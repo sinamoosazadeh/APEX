@@ -1,0 +1,5 @@
+# Exchange gateway configuration - owned by Phase 3 (Toobit first, Book VII).
+# Credentials NEVER live here; they come from the secrets platform (Phase 13).
+schema_version: 1
+
+exchanges: {}
