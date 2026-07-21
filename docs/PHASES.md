@@ -13,7 +13,7 @@ project stays runnable at the end of every phase (4.6).
 | 1 | Foundation Layer | ✅ **complete** | `apex/core`: types, enums, coded exceptions, identity, time system, metadata, validation, serialization+hashing, Result, BaseObject (lineage/versioning), contexts, versioning/stability, structured logging, config platform |
 | 2 | Core Infrastructure | ✅ **complete** | Shared kernel (`apex/domain`), infra + engine contracts, event platform (journal + deterministic bus), DI container, module registry, health monitor, kernel boot/shutdown with plugin stage, storage platform (SQLite key/value behind `IStorage`, durable event archive with journal catch-up), plugin system (manifest contract, config-driven loader with API-version/dependency validation) |
 | 3 | Data Platform | ✅ **complete** | REST: Toobit client, anti-corruption translator (5.37), paginating gateway behind `IMarketDataGateway`, gap detection + quality scoring, ingestion pipeline. Live: WebSocket streaming (`wss` client with keepalive + injected connector, closed-bar transition detection publishing `market.bar.closed`, throttled forming-bar persistence), tick storage (idempotent on exchange trade ids), catch-up synchronization resuming from the latest stored bar. Replay serves bars *and* ticks. CLI: `ingest`, `sync`, `stream`. Live-validated: 400 bars synced + 225 ticks streamed in 25s from Toobit. Deferred to later phases: funding/OI enrichment (Phase 4 features), multi-exchange backfill (plugin per Book II 29.9) |
-| 4 | Feature Platform | 🟡 **partial** | Delivered: feature registry (declare-before-compute, versioned definitions), SQLite feature store (bar-anchored, idempotent, vector + series queries), computation pipeline (pure engines, registry-validated emission, catalog events), `apex features` CLI, and the first migrated AICE family — **market structure** (19 features: swings via strict pivots, BOS/CHoCH state machine, break quality with decay, displacement, dealing range/premium/discount/OTE, sweeps, equal highs/lows) and the **liquidity** family (16 features: decayed confidence pools bumped by equal extremes at three pivot scales with the exact AICE ternary priority, resting-liquidity composites, external-extreme proximity, sweep efficiency, stop hunts, inducement) — both validated against real Toobit bars. Remaining families per the ch. 2 migration matrix: order blocks/FVG, volume & normalization, SMT, statistical |
+| 4 | Feature Platform | 🟡 **partial** | Delivered: feature registry (declare-before-compute, versioned definitions), SQLite feature store (bar-anchored, idempotent, vector + series queries), computation pipeline (pure engines, registry-validated emission, catalog events), `apex features` CLI, a shared chart-structure fold (BOS/CHoCH state machine + dealing range, single source per Constitution 2.12), and three migrated AICE families — **market structure** (19 features: swings via strict pivots, BOS/CHoCH, break quality with decay, displacement, dealing range/premium/discount/OTE, sweeps, equal highs/lows), **liquidity** (16 features: decayed confidence pools bumped by equal extremes at three pivot scales, resting-liquidity composites, external-extreme proximity, sweep efficiency, stop hunts, inducement) and **order blocks/FVG** (22 features: creation scans on structure breaks with the nine-term OB quality, decay/retest/mitigation lifecycle, breaker flags, three-bar FVG detection with six-term quality, fill tracking, IFVG inversions, BPR; HTF/momentum quality terms pinned to AICE's documented neutral values until those families land) — all validated against real Toobit bars. Remaining families per the ch. 2 migration matrix: volume & normalization, SMT, statistical |
 | 5 | Probability Platform | ⬜ pending | Book II ch. 8/18 |
 | 6 | Decision Platform | ⬜ pending | Book II ch. 11/19; Central Decision Kernel (Book I ch. 9) |
 | 7 | Signal Optimizer | ⬜ pending | Book V part 5; Book II ch. 9 |
@@ -26,16 +26,18 @@ project stays runnable at the end of every phase (4.6).
 | 14 | Deployment | ⬜ pending | Book II 29.20/29.25 |
 | 15 | Production Validation | ⬜ pending | Book II 29.26 acceptance criteria |
 
-## Current quality-gate results (Phase 4 first slice)
+## Current quality-gate results (Phase 4 third slice)
 
 - `ruff check apex tests` — clean
-- `mypy` (strict, 137 files) — clean
-- `pytest` — **237 passed**
+- `mypy` (strict, 141 files) — clean
+- `pytest` — **253 passed**
 - `python -m apex --check` — boots healthy (3 plugins, 4 modules), exits 0
-- Real-data validation: both families over 99 confirmed live Toobit bars per
-  symbol (2,342 features each); structure readings coherent with the observed
-  BTC rally; liquidity pools accumulated below BTC (peak 0.43, decaying) and
-  above ETH (0.25) — textbook SMC behavior
+- Real-data validation: three families over 99 confirmed live Toobit bars per
+  symbol; `apex features` stores 3,909 registry-validated features per run
+  (structure 79x19 + liquidity 46x16 + orderblocks 76x22 — per-family warmup
+  gating verified). OB/FVG behavior coherent with the observed BTC rally:
+  bull order blocks resting below price (peak effective 0.749), 7 bull vs 6
+  bear FVGs with inversions both ways, one bear breaker
 
 ## Spec library
 
@@ -60,7 +62,9 @@ content is fully covered by Books I-III. Priority on conflict:
 Migrate the remaining AICE families onto the delivered plumbing (Book II
 ch. 2 migration matrix; Book VI source):
 
-1. Order blocks + FVG family (AICE OB/FVG types and lifecycle).
-2. Volume & normalization family (percentile ranks, z-scores, volume
-   confirmation), then SMT divergence (multi-symbol context).
+1. Volume & normalization family (percentile ranks, z-scores, RVOL,
+   volume-profile approximation) plus the zero-lag momentum filter —
+   this also rewires the OB/FVG ``trendQ`` term off its neutral value.
+2. SMT divergence (multi-symbol context) and the HTF/MTF context family
+   (rewires ``mtfQ``/``htfQ`` neutral values in OB/FVG quality).
 3. Then Phase 5: the Probability Platform consuming stored feature vectors.
