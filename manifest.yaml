@@ -5,7 +5,7 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.4.0
+  version: 0.4.1
   phase: 4            # in progress (structure family delivered)
   phases_complete: [0, 1, 2, 3]
 
@@ -14,13 +14,13 @@ contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.4.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.4.1, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.contracts: { version: 0.4.0, stability: beta,         owner: foundation }
-  apex.kernel:    { version: 0.4.0, stability: beta,         owner: foundation }
+  apex.contracts: { version: 0.4.1, stability: beta,         owner: foundation }
+  apex.kernel:    { version: 0.4.1, stability: beta,         owner: foundation }
   apex.storage:   { version: 0.2.0, stability: beta,         owner: data-platform }
   apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.features:  { version: 0.1.0, stability: beta,         owner: feature-platform }
+  apex.features:  { version: 0.2.0, stability: beta,         owner: feature-platform }
   apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
@@ -40,12 +40,13 @@ plugin_registry:
   - { name: feature_platform, kind: feature, version: 0.1.0, module: apex.features.plugin }
 feature_registry:
   - { family: structure, features: 19, version: 1.0.0, source: AICE Book VI }
+  - { family: liquidity, features: 16, version: 1.0.0, source: AICE Book VI }
 exchange_registry:
   - { id: toobit, market_data: true, trading: false }
 
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 229
+  tests_passed: 237
   boot_check: pass
-  live_smoke: structure family validated on real Toobit bars (1558 features/symbol)
+  live_smoke: structure + liquidity validated on real Toobit bars (2342 features/symbol)
