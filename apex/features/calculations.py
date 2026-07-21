@@ -330,3 +330,156 @@ class StructureFold:
             body_atr / (self.displacement_body_atr * BREAK_QUALITY_FACTOR), 0.0, 1.0
         )
         self._last_break_index = index
+
+
+def correlation(xs: list[float], ys: list[float], length: int) -> list[float | None]:
+    """Rolling Pearson correlation (Pine ``ta.correlation``); None until full."""
+    out: list[float | None] = [None] * len(xs)
+    for index in range(length - 1, len(xs)):
+        wx = xs[index - length + 1 : index + 1]
+        wy = ys[index - length + 1 : index + 1]
+        mean_x = sum(wx) / length
+        mean_y = sum(wy) / length
+        cov = sum((a - mean_x) * (b - mean_y) for a, b in zip(wx, wy, strict=True))
+        var_x = sum((a - mean_x) ** 2 for a in wx)
+        var_y = sum((b - mean_y) ** 2 for b in wy)
+        denominator = (var_x * var_y) ** 0.5
+        if denominator > 0:
+            out[index] = cov / denominator
+    return out
+
+
+def last_closed_indices(
+    chart_close_ms: list[int],
+    other_close_ms: list[int],
+) -> list[int | None]:
+    """Causal series mapping: latest other-series bar closed by each chart bar.
+
+    Both inputs are ascending close times. Index ``i`` of the result is
+    the position of the last other-series bar whose close time is at or
+    before chart bar ``i``'s close time - the strict non-repainting
+    stand-in for Pine's ``request.security`` (Constitution over AICE).
+    """
+    out: list[int | None] = [None] * len(chart_close_ms)
+    other_index = -1
+    for i, close_ms in enumerate(chart_close_ms):
+        while (
+            other_index + 1 < len(other_close_ms)
+            and other_close_ms[other_index + 1] <= close_ms
+        ):
+            other_index += 1
+        out[i] = other_index if other_index >= 0 else None
+    return out
+
+
+@dataclass(frozen=True, slots=True)
+class StructBias:
+    """One bar of the AICE ``f_struct_pack`` fold: bias and equilibrium."""
+
+    bias: int
+    equilibrium: float | None
+
+
+def struct_bias_series(
+    bars: list[Bar],
+    *,
+    lookback: int,
+    ema_length: int,
+) -> list[StructBias]:
+    """AICE ``f_struct_pack`` per bar: swing-break bias with EMA fallback.
+
+    bias = +1 above the last pivot high, -1 below the last pivot low,
+    else the side of the EMA (0 while nothing is defined); equilibrium
+    is the midpoint of the last pivot pair when both exist.
+    """
+    closes = [float(bar.close.value) for bar in bars]
+    ema_series = ema(closes, ema_length)
+    pivots = PivotTracker(lookback=lookback)
+    out: list[StructBias] = []
+    for index, bar in enumerate(bars):
+        pivots.update(bar)
+        close = closes[index]
+        last_ph, last_pl = pivots.last_high, pivots.last_low
+        mean = ema_series[index]
+        if last_ph is not None and close > last_ph:
+            bias = 1
+        elif last_pl is not None and close < last_pl:
+            bias = -1
+        elif mean is not None and close > mean:
+            bias = 1
+        elif mean is not None and close < mean:
+            bias = -1
+        else:
+            bias = 0
+        equilibrium = (
+            (last_ph + last_pl) / 2.0
+            if last_ph is not None and last_pl is not None
+            else None
+        )
+        out.append(StructBias(bias=bias, equilibrium=equilibrium))
+    return out
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class HtfContext:
+    """AICE HTF context for one chart bar (spec lines 1087-1095)."""
+
+    macro1_bias: int
+    macro2_bias: int
+    alignment: int
+    bull_context: bool
+    bear_context: bool
+    confidence: float
+    in_discount: bool
+    in_premium: bool
+
+
+def htf_context_series(
+    chart_bars: list[Bar],
+    macro1_bars: list[Bar],
+    macro2_bars: list[Bar],
+    *,
+    pivot_lookback: int,
+    ema_length: int,
+) -> list[HtfContext | None]:
+    """HTF alignment/discount per chart bar from closed macro bars.
+
+    Shared by the HTF family and the OB/FVG quality terms
+    (Constitution 2.12). None where no macro bar has closed yet.
+    """
+    macro1 = struct_bias_series(macro1_bars, lookback=pivot_lookback, ema_length=ema_length)
+    macro2 = struct_bias_series(macro2_bars, lookback=pivot_lookback, ema_length=ema_length)
+    chart_close = [bar.open_time.epoch_ms + bar.timeframe.duration_ms for bar in chart_bars]
+    map1 = last_closed_indices(
+        chart_close,
+        [bar.open_time.epoch_ms + bar.timeframe.duration_ms for bar in macro1_bars],
+    )
+    map2 = last_closed_indices(
+        chart_close,
+        [bar.open_time.epoch_ms + bar.timeframe.duration_ms for bar in macro2_bars],
+    )
+    out: list[HtfContext | None] = []
+    for index, bar in enumerate(chart_bars):
+        first = map1[index]
+        second = map2[index]
+        if first is None and second is None:
+            out.append(None)
+            continue
+        bias1 = macro1[first].bias if first is not None else 0
+        bias2 = macro2[second].bias if second is not None else 0
+        equilibrium = macro1[first].equilibrium if first is not None else None
+        close = float(bar.close.value)
+        alignment = bias1 + bias2
+        out.append(
+            HtfContext(
+                macro1_bias=bias1,
+                macro2_bias=bias2,
+                alignment=alignment,
+                bull_context=alignment > 0,
+                bear_context=alignment < 0,
+                confidence=abs(alignment) / 2.0,
+                in_discount=equilibrium is not None and close < equilibrium,
+                in_premium=equilibrium is not None and close > equilibrium,
+            )
+        )
+    return out
