@@ -1,0 +1,4 @@
+# Telemetry configuration - owned by Phase 12 (Monitoring Platform).
+schema_version: 1
+
+metrics: {}
