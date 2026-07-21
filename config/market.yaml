@@ -25,3 +25,11 @@ features:
     displacement_body_atr: 1.2
     equal_tolerance_atr: 0.10
     break_decay: 0.985
+  liquidity:                   # AICE liquidity family (Book VI inputs)
+    chart_lookback: 8
+    internal_lookback: 3
+    external_lookback: 21
+    atr_length: 14
+    equal_tolerance_atr: 0.10
+    liquidity_decay: 0.990
+    ema_length: 50
