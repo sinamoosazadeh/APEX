@@ -13,6 +13,8 @@ from apex.core.events.catalog import SystemEvent
 from apex.core.events.journal import EventJournal
 from apex.core.exceptions import DataError, KernelError
 from apex.data.pipeline import BarIngestionPipeline
+from apex.features.pipeline import FeatureComputationPipeline
+from apex.features.registry import FeatureRegistry
 from apex.kernel.kernel import Kernel
 from apex.storage.bars import SqliteBarRepository
 from apex.storage.sqlite import SqliteKeyValueStorage
@@ -63,7 +65,11 @@ class TestKernelBoot:
             status = await kernel.boot()
             assert kernel.is_running
             assert status.health is HealthState.HEALTHY
-            assert status.plugins_loaded == ("storage_core", "toobit_connector")
+            assert status.plugins_loaded == (
+                "storage_core",
+                "toobit_connector",
+                "feature_platform",
+            )
             # Deterministic topological order with alphabetical tie-breaks.
             assert status.modules_started == (
                 "event_recorder",
@@ -71,8 +77,9 @@ class TestKernelBoot:
                 "consumer",
                 "event_archive",
                 "market_data",
+                "feature_platform",
             )
-            assert status.events_journaled >= 8  # booting, config, 5x module, started
+            assert status.events_journaled >= 9  # booting, config, 6x module, started
             await kernel.shutdown()
             assert not kernel.is_running
 
@@ -98,6 +105,8 @@ class TestKernelBoot:
             assert kernel.container.contains(IMarketDataGateway)
             assert kernel.container.contains(BarIngestionPipeline)
             assert kernel.container.contains(SqliteBarRepository)
+            assert kernel.container.contains(FeatureComputationPipeline)
+            assert kernel.container.contains(FeatureRegistry)
             await kernel.shutdown()
 
         asyncio.run(scenario())
