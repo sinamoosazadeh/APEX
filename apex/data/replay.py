@@ -12,9 +12,10 @@ from apex.core.enums import Timeframe
 from apex.core.exceptions import ApexError, DataError
 from apex.core.logging import StructuredLogger
 from apex.core.result import Result
-from apex.core.time.timestamp import Timestamp
+from apex.core.time.timestamp import MAX_EPOCH_MS, Timestamp
 from apex.domain.market import Bar, Tick
 from apex.storage.bars import SqliteBarRepository
+from apex.storage.ticks import SqliteTickRepository
 
 
 class ReplayMarketDataGateway:
@@ -26,9 +27,11 @@ class ReplayMarketDataGateway:
         source_exchange: str,
         repository: SqliteBarRepository,
         logger: StructuredLogger,
+        tick_repository: SqliteTickRepository | None = None,
     ) -> None:
         self._source_exchange = source_exchange
         self._repository = repository
+        self._ticks = tick_repository
         self._logger = logger
 
     @property
@@ -66,11 +69,24 @@ class ReplayMarketDataGateway:
         start: Timestamp,
         limit: int,
     ) -> Result[Sequence[Tick]]:
-        """Tick replay requires tick storage, which lands later in Phase 3."""
-        return Result.failure(
-            DataError(
-                "tick replay is unavailable: tick storage is a later Phase 3 slice",
-                code="DAT-020",
-                details={"symbol": symbol, "requested_limit": limit},
+        """Serve stored ticks at or after ``start``, oldest first."""
+        if self._ticks is None:
+            return Result.failure(
+                DataError(
+                    "this replay gateway was built without tick storage",
+                    code="DAT-020",
+                    details={"symbol": symbol, "requested_limit": limit},
+                )
             )
-        )
+        try:
+            ticks = await self._ticks.get_range(
+                self._source_exchange,
+                symbol,
+                start=start,
+                end=Timestamp(epoch_ms=MAX_EPOCH_MS),
+                limit=limit,
+            )
+        except ApexError as error:
+            self._logger.failure("replay_tick_fetch_failed", error, symbol=symbol)
+            return Result.failure(error)
+        return Result.success(tuple(ticks))

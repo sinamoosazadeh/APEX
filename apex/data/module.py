@@ -11,6 +11,7 @@ from apex.core.exceptions import ApexError
 from apex.core.logging import StructuredLogger
 from apex.data.toobit.gateway import ToobitMarketDataGateway
 from apex.storage.bars import SqliteBarRepository
+from apex.storage.ticks import SqliteTickRepository
 
 
 class MarketDataModule:
@@ -23,10 +24,12 @@ class MarketDataModule:
         *,
         gateway: ToobitMarketDataGateway,
         repository: SqliteBarRepository,
+        tick_repository: SqliteTickRepository,
         logger: StructuredLogger,
     ) -> None:
         self._gateway = gateway
         self._repository = repository
+        self._tick_repository = tick_repository
         self._logger = logger
         self._running = False
         self._degraded = False
@@ -42,8 +45,9 @@ class MarketDataModule:
         return ("event_archive",)
 
     async def start(self) -> None:
-        """Open repository and gateway resources."""
+        """Open repositories and gateway resources."""
         await self._repository.open()
+        await self._tick_repository.open()
         await self._gateway.open()
         self._running = True
         self._logger.info("market_data_started", exchange=self._gateway.exchange_id)
@@ -56,6 +60,7 @@ class MarketDataModule:
         except ApexError as error:
             self._degraded = True
             self._logger.failure("gateway_close_failed", error)
+        await self._tick_repository.close()
         await self._repository.close()
         self._logger.info("market_data_stopped")
 

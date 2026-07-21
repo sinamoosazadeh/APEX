@@ -5,22 +5,22 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.2.0
-  phase: 3            # highest phase with delivered work (partial)
-  phases_complete: [0, 1, 2]
+  version: 0.3.0
+  phase: 4            # next phase to build
+  phases_complete: [0, 1, 2, 3]
 
 config_schema_version: 1
 contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.2.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.3.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.contracts: { version: 0.2.0, stability: beta,         owner: foundation }
-  apex.kernel:    { version: 0.2.0, stability: beta,         owner: foundation }
-  apex.storage:   { version: 0.1.0, stability: beta,         owner: data-platform }
+  apex.contracts: { version: 0.3.0, stability: beta,         owner: foundation }
+  apex.kernel:    { version: 0.3.0, stability: beta,         owner: foundation }
+  apex.storage:   { version: 0.2.0, stability: beta,         owner: data-platform }
   apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.data:      { version: 0.1.0, stability: beta,         owner: data-platform }
+  apex.data:      { version: 0.2.0, stability: beta,         owner: data-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
@@ -42,6 +42,6 @@ exchange_registry:
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 199
+  tests_passed: 214
   boot_check: pass
-  live_smoke: toobit klines + trades validated
+  live_smoke: REST sync (400 bars) + 25s WS stream (225 ticks) validated

@@ -4,7 +4,10 @@ schema_version: 1
 
 toobit:
   base_url: https://api.toobit.com
+  ws_url: wss://stream.toobit.com/quote/ws/v1
   request_timeout_ms: 10000
   max_retries: 3
   retry_backoff_ms: 500
-  kline_page_limit: 1000   # Toobit API maximum per request
+  kline_page_limit: 1000     # Toobit API maximum per request
+  ws_ping_interval_ms: 30000 # keepalive (server drops idle links at 5 min)
+  ws_recv_timeout_ms: 15000  # receive timeout driving the ping cadence

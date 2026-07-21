@@ -1,6 +1,6 @@
 [project]
 name = "apex"
-version = "0.2.0"
+version = "0.3.0"
 description = "APEX - Autonomous Probabilistic Execution eXchange: institutional-grade crypto trading intelligence platform."
 readme = "README.md"
 requires-python = ">=3.13"
@@ -9,6 +9,7 @@ authors = [{ name = "APEX Engineering" }]
 dependencies = [
     "pyyaml>=6.0.2",
     "httpx>=0.28",
+    "websockets>=13",
 ]
 
 [project.scripts]

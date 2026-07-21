@@ -3,8 +3,10 @@
 Commands:
 - (default)          boot, report status, shut down cleanly
 - ``--check``        boot and exit; the CI/deployment configuration gate
-- ``ingest``         pull market history through the Toobit gateway into
-                     the bar store and report the ingestion summary
+- ``ingest``         pull history for one series into the bar store
+- ``sync``           catch up every configured series to the present
+- ``stream``         sync, then consume the live WebSocket feed for a
+                     bounded duration (bars close, ticks persist)
 
 The project stays runnable at the end of every phase (Constitution 4.6).
 """
@@ -19,7 +21,9 @@ from apex.core.config import AppConfig
 from apex.core.contracts.interfaces import IClock
 from apex.core.enums import Timeframe
 from apex.core.exceptions import ApexError, ValidationError
+from apex.data.catchup import CatchUpReport, CatchUpService
 from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
+from apex.data.streaming import MarketStreamService, StreamStats
 from apex.kernel.kernel import Kernel, KernelStatus
 
 DEFAULT_CONFIG_DIR = Path("config")
@@ -63,6 +67,20 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=0,
         help="number of most-recent bars to fetch (default: market.history_bars)",
+    )
+    subcommands.add_parser(
+        "sync",
+        help="catch up every configured series to the present",
+    )
+    stream = subcommands.add_parser(
+        "stream",
+        help="sync, then consume the live feed for a bounded duration",
+    )
+    stream.add_argument(
+        "--seconds",
+        type=int,
+        default=60,
+        help="how long to stream before shutting down cleanly",
     )
     return parser
 
@@ -111,6 +129,60 @@ async def run_status(config_dir: Path) -> KernelStatus:
         await kernel.shutdown()
 
 
+def render_catchup(report: CatchUpReport) -> str:
+    """Human-readable catch-up report."""
+    lines = [f"sync complete: {report.succeeded} ok, {report.failed} failed"]
+    for symbol, timeframe, result in report.results:
+        if result.ok:
+            summary = result.unwrap()
+            lines.append(
+                f"  {symbol} {timeframe.value}: +{summary.stored} bars "
+                f"({summary.gap_count} gaps)"
+            )
+        else:
+            assert result.error is not None
+            lines.append(f"  {symbol} {timeframe.value}: FAILED {result.error}")
+    return "\n".join(lines)
+
+
+def render_stream(stats: StreamStats) -> str:
+    """Human-readable streaming report."""
+    return "\n".join(
+        [
+            "stream session complete",
+            f"  messages     : {stats.messages}",
+            f"  bar updates  : {stats.bars_updated}",
+            f"  bars closed  : {stats.bars_closed}",
+            f"  ticks stored : {stats.ticks_stored}",
+            f"  reconnects   : {stats.reconnects}",
+        ]
+    )
+
+
+async def run_sync(config_dir: Path) -> CatchUpReport:
+    """Boot, run one catch-up pass, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        return await kernel.container.resolve(CatchUpService).run_once()
+    finally:
+        await kernel.shutdown()
+
+
+async def run_stream(config_dir: Path, seconds: int) -> tuple[CatchUpReport, StreamStats]:
+    """Boot, catch up, then stream live for ``seconds``."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        report = await kernel.container.resolve(CatchUpService).run_once()
+        stats = await kernel.container.resolve(MarketStreamService).run(
+            duration_ms=seconds * 1000
+        )
+        return report, stats
+    finally:
+        await kernel.shutdown()
+
+
 async def run_ingest(
     config_dir: Path,
     symbol: str,
@@ -151,9 +223,20 @@ def main(argv: list[str] | None = None) -> int:
             )
             sys.stdout.write(render_summary(summary) + "\n")
             return EXIT_OK
+        if args.command == "sync":
+            report = asyncio.run(run_sync(args.config_dir))
+            sys.stdout.write(render_catchup(report) + "\n")
+            return EXIT_OK if report.failed == 0 else EXIT_FAILURE
+        if args.command == "stream":
+            if args.seconds < 1:
+                raise ValidationError("--seconds must be >= 1", code="VAL-131")
+            report, stats = asyncio.run(run_stream(args.config_dir, args.seconds))
+            sys.stdout.write(render_catchup(report) + "\n")
+            sys.stdout.write(render_stream(stats) + "\n")
+            return EXIT_OK
         status = asyncio.run(run_status(args.config_dir))
     except ApexError as error:
-        stage = "ingest" if args.command == "ingest" else "boot"
+        stage = args.command if args.command else "boot"
         sys.stderr.write(f"{stage} failed: {error}\n")
         return EXIT_FAILURE
     sys.stdout.write(render_status(status) + "\n")
