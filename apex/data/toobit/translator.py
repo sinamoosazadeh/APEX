@@ -113,6 +113,98 @@ class ToobitTranslator:
             aggressor=aggressor,
         )
 
+    # --- WebSocket stream payloads (Book VII, /quote/ws/v1) -----------------------
+
+    def stream_klines_to_bars(
+        self,
+        message: dict[str, JsonValue],
+        timeframe: Timeframe,
+        *,
+        now: Timestamp,
+    ) -> list[Bar]:
+        """Translate a kline stream message into Bars (oldest first).
+
+        Stream kline objects are ``{"t","o","h","l","c","v"}`` keyed
+        dictionaries - a different shape from the REST arrays.
+        """
+        symbol = self._require_symbol(message)
+        rows = message.get("data")
+        if not isinstance(rows, list):
+            raise DataError(
+                "kline stream message has no data array",
+                code="DAT-021",
+                details={"symbol": symbol},
+            )
+        bars: list[Bar] = []
+        for row in rows:
+            if not isinstance(row, dict):
+                raise DataError(
+                    "kline stream row is not an object",
+                    code="DAT-021",
+                    details={"symbol": symbol},
+                )
+            open_time = self._parse_time(row.get("t"), symbol)
+            bars.append(
+                Bar(
+                    exchange=EXCHANGE_ID,
+                    symbol=symbol,
+                    timeframe=timeframe,
+                    open_time=open_time,
+                    open=Price(self._parse_decimal(row.get("o"), "open", symbol)),
+                    high=Price(self._parse_decimal(row.get("h"), "high", symbol)),
+                    low=Price(self._parse_decimal(row.get("l"), "low", symbol)),
+                    close=Price(self._parse_decimal(row.get("c"), "close", symbol)),
+                    volume=Volume(self._parse_decimal(row.get("v"), "volume", symbol)),
+                    is_closed=open_time.add_ms(timeframe.duration_ms).epoch_ms
+                    <= now.epoch_ms,
+                    quality=_FULL_QUALITY,
+                )
+            )
+        return sorted(bars, key=lambda bar: bar.open_time.epoch_ms)
+
+    def stream_trades_to_ticks(self, message: dict[str, JsonValue]) -> list[Tick]:
+        """Translate a trade stream message into Ticks (oldest first).
+
+        Stream semantics (Book VII): ``v`` is the globally unique trade
+        id; ``m`` true means a buy, false means a sell.
+        """
+        symbol = self._require_symbol(message)
+        rows = message.get("data")
+        if not isinstance(rows, list):
+            raise DataError(
+                "trade stream message has no data array",
+                code="DAT-022",
+                details={"symbol": symbol},
+            )
+        ticks: list[Tick] = []
+        for row in rows:
+            if not isinstance(row, dict):
+                raise DataError(
+                    "trade stream row is not an object",
+                    code="DAT-022",
+                    details={"symbol": symbol},
+                )
+            trade_id = row.get("v")
+            ticks.append(
+                Tick(
+                    exchange=EXCHANGE_ID,
+                    symbol=symbol,
+                    occurred_at=self._parse_time(row.get("t"), symbol),
+                    price=Price(self._parse_decimal(row.get("p"), "price", symbol)),
+                    quantity=Quantity(self._parse_decimal(row.get("q"), "quantity", symbol)),
+                    aggressor=OrderSide.BUY if bool(row.get("m")) else OrderSide.SELL,
+                    trade_id=str(trade_id) if trade_id is not None else None,
+                )
+            )
+        return sorted(ticks, key=lambda tick: tick.occurred_at.epoch_ms)
+
+    @staticmethod
+    def _require_symbol(message: dict[str, JsonValue]) -> str:
+        symbol = message.get("symbol")
+        if not isinstance(symbol, str) or not symbol:
+            raise DataError("stream message has no symbol", code="DAT-023")
+        return symbol
+
     @staticmethod
     def _parse_decimal(raw: JsonValue, field: str, symbol: str) -> Decimal:
         if not isinstance(raw, (str, int)) or isinstance(raw, bool):
