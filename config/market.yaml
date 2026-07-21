@@ -17,3 +17,11 @@ streaming:
   forming_flush_ms: 5000     # throttle for persisting forming-bar updates
   reconnect_backoff_ms: 2000 # linear backoff between reconnect attempts
   max_reconnects: 5          # reconnect budget per streaming session
+
+features:
+  structure:                   # AICE structure family (Book VI inputs)
+    pivot_lookback: 8
+    atr_length: 14
+    displacement_body_atr: 1.2
+    equal_tolerance_atr: 0.10
+    break_decay: 0.985
