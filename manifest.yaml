@@ -5,8 +5,8 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.4.3
-  phase: 4            # in progress (structure + liquidity + orderblocks + volume delivered)
+  version: 0.5.0
+  phase: 4            # in progress (six families delivered; statistical remains)
   phases_complete: [0, 1, 2, 3]
 
 config_schema_version: 1
@@ -14,13 +14,13 @@ contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.4.3, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.5.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.contracts: { version: 0.4.3, stability: beta,         owner: foundation }
-  apex.kernel:    { version: 0.4.3, stability: beta,         owner: foundation }
+  apex.contracts: { version: 0.5.0, stability: beta,         owner: foundation }
+  apex.kernel:    { version: 0.5.0, stability: beta,         owner: foundation }
   apex.storage:   { version: 0.2.0, stability: beta,         owner: data-platform }
   apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.features:  { version: 0.4.0, stability: beta,         owner: feature-platform }
+  apex.features:  { version: 0.5.0, stability: beta,         owner: feature-platform }
   apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
@@ -41,14 +41,16 @@ plugin_registry:
 feature_registry:
   - { family: structure, features: 19, version: 1.0.0, source: AICE Book VI }
   - { family: liquidity, features: 16, version: 1.0.0, source: AICE Book VI }
-  - { family: orderblocks, features: 22, version: 1.0.1, source: AICE Book VI }
+  - { family: orderblocks, features: 22, version: 1.0.2, source: AICE Book VI }
   - { family: volume, features: 25, version: 1.0.0, source: AICE Book VI }
+  - { family: htf, features: 8, version: 1.0.0, source: AICE Book VI }
+  - { family: smt, features: 7, version: 1.0.0, source: AICE Book VI }
 exchange_registry:
   - { id: toobit, market_data: true, trading: false }
 
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 268
+  tests_passed: 278
   boot_check: pass
-  live_smoke: four families validated on real Toobit bars (35913 features/run)
+  live_smoke: six families validated on real Toobit bars (43683 features/run)
