@@ -47,3 +47,19 @@ features:
     min_fvg_size_atr: 0.05
     volume_sma_length: 20
     range_sma_length: 14
+    zpf_fast_length: 12
+    zpf_slow_length: 26
+  volume:                      # AICE volume & normalization family (Book VI inputs)
+    atr_length: 14
+    volume_sma_length: 20
+    range_sma_length: 14
+    normalization_window: 200  # norm_win
+    rank_window: 200           # rank_len
+    forecast_length: 50        # vol_fc_len
+    winsor_z: 3.0
+    zpf_fast_length: 12
+    zpf_slow_length: 26
+    profile_length: 96         # vp_len
+    profile_bins: 16           # vp_bins
+    delta_roll_length: 50
+    delta_bias_ema_length: 100
