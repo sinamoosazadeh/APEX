@@ -104,7 +104,12 @@ class Bar:
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class Tick:
-    """One executed market trade print (Book II 5.7)."""
+    """One executed market trade print (Book II 5.7).
+
+    ``trade_id`` is the exchange's unique trade identifier when the
+    source provides one (Toobit's stream does; its REST snapshot does
+    not). Storage synthesizes a deterministic dedup key when absent.
+    """
 
     exchange: str
     symbol: str
@@ -112,10 +117,20 @@ class Tick:
     price: Price
     quantity: Quantity
     aggressor: OrderSide
+    trade_id: str | None = None
 
     def __post_init__(self) -> None:
         ensure_not_empty(self.exchange, "exchange")
         ensure_symbol(self.symbol)
+
+    def dedup_key(self) -> str:
+        """Stable identity for idempotent storage."""
+        if self.trade_id is not None:
+            return self.trade_id
+        return (
+            f"synth:{self.occurred_at.epoch_ms}:{self.price.value}:"
+            f"{self.quantity.value}:{self.aggressor.value}"
+        )
 
     def to_dict(self) -> dict[str, JsonValue]:
         """Canonical serialized form."""
