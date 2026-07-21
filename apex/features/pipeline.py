@@ -11,7 +11,7 @@ Engines are pure; the pipeline owns I/O, validation and announcement.
 
 from dataclasses import dataclass
 
-from apex.contracts.engines import IFeatureEngine
+from apex.contracts.engines import IContextFeatureEngine, IFeatureEngine
 from apex.core.context import MarketContext
 from apex.core.contracts.interfaces import IEventBus
 from apex.core.enums import Timeframe
@@ -21,6 +21,7 @@ from apex.core.result import Result
 from apex.core.time.clock import Clock
 from apex.core.time.timestamp import Timestamp
 from apex.domain.feature import Feature
+from apex.domain.market import Bar
 from apex.features.events import FeatureEvent, feature_event
 from apex.features.registry import FeatureRegistry
 from apex.storage.bars import SqliteBarRepository
@@ -85,7 +86,7 @@ class FeatureComputationPipeline:
         computed: list[Feature] = []
         families: set[str] = set()
         for engine in self._engines:
-            result = engine.compute(bars, context)
+            result = await self._run_engine(engine, bars, context, end=end)
             if not result.ok:
                 assert result.error is not None
                 await self._announce_failure(symbol, timeframe, engine, result.error)
@@ -107,6 +108,31 @@ class FeatureComputationPipeline:
         )
         await self._announce_success(summary)
         return Result.success(summary)
+
+    async def _run_engine(
+        self,
+        engine: IFeatureEngine,
+        bars: list[Bar],
+        context: MarketContext,
+        *,
+        end: Timestamp,
+    ) -> Result[tuple[Feature, ...]]:
+        """Run one engine, feeding auxiliary series to context-aware ones."""
+        if not isinstance(engine, IContextFeatureEngine):
+            return engine.compute(bars, context)
+        auxiliary: dict[tuple[str, Timeframe], list[Bar]] = {}
+        for aux_symbol, aux_timeframe in engine.required_series(
+            context.symbol, context.timeframe
+        ):
+            auxiliary[(aux_symbol, aux_timeframe)] = await self._bars.get_range(
+                self._exchange_id,
+                aux_symbol,
+                aux_timeframe,
+                start=Timestamp(epoch_ms=0),
+                end=end,
+                closed_only=True,
+            )
+        return engine.compute_with_context(bars, auxiliary, context)
 
     def _validate(self, engine: IFeatureEngine, features: tuple[Feature, ...]) -> None:
         """Every emitted feature must be declared and family-consistent."""
