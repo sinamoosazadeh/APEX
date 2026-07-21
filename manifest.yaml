@@ -1,0 +1,37 @@
+# APEX Repository Manifest (Book II 3.39)
+# Central coordination record: project version, module versions, dependency
+# graph, registries and schema versions. Updated at the end of every phase.
+
+manifest_version: 1
+project:
+  name: apex
+  version: 0.1.0
+  phase: 2            # highest phase with delivered work (partial)
+  phases_complete: [0, 1]
+
+config_schema_version: 1
+contract_schema_version: 1
+database_schema_version: null   # storage platform arrives in Phase 3
+
+modules:
+  apex.core:      { version: 0.1.0, stability: beta,         owner: foundation }
+  apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
+  apex.contracts: { version: 0.1.0, stability: experimental, owner: foundation }
+  apex.kernel:    { version: 0.1.0, stability: beta,         owner: foundation }
+
+# Downward-only dependency edges between built packages (Book II 3.25).
+dependency_graph:
+  apex.domain: [apex.core]
+  apex.contracts: [apex.core, apex.domain]
+  apex.kernel: [apex.core]
+
+# Populated by their phases.
+plugin_registry: []
+feature_registry: []
+exchange_registry: []
+
+quality_gates:
+  ruff: clean
+  mypy_strict: clean
+  tests_passed: 148
+  boot_check: pass
