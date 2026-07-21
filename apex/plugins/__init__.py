@@ -1,8 +1,20 @@
-"""Plugin system - indicators, filters, strategies, connectors (Book II 3.23/5.19).
+"""APEX Plugin System (Book II 3.23, 5.19, 29.24).
 
-Owned by Phase 4+. This package intentionally contains no code yet:
-per the Master Repository Blueprint (Book II ch. 29) no file is created
-before its dependencies, and per the Constitution no placeholder logic
-is ever committed. The layer's contracts already exist in
-:mod:`apex.contracts` / :mod:`apex.core.contracts`.
+Every extension enters through one contract: a plugin publishes a
+:class:`PluginManifest`, implements :class:`IPlugin` and builds kernel
+modules from injected services. The :class:`PluginLoader` imports,
+validates (API version, duplicates, dependency closure) and registers
+configured plugins at boot; a failing plugin aborts boot.
 """
+
+from apex.plugins.contract import PLUGIN_API_VERSION, IPlugin, PluginManifest
+from apex.plugins.loader import LoadedPlugin, PluginLoader, safe_load
+
+__all__ = [
+    "PLUGIN_API_VERSION",
+    "IPlugin",
+    "LoadedPlugin",
+    "PluginLoader",
+    "PluginManifest",
+    "safe_load",
+]
