@@ -36,6 +36,7 @@ from apex.core.types import Confidence, Reliability, Weight
 from apex.core.validation import ensure_in_range, ensure_positive
 from apex.domain.feature import Feature
 from apex.domain.market import Bar
+from apex.features.calculations import PivotTracker, clamp, wilder_atr
 
 FAMILY = "structure"
 _SOURCE = "apex.features.structure"
@@ -98,20 +99,12 @@ class StructureParams:
 class _StructureState:
     """Mutable fold state mirroring the AICE ``var`` block."""
 
-    last_ph: float | None = None
-    prev_ph: float | None = None
-    last_pl: float | None = None
-    prev_pl: float | None = None
     trend_dir: int = 0
     protected_high: float | None = None
     protected_low: float | None = None
     break_quality: float = 0.0
     last_break_index: int | None = None
     atr: float | None = None
-
-
-def _clamp(value: float, lower: float, upper: float) -> float:
-    return max(lower, min(upper, value))
 
 
 class MarketStructureEngine:
@@ -149,13 +142,13 @@ class MarketStructureEngine:
         self._require_confirmed_series(bars)
         params = self._params
         state = _StructureState()
-        highs = [float(bar.high.value) for bar in bars]
-        lows = [float(bar.low.value) for bar in bars]
+        pivots = PivotTracker(lookback=params.pivot_lookback)
+        atr_series = wilder_atr(bars, params.atr_length)
         features: list[Feature] = []
         for index, bar in enumerate(bars):
-            self._update_atr(state, bars, index)
-            pivot_flags = self._confirm_pivots(state, highs, lows, index)
-            snapshot = self._step(state, bars, index, pivot_flags)
+            state.atr = atr_series[index]
+            pivot_flags = pivots.update(bar)
+            snapshot = self._step(state, pivots, bars, index, pivot_flags)
             if index >= params.warmup_bars and state.atr is not None:
                 features.extend(self._emit(bar, snapshot))
         return features
@@ -171,55 +164,10 @@ class MarketStructureEngine:
                     details={"at": str(current.open_time)},
                 )
 
-    def _update_atr(self, state: _StructureState, bars: list[Bar], index: int) -> None:
-        """Wilder ATR (Pine ``ta.atr``): SMA seed, then recursive."""
-        length = self._params.atr_length
-        tr = self._true_range(bars, index)
-        if index < length - 1:
-            return
-        if state.atr is None:
-            seed = sum(self._true_range(bars, i) for i in range(length)) / length
-            state.atr = seed
-            return
-        state.atr = (state.atr * (length - 1) + tr) / length
-
-    @staticmethod
-    def _true_range(bars: list[Bar], index: int) -> float:
-        high = float(bars[index].high.value)
-        low = float(bars[index].low.value)
-        if index == 0:
-            return high - low
-        prev_close = float(bars[index - 1].close.value)
-        return max(high - low, abs(high - prev_close), abs(low - prev_close))
-
-    def _confirm_pivots(
-        self,
-        state: _StructureState,
-        highs: list[float],
-        lows: list[float],
-        index: int,
-    ) -> tuple[bool, bool]:
-        """Pine pivot semantics: bar ``lb`` back is a strict extremum."""
-        lb = self._params.pivot_lookback
-        candidate = index - lb
-        if candidate < lb:
-            return False, False
-        window = range(candidate - lb, candidate + lb + 1)
-        new_high = all(
-            highs[candidate] > highs[i] for i in window if i != candidate
-        )
-        new_low = all(lows[candidate] < lows[i] for i in window if i != candidate)
-        if new_high:
-            state.prev_ph = state.last_ph
-            state.last_ph = highs[candidate]
-        if new_low:
-            state.prev_pl = state.last_pl
-            state.last_pl = lows[candidate]
-        return new_high, new_low
-
     def _step(
         self,
         state: _StructureState,
+        pivots: PivotTracker,
         bars: list[Bar],
         index: int,
         pivot_flags: tuple[bool, bool],
@@ -232,6 +180,7 @@ class MarketStructureEngine:
         low = float(bar.low.value)
         prev_close = float(bars[index - 1].close.value) if index > 0 else close
         atr = state.atr if state.atr is not None and state.atr > 0 else None
+        last_ph, last_pl = pivots.last_high, pivots.last_low
 
         body = abs(close - float(bar.open.value))
         body_atr = body / atr if atr else 0.0
@@ -241,37 +190,37 @@ class MarketStructureEngine:
         tolerance = (atr or 0.0) * params.equal_tolerance_atr
         equal_highs = (
             new_high
-            and state.prev_ph is not None
-            and state.last_ph is not None
-            and abs(state.last_ph - state.prev_ph) <= tolerance
+            and pivots.prev_high is not None
+            and last_ph is not None
+            and abs(last_ph - pivots.prev_high) <= tolerance
         )
         equal_lows = (
             new_low
-            and state.prev_pl is not None
-            and state.last_pl is not None
-            and abs(state.last_pl - state.prev_pl) <= tolerance
+            and pivots.prev_low is not None
+            and last_pl is not None
+            and abs(last_pl - pivots.prev_low) <= tolerance
         )
 
         bos_up = bos_dn = choch_up = choch_dn = False
-        if state.last_ph is not None and close > state.last_ph and prev_close <= state.last_ph:
+        if last_ph is not None and close > last_ph and prev_close <= last_ph:
             if state.trend_dir == -1:
                 choch_up = True
             else:
                 bos_up = True
             state.trend_dir = 1
-            state.protected_low = state.last_pl
-            state.break_quality = _clamp(
+            state.protected_low = last_pl
+            state.break_quality = clamp(
                 body_atr / (params.displacement_body_atr * _BREAK_QUALITY_FACTOR), 0.0, 1.0
             )
             state.last_break_index = index
-        if state.last_pl is not None and close < state.last_pl and prev_close >= state.last_pl:
+        if last_pl is not None and close < last_pl and prev_close >= last_pl:
             if state.trend_dir == 1:
                 choch_dn = True
             else:
                 bos_dn = True
             state.trend_dir = -1
-            state.protected_high = state.last_ph
-            state.break_quality = _clamp(
+            state.protected_high = last_ph
+            state.break_quality = clamp(
                 body_atr / (params.displacement_body_atr * _BREAK_QUALITY_FACTOR), 0.0, 1.0
             )
             state.last_break_index = index
@@ -284,24 +233,24 @@ class MarketStructureEngine:
 
         dr_pos = 0.5
         in_premium = in_discount = False
-        if state.last_ph is not None and state.last_pl is not None:
-            top = max(state.last_ph, state.last_pl)
-            bottom = min(state.last_ph, state.last_pl)
+        if last_ph is not None and last_pl is not None:
+            top = max(last_ph, last_pl)
+            bottom = min(last_ph, last_pl)
             size = top - bottom
             if size > 0:
-                dr_pos = _clamp((close - bottom) / size, 0.0, 1.0)
+                dr_pos = clamp((close - bottom) / size, 0.0, 1.0)
                 equilibrium = (top + bottom) / 2.0
                 in_discount = close < equilibrium
                 in_premium = close > equilibrium
 
-        sweep_high = state.last_ph is not None and high > state.last_ph and close < state.last_ph
-        sweep_low = state.last_pl is not None and low < state.last_pl and close > state.last_pl
+        sweep_high = last_ph is not None and high > last_ph and close < last_ph
+        sweep_low = last_pl is not None and low < last_pl and close > last_pl
 
         swing_high_distance = (
-            (close - state.last_ph) / atr if atr and state.last_ph is not None else 0.0
+            (close - last_ph) / atr if atr and last_ph is not None else 0.0
         )
         swing_low_distance = (
-            (close - state.last_pl) / atr if atr and state.last_pl is not None else 0.0
+            (close - last_pl) / atr if atr and last_pl is not None else 0.0
         )
 
         return {
@@ -358,12 +307,12 @@ class MarketStructureEngine:
         """Map raw values into [-1, 1] per feature semantics."""
         params = self._params
         if name in ("structure.break_quality",):
-            return _clamp(raw, 0.0, 1.0) * 2.0 - 1.0
+            return clamp(raw, 0.0, 1.0) * 2.0 - 1.0
         if name == "structure.dealing_range_position":
             return raw * 2.0 - 1.0
         if name == "structure.displacement_body_atr":
-            return _clamp(raw / (2.0 * params.displacement_body_atr), 0.0, 1.0) * 2.0 - 1.0
+            return clamp(raw / (2.0 * params.displacement_body_atr), 0.0, 1.0) * 2.0 - 1.0
         if name in ("structure.swing_high_distance", "structure.swing_low_distance"):
-            return _clamp(raw / _DISTANCE_NORM_ATR, -1.0, 1.0)
+            return clamp(raw / _DISTANCE_NORM_ATR, -1.0, 1.0)
         # Trend direction and binary flags are already within [-1, 1].
-        return _clamp(raw, -1.0, 1.0)
+        return clamp(raw, -1.0, 1.0)

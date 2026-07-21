@@ -15,6 +15,8 @@ from apex.core.enums import HealthState, PluginKind, StabilityLevel
 from apex.core.exceptions import ConfigurationError
 from apex.core.logging import LoggerFactory, StructuredLogger
 from apex.core.versioning import SemanticVersion
+from apex.features.liquidity.definitions import liquidity_definitions
+from apex.features.liquidity.engine import LiquidityEngine, LiquidityParams
 from apex.features.pipeline import FeatureComputationPipeline
 from apex.features.registry import FeatureRegistry
 from apex.features.structure.definitions import structure_definitions
@@ -69,33 +71,62 @@ class FeaturePlatformModule:
         return HealthState.HEALTHY if self._running else HealthState.OFFLINE
 
 
-def _structure_params(features_config: ConfigSection) -> StructureParams:
-    """Build engine params from config overrides on AICE defaults."""
-    raw = features_config.get("structure", {})
+def _family_numbers(features_config: ConfigSection, family: str) -> dict[str, float]:
+    """Read a family's numeric overrides from market.features config."""
+    raw = features_config.get(family, {})
     if not isinstance(raw, dict):
         raise ConfigurationError(
-            "market.features.structure must be a mapping",
+            f"market.features.{family} must be a mapping",
             code="CFG-024",
+            details={"family": family},
         )
-    defaults = StructureParams()
-    def _number(key: str, fallback: float) -> float:
-        value = raw.get(key, fallback)
+    numbers: dict[str, float] = {}
+    for key, value in raw.items():
         if isinstance(value, bool) or not isinstance(value, (int, float)):
             raise ConfigurationError(
-                "market.features.structure values must be numbers",
+                f"market.features.{family} values must be numbers",
                 code="CFG-025",
-                details={"key": key},
+                details={"family": family, "key": key},
             )
-        return float(value)
+        numbers[key] = float(value)
+    return numbers
 
+
+def _structure_params(features_config: ConfigSection) -> StructureParams:
+    """Structure params: config overrides on AICE defaults."""
+    numbers = _family_numbers(features_config, "structure")
+    defaults = StructureParams()
     return StructureParams(
-        pivot_lookback=int(_number("pivot_lookback", defaults.pivot_lookback)),
-        atr_length=int(_number("atr_length", defaults.atr_length)),
-        displacement_body_atr=_number(
+        pivot_lookback=int(numbers.get("pivot_lookback", defaults.pivot_lookback)),
+        atr_length=int(numbers.get("atr_length", defaults.atr_length)),
+        displacement_body_atr=numbers.get(
             "displacement_body_atr", defaults.displacement_body_atr
         ),
-        equal_tolerance_atr=_number("equal_tolerance_atr", defaults.equal_tolerance_atr),
-        break_decay=_number("break_decay", defaults.break_decay),
+        equal_tolerance_atr=numbers.get(
+            "equal_tolerance_atr", defaults.equal_tolerance_atr
+        ),
+        break_decay=numbers.get("break_decay", defaults.break_decay),
+    )
+
+
+def _liquidity_params(features_config: ConfigSection) -> LiquidityParams:
+    """Liquidity params: config overrides on AICE defaults."""
+    numbers = _family_numbers(features_config, "liquidity")
+    defaults = LiquidityParams()
+    return LiquidityParams(
+        chart_lookback=int(numbers.get("chart_lookback", defaults.chart_lookback)),
+        internal_lookback=int(
+            numbers.get("internal_lookback", defaults.internal_lookback)
+        ),
+        external_lookback=int(
+            numbers.get("external_lookback", defaults.external_lookback)
+        ),
+        atr_length=int(numbers.get("atr_length", defaults.atr_length)),
+        equal_tolerance_atr=numbers.get(
+            "equal_tolerance_atr", defaults.equal_tolerance_atr
+        ),
+        liquidity_decay=numbers.get("liquidity_decay", defaults.liquidity_decay),
+        ema_length=int(numbers.get("ema_length", defaults.ema_length)),
     )
 
 
@@ -122,16 +153,21 @@ class FeaturePlatformPlugin:
         clock = container.resolve(IClock)  # type: ignore[type-abstract]
         bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
 
-        params = _structure_params(config.market.features)
-        engine = MarketStructureEngine(params=params, clock=clock)
+        structure_params = _structure_params(config.market.features)
+        liquidity_params = _liquidity_params(config.market.features)
+        engines = (
+            MarketStructureEngine(params=structure_params, clock=clock),
+            LiquidityEngine(params=liquidity_params, clock=clock),
+        )
         registry = FeatureRegistry()
-        registry.register_all(structure_definitions(params))
+        registry.register_all(structure_definitions(structure_params))
+        registry.register_all(liquidity_definitions(liquidity_params))
         repository = SqliteFeatureRepository(
             database_path=Path(config.system.data_dir) / FEATURES_DATABASE_FILENAME,
         )
         pipeline = FeatureComputationPipeline(
             exchange_id="toobit",
-            engines=(engine,),
+            engines=engines,
             registry=registry,
             bar_repository=container.resolve(SqliteBarRepository),
             feature_repository=repository,
