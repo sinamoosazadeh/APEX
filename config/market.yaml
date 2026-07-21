@@ -78,3 +78,18 @@ features:
     correlation_slope_length: 34
     decay_rate: 0.985
     min_score: 0.35
+  statistical:                 # AICE regime / candle DNA / kinetic (Book VI inputs)
+    atr_length: 14
+    adx_length: 14
+    adx_trend_threshold: 23.0
+    efficiency_length: 20      # er_len
+    entropy_window: 50         # hurst_len
+    normalization_window: 200  # norm_win
+    rank_window: 200           # rank_len (vol_factor)
+    range_sma_length: 14
+    wavetrend_channel: 10      # wt_ch
+    wavetrend_average: 21      # wt_avg
+    stc_cycle: 48
+    stc_fast: 23
+    stc_slow: 50
+    cci_length: 20
