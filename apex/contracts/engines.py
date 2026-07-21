@@ -118,6 +118,43 @@ class IFeatureEngine(Protocol):
 
 
 @runtime_checkable
+@stability(StabilityLevel.BETA)
+class IContextFeatureEngine(IFeatureEngine, Protocol):
+    """Feature engine needing auxiliary bar series (Phase 4).
+
+    Multi-series families (HTF/MTF context, SMT divergence) declare the
+    extra series they need via :meth:`required_series`; the pipeline
+    fetches those confirmed bars and passes them to
+    :meth:`compute_with_context`. Engines must consume auxiliary series
+    causally: for any chart bar, only auxiliary bars whose close time
+    is at or before that bar's close time may influence its features
+    (Constitution: no repainting - stricter than Pine's
+    ``request.security`` semantics, which outranks AICE on conflict).
+
+    ``compute`` (inherited) remains the auxiliary-free fallback: it
+    must produce the family's documented neutral behavior so the
+    engine stays usable when a required series is not stored.
+    """
+
+    def required_series(
+        self,
+        symbol: str,
+        timeframe: Timeframe,
+    ) -> tuple[tuple[str, Timeframe], ...]:
+        """(symbol, timeframe) pairs this engine needs beyond the chart."""
+        ...
+
+    def compute_with_context(
+        self,
+        bars: Sequence[Bar],
+        auxiliary: Mapping[tuple[str, Timeframe], Sequence[Bar]],
+        context: MarketContext,
+    ) -> Result[tuple[Feature, ...]]:
+        """Compute features using the chart window plus auxiliary series."""
+        ...
+
+
+@runtime_checkable
 @stability(StabilityLevel.EXPERIMENTAL)
 class IProbabilityEngine(Protocol):
     """Probability platform contract (Phase 5)."""
