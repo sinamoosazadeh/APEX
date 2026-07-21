@@ -1,6 +1,14 @@
 # Market data platform configuration - owned by Phase 3 (Data Platform).
-# Deep schema ships with Phase 3; schema_version and shape are enforced now.
 schema_version: 1
 
-symbols: []
-timeframes: []
+symbols:
+  - BTCUSDT
+  - ETHUSDT
+timeframes:
+  - 1h
+  - 4h
+history_bars: 500          # bars to backfill per series on demand
+
+quality:
+  gap_penalty: 0.25          # quality deduction for a bar following a gap
+  forming_bar_quality: 0.5   # score assigned to not-yet-closed bars
