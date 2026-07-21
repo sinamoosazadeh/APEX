@@ -63,3 +63,18 @@ features:
     profile_bins: 16           # vp_bins
     delta_roll_length: 50
     delta_bias_ema_length: 100
+    htf_pivot_lookback: 8
+    htf_ema_length: 50
+  htf:                         # AICE macro context (Book VI lines 1087-1097)
+    macro1_minutes: 60         # macro_tf1 = "60"
+    macro2_minutes: 240        # macro_tf2 = "240"
+    pivot_lookback: 8
+    ema_length: 50
+  smt:                         # AICE SMT core (Book VI SMT inputs)
+    pivot_lookback: 5
+    max_pivot_age: 10
+    correlation_length: 120
+    correlation_minimum: 0.60
+    correlation_slope_length: 34
+    decay_rate: 0.985
+    min_score: 0.35
