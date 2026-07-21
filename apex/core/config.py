@@ -66,6 +66,9 @@ class MarketConfig:
     history_bars: int
     gap_penalty: float
     forming_bar_quality: float
+    stream_forming_flush_ms: int
+    stream_reconnect_backoff_ms: int
+    stream_max_reconnects: int
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -73,10 +76,13 @@ class ToobitConfig:
     """Deep-validated ``toobit`` section of ``exchange.yaml`` (Phase 3)."""
 
     base_url: str
+    ws_url: str
     request_timeout_ms: int
     max_retries: int
     retry_backoff_ms: int
     kline_page_limit: int
+    ws_ping_interval_ms: int
+    ws_recv_timeout_ms: int
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -413,12 +419,22 @@ def _parse_market(section: ConfigSection) -> MarketConfig:
             )
         timeframes.append(timeframe_by_value[raw])
     quality = _require_mapping(section, "quality", "market")
+    streaming = _require_mapping(section, "streaming", "market")
     return MarketConfig(
         symbols=symbols,
         timeframes=tuple(timeframes),
         history_bars=_require_int(section, "history_bars", "market", minimum=1),
         gap_penalty=_require_fraction(quality, "gap_penalty", "market"),
         forming_bar_quality=_require_fraction(quality, "forming_bar_quality", "market"),
+        stream_forming_flush_ms=_require_int(
+            streaming, "forming_flush_ms", "market", minimum=1
+        ),
+        stream_reconnect_backoff_ms=_require_int(
+            streaming, "reconnect_backoff_ms", "market", minimum=0
+        ),
+        stream_max_reconnects=_require_int(
+            streaming, "max_reconnects", "market", minimum=0
+        ),
     )
 
 
@@ -431,13 +447,27 @@ def _parse_exchange(section: ConfigSection) -> ToobitConfig:
             code="CFG-021",
             details={"base_url": base_url},
         )
+    ws_url = _require_str(toobit, "ws_url", "exchange")
+    if not ws_url.startswith("wss://"):
+        raise ConfigurationError(
+            "exchange.toobit.ws_url must use wss",
+            code="CFG-023",
+            details={"ws_url": ws_url},
+        )
     page_limit = _require_int(toobit, "kline_page_limit", "exchange", minimum=1)
     return ToobitConfig(
         base_url=base_url,
+        ws_url=ws_url,
         request_timeout_ms=_require_int(toobit, "request_timeout_ms", "exchange", minimum=1),
         max_retries=_require_int(toobit, "max_retries", "exchange", minimum=0),
         retry_backoff_ms=_require_int(toobit, "retry_backoff_ms", "exchange", minimum=0),
         kline_page_limit=page_limit,
+        ws_ping_interval_ms=_require_int(
+            toobit, "ws_ping_interval_ms", "exchange", minimum=1
+        ),
+        ws_recv_timeout_ms=_require_int(
+            toobit, "ws_recv_timeout_ms", "exchange", minimum=1
+        ),
     )
 
 
