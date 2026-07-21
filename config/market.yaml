@@ -1,0 +1,6 @@
+# Market data platform configuration - owned by Phase 3 (Data Platform).
+# Deep schema ships with Phase 3; schema_version and shape are enforced now.
+schema_version: 1
+
+symbols: []
+timeframes: []
