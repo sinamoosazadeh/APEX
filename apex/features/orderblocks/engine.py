@@ -26,6 +26,11 @@ spec lines ~1248-1592), per the Book II ch. 2 migration matrix:
 - **BPR**: a balanced price range fires when a new bull FVG follows a
   new bear FVG on the previous bar (and mirrored).
 
+FVG ``trendQ`` is fully wired: the zero-lag momentum filter (AICE
+``local_bull/bear``, spec lines 1061-1066) is computed internally from
+the shared ``zero_lag_filter`` primitive, so the term evaluates the
+true AICE ternary ``local ? 1.0 : trend-aligned ? 0.75 : 0.35``.
+
 Deferred context inputs (documented substitutions, not fake logic):
 the AICE terms fed by families that are not migrated yet use the
 neutral values AICE itself defines for the undecided case, and will be
@@ -33,8 +38,6 @@ rewired when those families land:
 
 - ``mtfQ`` / ``htfQ`` (HTF alignment, MTF family): neutral ``0.60``,
   the AICE ``htf_align == 0`` branch.
-- FVG ``trendQ`` (zero-lag momentum ``local_bull/bear``): falls back
-  to the chart trend branch (``0.75`` aligned / ``0.35`` against).
 - FVG ``locQ`` HTF discount/premium branch (``0.75``): falls back to
   the chart dealing range only (``1.0`` in zone, else ``0.45``).
 
@@ -65,6 +68,7 @@ from apex.features.calculations import (
     clamp,
     sma,
     wilder_atr,
+    zero_lag_filter,
 )
 
 FAMILY = "orderblocks"
@@ -82,8 +86,12 @@ _QUALITY_ATR_NORM = 1.5
 _RVOL_NORM = 2.5
 # Neutral values for deferred context inputs (see module docstring).
 _HTF_NEUTRAL_QUALITY = 0.60
+# FVG trendQ ternary (AICE line 1488): local momentum -> 1.0.
+_TREND_LOCAL_QUALITY = 1.0
 _TREND_ALIGNED_QUALITY = 0.75
 _TREND_AGAINST_QUALITY = 0.35
+# Zero-lag slope lag (AICE line 1063).
+_SLOPE_LAG = 3
 _LOCATION_MISS_QUALITY = 0.45
 _LOCATION_UNKNOWN_QUALITY = 0.5
 # Absorption: high relative volume inside a narrow bar (line 1332).
@@ -150,6 +158,8 @@ class OrderBlockParams:
     min_fvg_size_atr: float = 0.05
     volume_sma_length: int = 20
     range_sma_length: int = 14
+    zpf_fast_length: int = 12
+    zpf_slow_length: int = 26
 
     def __post_init__(self) -> None:
         ensure_positive(self.pivot_lookback, "pivot_lookback")
@@ -165,6 +175,8 @@ class OrderBlockParams:
         ensure_positive(self.min_fvg_size_atr, "min_fvg_size_atr")
         ensure_positive(self.volume_sma_length, "volume_sma_length")
         ensure_positive(self.range_sma_length, "range_sma_length")
+        ensure_positive(self.zpf_fast_length, "zpf_fast_length")
+        ensure_positive(self.zpf_slow_length, "zpf_slow_length")
 
     @property
     def warmup_bars(self) -> int:
@@ -215,7 +227,21 @@ class _Series:
     volume_sma: list[float | None]
     ranges: list[float]
     range_sma: list[float | None]
+    momentum_fast: list[float | None]
+    momentum_slow: list[float | None]
     equilibriums: list[float | None] = field(default_factory=list)
+
+    def local_momentum(self, index: int, *, bullish: bool) -> bool:
+        """AICE ``local_bull/bear``: zero-lag cross with confirming slope."""
+        fast = self.momentum_fast[index]
+        slow = self.momentum_slow[index]
+        lagged = self.momentum_slow[index - _SLOPE_LAG] if index >= _SLOPE_LAG else None
+        if fast is None or slow is None or lagged is None:
+            return False
+        slope = slow - lagged
+        if bullish:
+            return fast > slow and slope > 0
+        return fast < slow and slope < 0
 
 
 @dataclass(slots=True)
@@ -272,6 +298,7 @@ class OrderBlockEngine:
         params = self._params
         volumes = [float(bar.volume.value) for bar in bars]
         ranges = [float(bar.high.value) - float(bar.low.value) for bar in bars]
+        closes = [float(bar.close.value) for bar in bars]
         series = _Series(
             bars=bars,
             atr=wilder_atr(bars, params.atr_length),
@@ -279,6 +306,8 @@ class OrderBlockEngine:
             volume_sma=sma(volumes, params.volume_sma_length),
             ranges=ranges,
             range_sma=sma(ranges, params.range_sma_length),
+            momentum_fast=zero_lag_filter(closes, params.zpf_fast_length),
+            momentum_slow=zero_lag_filter(closes, params.zpf_slow_length),
         )
         fold = StructureFold(
             pivots=PivotTracker(lookback=params.pivot_lookback),
@@ -599,13 +628,21 @@ class OrderBlockEngine:
             if volume_mean is not None and volume_mean > 0
             else 1.0
         )
+        local = series.local_momentum(index, bullish=bullish)
         aligned = signals.trend_direction == (1 if bullish else -1)
+        trend_quality = (
+            _TREND_LOCAL_QUALITY
+            if local
+            else _TREND_ALIGNED_QUALITY
+            if aligned
+            else _TREND_AGAINST_QUALITY
+        )
         in_zone = signals.in_discount if bullish else signals.in_premium
         terms = (
             clamp(size_atr / _QUALITY_ATR_NORM, 0.0, 1.0),
             clamp(signals.body_atr / params.displacement_body_atr, 0.0, 1.0),
             clamp(rvol / _RVOL_NORM, 0.0, 1.0),
-            _TREND_ALIGNED_QUALITY if aligned else _TREND_AGAINST_QUALITY,
+            trend_quality,
             1.0 if in_zone else _LOCATION_MISS_QUALITY,
             _HTF_NEUTRAL_QUALITY,
         )
