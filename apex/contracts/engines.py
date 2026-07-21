@@ -26,12 +26,14 @@ from apex.domain.trade import Trade
 
 
 @runtime_checkable
-@stability(StabilityLevel.EXPERIMENTAL)
-class IExchange(Protocol):
-    """Market gateway contract (anti-corruption layer, Book II 5.37).
+@stability(StabilityLevel.BETA)
+class IMarketDataGateway(Protocol):
+    """Market data contract (anti-corruption layer, Book II 5.37).
 
-    Implementations translate exchange-specific APIs (Toobit first,
-    per Book VII) into domain contracts; no exchange concept leaks in.
+    Contract evolution note (Book II 5.35): split out of ``IExchange``
+    in Phase 3 so the data platform ships without any pretend trading
+    surface. ``IExchange`` extends this with order methods and is
+    implemented by the Execution Platform (Phase 10).
     """
 
     @property
@@ -47,7 +49,7 @@ class IExchange(Protocol):
         start: Timestamp,
         end: Timestamp,
     ) -> Result[Sequence[Bar]]:
-        """Fetch confirmed historical bars in [start, end)."""
+        """Fetch historical bars with open time in [start, end)."""
         ...
 
     async def fetch_ticks(
@@ -59,6 +61,16 @@ class IExchange(Protocol):
     ) -> Result[Sequence[Tick]]:
         """Fetch executed trade prints from ``start``."""
         ...
+
+
+@runtime_checkable
+@stability(StabilityLevel.EXPERIMENTAL)
+class IExchange(IMarketDataGateway, Protocol):
+    """Full exchange contract: market data plus order lifecycle.
+
+    Implemented by the Execution Platform (Phase 10); market data
+    methods are inherited from :class:`IMarketDataGateway`.
+    """
 
     async def submit_order(self, order: Order) -> Result[Order]:
         """Submit an order; returns the acknowledged order version."""

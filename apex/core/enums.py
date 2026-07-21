@@ -246,3 +246,20 @@ class RiskMode(Enum):
     AGGRESSIVE = "aggressive"
     DEFENSIVE = "defensive"
     HALTED = "halted"
+
+
+@unique
+class PluginKind(Enum):
+    """Plugin taxonomy (Book II 3.23)."""
+
+    INDICATOR = "indicator"
+    FILTER = "filter"
+    FEATURE = "feature"
+    STRATEGY = "strategy"
+    OPTIMIZER = "optimizer"
+    EXECUTION_POLICY = "execution_policy"
+    RISK_POLICY = "risk_policy"
+    PORTFOLIO_POLICY = "portfolio_policy"
+    EXCHANGE_CONNECTOR = "exchange_connector"
+    REPORT_GENERATOR = "report_generator"
+    SERVICE = "service"

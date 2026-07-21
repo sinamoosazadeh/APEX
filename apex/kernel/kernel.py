@@ -25,6 +25,7 @@ from apex.core.time.clock import Clock, SystemClock
 from apex.kernel.container import ServiceContainer
 from apex.kernel.health import HealthMonitor
 from apex.kernel.modules import ModuleRegistry
+from apex.plugins.loader import PluginLoader, safe_load
 
 _SOURCE = "apex.kernel"
 
@@ -38,6 +39,7 @@ class KernelStatus:
     environment: str
     run_mode: str
     config_hash: str
+    plugins_loaded: tuple[str, ...]
     modules_started: tuple[str, ...]
     services_registered: tuple[str, ...]
     health: HealthState
@@ -66,6 +68,7 @@ class Kernel:
         self._bus: InProcessEventBus | None = None
         self._health: HealthMonitor | None = None
         self._session_id: uuid.UUID | None = None
+        self._plugins: tuple[str, ...] = ()
 
     # --- Accessors -------------------------------------------------------------
 
@@ -110,6 +113,7 @@ class Kernel:
                 payload={"config_hash": config.config_hash, "config_dir": config.config_dir},
             )
         )
+        self._stage_plugins(config, logger)
         await self._stage_modules(bus, logger)
         health = self._stage_health(logger)
         self._running = True
@@ -178,6 +182,18 @@ class Kernel:
     def _register_protocol(self, protocol: type, instance: object) -> None:
         # Protocols are registered under their protocol type as the key.
         self._container.register_instance(protocol, instance)
+
+    def _stage_plugins(self, config: AppConfig, logger: StructuredLogger) -> None:
+        """Load configured plugins (Book II 29.24); failures abort boot."""
+        factory = self._container.resolve(LoggerFactory)
+        loader = PluginLoader(
+            container=self._container,
+            registry=self._registry,
+            logger=factory.get("kernel.plugins"),
+        )
+        loaded = safe_load(loader, config.system.plugin_modules)
+        self._plugins = tuple(record.manifest.name for record in loaded)
+        logger.info("plugins_loaded", count=len(loaded), plugins=", ".join(self._plugins))
 
     def _stage_event_bus(self, config: AppConfig, logger: StructuredLogger) -> InProcessEventBus:
         journal = EventJournal(capacity=config.system.event_journal_capacity)
@@ -298,6 +314,7 @@ class Kernel:
             environment=config.system.environment.value,
             run_mode=config.system.run_mode.value,
             config_hash=config.config_hash,
+            plugins_loaded=self._plugins,
             modules_started=tuple(self._started_modules),
             services_registered=self._container.registered_types(),
             health=health.overall(),

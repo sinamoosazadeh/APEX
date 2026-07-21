@@ -13,3 +13,11 @@ id_seed: null
 events:
   journal_capacity: 10000  # retained events in the in-process journal
   fail_fast: false         # true: a failing event handler aborts the run
+
+storage:
+  data_dir: runtime        # SQLite databases live here (gitignored)
+
+plugins:
+  enabled:                 # loaded in order at boot (Book II 29.24)
+    - apex.storage.plugin
+    - apex.data.toobit.plugin

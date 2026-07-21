@@ -5,13 +5,17 @@ from pathlib import Path
 
 import pytest
 from apex.__main__ import main
+from apex.contracts.engines import IMarketDataGateway
 from apex.core.config import AppConfig
-from apex.core.contracts.interfaces import IClock, IEventBus, ILogger
+from apex.core.contracts.interfaces import IClock, IEventBus, ILogger, IStorage
 from apex.core.enums import HealthState, ModuleState
 from apex.core.events.catalog import SystemEvent
 from apex.core.events.journal import EventJournal
 from apex.core.exceptions import DataError, KernelError
+from apex.data.pipeline import BarIngestionPipeline
 from apex.kernel.kernel import Kernel
+from apex.storage.bars import SqliteBarRepository
+from apex.storage.sqlite import SqliteKeyValueStorage
 
 pytestmark = pytest.mark.integration
 
@@ -59,8 +63,16 @@ class TestKernelBoot:
             status = await kernel.boot()
             assert kernel.is_running
             assert status.health is HealthState.HEALTHY
-            assert status.modules_started == ("event_recorder", "consumer")
-            assert status.events_journaled >= 4  # booting, config, 2x module, started
+            assert status.plugins_loaded == ("storage_core", "toobit_connector")
+            # Deterministic topological order with alphabetical tie-breaks.
+            assert status.modules_started == (
+                "event_recorder",
+                "storage_core",
+                "consumer",
+                "event_archive",
+                "market_data",
+            )
+            assert status.events_journaled >= 8  # booting, config, 5x module, started
             await kernel.shutdown()
             assert not kernel.is_running
 
@@ -69,6 +81,7 @@ class TestKernelBoot:
         assert second.events == ["start", "stop"]
         # Shutdown order is the reverse of start order.
         assert kernel.modules.state_of("consumer") is ModuleState.STOPPED
+        assert kernel.modules.state_of("market_data") is ModuleState.STOPPED
 
     def test_boot_registers_core_services(self, config_dir: Path) -> None:
         kernel = Kernel(config_dir=config_dir)
@@ -80,6 +93,24 @@ class TestKernelBoot:
             assert kernel.container.contains(IClock)
             assert kernel.container.contains(ILogger)
             assert kernel.container.contains(EventJournal)
+            # Plugin-provided services.
+            assert kernel.container.contains(IStorage)
+            assert kernel.container.contains(IMarketDataGateway)
+            assert kernel.container.contains(BarIngestionPipeline)
+            assert kernel.container.contains(SqliteBarRepository)
+            await kernel.shutdown()
+
+        asyncio.run(scenario())
+
+    def test_event_archive_persists_boot_events(self, config_dir: Path) -> None:
+        kernel = Kernel(config_dir=config_dir)
+
+        async def scenario() -> None:
+            await kernel.boot()
+            storage = kernel.container.resolve(SqliteKeyValueStorage)
+            # Sequence 0 is the kernel booting event, caught up from the journal.
+            first = await storage.read("events", f"{0:020d}")
+            assert first is not None and b"system.kernel.booting" in first
             await kernel.shutdown()
 
         asyncio.run(scenario())

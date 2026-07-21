@@ -11,8 +11,8 @@ project stays runnable at the end of every phase (4.6).
 | --- | --- | --- | --- |
 | 0 | Project Initialization | ✅ **complete** | Repo structure, tooling (uv/ruff/mypy strict/pytest), 12-file schema-gated config set, git (main/develop), docs, spec library |
 | 1 | Foundation Layer | ✅ **complete** | `apex/core`: types, enums, coded exceptions, identity, time system, metadata, validation, serialization+hashing, Result, BaseObject (lineage/versioning), contexts, versioning/stability, structured logging, config platform |
-| 2 | Core Infrastructure | 🟡 **partial** | Delivered now: shared kernel (`apex/domain`), infra + engine contracts, event platform (journal + deterministic bus), DI container, module registry, health monitor, kernel boot/shutdown, `python -m apex`. Remaining: durable storage-backed journal, plugin loader, scheduler service |
-| 3 | Data Platform | ⬜ pending | Book II ch. 6/16/24; Toobit gateway (Book VII) behind `IExchange`, storage repositories, replay |
+| 2 | Core Infrastructure | ✅ **complete** | Shared kernel (`apex/domain`), infra + engine contracts, event platform (journal + deterministic bus), DI container, module registry, health monitor, kernel boot/shutdown with plugin stage, storage platform (SQLite key/value behind `IStorage`, durable event archive with journal catch-up), plugin system (manifest contract, config-driven loader with API-version/dependency validation) |
+| 3 | Data Platform | 🟡 **partial** | Delivered: Toobit REST client (injected transport), anti-corruption translator (Book II 5.37), paginating gateway behind `IMarketDataGateway` (contract split from `IExchange` per 5.35), gap detection + quality scoring, ingestion pipeline with market event catalog, `SqliteBarRepository` system of record, replay gateway, `apex ingest` CLI — live-validated against api.toobit.com. Remaining: WebSocket streaming, tick storage, funding/OI enrichment, multi-exchange (Binance/Bybit backfill sources) |
 | 4 | Feature Platform | ⬜ pending | Book II ch. 7/17; AICE feature migration (Book VI reference, Book II ch. 2 migration matrix) |
 | 5 | Probability Platform | ⬜ pending | Book II ch. 8/18 |
 | 6 | Decision Platform | ⬜ pending | Book II ch. 11/19; Central Decision Kernel (Book I ch. 9) |
@@ -26,12 +26,14 @@ project stays runnable at the end of every phase (4.6).
 | 14 | Deployment | ⬜ pending | Book II 29.20/29.25 |
 | 15 | Production Validation | ⬜ pending | Book II 29.26 acceptance criteria |
 
-## Current quality-gate results (Phase 0/1 acceptance)
+## Current quality-gate results (Phase 2 acceptance + Phase 3 first slice)
 
 - `ruff check apex tests` — clean
-- `mypy` (strict, 89 files) — clean
-- `pytest` — **148 passed**
-- `python -m apex --check` — boots healthy, exits 0
+- `mypy` (strict, 117 files) — clean
+- `pytest` — **199 passed**
+- `python -m apex --check` — boots healthy (2 plugins, 3 modules), exits 0
+- Live smoke: 48 hourly BTCUSDT bars ingested from api.toobit.com through the
+  full gateway stack; forming-bar detection confirmed on live data
 
 ## Spec library
 
@@ -51,12 +53,13 @@ book 8 is truncated at its source ("Dependency Rule" section) — its missing
 content is fully covered by Books I-III. Priority on conflict:
 **Constitution → Book I → Book II → AICE logic**.
 
-## Next up (Phase 2 completion → Phase 3)
+## Next up (Phase 3 completion → Phase 4)
 
-1. Durable event journal + repository implementations over SQLite/Parquet
-   (`IStorage`/`IRepository`, Book II ch. 24).
-2. Plugin loader with signature/version/dependency checks (Book II 29.24).
-3. Toobit market gateway behind `IExchange` with the anti-corruption layer
-   (Book II 5.37, Book VII) — first as market-data-only (Phase 3 read path).
-4. Bar ingestion pipeline with quality scoring and gap detection
-   (Book II ch. 6/16).
+1. Scheduled/looped ingestion (keep series current; catch-up from
+   `latest_open_time`).
+2. Tick storage and tick replay (completes the replay contract).
+3. Toobit WebSocket streaming (Book VII `wss://stream.toobit.com`) behind the
+   same gateway contract.
+4. Then Phase 4: the Feature Platform — begin the AICE migration (Book II
+   ch. 2 migration matrix, ch. 7/17; Book VI reference source) on top of the
+   confirmed-bar store.

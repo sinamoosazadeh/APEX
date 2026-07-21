@@ -5,33 +5,43 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.1.0
-  phase: 2            # highest phase with delivered work (partial)
-  phases_complete: [0, 1]
+  version: 0.2.0
+  phase: 3            # highest phase with delivered work (partial)
+  phases_complete: [0, 1, 2]
 
 config_schema_version: 1
 contract_schema_version: 1
-database_schema_version: null   # storage platform arrives in Phase 3
+database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.1.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.2.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.contracts: { version: 0.1.0, stability: experimental, owner: foundation }
-  apex.kernel:    { version: 0.1.0, stability: beta,         owner: foundation }
+  apex.contracts: { version: 0.2.0, stability: beta,         owner: foundation }
+  apex.kernel:    { version: 0.2.0, stability: beta,         owner: foundation }
+  apex.storage:   { version: 0.1.0, stability: beta,         owner: data-platform }
+  apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
+  apex.data:      { version: 0.1.0, stability: beta,         owner: data-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
   apex.domain: [apex.core]
   apex.contracts: [apex.core, apex.domain]
-  apex.kernel: [apex.core]
+  apex.kernel: [apex.core, apex.plugins]
+  apex.plugins: [apex.core, apex.kernel]
+  apex.storage: [apex.core, apex.domain, apex.plugins]
+  apex.data: [apex.core, apex.domain, apex.contracts, apex.storage, apex.plugins]
 
 # Populated by their phases.
-plugin_registry: []
+plugin_registry:
+  - { name: storage_core, kind: service, version: 0.1.0, module: apex.storage.plugin }
+  - { name: toobit_connector, kind: exchange_connector, version: 0.1.0, module: apex.data.toobit.plugin }
 feature_registry: []
-exchange_registry: []
+exchange_registry:
+  - { id: toobit, market_data: true, trading: false }
 
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 148
+  tests_passed: 199
   boot_check: pass
+  live_smoke: toobit klines + trades validated

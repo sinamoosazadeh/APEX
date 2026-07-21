@@ -1,8 +1,27 @@
-"""Data Platform - market data acquisition, validation, sync, replay and quality (Book II ch. 6/16).
+"""APEX Data Platform (Book II ch. 6/16) - Phase 3.
 
-Owned by Phase 3. This package intentionally contains no code yet:
-per the Master Repository Blueprint (Book II ch. 29) no file is created
-before its dependencies, and per the Constitution no placeholder logic
-is ever committed. The layer's contracts already exist in
-:mod:`apex.contracts` / :mod:`apex.core.contracts`.
+First delivered slice: the Toobit market data gateway behind the
+IMarketDataGateway contract, the bar ingestion pipeline (fetch,
+quality-inspect, persist, announce), gap detection, and a replay
+gateway that serves stored history through the same contract.
+
+Ingestion is on-demand (CLI ``apex ingest``; the Phase 11 scheduler
+automates it) - kernel boot never touches the network.
 """
+
+from apex.data.events import MarketEvent, market_event
+from apex.data.module import MarketDataModule
+from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
+from apex.data.quality import BarQualityInspector, GapReport
+from apex.data.replay import ReplayMarketDataGateway
+
+__all__ = [
+    "BarIngestionPipeline",
+    "BarQualityInspector",
+    "GapReport",
+    "IngestionSummary",
+    "MarketDataModule",
+    "MarketEvent",
+    "ReplayMarketDataGateway",
+    "market_event",
+]
