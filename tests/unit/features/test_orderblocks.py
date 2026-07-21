@@ -256,6 +256,42 @@ class TestEngineContract:
             OrderBlockParams(ob_decay=1.5)
 
 
+class TestTrendQualityRewire:
+    def rally_with_gap(self) -> list[Bar]:
+        """Steadily rising closes, then a qualified bull gap at bar 8."""
+        bars: list[Bar] = []
+        for i in range(8):
+            base = 100.0 + 2.0 * i
+            bars.append(make_bar(i, base, base + 2.2, base - 0.2, base + 2.0))
+        # low 116 > high[6] (114.2): raw bull FVG with a strong body.
+        bars.append(make_bar(8, 116.5, 120.0, 116.0, 119.5))
+        return bars
+
+    def test_local_momentum_lifts_fvg_quality(self) -> None:
+        """AICE line 1488: trendQ = local_bull ? 1.0 : ... (rewired).
+
+        The same window scored with an active zero-lag filter (local
+        bull momentum on a steady rally) must produce a higher bull FVG
+        confidence than with an unwarmed filter falling back to the
+        chart-trend branch.
+        """
+        from dataclasses import replace
+
+        bars = self.rally_with_gap()
+        context = MarketContext(symbol="BTCUSDT", timeframe=Timeframe.H1, as_of=T0)
+        local_engine = OrderBlockEngine(
+            params=replace(PARAMS, zpf_fast_length=2, zpf_slow_length=3),
+            clock=ManualClock(T0),
+        )
+        fallback_engine = OrderBlockEngine(params=PARAMS, clock=ManualClock(T0))
+        with_local = list(local_engine.compute(bars, context).unwrap())
+        without = list(fallback_engine.compute(bars, context).unwrap())
+        boosted = value_of(with_local, "orderblocks.fvg_long_confidence", 8)
+        fallback = value_of(without, "orderblocks.fvg_long_confidence", 8)
+        assert value_of(with_local, "orderblocks.new_bull_fvg", 8) == 1.0
+        assert boosted > fallback + 0.05
+
+
 class TestDefinitions:
     def test_definitions_cover_engine_names(self) -> None:
         definitions = orderblock_definitions(PARAMS)
