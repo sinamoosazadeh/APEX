@@ -16,6 +16,7 @@ from apex.core.enums import StabilityLevel, Timeframe
 from apex.core.result import Result
 from apex.core.time.timestamp import Timestamp
 from apex.core.versioning import stability
+from apex.domain.feature import Feature
 from apex.domain.market import Bar, Tick
 from apex.domain.order import Order
 from apex.domain.portfolio import PortfolioSnapshot
@@ -86,21 +87,33 @@ class IExchange(IMarketDataGateway, Protocol):
 
 
 @runtime_checkable
-@stability(StabilityLevel.EXPERIMENTAL)
+@stability(StabilityLevel.BETA)
 class IFeatureEngine(Protocol):
-    """Feature platform contract (Phase 4)."""
+    """Feature engine contract (Phase 4).
+
+    Contract evolution (5.35): engines emit full :class:`Feature`
+    domain objects - one per (bar, feature name) - computed from
+    confirmed bars only. Computation is pure and synchronous: engines
+    perform no I/O, which keeps every feature deterministic and
+    replayable.
+    """
 
     @property
-    def families(self) -> tuple[str, ...]:
-        """Feature families this engine produces."""
+    def family(self) -> str:
+        """The feature family this engine produces."""
         ...
 
-    async def compute(
+    @property
+    def feature_names(self) -> tuple[str, ...]:
+        """Every feature name this engine can emit."""
+        ...
+
+    def compute(
         self,
         bars: Sequence[Bar],
         context: MarketContext,
-    ) -> Result[Mapping[str, float]]:
-        """Compute features from confirmed bars only (non-repainting)."""
+    ) -> Result[tuple[Feature, ...]]:
+        """Compute features for every confirmed bar in the window."""
         ...
 
 
