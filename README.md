@@ -10,10 +10,11 @@ event-driven Python system, built strictly to the APEX specification books.
 
 ## Status
 
-**Phase 0 (Project Initialization) and Phase 1 (Foundation Layer): complete.**
-The kernel boots, passes health checks and shuts down cleanly. Engine
-platforms (data, features, probability, decision, risk, execution) arrive in
-Phases 2-15 — see [docs/PHASES.md](docs/PHASES.md).
+**Phases 0-2 complete; Phase 3 (Data Platform) partially delivered.**
+The kernel boots with a plugin system, durable storage and event archiving.
+The Toobit market data gateway ingests live klines through an
+anti-corruption layer with gap detection and quality scoring — validated
+against the live exchange. See [docs/PHASES.md](docs/PHASES.md).
 
 ## Requirements
 
@@ -32,6 +33,9 @@ uv pip install -p .venv/bin/python -e . --group dev
 # boot as a validation gate (CI / deployment)
 .venv/bin/python -m apex --check
 
+# ingest live market history from Toobit into the bar store
+.venv/bin/python -m apex ingest --symbol BTCUSDT --timeframe 1h --bars 200
+
 # quality gates
 .venv/bin/ruff check apex tests
 .venv/bin/mypy
@@ -46,7 +50,10 @@ uv pip install -p .venv/bin/python -e . --group dev
 | `apex/domain/` | Shared kernel: Bar, Tick, Signal, Order, Trade, Position, Portfolio, Probability, Risk, Money |
 | `apex/contracts/` | Engine interface contracts (exchange, features, probability, risk, execution, optimizer) |
 | `apex/kernel/` | DI container, module registry, health monitor, boot/shutdown orchestrator |
-| `apex/<layer>/` | Engine layers owned by Phases 2-15 (see each package docstring) |
+| `apex/storage/` | Storage platform: SQLite key/value (IStorage), bar repository, event archive |
+| `apex/plugins/` | Plugin system: manifest contract + config-driven loader |
+| `apex/data/` | Data platform: Toobit gateway, quality inspection, ingestion pipeline, replay |
+| `apex/<layer>/` | Engine layers owned by Phases 4-15 (see each package docstring) |
 | `config/` | The 12-file YAML configuration set (schema-gated at boot) |
 | `docs/` | Architecture, conventions, phase tracker, and the source specification books |
 | `tests/` | Unit + integration suites |
