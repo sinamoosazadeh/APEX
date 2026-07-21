@@ -25,6 +25,8 @@ from apex.features.pipeline import FeatureComputationPipeline
 from apex.features.registry import FeatureRegistry
 from apex.features.smt.definitions import smt_definitions
 from apex.features.smt.engine import SmtEngine, SmtParams
+from apex.features.statistical.definitions import statistical_definitions
+from apex.features.statistical.engine import StatisticalEngine, StatisticalParams
 from apex.features.structure.definitions import structure_definitions
 from apex.features.structure.engine import MarketStructureEngine, StructureParams
 from apex.features.volume.definitions import volume_definitions
@@ -248,6 +250,32 @@ def _smt_params(features_config: ConfigSection) -> SmtParams:
     )
 
 
+def _statistical_params(features_config: ConfigSection) -> StatisticalParams:
+    """Statistical family params: config overrides on AICE defaults."""
+    numbers = _family_numbers(features_config, "statistical")
+    defaults = StatisticalParams()
+    return StatisticalParams(
+        atr_length=int(numbers.get("atr_length", defaults.atr_length)),
+        adx_length=int(numbers.get("adx_length", defaults.adx_length)),
+        adx_trend_threshold=numbers.get(
+            "adx_trend_threshold", defaults.adx_trend_threshold
+        ),
+        efficiency_length=int(numbers.get("efficiency_length", defaults.efficiency_length)),
+        entropy_window=int(numbers.get("entropy_window", defaults.entropy_window)),
+        normalization_window=int(
+            numbers.get("normalization_window", defaults.normalization_window)
+        ),
+        rank_window=int(numbers.get("rank_window", defaults.rank_window)),
+        range_sma_length=int(numbers.get("range_sma_length", defaults.range_sma_length)),
+        wavetrend_channel=int(numbers.get("wavetrend_channel", defaults.wavetrend_channel)),
+        wavetrend_average=int(numbers.get("wavetrend_average", defaults.wavetrend_average)),
+        stc_cycle=int(numbers.get("stc_cycle", defaults.stc_cycle)),
+        stc_fast=int(numbers.get("stc_fast", defaults.stc_fast)),
+        stc_slow=int(numbers.get("stc_slow", defaults.stc_slow)),
+        cci_length=int(numbers.get("cci_length", defaults.cci_length)),
+    )
+
+
 def _smt_references(symbols: tuple[str, ...]) -> dict[str, str]:
     """Each symbol references its first peer (AICE auto-profile analog)."""
     references: dict[str, str] = {}
@@ -287,6 +315,7 @@ class FeaturePlatformPlugin:
         volume_params = _volume_params(config.market.features)
         htf_params = _htf_params(config.market.features)
         smt_params = _smt_params(config.market.features)
+        statistical_params = _statistical_params(config.market.features)
         macro = _macro_timeframes(config.market.features)
         references = _smt_references(config.market.symbols)
         engines = (
@@ -298,6 +327,7 @@ class FeaturePlatformPlugin:
             VolumeEngine(params=volume_params, clock=clock),
             HtfContextEngine(params=htf_params, macro_timeframes=macro, clock=clock),
             SmtEngine(params=smt_params, references=references, clock=clock),
+            StatisticalEngine(params=statistical_params, clock=clock),
         )
         registry = FeatureRegistry()
         registry.register_all(structure_definitions(structure_params))
@@ -306,6 +336,7 @@ class FeaturePlatformPlugin:
         registry.register_all(volume_definitions(volume_params))
         registry.register_all(htf_definitions(htf_params))
         registry.register_all(smt_definitions(smt_params))
+        registry.register_all(statistical_definitions(statistical_params))
         repository = SqliteFeatureRepository(
             database_path=Path(config.system.data_dir) / FEATURES_DATABASE_FILENAME,
         )

@@ -62,6 +62,7 @@ from apex.features.calculations import (
     sma,
     squash,
     stdev,
+    volatility_regime_factor,
     wilder_atr,
     zero_lag_filter,
 )
@@ -69,9 +70,6 @@ from apex.features.calculations import (
 FAMILY = "volume"
 _SOURCE = "apex.features.volume"
 
-# Discrete volatility regime multiplier (AICE line 988).
-_WIDTH_WIDE, _WIDTH_NARROW = 1.5, 0.6
-_FACTOR_WIDE, _FACTOR_NARROW = 1.3, 0.75
 # Adaptive ATR shape (AICE line 1010).
 _ADAPTIVE_BASE, _ADAPTIVE_FC, _ADAPTIVE_RANK = 0.85, 0.25, 0.30
 _ADAPTIVE_FLOOR, _ADAPTIVE_CEIL = 0.65, 1.45
@@ -478,13 +476,7 @@ class VolumeEngine:
         pct = percentile if percentile is not None else 0.5
         mean = series.atr_mean[index]
         width = atr / mean if atr is not None and mean is not None and mean > 0 else 1.0
-        factor = (
-            _FACTOR_WIDE
-            if width > _WIDTH_WIDE
-            else _FACTOR_NARROW
-            if width < _WIDTH_NARROW
-            else 1.0
-        )
+        factor = volatility_regime_factor(width)
         hist = series.hist_vol[index]
         forecast = series.ewma_vol[index] / hist if hist is not None and hist > 0 else 1.0
         adaptive = clamp(

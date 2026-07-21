@@ -14,7 +14,7 @@ their Pine counterparts (Constitution 2.12: no duplicate logic):
 """
 
 from dataclasses import dataclass, field
-from math import exp
+from math import exp, log
 
 from apex.domain.market import Bar
 
@@ -483,3 +483,154 @@ def htf_context_series(
             )
         )
     return out
+
+
+def entropy01(probability: float) -> float:
+    """Pine ``f_entropy01``: binary entropy of p, normalized to [0, 1]."""
+    p = clamp(probability, 0.0001, 0.9999)
+    return -(p * log(p) + (1.0 - p) * log(1.0 - p)) / log(2.0)
+
+
+def min_max_scale(values: list[float], length: int) -> list[float]:
+    """Pine ``f_minmax``: rolling min-max position; 0.5 while undefined."""
+    out = [0.5] * len(values)
+    for index in range(length - 1, len(values)):
+        window = values[index - length + 1 : index + 1]
+        low, high = min(window), max(window)
+        span = high - low
+        if span > 0:
+            out[index] = (values[index] - low) / span
+    return out
+
+
+def rma(values: list[float], length: int) -> list[float | None]:
+    """Wilder moving average (Pine ``ta.rma``): SMA seed, then recursive."""
+    out: list[float | None] = [None] * len(values)
+    current: float | None = None
+    for index, value in enumerate(values):
+        if index < length - 1:
+            continue
+        if current is None:
+            current = sum(values[index - length + 1 : index + 1]) / length
+        else:
+            current = (current * (length - 1) + value) / length
+        out[index] = current
+    return out
+
+
+def adx(bars: list[Bar], length: int) -> list[float | None]:
+    """Average directional index (Pine ``ta.dmi`` third output)."""
+    count = len(bars)
+    plus_dm = [0.0] * count
+    minus_dm = [0.0] * count
+    true_ranges = [true_range(bars, index) for index in range(count)]
+    for index in range(1, count):
+        up = float(bars[index].high.value) - float(bars[index - 1].high.value)
+        down = float(bars[index - 1].low.value) - float(bars[index].low.value)
+        plus_dm[index] = up if up > down and up > 0 else 0.0
+        minus_dm[index] = down if down > up and down > 0 else 0.0
+    smoothed_tr = rma(true_ranges, length)
+    smoothed_plus = rma(plus_dm, length)
+    smoothed_minus = rma(minus_dm, length)
+    dx: list[float] = [0.0] * count
+    for index in range(count):
+        tr_value = smoothed_tr[index]
+        plus = smoothed_plus[index]
+        minus = smoothed_minus[index]
+        if tr_value is None or plus is None or minus is None or tr_value <= 0:
+            continue
+        plus_di = 100.0 * plus / tr_value
+        minus_di = 100.0 * minus / tr_value
+        total = plus_di + minus_di
+        dx[index] = 100.0 * abs(plus_di - minus_di) / total if total > 0 else 0.0
+    return rma(dx, length)
+
+
+def cci(values: list[float], length: int) -> list[float | None]:
+    """Commodity channel index (Pine ``ta.cci``) over a typical-price series."""
+    out: list[float | None] = [None] * len(values)
+    for index in range(length - 1, len(values)):
+        window = values[index - length + 1 : index + 1]
+        mean = sum(window) / length
+        deviation = sum(abs(value - mean) for value in window) / length
+        if deviation > 0:
+            out[index] = (values[index] - mean) / (0.015 * deviation)
+        else:
+            out[index] = 0.0
+    return out
+
+
+def stochastic(values: list[float | None], length: int) -> list[float | None]:
+    """Pine ``ta.stoch(x, x, x, len)``: rolling range position, 0-100."""
+    out: list[float | None] = [None] * len(values)
+    for index in range(len(values)):
+        window = [
+            value
+            for value in values[max(0, index - length + 1) : index + 1]
+            if value is not None
+        ]
+        if index < length - 1 or values[index] is None or not window:
+            continue
+        low, high = min(window), max(window)
+        span = high - low
+        current = values[index]
+        if span > 0 and current is not None:
+            out[index] = 100.0 * (current - low) / span
+    return out
+
+
+def schaff_trend_cycle(
+    values: list[float],
+    fast: int,
+    slow: int,
+    cycle: int,
+) -> list[float]:
+    """Pine ``f_stc``: double-stochastic MACD with half-speed smoothing.
+
+    50.0 while undefined (the AICE ``nz(st, 50)`` fallback).
+    """
+    fast_ema = ema(values, fast)
+    slow_ema = ema(values, slow)
+    macd: list[float | None] = [
+        f - s if f is not None and s is not None else None
+        for f, s in zip(fast_ema, slow_ema, strict=True)
+    ]
+    k = stochastic(macd, cycle)
+    d: list[float | None] = [None] * len(values)
+    current_d: float | None = None
+    for index, value in enumerate(k):
+        if value is not None:
+            current_d = value if current_d is None else current_d + 0.5 * (value - current_d)
+        d[index] = current_d
+    kd = stochastic(d, cycle)
+    out = [50.0] * len(values)
+    current_st: float | None = None
+    for index, value in enumerate(kd):
+        if value is not None:
+            current_st = (
+                value if current_st is None else current_st + 0.5 * (value - current_st)
+            )
+        if current_st is not None:
+            out[index] = clamp(current_st, 0.0, 100.0)
+    return out
+
+
+# Discrete volatility regime multiplier (AICE line 988), shared by the
+# volume and statistical families (Constitution 2.12).
+WIDTH_WIDE, WIDTH_NARROW = 1.5, 0.6
+FACTOR_WIDE, FACTOR_NARROW = 1.3, 0.75
+
+
+def volatility_regime_factor(width: float) -> float:
+    """AICE ``vol_factor``: 1.3 wide / 0.75 narrow / 1.0 normal."""
+    if width > WIDTH_WIDE:
+        return FACTOR_WIDE
+    if width < WIDTH_NARROW:
+        return FACTOR_NARROW
+    return 1.0
+
+
+def valid_tail(series: list[float | None]) -> tuple[int, list[float]]:
+    """(offset of the first non-None value, dense tail from there)."""
+    offset = next((i for i, value in enumerate(series) if value is not None), len(series))
+    return offset, [value for value in series[offset:] if value is not None]
