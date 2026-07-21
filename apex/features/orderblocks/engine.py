@@ -31,15 +31,12 @@ FVG ``trendQ`` is fully wired: the zero-lag momentum filter (AICE
 the shared ``zero_lag_filter`` primitive, so the term evaluates the
 true AICE ternary ``local ? 1.0 : trend-aligned ? 0.75 : 0.35``.
 
-Deferred context inputs (documented substitutions, not fake logic):
-the AICE terms fed by families that are not migrated yet use the
-neutral values AICE itself defines for the undecided case, and will be
-rewired when those families land:
-
-- ``mtfQ`` / ``htfQ`` (HTF alignment, MTF family): neutral ``0.60``,
-  the AICE ``htf_align == 0`` branch.
-- FVG ``locQ`` HTF discount/premium branch (``0.75``): falls back to
-  the chart dealing range only (``1.0`` in zone, else ``0.45``).
+All context terms are fully wired. ``mtfQ``/``htfQ`` and the FVG
+``locQ`` HTF branch evaluate the true AICE ternaries against the HTF
+context computed from closed macro bars (shared
+``htf_context_series``); when the engine runs without auxiliary macro
+series, those terms fall back to AICE's own ``htf_align == 0`` neutral
+values - identical arithmetic to an undecided macro state.
 
 Two Pine artifacts are replicated exactly for parity with the
 reference: creation runs *before* the lifecycle pass on the same bar
@@ -49,11 +46,12 @@ oldest lifecycle sweep. All values are computed from confirmed bars
 only; the engine emits nothing during warmup.
 """
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from itertools import pairwise
 
 from apex.core.context import MarketContext
+from apex.core.enums import Timeframe
 from apex.core.exceptions import ApexError, FeatureError
 from apex.core.result import Result
 from apex.core.time.clock import Clock
@@ -62,10 +60,12 @@ from apex.core.validation import ensure_in_range, ensure_positive
 from apex.domain.feature import Feature
 from apex.domain.market import Bar
 from apex.features.calculations import (
+    HtfContext,
     PivotTracker,
     StructureFold,
     StructureSignals,
     clamp,
+    htf_context_series,
     sma,
     wilder_atr,
     zero_lag_filter,
@@ -84,8 +84,12 @@ _FVG_QUALITY_WEIGHTS = (0.25, 0.25, 0.18, 0.18, 0.14, 0.10)
 # Normalizers inside the quality terms (AICE lines 1291-1292, 1304).
 _QUALITY_ATR_NORM = 1.5
 _RVOL_NORM = 2.5
-# Neutral values for deferred context inputs (see module docstring).
+# HTF context ternaries (AICE lines 1334, 1490): favorable -> 1.0,
+# undecided (or no macro series) -> 0.60, against -> 0.25; the FVG
+# location HTF branch scores 0.75 (line 1489).
 _HTF_NEUTRAL_QUALITY = 0.60
+_HTF_AGAINST_QUALITY = 0.25
+_HTF_LOCATION_QUALITY = 0.75
 # FVG trendQ ternary (AICE line 1488): local momentum -> 1.0.
 _TREND_LOCAL_QUALITY = 1.0
 _TREND_ALIGNED_QUALITY = 0.75
@@ -160,6 +164,8 @@ class OrderBlockParams:
     range_sma_length: int = 14
     zpf_fast_length: int = 12
     zpf_slow_length: int = 26
+    htf_pivot_lookback: int = 8
+    htf_ema_length: int = 50
 
     def __post_init__(self) -> None:
         ensure_positive(self.pivot_lookback, "pivot_lookback")
@@ -177,6 +183,8 @@ class OrderBlockParams:
         ensure_positive(self.range_sma_length, "range_sma_length")
         ensure_positive(self.zpf_fast_length, "zpf_fast_length")
         ensure_positive(self.zpf_slow_length, "zpf_slow_length")
+        ensure_positive(self.htf_pivot_lookback, "htf_pivot_lookback")
+        ensure_positive(self.htf_ema_length, "htf_ema_length")
 
     @property
     def warmup_bars(self) -> int:
@@ -229,6 +237,7 @@ class _Series:
     range_sma: list[float | None]
     momentum_fast: list[float | None]
     momentum_slow: list[float | None]
+    htf: list[HtfContext | None] = field(default_factory=list)
     equilibriums: list[float | None] = field(default_factory=list)
 
     def local_momentum(self, index: int, *, bullish: bool) -> bool:
@@ -265,9 +274,16 @@ def _weighted(terms: tuple[float, ...], weights: tuple[float, ...]) -> float:
 class OrderBlockEngine:
     """Computes the OB/FVG family over a confirmed-bar window."""
 
-    def __init__(self, *, params: OrderBlockParams, clock: Clock) -> None:
+    def __init__(
+        self,
+        *,
+        params: OrderBlockParams,
+        clock: Clock,
+        macro_timeframes: tuple[Timeframe, Timeframe] | None = None,
+    ) -> None:
         self._params = params
         self._clock = clock
+        self._macro = macro_timeframes
 
     @property
     def family(self) -> str:
@@ -279,21 +295,45 @@ class OrderBlockEngine:
         """Every feature this engine emits."""
         return FEATURE_NAMES
 
+    def required_series(
+        self,
+        symbol: str,
+        timeframe: Timeframe,
+    ) -> tuple[tuple[str, Timeframe], ...]:
+        """Macro series feeding the HTF quality terms (when configured)."""
+        if self._macro is None:
+            return ()
+        return ((symbol, self._macro[0]), (symbol, self._macro[1]))
+
     def compute(
         self,
         bars: Sequence[Bar],
         context: MarketContext,
     ) -> Result[tuple[Feature, ...]]:
+        """Auxiliary-free path: HTF terms use AICE's undecided neutrals."""
+        return self.compute_with_context(bars, {}, context)
+
+    def compute_with_context(
+        self,
+        bars: Sequence[Bar],
+        auxiliary: Mapping[tuple[str, Timeframe], Sequence[Bar]],
+        context: MarketContext,
+    ) -> Result[tuple[Feature, ...]]:
         """Fold the window, emitting one feature set per post-warmup bar."""
         try:
-            features = self._compute_all(list(bars))
+            features = self._compute_all(list(bars), auxiliary, context)
         except ApexError as error:
             return Result.failure(error)
         return Result.success(tuple(features))
 
     # --- Fold ---------------------------------------------------------------
 
-    def _compute_all(self, bars: list[Bar]) -> list[Feature]:
+    def _compute_all(
+        self,
+        bars: list[Bar],
+        auxiliary: Mapping[tuple[str, Timeframe], Sequence[Bar]],
+        context: MarketContext,
+    ) -> list[Feature]:
         self._require_confirmed_series(bars)
         params = self._params
         volumes = [float(bar.volume.value) for bar in bars]
@@ -308,6 +348,7 @@ class OrderBlockEngine:
             range_sma=sma(ranges, params.range_sma_length),
             momentum_fast=zero_lag_filter(closes, params.zpf_fast_length),
             momentum_slow=zero_lag_filter(closes, params.zpf_slow_length),
+            htf=self._htf_series(bars, auxiliary, context),
         )
         fold = StructureFold(
             pivots=PivotTracker(lookback=params.pivot_lookback),
@@ -400,14 +441,21 @@ class OrderBlockEngine:
         """Scan for the best opposing candle on a structure break."""
         if index <= _MIN_CREATION_INDEX:
             return
+        htf = series.htf[index]
         if signals.bos_up or signals.choch_up:
             imbalance = raw_bull_gap or signals.is_displacement
-            zone = self._scan_order_block(state.bull_obs, series, index, signals, imbalance, True)
+            mtf_quality = self._htf_quality(htf, bullish=True)
+            zone = self._scan_order_block(
+                state.bull_obs, series, index, signals, imbalance, mtf_quality, True
+            )
             if zone is not None:
                 self._push_zone(state.bull_obs, zone)
         if signals.bos_down or signals.choch_down:
             imbalance = raw_bear_gap or signals.is_displacement
-            zone = self._scan_order_block(state.bear_obs, series, index, signals, imbalance, False)
+            mtf_quality = self._htf_quality(htf, bullish=False)
+            zone = self._scan_order_block(
+                state.bear_obs, series, index, signals, imbalance, mtf_quality, False
+            )
             if zone is not None:
                 self._push_zone(state.bear_obs, zone)
 
@@ -417,6 +465,34 @@ class OrderBlockEngine:
         if len(zones) > self._params.max_live_objects:
             zones.pop(0)
 
+    def _htf_quality(self, htf: HtfContext | None, *, bullish: bool) -> float:
+        """AICE mtfQ/htfQ ternary; missing macro reads as undecided."""
+        if htf is None or htf.alignment == 0:
+            return _HTF_NEUTRAL_QUALITY
+        favorable = htf.bull_context if bullish else htf.bear_context
+        return 1.0 if favorable else _HTF_AGAINST_QUALITY
+
+    def _htf_series(
+        self,
+        bars: list[Bar],
+        auxiliary: Mapping[tuple[str, Timeframe], Sequence[Bar]],
+        context: MarketContext,
+    ) -> list[HtfContext | None]:
+        """HTF context per chart bar; all-None without macro series."""
+        if self._macro is None:
+            return [None] * len(bars)
+        macro1 = list(auxiliary.get((context.symbol, self._macro[0]), ()))
+        macro2 = list(auxiliary.get((context.symbol, self._macro[1]), ()))
+        if not macro1 and not macro2:
+            return [None] * len(bars)
+        return htf_context_series(
+            bars,
+            macro1,
+            macro2,
+            pivot_lookback=self._params.htf_pivot_lookback,
+            ema_length=self._params.htf_ema_length,
+        )
+
     def _scan_order_block(
         self,
         zones: list[_OrderBlock],
@@ -424,6 +500,7 @@ class OrderBlockEngine:
         index: int,
         signals: StructureSignals,
         imbalance: bool,
+        mtf_quality: float,
         bullish: bool,
     ) -> _OrderBlock | None:
         """Best-quality opposing candle within the scan window."""
@@ -433,7 +510,9 @@ class OrderBlockEngine:
         best_quality = -1.0
         for offset in range(1, max_look + 1):
             candidate = index - offset
-            scored = self._candidate_quality(zones, series, candidate, signals, imbalance, bullish)
+            scored = self._candidate_quality(
+                zones, series, candidate, signals, imbalance, mtf_quality, bullish
+            )
             if scored is None:
                 continue
             quality, nested = scored
@@ -457,6 +536,7 @@ class OrderBlockEngine:
         candidate: int,
         signals: StructureSignals,
         imbalance: bool,
+        mtf_quality: float,
         bullish: bool,
     ) -> tuple[float, bool] | None:
         """f_ob_quality for one candidate bar; None if wrong direction."""
@@ -493,7 +573,7 @@ class OrderBlockEngine:
             location,
             1.0 if nested else 0.0,
             1.0 if imbalance else 0.0,
-            _HTF_NEUTRAL_QUALITY,
+            mtf_quality,
         )
         return _weighted(terms, _OB_QUALITY_WEIGHTS), nested
 
@@ -637,14 +717,25 @@ class OrderBlockEngine:
             if aligned
             else _TREND_AGAINST_QUALITY
         )
+        htf = series.htf[index]
         in_zone = signals.in_discount if bullish else signals.in_premium
+        htf_in_zone = (
+            htf is not None and (htf.in_discount if bullish else htf.in_premium)
+        )
+        location_quality = (
+            1.0
+            if in_zone
+            else _HTF_LOCATION_QUALITY
+            if htf_in_zone
+            else _LOCATION_MISS_QUALITY
+        )
         terms = (
             clamp(size_atr / _QUALITY_ATR_NORM, 0.0, 1.0),
             clamp(signals.body_atr / params.displacement_body_atr, 0.0, 1.0),
             clamp(rvol / _RVOL_NORM, 0.0, 1.0),
             trend_quality,
-            1.0 if in_zone else _LOCATION_MISS_QUALITY,
-            _HTF_NEUTRAL_QUALITY,
+            location_quality,
+            self._htf_quality(htf, bullish=bullish),
         )
         quality = _weighted(terms, _FVG_QUALITY_WEIGHTS)
         gaps = state.bull_fvgs if bullish else state.bear_fvgs
