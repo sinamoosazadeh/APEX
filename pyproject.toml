@@ -1,0 +1,71 @@
+[project]
+name = "apex"
+version = "0.1.0"
+description = "APEX - Autonomous Probabilistic Execution eXchange: institutional-grade crypto trading intelligence platform."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "Proprietary" }
+authors = [{ name = "APEX Engineering" }]
+dependencies = [
+    "pyyaml>=6.0.2",
+]
+
+[project.scripts]
+apex = "apex.__main__:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "mypy>=1.14",
+    "ruff>=0.9",
+    "types-pyyaml>=6.0.12",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["apex"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["apex", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes (includes unused imports, F403 wildcard imports)
+    "I",   # isort (import ordering)
+    "N",   # pep8-naming (constitution naming policy)
+    "UP",  # pyupgrade (modern Python only)
+    "B",   # flake8-bugbear
+    "C4",  # comprehension hygiene
+    "SIM", # simplification
+    "RUF", # ruff-specific rules
+    "C90", # mccabe complexity
+]
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["SIM117"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+warn_unreachable = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_explicit = false
+show_error_codes = true
+files = ["apex", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "integration: end-to-end boot tests",
+]
