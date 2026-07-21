@@ -21,3 +21,4 @@ plugins:
   enabled:                 # loaded in order at boot (Book II 29.24)
     - apex.storage.plugin
     - apex.data.toobit.plugin
+    - apex.features.plugin
