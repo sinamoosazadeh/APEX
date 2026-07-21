@@ -10,12 +10,13 @@ event-driven Python system, built strictly to the APEX specification books.
 
 ## Status
 
-**Phases 0-3 complete.** The kernel boots with a plugin system, durable
-storage and event archiving. The data platform is fully operational:
-REST catch-up, live WebSocket streaming with closed-bar events, tick
-capture (deduped on exchange trade ids), quality scoring, gap detection
-and deterministic replay — all validated against the live Toobit
-exchange. Next: Phase 4, the AICE feature migration.
+**Phases 0-3 complete; Phase 4 (Feature Platform) in progress.**
+Kernel + plugins + durable storage + event archive; a fully operational
+data platform (REST catch-up, live WebSocket streaming, tick capture,
+quality scoring, replay) validated against the live Toobit exchange;
+and the AICE migration underway — the feature registry/store/pipeline
+plus the first migrated family (market structure: swings, BOS, CHoCH,
+dealing range, sweeps) computing real features from real bars.
 See [docs/PHASES.md](docs/PHASES.md).
 
 ## Requirements
@@ -44,6 +45,9 @@ uv pip install -p .venv/bin/python -e . --group dev
 # ingest history for one series
 .venv/bin/python -m apex ingest --symbol BTCUSDT --timeframe 1h --bars 200
 
+# compute feature families over stored confirmed bars
+.venv/bin/python -m apex features --symbol BTCUSDT --timeframe 1h
+
 # quality gates
 .venv/bin/ruff check apex tests
 .venv/bin/mypy
@@ -61,7 +65,8 @@ uv pip install -p .venv/bin/python -e . --group dev
 | `apex/storage/` | Storage platform: SQLite key/value (IStorage), bar repository, event archive |
 | `apex/plugins/` | Plugin system: manifest contract + config-driven loader |
 | `apex/data/` | Data platform: Toobit gateway, quality inspection, ingestion pipeline, replay |
-| `apex/<layer>/` | Engine layers owned by Phases 4-15 (see each package docstring) |
+| `apex/features/` | Feature platform: registry, pipeline, migrated AICE families (structure) |
+| `apex/<layer>/` | Engine layers owned by Phases 5-15 (see each package docstring) |
 | `config/` | The 12-file YAML configuration set (schema-gated at boot) |
 | `docs/` | Architecture, conventions, phase tracker, and the source specification books |
 | `tests/` | Unit + integration suites |
