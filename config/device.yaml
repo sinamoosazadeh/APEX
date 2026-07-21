@@ -1,0 +1,4 @@
+# Device/runtime environment configuration - owned by Phase 14 (Deployment).
+schema_version: 1
+
+profile: default
