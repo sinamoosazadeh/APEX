@@ -17,6 +17,8 @@ from apex.core.logging import LoggerFactory, StructuredLogger
 from apex.core.versioning import SemanticVersion
 from apex.features.liquidity.definitions import liquidity_definitions
 from apex.features.liquidity.engine import LiquidityEngine, LiquidityParams
+from apex.features.orderblocks.definitions import orderblock_definitions
+from apex.features.orderblocks.engine import OrderBlockEngine, OrderBlockParams
 from apex.features.pipeline import FeatureComputationPipeline
 from apex.features.registry import FeatureRegistry
 from apex.features.structure.definitions import structure_definitions
@@ -130,6 +132,29 @@ def _liquidity_params(features_config: ConfigSection) -> LiquidityParams:
     )
 
 
+def _orderblock_params(features_config: ConfigSection) -> OrderBlockParams:
+    """OB/FVG params: config overrides on AICE defaults."""
+    numbers = _family_numbers(features_config, "orderblocks")
+    defaults = OrderBlockParams()
+    return OrderBlockParams(
+        pivot_lookback=int(numbers.get("pivot_lookback", defaults.pivot_lookback)),
+        atr_length=int(numbers.get("atr_length", defaults.atr_length)),
+        displacement_body_atr=numbers.get(
+            "displacement_body_atr", defaults.displacement_body_atr
+        ),
+        break_decay=numbers.get("break_decay", defaults.break_decay),
+        scan_lookback=int(numbers.get("scan_lookback", defaults.scan_lookback)),
+        scan_cap=int(numbers.get("scan_cap", defaults.scan_cap)),
+        ob_decay=numbers.get("ob_decay", defaults.ob_decay),
+        fvg_decay=numbers.get("fvg_decay", defaults.fvg_decay),
+        max_live_objects=int(numbers.get("max_live_objects", defaults.max_live_objects)),
+        max_object_age=int(numbers.get("max_object_age", defaults.max_object_age)),
+        min_fvg_size_atr=numbers.get("min_fvg_size_atr", defaults.min_fvg_size_atr),
+        volume_sma_length=int(numbers.get("volume_sma_length", defaults.volume_sma_length)),
+        range_sma_length=int(numbers.get("range_sma_length", defaults.range_sma_length)),
+    )
+
+
 class FeaturePlatformPlugin:
     """Builds the feature platform as a kernel plugin."""
 
@@ -141,7 +166,7 @@ class FeaturePlatformPlugin:
             version=SemanticVersion(0, 1, 0),
             kind=PluginKind.FEATURE,
             api_version=SemanticVersion(1, 0, 0),
-            description="Feature registry, store, pipeline and the structure family",
+            description="Feature registry, store, pipeline and the migrated AICE families",
             stability=StabilityLevel.BETA,
             requires=("storage_core", "toobit_connector"),
         )
@@ -155,13 +180,16 @@ class FeaturePlatformPlugin:
 
         structure_params = _structure_params(config.market.features)
         liquidity_params = _liquidity_params(config.market.features)
+        orderblock_params = _orderblock_params(config.market.features)
         engines = (
             MarketStructureEngine(params=structure_params, clock=clock),
             LiquidityEngine(params=liquidity_params, clock=clock),
+            OrderBlockEngine(params=orderblock_params, clock=clock),
         )
         registry = FeatureRegistry()
         registry.register_all(structure_definitions(structure_params))
         registry.register_all(liquidity_definitions(liquidity_params))
+        registry.register_all(orderblock_definitions(orderblock_params))
         repository = SqliteFeatureRepository(
             database_path=Path(config.system.data_dir) / FEATURES_DATABASE_FILENAME,
         )
