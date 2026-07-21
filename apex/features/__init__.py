@@ -1,8 +1,21 @@
-"""Feature Platform - ICT/SMC/statistical engines behind the Feature contract (Book II ch. 7/17).
+"""APEX Feature Platform (Book II ch. 7/17) - Phase 4.
 
-Owned by Phase 4. This package intentionally contains no code yet:
-per the Master Repository Blueprint (Book II ch. 29) no file is created
-before its dependencies, and per the Constitution no placeholder logic
-is ever committed. The layer's contracts already exist in
-:mod:`apex.contracts` / :mod:`apex.core.contracts`.
+The AICE migration home. Registry (every feature is declared before it
+is computed), SQLite feature store (anchored to confirmed bars),
+computation pipeline (pure engines, validated emission, catalog
+events) and the migrated feature families - starting with market
+structure (swings, BOS, CHoCH, dealing range, sweeps) from the AICE
+Pine v6 source.
+
+Run it: ``python -m apex features --symbol BTCUSDT --timeframe 1h``
 """
+
+from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
+from apex.features.registry import FeatureDefinition, FeatureRegistry
+
+__all__ = [
+    "FeatureComputationPipeline",
+    "FeatureComputationSummary",
+    "FeatureDefinition",
+    "FeatureRegistry",
+]
