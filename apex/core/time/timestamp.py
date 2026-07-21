@@ -15,6 +15,9 @@ _MIN_EPOCH_MS = 0
 # 9999-12-31T23:59:59Z upper bound guards against second/nanosecond mixups.
 _MAX_EPOCH_MS = 253_402_300_799_000
 
+#: Largest representable instant (exclusive upper bound for open ranges).
+MAX_EPOCH_MS = _MAX_EPOCH_MS
+
 
 @dataclass(frozen=True, slots=True, order=True)
 class Timestamp:
