@@ -1,0 +1,4 @@
+# Risk platform configuration - owned by Phase 8 (Risk Optimizer).
+schema_version: 1
+
+limits: {}
