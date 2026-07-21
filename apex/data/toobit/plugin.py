@@ -1,0 +1,98 @@
+"""Toobit exchange connector plugin (Book II 3.23: connectors are plugins).
+
+Wires the whole Phase 3 data platform slice from injected services:
+REST client -> translator -> gateway -> quality inspector -> pipeline
+-> kernel module. Registered via ``plugins.enabled`` in system.yaml.
+"""
+
+from collections.abc import Sequence
+from pathlib import Path
+
+from apex.contracts.engines import IMarketDataGateway
+from apex.core.config import AppConfig
+from apex.core.contracts.interfaces import IClock, IEventBus, IModule
+from apex.core.enums import PluginKind, StabilityLevel
+from apex.core.logging import LoggerFactory
+from apex.core.versioning import SemanticVersion
+from apex.data.module import MarketDataModule
+from apex.data.pipeline import BarIngestionPipeline
+from apex.data.quality import BarQualityInspector
+from apex.data.toobit.client import ToobitRestClient
+from apex.data.toobit.gateway import ToobitMarketDataGateway
+from apex.data.toobit.translator import ToobitTranslator
+from apex.kernel.container import ServiceContainer
+from apex.plugins.contract import PluginManifest
+from apex.storage.bars import SqliteBarRepository
+
+BARS_DATABASE_FILENAME = "bars.sqlite"
+
+
+class ToobitConnectorPlugin:
+    """Builds the Toobit market data stack as a kernel plugin."""
+
+    @property
+    def manifest(self) -> PluginManifest:
+        """Plugin self-description."""
+        return PluginManifest(
+            name="toobit_connector",
+            version=SemanticVersion(0, 1, 0),
+            kind=PluginKind.EXCHANGE_CONNECTOR,
+            api_version=SemanticVersion(1, 0, 0),
+            description="Toobit market data gateway, ingestion pipeline and bar store",
+            stability=StabilityLevel.BETA,
+            requires=("storage_core",),
+        )
+
+    def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
+        """Construct and register the data platform services."""
+        config = container.resolve(AppConfig)
+        loggers = container.resolve(LoggerFactory)
+        clock = container.resolve(IClock)  # type: ignore[type-abstract]
+        bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
+
+        toobit = config.toobit
+        client = ToobitRestClient(
+            base_url=toobit.base_url,
+            request_timeout_ms=toobit.request_timeout_ms,
+            max_retries=toobit.max_retries,
+            retry_backoff_ms=toobit.retry_backoff_ms,
+            logger=loggers.get("data.toobit.client"),
+        )
+        gateway = ToobitMarketDataGateway(
+            client=client,
+            translator=ToobitTranslator(),
+            clock=clock,
+            logger=loggers.get("data.toobit.gateway"),
+            kline_page_limit=toobit.kline_page_limit,
+        )
+        repository = SqliteBarRepository(
+            database_path=Path(config.system.data_dir) / BARS_DATABASE_FILENAME,
+        )
+        pipeline = BarIngestionPipeline(
+            gateway=gateway,
+            repository=repository,
+            inspector=BarQualityInspector(
+                gap_penalty=config.market.gap_penalty,
+                forming_bar_quality=config.market.forming_bar_quality,
+            ),
+            bus=bus,
+            clock=clock,
+            logger=loggers.get("data.pipeline"),
+        )
+        container.register_instance(SqliteBarRepository, repository)
+        container.register_instance(BarIngestionPipeline, pipeline)
+        self._register_gateway(container, gateway)
+        return [
+            MarketDataModule(
+                gateway=gateway,
+                repository=repository,
+                logger=loggers.get("data.module"),
+            )
+        ]
+
+    @staticmethod
+    def _register_gateway(container: ServiceContainer, gateway: ToobitMarketDataGateway) -> None:
+        container.register_instance(IMarketDataGateway, gateway)  # type: ignore[type-abstract]
+
+
+APEX_PLUGIN = ToobitConnectorPlugin()
