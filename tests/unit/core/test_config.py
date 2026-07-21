@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 from apex.core.config import load_config
-from apex.core.enums import Environment, RunMode
+from apex.core.enums import Environment, RunMode, Timeframe
 from apex.core.exceptions import ConfigurationError
 from apex.core.logging import LogFormat, LogLevel
 
@@ -23,13 +23,11 @@ class TestLoadConfig:
     def test_all_phase_sections_present(self, config_dir: Path) -> None:
         config = load_config(config_dir)
         for name in (
-            "market",
             "signal",
             "risk",
             "optimizer",
             "portfolio",
             "research",
-            "exchange",
             "telemetry",
             "scheduler",
             "device",
@@ -37,6 +35,49 @@ class TestLoadConfig:
             assert isinstance(config.section(name), dict)
         with pytest.raises(ConfigurationError):
             config.section("nonexistent")
+
+    def test_market_config_parsed(self, config_dir: Path) -> None:
+        config = load_config(config_dir)
+        assert "BTCUSDT" in config.market.symbols
+        assert Timeframe.H1 in config.market.timeframes
+        assert config.market.history_bars >= 1
+        assert 0.0 <= config.market.gap_penalty <= 1.0
+        assert config.system.plugin_modules == (
+            "apex.storage.plugin",
+            "apex.data.toobit.plugin",
+        )
+
+    def test_exchange_config_parsed(self, config_dir: Path) -> None:
+        config = load_config(config_dir)
+        assert config.toobit.base_url.startswith("https://")
+        assert config.toobit.kline_page_limit == 1000
+
+    def test_bad_market_symbol_refuses_boot(self, config_dir: Path) -> None:
+        text = (config_dir / "market.yaml").read_text(encoding="utf-8")
+        (config_dir / "market.yaml").write_text(
+            text.replace("- BTCUSDT", "- btc/usdt"), encoding="utf-8"
+        )
+        with pytest.raises(ConfigurationError):
+            load_config(config_dir)
+
+    def test_bad_timeframe_refuses_boot(self, config_dir: Path) -> None:
+        text = (config_dir / "market.yaml").read_text(encoding="utf-8")
+        (config_dir / "market.yaml").write_text(
+            text.replace("- 1h", "- 7h"), encoding="utf-8"
+        )
+        with pytest.raises(ConfigurationError) as excinfo:
+            load_config(config_dir)
+        assert excinfo.value.code == "CFG-020"
+
+    def test_http_exchange_url_refuses_boot(self, config_dir: Path) -> None:
+        text = (config_dir / "exchange.yaml").read_text(encoding="utf-8")
+        (config_dir / "exchange.yaml").write_text(
+            text.replace("https://api.toobit.com", "http://api.toobit.com"),
+            encoding="utf-8",
+        )
+        with pytest.raises(ConfigurationError) as excinfo:
+            load_config(config_dir)
+        assert excinfo.value.code == "CFG-021"
 
     def test_missing_file_refuses_boot(self, config_dir: Path) -> None:
         (config_dir / "risk.yaml").unlink()
