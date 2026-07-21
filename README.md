@@ -10,11 +10,13 @@ event-driven Python system, built strictly to the APEX specification books.
 
 ## Status
 
-**Phases 0-2 complete; Phase 3 (Data Platform) partially delivered.**
-The kernel boots with a plugin system, durable storage and event archiving.
-The Toobit market data gateway ingests live klines through an
-anti-corruption layer with gap detection and quality scoring — validated
-against the live exchange. See [docs/PHASES.md](docs/PHASES.md).
+**Phases 0-3 complete.** The kernel boots with a plugin system, durable
+storage and event archiving. The data platform is fully operational:
+REST catch-up, live WebSocket streaming with closed-bar events, tick
+capture (deduped on exchange trade ids), quality scoring, gap detection
+and deterministic replay — all validated against the live Toobit
+exchange. Next: Phase 4, the AICE feature migration.
+See [docs/PHASES.md](docs/PHASES.md).
 
 ## Requirements
 
@@ -33,7 +35,13 @@ uv pip install -p .venv/bin/python -e . --group dev
 # boot as a validation gate (CI / deployment)
 .venv/bin/python -m apex --check
 
-# ingest live market history from Toobit into the bar store
+# catch every configured series up to the present (REST)
+.venv/bin/python -m apex sync
+
+# sync, then consume the live WebSocket feed for a minute
+.venv/bin/python -m apex stream --seconds 60
+
+# ingest history for one series
 .venv/bin/python -m apex ingest --symbol BTCUSDT --timeframe 1h --bars 200
 
 # quality gates
