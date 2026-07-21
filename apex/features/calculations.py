@@ -14,6 +14,7 @@ their Pine counterparts (Constitution 2.12: no duplicate logic):
 """
 
 from dataclasses import dataclass, field
+from math import exp
 
 from apex.domain.market import Bar
 
@@ -61,6 +62,78 @@ def sma(values: list[float], length: int) -> list[float | None]:
             running -= values[index - length]
         if index >= length - 1:
             out[index] = running / length
+    return out
+
+
+def stdev(values: list[float], length: int) -> list[float | None]:
+    """Population standard deviation per index (Pine ``ta.stdev``).
+
+    Pine's default is the biased estimator: divide by N over the
+    ``length``-bar window including the current bar; None until a full
+    window exists.
+    """
+    out: list[float | None] = [None] * len(values)
+    for index in range(length - 1, len(values)):
+        window = values[index - length + 1 : index + 1]
+        mean = sum(window) / length
+        variance = sum((value - mean) ** 2 for value in window) / length
+        out[index] = variance**0.5
+    return out
+
+
+def percent_rank(values: list[float], length: int) -> list[float | None]:
+    """Percent rank in [0, 1] per index (Pine ``ta.percentrank`` / 100).
+
+    Share of the ``length`` values BEFORE the current bar that are less
+    than or equal to the current value; None until that much history
+    exists.
+    """
+    out: list[float | None] = [None] * len(values)
+    for index in range(length, len(values)):
+        current = values[index]
+        below = sum(1 for i in range(index - length, index) if values[i] <= current)
+        out[index] = below / length
+    return out
+
+
+def squash(value: float) -> float:
+    """Pine ``f_squash``: logistic sigmoid into (0, 1)."""
+    return 1.0 / (1.0 + exp(-value))
+
+
+def robust_z(values: list[float], length: int, winsor: float) -> list[float]:
+    """Winsorized z-score per index (Pine ``f_zrobust``).
+
+    ``(x - sma) / stdev`` clamped into [-winsor, +winsor]; 0.0 while
+    the window is incomplete or the deviation is degenerate.
+    """
+    means = sma(values, length)
+    deviations = stdev(values, length)
+    out: list[float] = [0.0] * len(values)
+    for index, value in enumerate(values):
+        mean = means[index]
+        deviation = deviations[index]
+        if mean is not None and deviation is not None and deviation > 0:
+            out[index] = clamp((value - mean) / deviation, -winsor, winsor)
+    return out
+
+
+def zero_lag_filter(values: list[float], length: int) -> list[float | None]:
+    """Zero-lag price filter per index (Pine ``f_zpf``): ``e1 + (e1 - e2)``.
+
+    ``e1`` is the EMA of the source and ``e2`` the EMA of ``e1``; None
+    until both seeds exist. Like Pine, ``e2`` seeds from ``e1``'s first
+    valid values (the warmup does not contaminate the second pass).
+    """
+    e1 = ema(values, length)
+    offset = length - 1
+    tail = [value for value in e1[offset:] if value is not None]
+    e2_tail = ema(tail, length)
+    out: list[float | None] = [None] * len(values)
+    for tail_index, second in enumerate(e2_tail):
+        first = e1[offset + tail_index]
+        if first is not None and second is not None:
+            out[offset + tail_index] = first + (first - second)
     return out
 
 

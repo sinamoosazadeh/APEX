@@ -23,6 +23,8 @@ from apex.features.pipeline import FeatureComputationPipeline
 from apex.features.registry import FeatureRegistry
 from apex.features.structure.definitions import structure_definitions
 from apex.features.structure.engine import MarketStructureEngine, StructureParams
+from apex.features.volume.definitions import volume_definitions
+from apex.features.volume.engine import VolumeEngine, VolumeParams
 from apex.kernel.container import ServiceContainer
 from apex.plugins.contract import PluginManifest
 from apex.storage.bars import SqliteBarRepository
@@ -152,6 +154,33 @@ def _orderblock_params(features_config: ConfigSection) -> OrderBlockParams:
         min_fvg_size_atr=numbers.get("min_fvg_size_atr", defaults.min_fvg_size_atr),
         volume_sma_length=int(numbers.get("volume_sma_length", defaults.volume_sma_length)),
         range_sma_length=int(numbers.get("range_sma_length", defaults.range_sma_length)),
+        zpf_fast_length=int(numbers.get("zpf_fast_length", defaults.zpf_fast_length)),
+        zpf_slow_length=int(numbers.get("zpf_slow_length", defaults.zpf_slow_length)),
+    )
+
+
+def _volume_params(features_config: ConfigSection) -> VolumeParams:
+    """Volume family params: config overrides on AICE defaults."""
+    numbers = _family_numbers(features_config, "volume")
+    defaults = VolumeParams()
+    return VolumeParams(
+        atr_length=int(numbers.get("atr_length", defaults.atr_length)),
+        volume_sma_length=int(numbers.get("volume_sma_length", defaults.volume_sma_length)),
+        range_sma_length=int(numbers.get("range_sma_length", defaults.range_sma_length)),
+        normalization_window=int(
+            numbers.get("normalization_window", defaults.normalization_window)
+        ),
+        rank_window=int(numbers.get("rank_window", defaults.rank_window)),
+        forecast_length=int(numbers.get("forecast_length", defaults.forecast_length)),
+        winsor_z=numbers.get("winsor_z", defaults.winsor_z),
+        zpf_fast_length=int(numbers.get("zpf_fast_length", defaults.zpf_fast_length)),
+        zpf_slow_length=int(numbers.get("zpf_slow_length", defaults.zpf_slow_length)),
+        profile_length=int(numbers.get("profile_length", defaults.profile_length)),
+        profile_bins=int(numbers.get("profile_bins", defaults.profile_bins)),
+        delta_roll_length=int(numbers.get("delta_roll_length", defaults.delta_roll_length)),
+        delta_bias_ema_length=int(
+            numbers.get("delta_bias_ema_length", defaults.delta_bias_ema_length)
+        ),
     )
 
 
@@ -181,15 +210,18 @@ class FeaturePlatformPlugin:
         structure_params = _structure_params(config.market.features)
         liquidity_params = _liquidity_params(config.market.features)
         orderblock_params = _orderblock_params(config.market.features)
+        volume_params = _volume_params(config.market.features)
         engines = (
             MarketStructureEngine(params=structure_params, clock=clock),
             LiquidityEngine(params=liquidity_params, clock=clock),
             OrderBlockEngine(params=orderblock_params, clock=clock),
+            VolumeEngine(params=volume_params, clock=clock),
         )
         registry = FeatureRegistry()
         registry.register_all(structure_definitions(structure_params))
         registry.register_all(liquidity_definitions(liquidity_params))
         registry.register_all(orderblock_definitions(orderblock_params))
+        registry.register_all(volume_definitions(volume_params))
         repository = SqliteFeatureRepository(
             database_path=Path(config.system.data_dir) / FEATURES_DATABASE_FILENAME,
         )
