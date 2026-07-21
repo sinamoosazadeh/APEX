@@ -27,9 +27,21 @@ def clock() -> ManualClock:
 
 @pytest.fixture
 def config_dir(tmp_path: Path) -> Path:
-    """A private copy of the repository configuration set."""
+    """A private copy of the repository configuration set.
+
+    The storage data directory is redirected into the test's tmp dir so
+    tests never touch the repository's runtime databases.
+    """
     target = tmp_path / "config"
     shutil.copytree(REPO_CONFIG_DIR, target)
+    system = target / "system.yaml"
+    data_dir = tmp_path / "runtime"
+    system.write_text(
+        system.read_text(encoding="utf-8").replace(
+            "data_dir: runtime", f"data_dir: {data_dir}"
+        ),
+        encoding="utf-8",
+    )
     return target
 
 
