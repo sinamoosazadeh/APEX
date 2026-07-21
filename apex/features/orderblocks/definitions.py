@@ -4,7 +4,9 @@ from apex.core.versioning import SemanticVersion
 from apex.features.orderblocks.engine import FAMILY, OrderBlockParams
 from apex.features.registry import FeatureDefinition
 
-_VERSION = SemanticVersion(1, 0, 0)
+# 1.0.1: FVG trendQ rewired from its neutral fallback onto the migrated
+# zero-lag momentum filter (volume family slice).
+_VERSION = SemanticVersion(1, 0, 1)
 
 _DESCRIPTIONS: dict[str, str] = {
     "orderblocks.ob_long_confidence": (
@@ -56,6 +58,8 @@ def orderblock_definitions(params: OrderBlockParams) -> tuple[FeatureDefinition,
         "min_fvg_size_atr": params.min_fvg_size_atr,
         "volume_sma_length": params.volume_sma_length,
         "range_sma_length": params.range_sma_length,
+        "zpf_fast_length": params.zpf_fast_length,
+        "zpf_slow_length": params.zpf_slow_length,
     }
     return tuple(
         FeatureDefinition(
