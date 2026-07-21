@@ -8,14 +8,19 @@ stability level before it may be published.
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import TypeVar
+from weakref import WeakKeyDictionary
 
 from apex.core.enums import StabilityLevel
 from apex.core.exceptions import ValidationError
 
 _T = TypeVar("_T")
 
-STABILITY_ATTRIBUTE = "__apex_stability__"
-CONTRACT_VERSION_ATTRIBUTE = "__apex_contract_version__"
+# Declarations live OUTSIDE the classes: a ``setattr`` on a
+# ``@runtime_checkable`` Protocol would register the marker as a
+# protocol member and silently break every ``isinstance`` check
+# against it (each implementation would suddenly need the marker).
+_STABILITY_REGISTRY: WeakKeyDictionary[type, StabilityLevel] = WeakKeyDictionary()
+_CONTRACT_VERSION_REGISTRY: WeakKeyDictionary[type, int] = WeakKeyDictionary()
 
 
 @dataclass(frozen=True, slots=True, order=True)
@@ -60,7 +65,7 @@ def stability(level: StabilityLevel) -> Callable[[type[_T]], type[_T]]:
     """Class decorator declaring an interface's stability level."""
 
     def apply(cls: type[_T]) -> type[_T]:
-        setattr(cls, STABILITY_ATTRIBUTE, level)
+        _STABILITY_REGISTRY[cls] = level
         return cls
 
     return apply
@@ -76,15 +81,22 @@ def contract_version(version: int) -> Callable[[type[_T]], type[_T]]:
                 code="VAL-072",
                 details={"version": version},
             )
-        setattr(cls, CONTRACT_VERSION_ATTRIBUTE, version)
+        _CONTRACT_VERSION_REGISTRY[cls] = version
         return cls
 
     return apply
 
 
 def stability_of(cls: type) -> StabilityLevel:
-    """Read a class's declared stability (default EXPERIMENTAL)."""
-    level = getattr(cls, STABILITY_ATTRIBUTE, StabilityLevel.EXPERIMENTAL)
-    if not isinstance(level, StabilityLevel):
-        raise ValidationError("invalid stability attribute", code="VAL-073")
-    return level
+    """Read a class's declared stability (default EXPERIMENTAL).
+
+    Walks the MRO so subclasses inherit the nearest declaration,
+    matching the previous attribute-lookup semantics.
+    """
+    for base in cls.__mro__:
+        level = _STABILITY_REGISTRY.get(base)
+        if level is not None:
+            if not isinstance(level, StabilityLevel):
+                raise ValidationError("invalid stability attribute", code="VAL-073")
+            return level
+    return StabilityLevel.EXPERIMENTAL
