@@ -1,0 +1,4 @@
+# Scheduler configuration - owned by Phase 11+ (optimization orchestrator).
+schema_version: 1
+
+jobs: {}
