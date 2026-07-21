@@ -8,11 +8,17 @@ their Pine counterparts (Constitution 2.12: no duplicate logic):
 - Strict pivot tracking (Pine ``ta.pivothigh/pivotlow`` semantics):
   a pivot is confirmed ``lookback`` bars after it printed.
 - Rolling extremes with a one-bar shift (Pine ``ta.highest(x, n)[1]``).
+- The chart-structure fold (AICE "STRUCTURE" block): BOS/CHoCH state
+  machine, decayed break quality, displacement and the dealing range.
+  Consumed by every family that needs structure context.
 """
 
 from dataclasses import dataclass, field
 
 from apex.domain.market import Bar
+
+# Break quality denominator factor (AICE line 1163).
+BREAK_QUALITY_FACTOR = 1.5
 
 
 def clamp(value: float, lower: float, upper: float) -> float:
@@ -43,6 +49,19 @@ def wilder_atr(bars: list[Bar], length: int) -> list[float | None]:
             atr = (atr * (length - 1) + true_range(bars, index)) / length
         values[index] = atr
     return values
+
+
+def sma(values: list[float], length: int) -> list[float | None]:
+    """Simple moving average per index; None until a full window exists."""
+    out: list[float | None] = [None] * len(values)
+    running = 0.0
+    for index, value in enumerate(values):
+        running += value
+        if index >= length:
+            running -= values[index - length]
+        if index >= length - 1:
+            out[index] = running / length
+    return out
 
 
 def ema(values: list[float], length: int) -> list[float | None]:
@@ -119,3 +138,122 @@ class PivotTracker:
             self.prev_low = self.last_low
             self.last_low = self._lows[candidate]
         return new_high, new_low
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class StructureSignals:
+    """Per-bar snapshot of the shared chart-structure fold."""
+
+    new_pivot_high: bool
+    new_pivot_low: bool
+    body_atr: float
+    is_displacement: bool
+    bos_up: bool
+    bos_down: bool
+    choch_up: bool
+    choch_down: bool
+    break_quality: float
+    trend_direction: int
+    dealing_range_position: float
+    equilibrium: float | None
+    in_premium: bool
+    in_discount: bool
+
+
+@dataclass(slots=True)
+class StructureFold:
+    """AICE chart-structure state machine, shared across families.
+
+    Encapsulates the ``var`` block of the AICE "STRUCTURE / LIQUIDITY
+    HIERARCHY" section: strict-pivot break detection with cross
+    semantics (close crossing the last swing), the BOS/CHoCH trend
+    state machine, break quality ``clamp(body_atr / (displacement x
+    1.5))`` decaying per bar, displacement, and the dealing range from
+    the last swing pair. The structure and order-block/FVG families
+    fold this once per bar (Constitution 2.12: single source of logic).
+
+    ``update`` must be called exactly once per bar in ascending order.
+    """
+
+    pivots: PivotTracker
+    displacement_body_atr: float
+    break_decay: float
+    trend_direction: int = 0
+    protected_high: float | None = None
+    protected_low: float | None = None
+    _break_quality: float = 0.0
+    _last_break_index: int | None = None
+
+    def update(self, bars: list[Bar], index: int, atr: float | None) -> StructureSignals:
+        """Advance the fold by one bar and return its signal snapshot."""
+        bar = bars[index]
+        close = float(bar.close.value)
+        prev_close = float(bars[index - 1].close.value) if index > 0 else close
+        usable_atr = atr if atr is not None and atr > 0 else None
+        new_high, new_low = self.pivots.update(bar)
+        last_ph, last_pl = self.pivots.last_high, self.pivots.last_low
+
+        body = abs(close - float(bar.open.value))
+        body_atr = body / usable_atr if usable_atr else 0.0
+        is_displacement = body_atr >= self.displacement_body_atr
+
+        bos_up = bos_dn = choch_up = choch_dn = False
+        if last_ph is not None and close > last_ph and prev_close <= last_ph:
+            if self.trend_direction == -1:
+                choch_up = True
+            else:
+                bos_up = True
+            self.trend_direction = 1
+            self.protected_low = last_pl
+            self._record_break(index, body_atr)
+        if last_pl is not None and close < last_pl and prev_close >= last_pl:
+            if self.trend_direction == 1:
+                choch_dn = True
+            else:
+                bos_dn = True
+            self.trend_direction = -1
+            self.protected_high = last_ph
+            self._record_break(index, body_atr)
+
+        if self._last_break_index is not None:
+            age = index - self._last_break_index
+            break_quality = self._break_quality * (self.break_decay**age)
+        else:
+            break_quality = 0.0
+
+        dr_pos = 0.5
+        equilibrium: float | None = None
+        in_premium = in_discount = False
+        if last_ph is not None and last_pl is not None:
+            top = max(last_ph, last_pl)
+            bottom = min(last_ph, last_pl)
+            size = top - bottom
+            if size > 0:
+                dr_pos = clamp((close - bottom) / size, 0.0, 1.0)
+                equilibrium = (top + bottom) / 2.0
+                in_discount = close < equilibrium
+                in_premium = close > equilibrium
+
+        return StructureSignals(
+            new_pivot_high=new_high,
+            new_pivot_low=new_low,
+            body_atr=body_atr,
+            is_displacement=is_displacement,
+            bos_up=bos_up,
+            bos_down=bos_dn,
+            choch_up=choch_up,
+            choch_down=choch_dn,
+            break_quality=break_quality,
+            trend_direction=self.trend_direction,
+            dealing_range_position=dr_pos,
+            equilibrium=equilibrium,
+            in_premium=in_premium,
+            in_discount=in_discount,
+        )
+
+    def _record_break(self, index: int, body_atr: float) -> None:
+        """Stamp break quality and age origin at a structure break."""
+        self._break_quality = clamp(
+            body_atr / (self.displacement_body_atr * BREAK_QUALITY_FACTOR), 0.0, 1.0
+        )
+        self._last_break_index = index

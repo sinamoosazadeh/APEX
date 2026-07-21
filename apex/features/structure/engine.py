@@ -36,7 +36,7 @@ from apex.core.types import Confidence, Reliability, Weight
 from apex.core.validation import ensure_in_range, ensure_positive
 from apex.domain.feature import Feature
 from apex.domain.market import Bar
-from apex.features.calculations import PivotTracker, clamp, wilder_atr
+from apex.features.calculations import PivotTracker, StructureFold, clamp, wilder_atr
 
 FAMILY = "structure"
 _SOURCE = "apex.features.structure"
@@ -44,8 +44,6 @@ _SOURCE = "apex.features.structure"
 # OTE retracement windows (AICE spec lines 1192-1193).
 _OTE_LONG_LOW, _OTE_LONG_HIGH = 0.21, 0.38
 _OTE_SHORT_LOW, _OTE_SHORT_HIGH = 0.62, 0.79
-# Break quality denominator factor (AICE line 1163).
-_BREAK_QUALITY_FACTOR = 1.5
 # Swing distance normalization horizon in ATR units.
 _DISTANCE_NORM_ATR = 10.0
 
@@ -95,18 +93,6 @@ class StructureParams:
         return max(self.atr_length, 2 * self.pivot_lookback + 1)
 
 
-@dataclass(slots=True)
-class _StructureState:
-    """Mutable fold state mirroring the AICE ``var`` block."""
-
-    trend_dir: int = 0
-    protected_high: float | None = None
-    protected_low: float | None = None
-    break_quality: float = 0.0
-    last_break_index: int | None = None
-    atr: float | None = None
-
-
 class MarketStructureEngine:
     """Computes the structure family over a confirmed-bar window."""
 
@@ -141,15 +127,17 @@ class MarketStructureEngine:
     def _compute_all(self, bars: list[Bar]) -> list[Feature]:
         self._require_confirmed_series(bars)
         params = self._params
-        state = _StructureState()
-        pivots = PivotTracker(lookback=params.pivot_lookback)
+        fold = StructureFold(
+            pivots=PivotTracker(lookback=params.pivot_lookback),
+            displacement_body_atr=params.displacement_body_atr,
+            break_decay=params.break_decay,
+        )
         atr_series = wilder_atr(bars, params.atr_length)
         features: list[Feature] = []
         for index, bar in enumerate(bars):
-            state.atr = atr_series[index]
-            pivot_flags = pivots.update(bar)
-            snapshot = self._step(state, pivots, bars, index, pivot_flags)
-            if index >= params.warmup_bars and state.atr is not None:
+            atr = atr_series[index]
+            snapshot = self._step(fold, bars, index, atr)
+            if index >= params.warmup_bars and atr is not None:
                 features.extend(self._emit(bar, snapshot))
         return features
 
@@ -166,11 +154,10 @@ class MarketStructureEngine:
 
     def _step(
         self,
-        state: _StructureState,
-        pivots: PivotTracker,
+        fold: StructureFold,
         bars: list[Bar],
         index: int,
-        pivot_flags: tuple[bool, bool],
+        raw_atr: float | None,
     ) -> dict[str, float]:
         """One bar of the AICE structure state machine."""
         params = self._params
@@ -178,70 +165,24 @@ class MarketStructureEngine:
         close = float(bar.close.value)
         high = float(bar.high.value)
         low = float(bar.low.value)
-        prev_close = float(bars[index - 1].close.value) if index > 0 else close
-        atr = state.atr if state.atr is not None and state.atr > 0 else None
+        signals = fold.update(bars, index, raw_atr)
+        pivots = fold.pivots
+        atr = raw_atr if raw_atr is not None and raw_atr > 0 else None
         last_ph, last_pl = pivots.last_high, pivots.last_low
 
-        body = abs(close - float(bar.open.value))
-        body_atr = body / atr if atr else 0.0
-        is_displacement = body_atr >= params.displacement_body_atr
-
-        new_high, new_low = pivot_flags
         tolerance = (atr or 0.0) * params.equal_tolerance_atr
         equal_highs = (
-            new_high
+            signals.new_pivot_high
             and pivots.prev_high is not None
             and last_ph is not None
             and abs(last_ph - pivots.prev_high) <= tolerance
         )
         equal_lows = (
-            new_low
+            signals.new_pivot_low
             and pivots.prev_low is not None
             and last_pl is not None
             and abs(last_pl - pivots.prev_low) <= tolerance
         )
-
-        bos_up = bos_dn = choch_up = choch_dn = False
-        if last_ph is not None and close > last_ph and prev_close <= last_ph:
-            if state.trend_dir == -1:
-                choch_up = True
-            else:
-                bos_up = True
-            state.trend_dir = 1
-            state.protected_low = last_pl
-            state.break_quality = clamp(
-                body_atr / (params.displacement_body_atr * _BREAK_QUALITY_FACTOR), 0.0, 1.0
-            )
-            state.last_break_index = index
-        if last_pl is not None and close < last_pl and prev_close >= last_pl:
-            if state.trend_dir == 1:
-                choch_dn = True
-            else:
-                bos_dn = True
-            state.trend_dir = -1
-            state.protected_high = last_ph
-            state.break_quality = clamp(
-                body_atr / (params.displacement_body_atr * _BREAK_QUALITY_FACTOR), 0.0, 1.0
-            )
-            state.last_break_index = index
-
-        if state.last_break_index is not None:
-            age = index - state.last_break_index
-            break_quality_live = state.break_quality * (params.break_decay**age)
-        else:
-            break_quality_live = 0.0
-
-        dr_pos = 0.5
-        in_premium = in_discount = False
-        if last_ph is not None and last_pl is not None:
-            top = max(last_ph, last_pl)
-            bottom = min(last_ph, last_pl)
-            size = top - bottom
-            if size > 0:
-                dr_pos = clamp((close - bottom) / size, 0.0, 1.0)
-                equilibrium = (top + bottom) / 2.0
-                in_discount = close < equilibrium
-                in_premium = close > equilibrium
 
         sweep_high = last_ph is not None and high > last_ph and close < last_ph
         sweep_low = last_pl is not None and low < last_pl and close > last_pl
@@ -253,18 +194,19 @@ class MarketStructureEngine:
             (close - last_pl) / atr if atr and last_pl is not None else 0.0
         )
 
+        dr_pos = signals.dealing_range_position
         return {
-            "structure.trend_direction": float(state.trend_dir),
-            "structure.bos_up": 1.0 if bos_up else 0.0,
-            "structure.bos_down": 1.0 if bos_dn else 0.0,
-            "structure.choch_up": 1.0 if choch_up else 0.0,
-            "structure.choch_down": 1.0 if choch_dn else 0.0,
-            "structure.break_quality": break_quality_live,
-            "structure.displacement_body_atr": body_atr,
-            "structure.is_displacement": 1.0 if is_displacement else 0.0,
+            "structure.trend_direction": float(signals.trend_direction),
+            "structure.bos_up": 1.0 if signals.bos_up else 0.0,
+            "structure.bos_down": 1.0 if signals.bos_down else 0.0,
+            "structure.choch_up": 1.0 if signals.choch_up else 0.0,
+            "structure.choch_down": 1.0 if signals.choch_down else 0.0,
+            "structure.break_quality": signals.break_quality,
+            "structure.displacement_body_atr": signals.body_atr,
+            "structure.is_displacement": 1.0 if signals.is_displacement else 0.0,
             "structure.dealing_range_position": dr_pos,
-            "structure.in_premium": 1.0 if in_premium else 0.0,
-            "structure.in_discount": 1.0 if in_discount else 0.0,
+            "structure.in_premium": 1.0 if signals.in_premium else 0.0,
+            "structure.in_discount": 1.0 if signals.in_discount else 0.0,
             "structure.in_ote_long": (
                 1.0 if _OTE_LONG_LOW <= dr_pos <= _OTE_LONG_HIGH else 0.0
             ),

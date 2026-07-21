@@ -33,3 +33,17 @@ features:
     equal_tolerance_atr: 0.10
     liquidity_decay: 0.990
     ema_length: 50
+  orderblocks:                 # AICE order block / FVG family (Book VI inputs)
+    pivot_lookback: 8
+    atr_length: 14
+    displacement_body_atr: 1.2
+    break_decay: 0.985
+    scan_lookback: 150         # ob_lb
+    scan_cap: 300              # ob_scan_cap
+    ob_decay: 0.985
+    fvg_decay: 0.975
+    max_live_objects: 12
+    max_object_age: 300
+    min_fvg_size_atr: 0.05
+    volume_sma_length: 20
+    range_sma_length: 14
