@@ -77,6 +77,12 @@ class DataError(ApexError):
     DEFAULT_CODE = "DAT-000"
 
 
+class FeatureError(ApexError):
+    """Feature computation or feature contract violation."""
+
+    DEFAULT_CODE = "FEA-000"
+
+
 class MarketError(ApexError):
     """Market gateway or exchange interaction failure."""
 
