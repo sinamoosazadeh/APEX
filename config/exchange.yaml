@@ -2,4 +2,9 @@
 # Credentials NEVER live here; they come from the secrets platform (Phase 13).
 schema_version: 1
 
-exchanges: {}
+toobit:
+  base_url: https://api.toobit.com
+  request_timeout_ms: 10000
+  max_retries: 3
+  retry_backoff_ms: 500
+  kline_page_limit: 1000   # Toobit API maximum per request
