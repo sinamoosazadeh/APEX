@@ -1,0 +1,5 @@
+# APEX logging configuration - consumed by the kernel (Phase 0/1).
+schema_version: 1
+
+level: info    # debug | info | warning | error | critical
+format: console  # json (production) | console (development)
