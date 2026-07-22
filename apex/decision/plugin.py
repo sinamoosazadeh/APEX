@@ -82,9 +82,20 @@ def _numbers(section: ConfigSection, code: str) -> dict[str, float]:
     return numbers
 
 
+def _flags(section: ConfigSection, code: str) -> dict[str, bool]:
+    if not isinstance(section, dict):
+        raise ConfigurationError(
+            "market.decision must be a mapping", code=code, details={}
+        )
+    return {
+        key: value for key, value in section.items() if isinstance(value, bool)
+    }
+
+
 def _decision_params(section: ConfigSection) -> DecisionParams:
-    """Kernel params: numeric config overrides on AICE defaults."""
+    """Kernel params: numeric/flag config overrides on AICE defaults."""
     numbers = _numbers(section, "CFG-029")
+    flags = _flags(section, "CFG-029")
     defaults = DecisionParams()
     return DecisionParams(
         probability_threshold=numbers.get(
@@ -135,6 +146,23 @@ def _decision_params(section: ConfigSection) -> DecisionParams:
         ),
         atr_length=int(numbers.get("atr_length", defaults.atr_length)),
         ema_length=int(numbers.get("ema_length", defaults.ema_length)),
+        flatness_gate_enabled=flags.get(
+            "flatness_gate_enabled", defaults.flatness_gate_enabled
+        ),
+        conservative_resolver=flags.get(
+            "conservative_resolver", defaults.conservative_resolver
+        ),
+        equity_guard_enabled=flags.get(
+            "equity_guard_enabled", defaults.equity_guard_enabled
+        ),
+        equity_guard_minimum_trades=int(
+            numbers.get(
+                "equity_guard_minimum_trades", defaults.equity_guard_minimum_trades
+            )
+        ),
+        equity_guard_ema_length=int(
+            numbers.get("equity_guard_ema_length", defaults.equity_guard_ema_length)
+        ),
     )
 
 

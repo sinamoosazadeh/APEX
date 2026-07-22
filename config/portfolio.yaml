@@ -1,5 +1,29 @@
-# Portfolio platform configuration - owned by Phase 9.
+# Portfolio platform configuration - owned by Phase 9 (Book II ch. 13/21).
 schema_version: 1
 
+portfolio_id: default
 base_currency: USDT
-allocation: {}
+
+account:
+  initial_capital: "10000"        # exact Decimal string
+  risk_fraction: 0.01             # equity fraction risked per trade
+  tail_loss_multiple: 3.0         # stress assumption: gap through the stop
+  defensive_drawdown_fraction: 0.05
+
+caps:                             # governance (Book I 8.15; Book V portfolio risk)
+  max_open_positions: 4
+  max_positions_per_symbol: 1
+  max_symbol_exposure_fraction: 0.35
+  max_gross_exposure_fraction: 1.0
+  daily_loss_limit_fraction: 0.02
+  weekly_loss_limit_fraction: 0.05
+  max_consecutive_losses: 4
+  correlation_ceiling: 0.85
+  correlation_window: 50
+
+kelly:                            # constrained Kelly (Book V 4.11)
+  multiplier: 0.5
+  cap: 0.25
+  minimum_trades: 12
+
+allocation: {}                    # capital allocation policies (later phases)

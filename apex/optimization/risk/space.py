@@ -12,10 +12,16 @@ with those phases - the space is discovered, never hardcoded.
 
 from apex.optimization.parameters import OptimizableParameter
 
-# Sizing models (part 6): fixed / probability-adjusted / confidence-adjusted.
+# Sizing models (part 6 + Book V 4.10, portfolio state from Phase 9):
+# fixed / probability / confidence shape on the signal alone;
+# Kelly / drawdown / budget shape on the fold's own trailing trade
+# history and equity curve.
 SIZING_FIXED = 0
 SIZING_PROBABILITY = 1
 SIZING_CONFIDENCE = 2
+SIZING_KELLY = 3
+SIZING_DRAWDOWN = 4
+SIZING_BUDGET = 5
 # Stop models: pure ATR or the signal's structure-hybrid stop.
 STOP_MODEL_ATR = 0
 STOP_MODEL_SIGNAL = 1
@@ -31,6 +37,6 @@ RISK_SEARCH_SPACE: tuple[OptimizableParameter, ...] = (
     OptimizableParameter(name="breakeven_trigger_r", minimum=0.3, maximum=2.0, step=0.1),
     OptimizableParameter(name="trailing_enabled", minimum=0, maximum=1, step=1, integer=True),
     OptimizableParameter(name="trailing_distance_r", minimum=0.5, maximum=3.0, step=0.25),
-    OptimizableParameter(name="sizing_model", minimum=0, maximum=2, step=1, integer=True),
+    OptimizableParameter(name="sizing_model", minimum=0, maximum=5, step=1, integer=True),
     OptimizableParameter(name="risk_fraction", minimum=0.25, maximum=2.0, step=0.25),
 )

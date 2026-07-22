@@ -5,9 +5,9 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.10.0
-  phase: 9            # Phase 8 complete (Risk Optimizer); Phase 9 next
-  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  version: 0.11.0
+  phase: 10           # Phase 9 complete (Portfolio Engine); Phase 10 next
+  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 config_schema_version: 1
 contract_schema_version: 1
@@ -23,8 +23,9 @@ modules:
   apex.features:  { version: 0.10.0, stability: beta,         owner: feature-platform }
   apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
   apex.probability: { version: 0.1.0, stability: beta,       owner: probability-platform }
-  apex.decision:  { version: 0.1.1, stability: beta,         owner: decision-platform }
-  apex.optimization: { version: 0.2.0, stability: beta,      owner: optimization-platform }
+  apex.decision:  { version: 0.2.0, stability: beta,         owner: decision-platform }
+  apex.optimization: { version: 0.3.0, stability: beta,      owner: optimization-platform }
+  apex.portfolio: { version: 0.1.0, stability: beta,         owner: portfolio-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
@@ -37,7 +38,8 @@ dependency_graph:
   apex.data: [apex.core, apex.domain, apex.contracts, apex.storage, apex.plugins]
   apex.probability: [apex.core, apex.domain, apex.contracts, apex.features, apex.storage, apex.plugins]
   apex.decision: [apex.core, apex.domain, apex.contracts, apex.features, apex.probability, apex.storage, apex.plugins]
-  apex.optimization: [apex.core, apex.domain, apex.contracts, apex.decision, apex.features, apex.storage, apex.plugins]
+  apex.optimization: [apex.core, apex.domain, apex.contracts, apex.decision, apex.features, apex.portfolio, apex.storage, apex.plugins]
+  apex.portfolio: [apex.core, apex.domain, apex.contracts, apex.decision, apex.features, apex.storage, apex.plugins]
 
 # Populated by their phases.
 plugin_registry:
@@ -47,6 +49,7 @@ plugin_registry:
   - { name: probability_platform, kind: service, version: 0.1.0, module: apex.probability.plugin }
   - { name: decision_platform, kind: service, version: 0.1.0, module: apex.decision.plugin }
   - { name: optimization_platform, kind: service, version: 0.1.0, module: apex.optimization.plugin }
+  - { name: portfolio_platform, kind: service, version: 0.1.0, module: apex.portfolio.plugin }
 feature_registry:
   - { family: structure, features: 21, version: 1.1.0, source: AICE Book VI }
   - { family: liquidity, features: 16, version: 1.0.0, source: AICE Book VI }
@@ -61,6 +64,6 @@ exchange_registry:
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 349
+  tests_passed: 400
   boot_check: pass
-  live_smoke: signal + risk optimizers ran live (136 + 112 trials), honest Book V rejections on thin history
+  live_smoke: portfolio folded live decisions (4 positions closed exactly, headroom reduction + correlation/streak governance fired); risk optimizer ran the 6-model sizing space live (112 trials, honest low-trade rejection)
