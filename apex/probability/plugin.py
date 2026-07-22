@@ -68,7 +68,7 @@ class ProbabilityPlatformModule:
         return HealthState.HEALTHY if self._running else HealthState.OFFLINE
 
 
-def _probability_params(section: ConfigSection) -> ConfluenceParams:
+def probability_params_from_config(section: ConfigSection) -> ConfluenceParams:
     """Confluence params: config overrides on AICE defaults."""
     if not isinstance(section, dict):
         raise ConfigurationError(
@@ -127,7 +127,7 @@ class ProbabilityPlatformPlugin:
         loggers = container.resolve(LoggerFactory)
         clock = container.resolve(IClock)  # type: ignore[type-abstract]
         bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
-        params = _probability_params(config.market.probability)
+        params = probability_params_from_config(config.market.probability)
         engine = ConfluenceProbabilityEngine(params=params, clock=clock)
         repository = SqliteProbabilityRepository(
             database_path=Path(config.system.data_dir) / PROBABILITY_DATABASE_FILENAME,
