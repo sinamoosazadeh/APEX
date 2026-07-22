@@ -255,20 +255,23 @@ class IExecutionEngine(Protocol):
 
 
 @runtime_checkable
-@stability(StabilityLevel.EXPERIMENTAL)
+@stability(StabilityLevel.BETA)
 class IOptimizer(Protocol):
-    """Optimizer contract (Book II 5.20, Phases 7-8)."""
+    """Optimizer contract (Book II 5.20, Phases 7-8).
+
+    Contract evolution (5.35): the search space is discovered from the
+    optimized engine's published parameters (Book V part 5 - never
+    passed in), and the search is pure and synchronous: one seed fully
+    determines every trial, so runs are reproducible bit-for-bit.
+    Returns the winning parameter overrides - empty when the candidate
+    failed the Book V validation protocol and was rejected.
+    """
 
     @property
     def optimizer_version(self) -> str:
         """Version tag stamped onto optimized outputs."""
         ...
 
-    async def optimize(
-        self,
-        search_space: Mapping[str, tuple[float, float]],
-        *,
-        seed: int,
-    ) -> Result[Mapping[str, float]]:
-        """Search the space deterministically (seeded) for best parameters."""
+    def optimize(self, *, seed: int) -> Result[Mapping[str, float]]:
+        """Search deterministically; winning overrides or empty."""
         ...
