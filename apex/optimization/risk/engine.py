@@ -17,7 +17,7 @@ from apex.features.calculations import wilder_atr
 from apex.optimization.metrics import SimulationMetrics, compute_metrics
 from apex.optimization.objective import ObjectiveWeights, objective_score
 from apex.optimization.parameters import OptimizableParameter
-from apex.optimization.risk.simulator import decode_plan, manage_trades
+from apex.optimization.risk.simulator import StopLevels, decode_plan, manage_trades
 from apex.optimization.risk.space import RISK_SEARCH_SPACE
 from apex.optimization.simulator import SimulatedTrade
 from apex.optimization.staged import OptimizationReport, StagedSearch, StageSettings
@@ -37,6 +37,8 @@ class _RiskCore:
         fee_r: float,
         horizon_bars: int,
         weights: ObjectiveWeights,
+        levels: Mapping[int, StopLevels] | None = None,
+        slippage_r: float = 0.0,
     ) -> None:
         self._outcomes = outcomes
         self._bars = bars
@@ -44,6 +46,8 @@ class _RiskCore:
         self._fee_r = fee_r
         self._horizon = horizon_bars
         self._weights = weights
+        self._levels = levels
+        self._slippage_r = slippage_r
         self._open_ms = [bar.open_time.epoch_ms for bar in bars]
 
     @property
@@ -77,6 +81,8 @@ class _RiskCore:
             atr=self._atr,
             fee_r=self._fee_r,
             horizon_bars=self._horizon,
+            levels=self._levels,
+            slippage_r=self._slippage_r,
         )
 
     def evaluate(
@@ -105,6 +111,8 @@ class RiskOptimizer:
         settings: StageSettings,
         weights: ObjectiveWeights,
         space: tuple[OptimizableParameter, ...] = RISK_SEARCH_SPACE,
+        levels: Mapping[int, StopLevels] | None = None,
+        slippage_r: float = 0.0,
     ) -> None:
         core = _RiskCore(
             outcomes=outcomes,
@@ -112,6 +120,8 @@ class RiskOptimizer:
             fee_r=fee_r,
             horizon_bars=settings.horizon_bars,
             weights=weights,
+            levels=levels,
+            slippage_r=slippage_r,
         )
         self._search = StagedSearch(
             space=space,
