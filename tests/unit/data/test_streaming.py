@@ -120,6 +120,7 @@ def make_market_config(history_bars: int = 5) -> MarketConfig:
         stream_max_reconnects=2,
         features={},
         probability={},
+        decision={},
     )
 
 
