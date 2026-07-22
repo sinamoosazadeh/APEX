@@ -4,7 +4,9 @@ from apex.core.versioning import SemanticVersion
 from apex.features.registry import FeatureDefinition
 from apex.features.volume.engine import FAMILY, VolumeParams
 
-_VERSION = SemanticVersion(1, 0, 0)
+# 1.1.0: narrow_range added for the probability platform's
+# effort-vs-result penalty (AICE line 1723).
+_VERSION = SemanticVersion(1, 1, 0)
 
 _DESCRIPTIONS: dict[str, str] = {
     "volume.rvol": "Relative volume: bar volume over its rolling mean",
@@ -21,6 +23,7 @@ _DESCRIPTIONS: dict[str, str] = {
     "volume.aggression": "Net delta approximation over mean volume (buy minus sell)",
     "volume.rolling_delta_bias": "Rolling sum of the net delta approximation",
     "volume.cumulative_delta_bias": "Cumulative delta minus its EMA baseline",
+    "volume.narrow_range": "Bar range below its rolling mean",
     "volume.absorption_buy": "High RVOL, dominant lower wick, strong close, narrow bar",
     "volume.absorption_sell": "High RVOL, dominant upper wick, weak close, narrow bar",
     "volume.spike": "Volume above twice its rolling mean",
