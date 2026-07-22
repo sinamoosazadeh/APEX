@@ -9,6 +9,9 @@ Commands:
                      bounded duration (bars close, ticks persist)
 - ``execute``        execute the latest fired signal (paper unless
                      ``--live`` with run_mode live + credentials)
+- ``research``       run a research study: attribution, learning fold,
+                     calibration measurement, drift detection
+- ``orchestrate``    enqueue/drain optimization jobs (Book V part 7)
 - ``portfolio``      rebuild the governed portfolio from stored
                      decisions across one or more symbols
 - ``optimize-risk``  run the ten-stage Book V risk optimizer
@@ -44,6 +47,7 @@ from apex.optimization.risk.service import RiskOptimizationService
 from apex.optimization.signal.service import OptimizationSummary, SignalOptimizationService
 from apex.portfolio.service import PortfolioService, PortfolioSummary
 from apex.probability.service import ProbabilityService, ProbabilitySummary
+from apex.research.service import OrchestrationSummary, ResearchService, ResearchSummary
 
 DEFAULT_CONFIG_DIR = Path("config")
 
@@ -237,6 +241,53 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="execute at the venue (requires run_mode live + credentials)",
     )
+    research = subcommands.add_parser(
+        "research",
+        help="run a research study: attribution, learning, calibration, drift",
+    )
+    research.add_argument(
+        "--symbol",
+        required=True,
+        action="append",
+        dest="symbols",
+        help="instrument symbol (repeatable)",
+    )
+    research.add_argument(
+        "--timeframe",
+        required=True,
+        choices=sorted(tf.value for tf in Timeframe),
+        help="bar timeframe",
+    )
+    research.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="study window in bars (default: market.history_bars)",
+    )
+    orchestrate = subcommands.add_parser(
+        "orchestrate",
+        help="drain queued optimization jobs (Book V part 7)",
+    )
+    orchestrate.add_argument(
+        "--limit", type=int, default=2, help="jobs to drain this run"
+    )
+    orchestrate.add_argument(
+        "--enqueue",
+        action="store_true",
+        help="queue a signal+risk cycle for the configured symbols first",
+    )
+    orchestrate.add_argument(
+        "--timeframe",
+        default="1h",
+        choices=sorted(tf.value for tf in Timeframe),
+        help="cycle timeframe when enqueueing",
+    )
+    orchestrate.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="job window in bars (default: research orchestrator setting)",
+    )
     return parser
 
 
@@ -426,18 +477,39 @@ async def run_decide(
     timeframe: Timeframe,
     bars: int,
 ) -> DecisionSummary:
-    """Boot, decide over stored assessments, shut down."""
+    """Boot, decide over stored assessments, shut down.
+
+    The runtime injector (Book V part 7): when research holds an
+    active accepted signal artifact and/or a learning state for this
+    series, the kernel runs with them.
+    """
+    from apex.decision.kernel import CentralDecisionKernel
+    from apex.decision.plugin import decision_params_from_config
+
     kernel = Kernel(config_dir=config_dir)
     await kernel.boot()
     try:
         config = kernel.container.resolve(AppConfig)
         clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
         service = kernel.container.resolve(DecisionService)
+        research = kernel.container.resolve(ResearchService)
+        overrides = await research.active_overrides(symbol, timeframe)
+        learning = await research.learning_state(symbol, timeframe)
+        kernel_override = None
+        if overrides or learning is not None:
+            base = decision_params_from_config(config.market.decision)
+            params = base.with_overrides(overrides) if overrides else base
+            kernel_override = CentralDecisionKernel(
+                params=params, clock=clock, learning=learning
+            )
         count = bars if bars > 0 else config.market.history_bars
         now = clock.now()
         aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
         start = aligned_end.add_ms(-count * timeframe.duration_ms)
-        result = await service.compute(symbol, timeframe, start=start, end=aligned_end)
+        result = await service.compute(
+            symbol, timeframe, start=start, end=aligned_end,
+            kernel_override=kernel_override,
+        )
         return result.unwrap()
     finally:
         await kernel.shutdown()
@@ -462,21 +534,162 @@ async def run_probability(
     timeframe: Timeframe,
     bars: int,
 ) -> ProbabilitySummary:
-    """Boot, assess stored feature vectors, shut down."""
+    """Boot, assess stored feature vectors, shut down.
+
+    The runtime injector (Book V part 7): with a learning state for
+    this series, the engine runs with its channel factors.
+    """
+    from apex.probability.engine import ConfluenceProbabilityEngine
+    from apex.probability.plugin import probability_params_from_config
+
     kernel = Kernel(config_dir=config_dir)
     await kernel.boot()
     try:
         config = kernel.container.resolve(AppConfig)
         clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
         service = kernel.container.resolve(ProbabilityService)
+        research = kernel.container.resolve(ResearchService)
+        learning = await research.learning_state(symbol, timeframe)
+        engine_override = None
+        if learning is not None:
+            engine_override = ConfluenceProbabilityEngine(
+                params=probability_params_from_config(config.market.probability),
+                clock=clock,
+                learning=learning,
+            )
         count = bars if bars > 0 else config.market.history_bars
         now = clock.now()
         aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
         start = aligned_end.add_ms(-count * timeframe.duration_ms)
-        result = await service.compute(symbol, timeframe, start=start, end=aligned_end)
+        result = await service.compute(
+            symbol, timeframe, start=start, end=aligned_end,
+            engine_override=engine_override,
+        )
         return result.unwrap()
     finally:
         await kernel.shutdown()
+
+
+def render_research(summary: ResearchSummary) -> str:
+    """Human-readable research study report."""
+    lines = [f"research study complete ({summary.timeframe.value})"]
+    for study in summary.studies:
+        drifting = [report.name for report in study.drifts if report.drifting]
+        lines.extend(
+            [
+                f"  {study.symbol}:",
+                f"    closed trades : {study.attribution.closed_trades} "
+                f"({len(study.attribution.outcomes)} attributed)",
+                f"    learning      : v{study.learning_version} "
+                f"({study.attribution.closed_trades} outcomes folded)",
+                f"    brier score   : {study.calibration.brier_score:.4f}",
+                f"    drifting      : {', '.join(drifting) or 'none'}",
+            ]
+        )
+    quality = summary.execution_quality
+    lines.append(
+        f"  executions   : {quality.executions} "
+        f"(fill rate {quality.fill_rate:.2f}, avg slippage {quality.average_slippage})"
+    )
+    return "\n".join(lines)
+
+
+async def run_research(
+    config_dir: Path,
+    symbols: tuple[str, ...],
+    timeframe: Timeframe,
+    bars: int,
+) -> ResearchSummary:
+    """Boot, run one research study, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
+        service = kernel.container.resolve(ResearchService)
+        count = bars if bars > 0 else config.market.history_bars
+        now = clock.now()
+        aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        start = aligned_end.add_ms(-count * timeframe.duration_ms)
+        result = await service.study(symbols, timeframe, start=start, end=aligned_end)
+        return result.unwrap()
+    finally:
+        await kernel.shutdown()
+
+
+def render_orchestration(summary: OrchestrationSummary) -> str:
+    """Human-readable queue drain report."""
+    lines = [
+        "orchestration complete",
+        f"  drained      : {summary.drained}",
+        f"  completed    : {summary.completed}",
+        f"  failed       : {summary.failed}",
+        f"  activated    : {len(summary.activated)} artifact(s)",
+    ]
+    lines.extend(f"    - {path}" for path in summary.activated)
+    return "\n".join(lines)
+
+
+async def run_orchestrate(
+    config_dir: Path,
+    *,
+    limit: int,
+    enqueue: bool,
+    timeframe: Timeframe,
+    bars: int,
+) -> OrchestrationSummary:
+    """Boot, optionally enqueue a cycle, drain jobs, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        service = kernel.container.resolve(ResearchService)
+        if enqueue:
+            await service.enqueue_cycle(
+                config.market.symbols, (timeframe,), window_bars=bars
+            )
+        research_section = config.section("research").get("orchestrator", {})
+        default_bars = 480
+        if isinstance(research_section, dict):
+            raw = research_section.get("default_window_bars", 480)
+            if isinstance(raw, int) and not isinstance(raw, bool):
+                default_bars = raw
+        result = await service.orchestrate(
+            limit=limit, default_window_bars=bars if bars > 0 else default_bars
+        )
+        return result.unwrap()
+    finally:
+        await kernel.shutdown()
+
+
+def _run_research_command(args: argparse.Namespace) -> int:
+    """Dispatch the research study command."""
+    if args.bars < 0:
+        raise ValidationError("--bars must be non-negative", code="VAL-130")
+    summary = asyncio.run(
+        run_research(
+            args.config_dir, tuple(args.symbols), Timeframe(args.timeframe), args.bars
+        )
+    )
+    sys.stdout.write(render_research(summary) + "\n")
+    return EXIT_OK
+
+
+def _run_orchestrate_command(args: argparse.Namespace) -> int:
+    """Dispatch the orchestrator drain command."""
+    if args.limit < 1:
+        raise ValidationError("--limit must be >= 1", code="VAL-132")
+    summary = asyncio.run(
+        run_orchestrate(
+            args.config_dir,
+            limit=args.limit,
+            enqueue=args.enqueue,
+            timeframe=Timeframe(args.timeframe),
+            bars=args.bars,
+        )
+    )
+    sys.stdout.write(render_orchestration(summary) + "\n")
+    return EXIT_OK
 
 
 def render_portfolio(summary: PortfolioSummary) -> str:
@@ -746,6 +959,8 @@ def main(argv: list[str] | None = None) -> int:
             "optimize-risk": _run_optimizer_command,
             "portfolio": _run_portfolio_command,
             "execute": _run_execute_command,
+            "research": _run_research_command,
+            "orchestrate": _run_orchestrate_command,
         }
         handler = dispatchers.get(args.command or "")
         if handler is not None:

@@ -12,7 +12,7 @@ from apex.core.contracts.interfaces import IClock, IEventBus, IModule
 from apex.core.enums import HealthState, PluginKind, StabilityLevel
 from apex.core.logging import LoggerFactory, StructuredLogger
 from apex.core.versioning import SemanticVersion
-from apex.decision.plugin import _decision_params
+from apex.decision.plugin import decision_params_from_config
 from apex.decision.service import DecisionService
 from apex.kernel.container import ServiceContainer
 from apex.optimization.objective import ObjectiveWeights
@@ -138,7 +138,7 @@ class OptimizationPlatformPlugin:
             database_path=data_dir / OPTIMIZATION_DATABASE_FILENAME,
             artifact_dir=data_dir / ARTIFACT_DIRECTORY,
         )
-        base_params = _decision_params(config.market.decision)
+        base_params = decision_params_from_config(config.market.decision)
         service = SignalOptimizationService(
             exchange_id="toobit",
             base_params=base_params,
