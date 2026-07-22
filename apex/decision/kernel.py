@@ -26,12 +26,17 @@ stand-asides, porting the AICE gate/timing stack (Book VI spec lines
   Structure Hybrid stop (protected swing, AICE's OB-bottom variant
   arrives with the execution-phase zone store), and the three
   R-multiple targets with the macro-extreme liquidity resolver.
+- **Virtual trade ledger** (lines 2906-2942, 3217-3280): the Pine
+  ``var`` position block as fold state - signals arm one virtual
+  trade per series, closes trigger on the first stop/target touch
+  after the entry bar (conservative same-bar resolver), and the
+  closed-trade statistics feed the **flatness gate** (``flat_ok`` in
+  the base gate, line 2971) and the **virtual equity guard** oracle
+  term (+0.10 once trades reach the minimum and ``r_sum`` drops below
+  its EMA, lines 2941-2945). Both rewired by Phase 9.
 
-Deferred along AICE gates / later phases (documented): position
-flatness (portfolio platform - no positions exist yet), the virtual
-equity guard (requires trade history; passes below its minimum trade
-count exactly like a fresh AICE chart), crypto-context permissions and
-the Kalman filter.
+Deferred along AICE gates / later phases (documented): crypto-context
+permissions and the Kalman filter.
 """
 
 from collections.abc import Mapping, Sequence
@@ -53,6 +58,7 @@ from apex.core.types import (
     RiskReward,
 )
 from apex.core.validation import ensure_in_range, ensure_positive
+from apex.decision.ledger import VirtualLedger
 from apex.decision.setups import classify_long, classify_short
 from apex.domain.market import Bar
 from apex.domain.signal import PriceZone, Signal
@@ -88,6 +94,7 @@ _UNC_FLOOR, _UNC_CEIL = 0.05, 0.95
 # Oracle composition (lines 2943-2944).
 _ORACLE_UNCERTAINTY, _ORACLE_ENTROPY, _ORACLE_THIN = 0.38, 0.25, 0.15
 _ORACLE_EXPECTANCY = 0.10
+_ORACLE_EQUITY_GUARD = 0.10
 # Entropy standby catalyst override (lines 2958-2959).
 _CATALYST_OVERRIDE = 0.75
 # Bar quality body fraction (lines 2965-2966).
@@ -146,6 +153,11 @@ class DecisionParams:
     atr_length: int = 14
     ema_length: int = 20
     structure_pivot_lookback: int = 8
+    flatness_gate_enabled: bool = True
+    conservative_resolver: bool = True
+    equity_guard_enabled: bool = True
+    equity_guard_minimum_trades: int = 12
+    equity_guard_ema_length: int = 50
 
     def __post_init__(self) -> None:
         ensure_in_range(self.probability_threshold, 0.4, 0.99, "probability_threshold")
@@ -163,6 +175,8 @@ class DecisionParams:
         ensure_positive(self.atr_length, "atr_length")
         ensure_positive(self.ema_length, "ema_length")
         ensure_positive(self.structure_pivot_lookback, "structure_pivot_lookback")
+        ensure_positive(self.equity_guard_minimum_trades, "equity_guard_minimum_trades")
+        ensure_in_range(self.equity_guard_ema_length, 5, 300, "equity_guard_ema_length")
         if self.execution_timing not in (TIMING_IMMEDIATE, TIMING_TRIGGER, TIMING_RETEST):
             raise ApexError("unknown execution timing", code="DEC-001")
         if self.stop_model not in (STOP_ATR, STOP_STRUCTURE_HYBRID):
@@ -219,7 +233,8 @@ class _SideState:
 
 @dataclass(slots=True)
 class _KernelState:
-    """AICE ``var`` block: cooldowns, similarity memory, pending setup."""
+    """AICE ``var`` block: cooldowns, similarity memory, pending setup
+    and the virtual trade ledger (flatness + equity guard)."""
 
     last_signal_bar: int = -10_000
     last_similar_bar: int = -10_000
@@ -229,6 +244,7 @@ class _KernelState:
     pending_bar: int = 0
     pending_pullback: bool = False
     pending_setup: str = ""
+    ledger: VirtualLedger = field(default_factory=VirtualLedger)
 
 
 def _cosine(a: Sequence[float], b: Sequence[float]) -> float:
@@ -292,10 +308,22 @@ class CentralDecisionKernel:
         ema20: float | None,
     ) -> DecisionOutcome:
         snapshot = snapshots[index]
+        params = self._params
+        # Pine line order: the guard EMA refreshes before this bar's
+        # closes, so it sees r_sum as of the previous bar (line 2941).
+        guard_raw = state.ledger.refresh_guard(
+            ema_length=params.equity_guard_ema_length,
+            minimum_trades=params.equity_guard_minimum_trades,
+        )
+        guard_bad = params.equity_guard_enabled and guard_raw
         uncertainty = self._uncertainty(snapshot)
-        long_side = self._side(snapshot, index, uncertainty, atr, bullish=True)
-        short_side = self._side(snapshot, index, uncertainty, atr, bullish=False)
-        shared = self._shared_gates(snapshot, index, atr)
+        long_side = self._side(
+            snapshot, index, uncertainty, atr, bullish=True, guard_bad=guard_bad
+        )
+        short_side = self._side(
+            snapshot, index, uncertainty, atr, bullish=False, guard_bad=guard_bad
+        )
+        shared = self._shared_gates(state, snapshot, index, atr)
         self._apply_shared(long_side, shared)
         self._apply_shared(short_side, shared)
         self._apply_cluster_gates(state, snapshot, index, long_side, short_side)
@@ -306,11 +334,17 @@ class CentralDecisionKernel:
         previous_compression = index >= 1 and flag(
             snapshots[index - 1].vector, "volume.compression"
         )
-        return self._outcome(
+        outcome = self._outcome(
             state, snapshot, index, fired_direction, from_pending,
             long_side, short_side, uncertainty, atr,
             previous_compression=previous_compression,
         )
+        # Entries precede closes (AICE 3092 -> 3217): the entry bar
+        # itself never closes, and a close frees flatness next bar.
+        state.ledger.close_on_touch(
+            snapshot.bar, index, conservative=params.conservative_resolver
+        )
+        return outcome
 
     # --- Derived figures ------------------------------------------------------
 
@@ -354,6 +388,7 @@ class CentralDecisionKernel:
         atr: float | None,
         *,
         bullish: bool,
+        guard_bad: bool,
     ) -> _SideState:
         params = self._params
         suffix = "long" if bullish else "short"
@@ -395,7 +430,7 @@ class CentralDecisionKernel:
             confidence=confidence,
             ready=False,
         )
-        self._readiness(side, snapshot, uncertainty, bullish=bullish)
+        self._readiness(side, snapshot, uncertainty, bullish=bullish, guard_bad=guard_bad)
         return side
 
     def _readiness(
@@ -405,6 +440,7 @@ class CentralDecisionKernel:
         uncertainty: float,
         *,
         bullish: bool,
+        guard_bad: bool,
     ) -> None:
         """AICE ready_long/short (lines 2973-2974) minus shared gates."""
         params = self._params
@@ -425,9 +461,9 @@ class CentralDecisionKernel:
         )
         if entropy_standby and side.catalyst < _CATALYST_OVERRIDE:
             side.failed.append("entropy_standby")
-        if params.oracle_enabled and self._oracle(snapshot, uncertainty, side) > (
-            params.oracle_failure_maximum
-        ):
+        if params.oracle_enabled and self._oracle(
+            snapshot, uncertainty, side, guard_bad=guard_bad
+        ) > (params.oracle_failure_maximum):
             side.failed.append("failure_oracle")
         if not self._bar_quality(snapshot.bar, vector, bullish=bullish):
             side.failed.append("bar_quality")
@@ -467,15 +503,21 @@ class CentralDecisionKernel:
         return threshold, ceiling
 
     def _oracle(
-        self, snapshot: DecisionSnapshot, uncertainty: float, side: _SideState
+        self,
+        snapshot: DecisionSnapshot,
+        uncertainty: float,
+        side: _SideState,
+        *,
+        guard_bad: bool,
     ) -> float:
-        """Failure-risk oracle (lines 2943-2944); guard terms follow
-        their AICE gates (no trades yet, crypto context deferred)."""
+        """Failure-risk oracle (lines 2943-2944) with the virtual
+        equity-guard term; crypto context stays deferred."""
         thin = side.contributors < self._params.minimum_contributors
         return clamp(
             _ORACLE_UNCERTAINTY * uncertainty
             + _ORACLE_ENTROPY * read(snapshot.vector, "statistical.market_entropy")
             + (_ORACLE_THIN if thin else 0.0)
+            + (_ORACLE_EQUITY_GUARD if guard_bad else 0.0)
             + (_ORACLE_EXPECTANCY if side.expected_r < 0 else 0.0),
             0.0,
             1.0,
@@ -504,13 +546,15 @@ class CentralDecisionKernel:
     # --- Shared and clustering gates -------------------------------------------
 
     def _shared_gates(
-        self, snapshot: DecisionSnapshot, index: int, atr: float | None
+        self, state: _KernelState, snapshot: DecisionSnapshot, index: int, atr: float | None
     ) -> list[str]:
-        """base_gate (line 2971): RVOL, ATR percent; bars are confirmed
-        upstream and flatness/warmup are documented deferrals."""
+        """base_gate (line 2971): RVOL, ATR percent and flatness; bars
+        are confirmed upstream and warmup is a documented deferral."""
         params = self._params
         vector = snapshot.vector
         failed: list[str] = []
+        if params.flatness_gate_enabled and not state.ledger.is_flat:
+            failed.append("flatness")
         if (
             params.rvol_gate_enabled
             and flag(vector, "volume.volume_available")
@@ -756,6 +800,13 @@ class CentralDecisionKernel:
                 state, snapshot, fired_direction, from_pending, previous_compression
             )
             signal = self._signal(snapshot, fired_direction, side, atr, setup)
+            state.ledger.arm(
+                direction=fired_direction,
+                entry=float(signal.entry_zone.lower.value),
+                stop=float(signal.stop_zone.lower.value),
+                target=float(signal.target_zones[-1].lower.value),
+                index=index,
+            )
             state.last_signal_bar = index
             state.last_similar_bar = index
             state.last_direction = fired_direction
