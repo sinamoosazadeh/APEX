@@ -69,6 +69,7 @@ class TestKernelBoot:
                 "storage_core",
                 "toobit_connector",
                 "feature_platform",
+                "probability_platform",
             )
             # Deterministic topological order with alphabetical tie-breaks.
             assert status.modules_started == (
@@ -78,8 +79,9 @@ class TestKernelBoot:
                 "event_archive",
                 "market_data",
                 "feature_platform",
+                "probability_platform",
             )
-            assert status.events_journaled >= 9  # booting, config, 6x module, started
+            assert status.events_journaled >= 10  # booting, config, modules, started
             await kernel.shutdown()
             assert not kernel.is_running
 
