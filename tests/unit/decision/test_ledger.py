@@ -155,6 +155,49 @@ class TestFlatnessGate:
         assert count(free) > count(gated)
 
 
+class TestObBottomStop:
+    def _series(self, *, with_zone: bool) -> list[DecisionSnapshot]:
+        snapshots = []
+        for index in range(12):
+            base = 100.0 + index
+            close = base + 2.0
+            snapshots.append(
+                DecisionSnapshot(
+                    bar=make_bar(index, base, base + 2.2, base - 0.4, close),
+                    vector=bullish_vector(),  # in_bull_ob = 1.0
+                    probability_long=0.85,
+                    probability_short=0.05,
+                    channels=strong_channels(),
+                    macro_high=close + 50.0,
+                    macro_low=close - 50.0,
+                    ob_long_bottom=(close - 3.0) if with_zone else None,
+                )
+            )
+        return snapshots
+
+    def _fired(self, *, with_zone: bool) -> tuple[float, int]:
+        context = MarketContext(symbol="BTCUSDT", timeframe=Timeframe.H1, as_of=T0)
+        outcomes = (
+            kernel().decide_series(self._series(with_zone=with_zone), context).unwrap()
+        )
+        signals = [o for o in outcomes if o.action == "signal"]
+        assert signals and signals[0].signal is not None, "fixture must fire"
+        stop = float(signals[0].signal.stop_zone.lower.value)
+        index = (signals[0].bar_open_ms - T0.epoch_ms) // 3_600_000
+        return stop, int(index)
+
+    def test_zone_level_leads_the_hybrid_stop(self) -> None:
+        # The macro swing (close - 50) is far out of the risk bounds, so
+        # without a zone the hybrid falls back to the ATR stop; the live
+        # order-block boundary replaces it (AICE line 3096).
+        zone_stop, index = self._fired(with_zone=True)
+        atr_stop, _ = self._fired(with_zone=False)
+        assert zone_stop != atr_stop
+        boundary = (100.0 + index + 2.0) - 3.0
+        # Below the boundary by the 0.15 x ATR buffer.
+        assert zone_stop < boundary
+
+
 class TestEquityGuardWiring:
     def test_guard_term_raises_the_oracle(self) -> None:
         decision_kernel = kernel()
