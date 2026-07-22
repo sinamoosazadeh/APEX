@@ -14,7 +14,7 @@ project stays runnable at the end of every phase (4.6).
 | 2 | Core Infrastructure | ✅ **complete** | Shared kernel (`apex/domain`), infra + engine contracts, event platform (journal + deterministic bus), DI container, module registry, health monitor, kernel boot/shutdown with plugin stage, storage platform (SQLite key/value behind `IStorage`, durable event archive with journal catch-up), plugin system (manifest contract, config-driven loader with API-version/dependency validation) |
 | 3 | Data Platform | ✅ **complete** | REST: Toobit client, anti-corruption translator (5.37), paginating gateway behind `IMarketDataGateway`, gap detection + quality scoring, ingestion pipeline. Live: WebSocket streaming (`wss` client with keepalive + injected connector, closed-bar transition detection publishing `market.bar.closed`, throttled forming-bar persistence), tick storage (idempotent on exchange trade ids), catch-up synchronization resuming from the latest stored bar. Replay serves bars *and* ticks. CLI: `ingest`, `sync`, `stream`. Live-validated: 400 bars synced + 225 ticks streamed in 25s from Toobit. Deferred to later phases: funding/OI enrichment (Phase 4 features), multi-exchange backfill (plugin per Book II 29.9) |
 | 4 | Feature Platform | ✅ **complete** | Feature registry (declare-before-compute, versioned definitions), SQLite feature store (bar-anchored, idempotent, vector + series queries), computation pipeline (pure engines, registry-validated emission, catalog events), `apex features` CLI, a shared chart-structure fold (BOS/CHoCH state machine + dealing range, single source per Constitution 2.12), and all seven migrated AICE families — **market structure** (19 features: swings via strict pivots, BOS/CHoCH, break quality with decay, displacement, dealing range/premium/discount/OTE, sweeps, equal highs/lows), **liquidity** (16 features: decayed confidence pools bumped by equal extremes at three pivot scales, resting-liquidity composites, external-extreme proximity, sweep efficiency, stop hunts, inducement) **order blocks/FVG** (22 features: creation scans on structure breaks with the nine-term OB quality, decay/retest/mitigation lifecycle, breaker flags, three-bar FVG detection with six-term quality, fill tracking, IFVG inversions, BPR; FVG ``trendQ`` fully wired via the zero-lag momentum filter, HTF terms pinned to AICE neutrals until the MTF family lands) and **volume & normalization** (25 features: RVOL, ATR percentile rank/width/regime factor, EWMA volatility forecast + adaptive ATR ratio, UTC-day VWAP deviation in ATR and winsorized z, expansion/compression, delta approximation — aggression, rolling/cumulative delta bias, absorption, spikes, climaxes — rolling volume-profile POC distance/acceptance, zero-lag momentum) — plus the first multi-series families on the new ``IContextFeatureEngine`` contract (pipeline fetches declared auxiliary series; strictly causal closed-bar mapping replaces Pine's ``request.security`` per the Constitution's no-repaint rule): **HTF context** (8 features: two macro struct-pack biases, alignment, bull/bear context, confidence, macro discount/premium) and **SMT divergence** (7 features: age-gated opposing-swing conditions against the correlated reference, rolling return correlation with AICE's dynamic quality, decayed per-side confidence pools). OB/FVG ``mtfQ``/``htfQ``/``locQ`` HTF terms fully rewired (defs 1.0.2) — every AICE context term in the family is now live. Finally the **statistical** family closes the ch. 2 migration matrix (32 features: regime detection — ADX/DMI, Kaufman efficiency, variance-ratio Hurst proxy, return entropy, slope quality, volatility clustering, five-term trend evidence with trending/ranging split, market entropy — candle DNA with persistence/body rank/impulse/rejections and the weighted composites, engulfing/pin/hammer/star/doji patterns, sequence bias, and the kinetic oscillators: WaveTrend, Schaff trend cycle, CCI with regime-scaled thresholds composed into kin_long/short). **All seven AICE families migrated and validated against live Toobit data.** |
-| 5 | Probability Platform | ⬜ pending | Book II ch. 8/18 |
+| 5 | Probability Platform | ✅ **complete** | The AICE confluence core behind the evolved `IProbabilityEngine` (bar-anchored, windowed, pure): thirteen evidence channels computed from stored 133-feature vectors (structure with the struct-momentum fold, liquidity gated on sweeps/springs, OB/FVG passthrough, zone, candle DNA, kinetic, delta with sos/sow compositions, sequences, trend, MTF alignment over internal/external/chart/macro biases, SMT, volume profile), trend-blended adaptive weights normalized to one (regime-composed SMT weight), the nine cross-channel interaction bonuses, the opposing-context penalty stack, and sigmoid calibration `squash((raw - 0.45) x (5.4 + tc x 1.2))` clamped [0.01, 0.99]. Assessments persist per (bar, side) with channels payload in the SQLite assessment store; `probability.assessed/failed` catalog events; `apex probability` CLI. Confidence intervals are APEX semantics (entropy-scaled width) until the research platform measures calibration. Deferred per AICE gates/later phases: IC + meta-learning weight factors and the meta calibrator (Phase 11), Kalman terms, crypto dominance context, probability smoothing (off in AICE). Four features added for exact evidence: structure internal/external bias, volume narrow-range, statistical direction (registry 133) |
 | 6 | Decision Platform | ⬜ pending | Book II ch. 11/19; Central Decision Kernel (Book I ch. 9) |
 | 7 | Signal Optimizer | ⬜ pending | Book V part 5; Book II ch. 9 |
 | 8 | Risk Optimizer | ⬜ pending | Book V part 6; Book II ch. 10 |
@@ -26,19 +26,18 @@ project stays runnable at the end of every phase (4.6).
 | 14 | Deployment | ⬜ pending | Book II 29.20/29.25 |
 | 15 | Production Validation | ⬜ pending | Book II 29.26 acceptance criteria |
 
-## Current quality-gate results (Phase 4 closed)
+## Current quality-gate results (Phase 5 closed)
 
 - `ruff check apex tests` — clean
-- `mypy` (strict, 156 files) — clean
-- `pytest` — **294 passed**
-- `python -m apex --check` — boots healthy (3 plugins, 4 modules, 7 engines)
-- Real-data validation: all seven families over 517 confirmed live Toobit 1h
-  bars per symbol with live 4h macro series; `apex features` stores 53,730
-  registry-validated features per run across 129 distinct names (per-family
-  warmup accounting exact). Statistical readings coherent with the tape:
-  trending regime on both symbols (ADX 36/32 above the 23 threshold, trend
-  confidence 0.71/0.56), low market entropy (0.15/0.11), BTC STC cycled high
-  (95.6) vs ETH low (19.8) on the pullback hour
+- `mypy` (strict, 165 files) — clean
+- `pytest` — **309 passed**
+- `python -m apex --check` — boots healthy (4 plugins, 5 modules)
+- Real-data validation: `apex probability` assessed 317 fully-featured bars
+  per symbol (634 records each) over live Toobit data. The distribution is
+  AICE-selective: only 0.2% of assessments exceed 0.65 (peaks 0.78 long /
+  0.71 short on stacked confluence); the current quiet hour reads low both
+  sides with shorts crushed by the bullish HTF penalty (raw -0.288); long
+  average 0.19 vs short 0.10 — coherent with the uptrend
 
 ## Spec library
 
@@ -58,11 +57,10 @@ book 8 is truncated at its source ("Dependency Rule" section) — its missing
 content is fully covered by Books I-III. Priority on conflict:
 **Constitution → Book I → Book II → AICE logic**.
 
-## Next up (Phase 5)
+## Next up (Phase 6)
 
-The Probability Platform (Book II ch. 8/18): consume the stored
-129-feature vectors per (symbol, timeframe, bar), fuse family evidence
-into calibrated long/short probability assessments (the AICE ev_*
-composites and the 13-feature confluence weighting are the reference),
-and persist assessments behind ``IProbabilityEngine`` for the Decision
-Platform (Phase 6).
+The Decision Platform (Book II ch. 11/19; Book I ch. 9): the Central
+Decision Kernel consuming persisted probability assessments — setup
+classification (the AICE setup taxonomy), signal construction with
+entry/invalidation context, and decision records behind the decision
+contracts for the optimizer phases.
