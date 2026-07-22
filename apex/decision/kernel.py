@@ -35,6 +35,13 @@ stand-asides, porting the AICE gate/timing stack (Book VI spec lines
   term (+0.10 once trades reach the minimum and ``r_sum`` drops below
   its EMA, lines 2941-2945). Both rewired by Phase 9.
 
+- **Learning meta layer** (lines 2833-2842, Phase 11): with a
+  research-produced learning state, each side's stored probability is
+  multiplied by its setup's performance factor and passed through the
+  ten-bin calibrator before any gate reads it - the AICE
+  ``prob_raw -> meta -> cal`` order. Without one, assessments pass
+  through unchanged (fresh chart).
+
 Deferred along AICE gates / later phases (documented): crypto-context
 permissions and the Kalman filter.
 """
@@ -60,6 +67,7 @@ from apex.core.types import (
 from apex.core.validation import ensure_in_range, ensure_positive
 from apex.decision.ledger import VirtualLedger
 from apex.decision.setups import classify_long, classify_short
+from apex.domain.learning import CHANNEL_NAMES, LearningParams, LearningState
 from apex.domain.market import Bar
 from apex.domain.signal import PriceZone, Signal
 from apex.features.calculations import clamp, ema, rolling_extremes, session_vwap, wilder_atr
@@ -73,10 +81,7 @@ _SOURCE = "apex.decision.kernel"
 _CONTRIBUTOR_THRESHOLDS: tuple[float, ...] = (
     0.35, 0.35, 0.25, 0.25, 0.35, 0.45, 0.35, 0.35, 0.35, 0.35, 0.45, 0.25, 0.35,
 )
-_CHANNELS: tuple[str, ...] = (
-    "structure", "liquidity", "orderblock", "fvg", "zone", "dna",
-    "kinetic", "delta", "sequence", "trend", "mtf", "smt", "profile",
-)
+_CHANNELS: tuple[str, ...] = CHANNEL_NAMES
 # Uncertainty composition (line 2882).
 _UNC_AMBIGUITY, _UNC_ENTROPY, _UNC_TRANSITION = 0.38, 0.28, 0.15
 _UNC_THIN, _UNC_CLUSTER = 0.12, 0.07
@@ -155,6 +160,7 @@ class DecisionParams:
     structure_pivot_lookback: int = 8
     flatness_gate_enabled: bool = True
     conservative_resolver: bool = True
+    probability_calibration_enabled: bool = True
     equity_guard_enabled: bool = True
     equity_guard_minimum_trades: int = 12
     equity_guard_ema_length: int = 50
@@ -260,9 +266,20 @@ def _cosine(a: Sequence[float], b: Sequence[float]) -> float:
 class CentralDecisionKernel:
     """Folds assessments and vectors into audited trade decisions."""
 
-    def __init__(self, *, params: DecisionParams, clock: Clock) -> None:
+    def __init__(
+        self,
+        *,
+        params: DecisionParams,
+        clock: Clock,
+        learning: LearningState | None = None,
+        learning_params: LearningParams | None = None,
+    ) -> None:
         self._params = params
         self._clock = clock
+        # Closed-trade knowledge (research artifact, Phase 11): setup
+        # meta factors and calibration bins. None is the fresh chart.
+        self._learning = learning
+        self._learning_params = learning_params or LearningParams()
 
     def decide_series(
         self,
@@ -316,12 +333,20 @@ class CentralDecisionKernel:
             minimum_trades=params.equity_guard_minimum_trades,
         )
         guard_bad = params.equity_guard_enabled and guard_raw
-        uncertainty = self._uncertainty(snapshot)
+        previous_compression = index >= 1 and flag(
+            snapshots[index - 1].vector, "volume.compression"
+        )
+        probabilities = self._decision_probabilities(
+            snapshot, previous_compression=previous_compression
+        )
+        uncertainty = self._uncertainty(snapshot, probabilities)
         long_side = self._side(
-            snapshot, index, uncertainty, atr, bullish=True, guard_bad=guard_bad
+            snapshot, index, uncertainty, atr,
+            bullish=True, guard_bad=guard_bad, probabilities=probabilities,
         )
         short_side = self._side(
-            snapshot, index, uncertainty, atr, bullish=False, guard_bad=guard_bad
+            snapshot, index, uncertainty, atr,
+            bullish=False, guard_bad=guard_bad, probabilities=probabilities,
         )
         shared = self._shared_gates(state, snapshot, index, atr)
         self._apply_shared(long_side, shared)
@@ -330,9 +355,6 @@ class CentralDecisionKernel:
         fired_direction, from_pending = self._timing(
             state, snapshots, index, long_side, short_side,
             atr=atr, vwap=vwap, ema20=ema20,
-        )
-        previous_compression = index >= 1 and flag(
-            snapshots[index - 1].vector, "volume.compression"
         )
         outcome = self._outcome(
             state, snapshot, index, fired_direction, from_pending,
@@ -355,18 +377,53 @@ class CentralDecisionKernel:
                 count += 1
         return count
 
-    def _uncertainty(self, snapshot: DecisionSnapshot) -> float:
+    def _decision_probabilities(
+        self, snapshot: DecisionSnapshot, *, previous_compression: bool
+    ) -> tuple[float, float]:
+        """Setup meta factor then bin calibration (AICE 2833-2842).
+
+        ``prob_raw -> x f_setup_factor(setup) -> f_calibrate`` per
+        side, exactly the Pine order; without a learning state the
+        stored assessment passes through unchanged (fresh chart).
+        """
+        raw_long = snapshot.probability_long
+        raw_short = snapshot.probability_short
+        if self._learning is None:
+            return raw_long, raw_short
+        setup_long = classify_long(
+            snapshot.vector, snapshot.channels,
+            previous_compression=previous_compression,
+        )
+        setup_short = classify_short(
+            snapshot.vector, snapshot.channels,
+            previous_compression=previous_compression,
+        )
+        meta_long = clamp(raw_long * self._learning.setup_factor(setup_long), 0.01, 0.99)
+        meta_short = clamp(
+            raw_short * self._learning.setup_factor(setup_short), 0.01, 0.99
+        )
+        if not self._params.probability_calibration_enabled:
+            return meta_long, meta_short
+        return (
+            self._learning.calibrate(meta_long, self._learning_params),
+            self._learning.calibrate(meta_short, self._learning_params),
+        )
+
+    def _uncertainty(
+        self, snapshot: DecisionSnapshot, probabilities: tuple[float, float]
+    ) -> float:
         """AICE line 2882 over the persisted state."""
         vector = snapshot.vector
         params = self._params
+        prob_long, prob_short = probabilities
         contributors = max(
             self._contributors(snapshot.channels, "long")
-            if snapshot.probability_long >= snapshot.probability_short
+            if prob_long >= prob_short
             else self._contributors(snapshot.channels, "short"),
             0,
         )
         thin = contributors < params.minimum_contributors
-        ambiguity = 1.0 - abs(snapshot.probability_long - snapshot.probability_short)
+        ambiguity = 1.0 - abs(prob_long - prob_short)
         is_trending = flag(vector, "statistical.is_trending")
         is_ranging = flag(vector, "statistical.is_ranging")
         transition = not is_trending and not is_ranging
@@ -389,11 +446,12 @@ class CentralDecisionKernel:
         *,
         bullish: bool,
         guard_bad: bool,
+        probabilities: tuple[float, float],
     ) -> _SideState:
         params = self._params
         suffix = "long" if bullish else "short"
         channels = snapshot.channels
-        probability = snapshot.probability_long if bullish else snapshot.probability_short
+        probability = probabilities[0] if bullish else probabilities[1]
         catalyst = max(
             read(channels, f"structure_{suffix}"),
             read(channels, f"liquidity_{suffix}"),
@@ -430,7 +488,10 @@ class CentralDecisionKernel:
             confidence=confidence,
             ready=False,
         )
-        self._readiness(side, snapshot, uncertainty, bullish=bullish, guard_bad=guard_bad)
+        self._readiness(
+            side, snapshot, uncertainty,
+            bullish=bullish, guard_bad=guard_bad, probabilities=probabilities,
+        )
         return side
 
     def _readiness(
@@ -441,6 +502,7 @@ class CentralDecisionKernel:
         *,
         bullish: bool,
         guard_bad: bool,
+        probabilities: tuple[float, float],
     ) -> None:
         """AICE ready_long/short (lines 2973-2974) minus shared gates."""
         params = self._params
@@ -467,9 +529,7 @@ class CentralDecisionKernel:
             side.failed.append("failure_oracle")
         if not self._bar_quality(snapshot.bar, vector, bullish=bullish):
             side.failed.append("bar_quality")
-        opposing = (
-            snapshot.probability_short if bullish else snapshot.probability_long
-        )
+        opposing = probabilities[1] if bullish else probabilities[0]
         if params.expectancy_gate_enabled and side.expected_r < params.minimum_expected_r:
             side.failed.append("expectancy_floor")
         if side.probability - opposing < params.probability_edge:
