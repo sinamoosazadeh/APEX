@@ -25,3 +25,4 @@ plugins:
     - apex.probability.plugin
     - apex.decision.plugin
     - apex.optimization.plugin
+    - apex.portfolio.plugin
