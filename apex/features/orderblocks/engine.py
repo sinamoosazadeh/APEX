@@ -142,6 +142,8 @@ FEATURE_NAMES: tuple[str, ...] = (
     "orderblocks.ifvg_bear",
     "orderblocks.bpr_bull",
     "orderblocks.bpr_bear",
+    "orderblocks.bull_ob_bottom",
+    "orderblocks.bear_ob_top",
 )
 
 
@@ -635,8 +637,10 @@ class OrderBlockEngine:
         zones: list[_OrderBlock],
         series: _Series,
         index: int,
-    ) -> tuple[float, float, bool]:
-        """Best zone by effective score: (confidence, freshness, inside)."""
+    ) -> tuple[float, float, bool, _OrderBlock | None]:
+        """Best zone by effective score: (confidence, freshness,
+        inside, zone). The winning zone's boundary is AICE's
+        ``ob_long_bot``/``ob_short_top`` (lines 1459/1477)."""
         params = self._params
         bar = series.bars[index]
         close = float(bar.close.value)
@@ -646,6 +650,7 @@ class OrderBlockEngine:
         best_score = -1.0
         confidence = freshness = 0.0
         inside_best = False
+        best_zone: _OrderBlock | None = None
         for zone in zones:
             inside = low <= zone.top and high >= zone.bot
             proximity = self._proximity(close, zone.top, zone.bot, atr)
@@ -665,7 +670,8 @@ class OrderBlockEngine:
                 age = index - zone.born
                 freshness = clamp(1.0 - age / max(params.max_object_age, 1), 0.0, 1.0)
                 inside_best = inside
-        return confidence, freshness, inside_best
+                best_zone = zone
+        return confidence, freshness, inside_best, best_zone
 
     def _proximity(self, close: float, top: float, bot: float, atr: float | None) -> float:
         """clamp(1 - distance / (ATR x 3)); zero without a usable ATR."""
@@ -849,8 +855,8 @@ class OrderBlockEngine:
         self,
         *,
         state: _ZoneState,
-        ob_long: tuple[float, float, bool],
-        ob_short: tuple[float, float, bool],
+        ob_long: tuple[float, float, bool, _OrderBlock | None],
+        ob_short: tuple[float, float, bool, _OrderBlock | None],
         breakers: tuple[bool, bool],
         new_fvgs: tuple[bool, bool],
         fvg_long: tuple[float, bool],
@@ -858,7 +864,15 @@ class OrderBlockEngine:
         ifvgs: tuple[bool, bool],
         bprs: tuple[bool, bool],
     ) -> dict[str, float]:
-        return {
+        values: dict[str, float] = {}
+        # Zone levels (Phase 10): the best zone's protective boundary,
+        # emitted only while a zone is live - an absent key is the
+        # AICE na-branch (ob_long_bot / ob_short_top stay na).
+        if ob_long[3] is not None:
+            values["orderblocks.bull_ob_bottom"] = ob_long[3].bot
+        if ob_short[3] is not None:
+            values["orderblocks.bear_ob_top"] = ob_short[3].top
+        return values | {
             "orderblocks.ob_long_confidence": ob_long[0],
             "orderblocks.ob_short_confidence": ob_short[0],
             "orderblocks.ob_long_freshness": ob_long[1],
@@ -907,6 +921,10 @@ class OrderBlockEngine:
 
     def _normalize(self, name: str, raw: float) -> float:
         """Map raw values into [-1, 1] per feature semantics."""
+        if name.endswith(("_bottom", "_top")):
+            # Absolute price levels: consumers read the raw value; the
+            # normalized channel is neutral by definition.
+            return 0.0
         if name.endswith("_count"):
             share = clamp(raw / self._params.max_live_objects, 0.0, 1.0)
             return share * 2.0 - 1.0
