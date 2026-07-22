@@ -46,6 +46,7 @@ class TestLoadConfig:
             "apex.storage.plugin",
             "apex.data.toobit.plugin",
             "apex.features.plugin",
+            "apex.probability.plugin",
         )
 
     def test_exchange_config_parsed(self, config_dir: Path) -> None:

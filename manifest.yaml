@@ -5,23 +5,24 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.6.0
-  phase: 5            # Phase 4 complete (all seven AICE families); Phase 5 next
-  phases_complete: [0, 1, 2, 3, 4]
+  version: 0.7.0
+  phase: 6            # Phase 5 complete (confluence probability); Phase 6 next
+  phases_complete: [0, 1, 2, 3, 4, 5]
 
 config_schema_version: 1
 contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.6.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.7.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.contracts: { version: 0.6.0, stability: beta,         owner: foundation }
-  apex.kernel:    { version: 0.6.0, stability: beta,         owner: foundation }
+  apex.contracts: { version: 0.7.0, stability: beta,         owner: foundation }
+  apex.kernel:    { version: 0.7.0, stability: beta,         owner: foundation }
   apex.storage:   { version: 0.2.0, stability: beta,         owner: data-platform }
   apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.features:  { version: 0.6.0, stability: beta,         owner: feature-platform }
+  apex.features:  { version: 0.7.0, stability: beta,         owner: feature-platform }
   apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
+  apex.probability: { version: 0.1.0, stability: beta,       owner: probability-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
@@ -32,26 +33,28 @@ dependency_graph:
   apex.plugins: [apex.core, apex.kernel]
   apex.storage: [apex.core, apex.domain, apex.plugins]
   apex.data: [apex.core, apex.domain, apex.contracts, apex.storage, apex.plugins]
+  apex.probability: [apex.core, apex.domain, apex.contracts, apex.features, apex.storage, apex.plugins]
 
 # Populated by their phases.
 plugin_registry:
   - { name: storage_core, kind: service, version: 0.1.0, module: apex.storage.plugin }
   - { name: toobit_connector, kind: exchange_connector, version: 0.1.0, module: apex.data.toobit.plugin }
   - { name: feature_platform, kind: feature, version: 0.1.0, module: apex.features.plugin }
+  - { name: probability_platform, kind: service, version: 0.1.0, module: apex.probability.plugin }
 feature_registry:
-  - { family: structure, features: 19, version: 1.0.0, source: AICE Book VI }
+  - { family: structure, features: 21, version: 1.1.0, source: AICE Book VI }
   - { family: liquidity, features: 16, version: 1.0.0, source: AICE Book VI }
   - { family: orderblocks, features: 22, version: 1.0.2, source: AICE Book VI }
-  - { family: volume, features: 25, version: 1.0.0, source: AICE Book VI }
+  - { family: volume, features: 26, version: 1.1.0, source: AICE Book VI }
   - { family: htf, features: 8, version: 1.0.0, source: AICE Book VI }
   - { family: smt, features: 7, version: 1.0.0, source: AICE Book VI }
-  - { family: statistical, features: 32, version: 1.0.0, source: AICE Book VI }
+  - { family: statistical, features: 33, version: 1.1.0, source: AICE Book VI }
 exchange_registry:
   - { id: toobit, market_data: true, trading: false }
 
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 294
+  tests_passed: 309
   boot_check: pass
-  live_smoke: all seven families validated on real Toobit bars (53730 features/run)
+  live_smoke: confluence assessments on live Toobit vectors (634 records/symbol, AICE-selective)

@@ -103,6 +103,7 @@ FEATURE_NAMES: tuple[str, ...] = (
     "volume.aggression",
     "volume.rolling_delta_bias",
     "volume.cumulative_delta_bias",
+    "volume.narrow_range",
     "volume.absorption_buy",
     "volume.absorption_sell",
     "volume.spike",
@@ -581,6 +582,7 @@ class VolumeEngine:
         selling_climax = spike and lower_dom and aggression > 0
         buying_climax = spike and upper_dom and aggression < 0
         return {
+            "volume.narrow_range": self._binary(bool(narrow)),
             "volume.absorption_buy": self._binary(absorption_buy),
             "volume.absorption_sell": self._binary(absorption_sell),
             "volume.spike": self._binary(spike),

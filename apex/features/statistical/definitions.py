@@ -4,7 +4,9 @@ from apex.core.versioning import SemanticVersion
 from apex.features.registry import FeatureDefinition
 from apex.features.statistical.engine import FAMILY, StatisticalParams
 
-_VERSION = SemanticVersion(1, 0, 0)
+# 1.1.0: candle direction added for the probability platform's
+# effort-vs-result penalty (AICE lines 1633, 2750).
+_VERSION = SemanticVersion(1, 1, 0)
 
 _DESCRIPTIONS: dict[str, str] = {
     "statistical.adx": "Average directional index (Wilder DMI)",
@@ -17,6 +19,7 @@ _DESCRIPTIONS: dict[str, str] = {
     "statistical.is_trending": "Trend confidence at or above the trending threshold",
     "statistical.is_ranging": "Trend confidence below the ranging threshold",
     "statistical.market_entropy": "Composite disorder: entropy, transition, compression",
+    "statistical.direction": "Candle direction: up +1, down -1, flat 0",
     "statistical.persistence": "Share of the previous four bars agreeing in direction",
     "statistical.body_rank": "Percent rank of the candle body over the norm window",
     "statistical.impulse_efficiency": "Three-bar displacement over the traveled range",

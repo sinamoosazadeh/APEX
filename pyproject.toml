@@ -1,6 +1,6 @@
 [project]
 name = "apex"
-version = "0.6.0"
+version = "0.7.0"
 description = "APEX - Autonomous Probabilistic Execution eXchange: institutional-grade crypto trading intelligence platform."
 readme = "README.md"
 requires-python = ">=3.13"

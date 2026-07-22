@@ -7,6 +7,8 @@ Commands:
 - ``sync``           catch up every configured series to the present
 - ``stream``         sync, then consume the live WebSocket feed for a
                      bounded duration (bars close, ticks persist)
+- ``probability``    assess stored feature vectors into calibrated
+  per-side probabilities
 - ``features``       compute registered feature families over stored
                      confirmed bars into the feature store
 
@@ -28,6 +30,7 @@ from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
 from apex.data.streaming import MarketStreamService, StreamStats
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
+from apex.probability.service import ProbabilityService, ProbabilitySummary
 
 DEFAULT_CONFIG_DIR = Path("config")
 
@@ -97,6 +100,23 @@ def build_parser() -> argparse.ArgumentParser:
         help="bar timeframe",
     )
     features.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="window of most-recent bars (default: market.history_bars)",
+    )
+    probability = subcommands.add_parser(
+        "probability",
+        help="assess stored feature vectors into calibrated probabilities",
+    )
+    probability.add_argument("--symbol", required=True, help="instrument symbol")
+    probability.add_argument(
+        "--timeframe",
+        required=True,
+        choices=sorted(tf.value for tf in Timeframe),
+        help="bar timeframe",
+    )
+    probability.add_argument(
         "--bars",
         type=int,
         default=0,
@@ -203,6 +223,42 @@ async def run_stream(config_dir: Path, seconds: int) -> tuple[CatchUpReport, Str
         await kernel.shutdown()
 
 
+def render_probability(summary: ProbabilitySummary) -> str:
+    """Human-readable probability computation report."""
+    return "\n".join(
+        [
+            f"probabilities assessed: {summary.exchange} {summary.symbol} "
+            f"{summary.timeframe.value}",
+            f"  bars loaded  : {summary.bars_loaded}",
+            f"  bars assessed: {summary.bars_assessed}",
+            f"  records      : {summary.records_stored} stored",
+        ]
+    )
+
+
+async def run_probability(
+    config_dir: Path,
+    symbol: str,
+    timeframe: Timeframe,
+    bars: int,
+) -> ProbabilitySummary:
+    """Boot, assess stored feature vectors, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
+        service = kernel.container.resolve(ProbabilityService)
+        count = bars if bars > 0 else config.market.history_bars
+        now = clock.now()
+        aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        start = aligned_end.add_ms(-count * timeframe.duration_ms)
+        result = await service.compute(symbol, timeframe, start=start, end=aligned_end)
+        return result.unwrap()
+    finally:
+        await kernel.shutdown()
+
+
 def render_features(summary: FeatureComputationSummary) -> str:
     """Human-readable feature computation report."""
     return "\n".join(
@@ -263,6 +319,27 @@ async def run_ingest(
         await kernel.shutdown()
 
 
+def _run_windowed_command(args: argparse.Namespace) -> int:
+    """Dispatch the bar-windowed compute commands (features, probability)."""
+    if args.bars < 0:
+        raise ValidationError("--bars must be non-negative", code="VAL-130")
+    if args.command == "features":
+        feature_summary = asyncio.run(
+            run_features(
+                args.config_dir, args.symbol, Timeframe(args.timeframe), args.bars
+            )
+        )
+        sys.stdout.write(render_features(feature_summary) + "\n")
+        return EXIT_OK
+    probability_summary = asyncio.run(
+        run_probability(
+            args.config_dir, args.symbol, Timeframe(args.timeframe), args.bars
+        )
+    )
+    sys.stdout.write(render_probability(probability_summary) + "\n")
+    return EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     """CLI entrypoint."""
     args = build_parser().parse_args(argv)
@@ -291,19 +368,8 @@ def main(argv: list[str] | None = None) -> int:
             sys.stdout.write(render_catchup(report) + "\n")
             sys.stdout.write(render_stream(stats) + "\n")
             return EXIT_OK
-        if args.command == "features":
-            if args.bars < 0:
-                raise ValidationError("--bars must be non-negative", code="VAL-130")
-            feature_summary = asyncio.run(
-                run_features(
-                    args.config_dir,
-                    args.symbol,
-                    Timeframe(args.timeframe),
-                    args.bars,
-                )
-            )
-            sys.stdout.write(render_features(feature_summary) + "\n")
-            return EXIT_OK
+        if args.command in ("features", "probability"):
+            return _run_windowed_command(args)
         status = asyncio.run(run_status(args.config_dir))
     except ApexError as error:
         stage = args.command if args.command else "boot"

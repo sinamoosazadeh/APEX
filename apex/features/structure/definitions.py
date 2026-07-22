@@ -4,7 +4,9 @@ from apex.core.versioning import SemanticVersion
 from apex.features.registry import FeatureDefinition
 from apex.features.structure.engine import FAMILY, StructureParams
 
-_VERSION = SemanticVersion(1, 0, 0)
+# 1.1.0: internal/external struct-pack biases added for the
+# probability platform's ev_mtf evidence channel (AICE lines 1084-1085).
+_VERSION = SemanticVersion(1, 1, 0)
 
 _DESCRIPTIONS: dict[str, str] = {
     "structure.trend_direction": "Structure trend state: -1 bearish, 0 undefined, 1 bullish",
@@ -26,6 +28,8 @@ _DESCRIPTIONS: dict[str, str] = {
     "structure.equal_lows": "New swing low within ATR tolerance of the previous one",
     "structure.swing_high_distance": "Signed distance from close to the last swing high, in ATR",
     "structure.swing_low_distance": "Signed distance from close to the last swing low, in ATR",
+    "structure.internal_bias": "Internal-scale struct-pack bias: pivot break or EMA side",
+    "structure.external_bias": "External-scale struct-pack bias: pivot break or EMA side",
 }
 
 
@@ -37,6 +41,9 @@ def structure_definitions(params: StructureParams) -> tuple[FeatureDefinition, .
         "displacement_body_atr": params.displacement_body_atr,
         "equal_tolerance_atr": params.equal_tolerance_atr,
         "break_decay": params.break_decay,
+        "internal_lookback": params.internal_lookback,
+        "external_lookback": params.external_lookback,
+        "bias_ema_length": params.bias_ema_length,
     }
     return tuple(
         FeatureDefinition(

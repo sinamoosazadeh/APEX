@@ -22,3 +22,4 @@ plugins:
     - apex.storage.plugin
     - apex.data.toobit.plugin
     - apex.features.plugin
+    - apex.probability.plugin
