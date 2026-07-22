@@ -13,13 +13,29 @@ Replays each fired signal under a candidate risk-management plan:
 - **Trailing**: once TP2 fills (and when enabled), the stop trails the
   best price at a fixed R distance.
 - **Exposure shaping**: the whole trade is weighted by the sizing
-  model - fixed, probability-adjusted or confidence-adjusted - times
-  the risk fraction, so the R series is exposure-weighted.
+  model times the risk fraction, so the R series is exposure-weighted.
+  Signal-shaped models (fixed, probability, confidence) read the
+  outcome alone; the Phase 9 portfolio-state models read the fold's
+  own trailing history, strictly causally (only trades CLOSED before
+  a signal's entry bar inform its size):
+
+  - **Constrained Kelly** (Book V 4.11, the shared Kelly source):
+    trailing win rate and payoff, half-Kelly capped, shaped around
+    the constrained midpoint; risk-fraction behavior below the
+    minimum trade count (a fresh chart).
+  - **Drawdown-adjusted**: exposure shrinks linearly with the
+    weighted equity curve's current drawdown in R.
+  - **Budget-adjusted**: exposure scales with the remaining daily
+    loss budget in R (the portfolio.yaml 2%-day / 1%-trade ratio);
+    a spent budget stands the trade aside entirely, mirroring the
+    portfolio governance daily limit.
 
 Same-bar collisions resolve pessimistically (stop before target, the
 AICE conservative resolver); unrealized volume marks to market at the
-horizon. Kelly/portfolio/correlation sizing models require portfolio
-state (Phase 9) and extend the model set then.
+horizon. Correlation-adjusted sizing is enforced at the portfolio
+engine's admission (a single-series simulation cannot exercise
+cross-symbol correlation); full cross-symbol backtesting arrives with
+the Phase 11 research orchestration.
 """
 
 from collections.abc import Mapping
@@ -29,15 +45,30 @@ from apex.decision.kernel import DecisionOutcome
 from apex.domain.market import Bar
 from apex.features.calculations import clamp
 from apex.optimization.risk.space import (
+    SIZING_BUDGET,
     SIZING_CONFIDENCE,
+    SIZING_DRAWDOWN,
+    SIZING_KELLY,
     SIZING_PROBABILITY,
     STOP_MODEL_ATR,
 )
 from apex.optimization.simulator import SimulatedTrade
+from apex.portfolio.account import TradeStatistics, constrained_kelly, day_key
 
 # Sizing adjustment bounds (exposure shaping stays near 1x).
 _SIZE_FLOOR, _SIZE_CEIL = 0.5, 1.5
 _MINIMUM_REMAINDER = 0.10
+# Constrained-Kelly shape (Book V 4.11 defaults; the live sizing
+# authority is the portfolio engine's configured Kelly settings).
+_KELLY_MULTIPLIER = 0.5
+_KELLY_CAP = 0.25
+_KELLY_MINIMUM_TRADES = 12
+_KELLY_NEUTRAL = _KELLY_CAP / 2.0
+# Drawdown-adjusted shape: R of weighted drawdown that floors exposure.
+_DRAWDOWN_SCALE_R = 10.0
+# Daily budget in R: portfolio.yaml daily_loss_limit_fraction (0.02)
+# over the per-trade risk_fraction (0.01).
+_DAY_BUDGET_R = 2.0
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -84,14 +115,97 @@ def decode_plan(overrides: Mapping[str, float]) -> RiskPlan:
     )
 
 
-def position_size(plan: RiskPlan, outcome: DecisionOutcome) -> float:
-    """Exposure weight for one trade under the sizing model."""
+@dataclass(frozen=True, slots=True, kw_only=True)
+class SizingContext:
+    """Trailing fold state a history-aware sizing model reads."""
+
+    statistics: TradeStatistics
+    drawdown_r: float
+    day_loss_r: float
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class _ManagedClose:
+    """One completed managed trade before exposure weighting."""
+
+    close_ms: int
+    weighted_r: float
+    win: bool
+
+
+class _SizingHistory:
+    """Chronological closed-trade memory (strictly causal reads)."""
+
+    def __init__(self) -> None:
+        self._closes: list[_ManagedClose] = []
+
+    def record(self, close: _ManagedClose) -> None:
+        self._closes.append(close)
+        self._closes.sort(key=lambda item: item.close_ms)
+
+    def context(self, entry_ms: int) -> SizingContext:
+        """The fold state visible at one entry instant."""
+        visible = [item for item in self._closes if item.close_ms <= entry_ms]
+        wins = [item.weighted_r for item in visible if item.win]
+        losses = [item.weighted_r for item in visible if not item.win]
+        equity = 0.0
+        peak = 0.0
+        for item in visible:
+            equity += item.weighted_r
+            peak = max(peak, equity)
+        entry_day = day_key(entry_ms)
+        day_losses = sum(
+            -item.weighted_r
+            for item in visible
+            if item.weighted_r < 0 and day_key(item.close_ms) == entry_day
+        )
+        return SizingContext(
+            statistics=TradeStatistics(
+                trades=len(visible),
+                wins=len(wins),
+                losses=len(losses),
+                r_sum=equity,
+                average_win_r=sum(wins) / len(wins) if wins else 0.0,
+                average_loss_r=sum(losses) / len(losses) if losses else 0.0,
+                consecutive_losses=0,
+            ),
+            drawdown_r=max(peak - equity, 0.0),
+            day_loss_r=day_losses,
+        )
+
+
+def position_size(
+    plan: RiskPlan, outcome: DecisionOutcome, context: SizingContext | None = None
+) -> float:
+    """Exposure weight for one trade under the sizing model.
+
+    History-aware models fall back to the plain risk fraction when no
+    fold context exists yet (the fresh-chart behavior).
+    """
     base = plan.risk_fraction
     if plan.sizing_model == SIZING_PROBABILITY:
         return base * clamp(2.0 * outcome.probability, _SIZE_FLOOR, _SIZE_CEIL)
     if plan.sizing_model == SIZING_CONFIDENCE:
         conviction = outcome.probability * (1.0 - outcome.uncertainty)
         return base * clamp(2.0 * conviction, _SIZE_FLOOR, _SIZE_CEIL)
+    if context is None:
+        return base
+    if plan.sizing_model == SIZING_KELLY:
+        kelly = constrained_kelly(
+            context.statistics,
+            multiplier=_KELLY_MULTIPLIER,
+            cap=_KELLY_CAP,
+            minimum_trades=_KELLY_MINIMUM_TRADES,
+            fallback=_KELLY_NEUTRAL,
+        )
+        return base * clamp(kelly / _KELLY_NEUTRAL, _SIZE_FLOOR, _SIZE_CEIL)
+    if plan.sizing_model == SIZING_DRAWDOWN:
+        return base * clamp(
+            1.0 - context.drawdown_r / _DRAWDOWN_SCALE_R, _SIZE_FLOOR, 1.0
+        )
+    if plan.sizing_model == SIZING_BUDGET:
+        remaining = 1.0 - context.day_loss_r / _DAY_BUDGET_R
+        return base * clamp(remaining, 0.0, 1.0)
     return base
 
 
@@ -104,8 +218,14 @@ def manage_trades(
     fee_r: float,
     horizon_bars: int,
 ) -> list[SimulatedTrade]:
-    """Exposure-weighted R outcomes for every fired signal."""
+    """Exposure-weighted R outcomes for every fired signal.
+
+    Trades are managed in entry order; history-aware sizing reads only
+    trades already closed at each entry. A budget-exhausted size of
+    zero stands the trade aside (the portfolio would reject it).
+    """
     index_by_open = {bar.open_time.epoch_ms: i for i, bar in enumerate(bars)}
+    history = _SizingHistory()
     trades: list[SimulatedTrade] = []
     for outcome in outcomes:
         if outcome.action != "signal" or outcome.signal is None:
@@ -113,9 +233,22 @@ def manage_trades(
         start = index_by_open.get(outcome.bar_open_ms)
         if start is None:
             continue
-        trade = _manage(outcome, bars, start, plan, atr, fee_r, horizon_bars)
-        if trade is not None:
-            trades.append(trade)
+        context = history.context(outcome.bar_open_ms)
+        size = position_size(plan, outcome, context)
+        if size <= 0.0:
+            continue
+        managed = _manage(outcome, bars, start, plan, atr, fee_r, horizon_bars, size)
+        if managed is None:
+            continue
+        trade, close_ms = managed
+        trades.append(trade)
+        history.record(
+            _ManagedClose(
+                close_ms=close_ms,
+                weighted_r=trade.r_multiple,
+                win=trade.r_multiple > 0,
+            )
+        )
     return trades
 
 
@@ -142,7 +275,8 @@ def _manage(
     atr: list[float | None],
     fee_r: float,
     horizon_bars: int,
-) -> SimulatedTrade | None:
+    size: float,
+) -> tuple[SimulatedTrade, int] | None:
     signal = outcome.signal
     assert signal is not None  # guarded by the caller
     entry = float(signal.entry_zone.lower.value)
@@ -153,12 +287,13 @@ def _manage(
         return None
     state = _TradeState(entry=entry, stop=stop, risk=risk, long_side=long_side)
     last = min(start + horizon_bars, len(bars) - 1)
+    close_index = last
     for index in range(start + 1, last + 1):
         if state.step(bars[index], plan):
+            close_index = index
             break
     realized = state.finalize(bars[last], plan)
-    size = position_size(plan, outcome)
-    return SimulatedTrade(
+    trade = SimulatedTrade(
         bar_open_ms=outcome.bar_open_ms,
         direction=outcome.direction.value,
         setup=outcome.setup,
@@ -166,6 +301,7 @@ def _manage(
         bars_held=max(min(state.bars_held, last - start), 0),
         exit_reason=state.exit_reason,
     )
+    return trade, bars[close_index].open_time.epoch_ms
 
 
 class _TradeState:
