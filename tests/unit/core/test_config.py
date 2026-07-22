@@ -48,6 +48,7 @@ class TestLoadConfig:
             "apex.features.plugin",
             "apex.probability.plugin",
             "apex.decision.plugin",
+            "apex.optimization.plugin",
         )
 
     def test_exchange_config_parsed(self, config_dir: Path) -> None:
