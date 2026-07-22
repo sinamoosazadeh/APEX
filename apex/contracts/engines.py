@@ -156,10 +156,15 @@ class IContextFeatureEngine(IFeatureEngine, Protocol):
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class FeatureVectorSnapshot:
-    """One bar's stored feature vector, keyed by feature name."""
+    """One bar's stored feature vector, keyed by feature name.
+
+    ``close`` (Phase 11) feeds the rolling-IC learning fold; None
+    keeps the fold neutral (fresh behavior).
+    """
 
     bar_open_time: Timestamp
     values: Mapping[str, float]
+    close: float | None = None
 
 
 @runtime_checkable
