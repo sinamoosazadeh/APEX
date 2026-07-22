@@ -151,7 +151,11 @@ class OptimizationPlatformPlugin:
             clock=clock,
             logger=loggers.get("optimization.signal"),
         )
+        risk_numbers = _numbers(
+            optimizer_config.get("risk", {})  # type: ignore[arg-type]
+        )
         risk_service = RiskOptimizationService(
+            slippage_r=risk_numbers.get("slippage_r", 0.01),
             exchange_id="toobit",
             base_params=base_params,
             settings=_settings(optimizer_config, "risk"),
