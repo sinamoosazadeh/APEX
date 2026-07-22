@@ -92,7 +92,7 @@ def _flags(section: ConfigSection, code: str) -> dict[str, bool]:
     }
 
 
-def _decision_params(section: ConfigSection) -> DecisionParams:
+def decision_params_from_config(section: ConfigSection) -> DecisionParams:
     """Kernel params: numeric/flag config overrides on AICE defaults."""
     numbers = _numbers(section, "CFG-029")
     flags = _flags(section, "CFG-029")
@@ -188,7 +188,7 @@ class DecisionPlatformPlugin:
         loggers = container.resolve(LoggerFactory)
         clock = container.resolve(IClock)  # type: ignore[type-abstract]
         bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
-        params = _decision_params(config.market.decision)
+        params = decision_params_from_config(config.market.decision)
         kernel = CentralDecisionKernel(params=params, clock=clock)
         repository = SqliteDecisionRepository(
             database_path=Path(config.system.data_dir) / DECISION_DATABASE_FILENAME,
