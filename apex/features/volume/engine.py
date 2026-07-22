@@ -59,6 +59,7 @@ from apex.features.calculations import (
     ema,
     percent_rank,
     robust_z,
+    session_vwap,
     sma,
     squash,
     stdev,
@@ -260,7 +261,7 @@ class VolumeEngine:
         atr = wilder_atr(bars, params.atr_length)
         atr_percentile, atr_mean = self._atr_statistics(atr)
         log_returns = self._log_returns(closes)
-        vwap = self._session_vwap(bars)
+        vwap = session_vwap(bars)
         net_delta = [
             volumes[i] * (2.0 * close_locations[i] - 1.0) for i in range(len(bars))
         ]
@@ -343,28 +344,6 @@ class VolumeEngine:
             squared = ret * ret
             variance = squared if variance is None else variance * (1.0 - lam) + lam * squared
             out[i] = max(variance, 0.0) ** 0.5
-        return out
-
-    def _session_vwap(self, bars: list[Bar]) -> list[float | None]:
-        """VWAP anchored to the UTC day of each bar's open time."""
-        out: list[float | None] = [None] * len(bars)
-        day_ms = 86_400_000
-        session_day: int | None = None
-        priced = 0.0
-        traded = 0.0
-        for i, bar in enumerate(bars):
-            day = bar.open_time.epoch_ms // day_ms
-            if day != session_day:
-                session_day = day
-                priced = 0.0
-                traded = 0.0
-            typical = (
-                float(bar.high.value) + float(bar.low.value) + float(bar.close.value)
-            ) / 3.0
-            volume = float(bar.volume.value)
-            priced += typical * volume
-            traded += volume
-            out[i] = priced / traded if traded > 0 else None
         return out
 
     def _running_sum(self, values: list[float]) -> list[float]:
