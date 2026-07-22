@@ -17,3 +17,14 @@ signal:                        # Book V part 5 stage sizes and thresholds
   stability_minimum: 0.40
   horizon_bars: 96
   top_candidates: 5
+
+risk:                          # Book V part 6 stage sizes (shared defaults)
+  random_trials: 24
+  latin_trials: 16
+  bayesian_trials: 32
+  refinement_rounds: 2
+  validation_folds: 4
+  test_share: 0.2
+  monte_carlo_resamples: 200
+  monte_carlo_minimum: 0.55
+  horizon_bars: 96
