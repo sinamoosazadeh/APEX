@@ -7,8 +7,8 @@ interfaces from day one. All are EXPERIMENTAL until their platform
 lands (Book II 5.36).
 """
 
-import uuid
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 from typing import Protocol, runtime_checkable
 
 from apex.core.context import ExecutionContext, MarketContext
@@ -154,18 +154,34 @@ class IContextFeatureEngine(IFeatureEngine, Protocol):
         ...
 
 
-@runtime_checkable
-@stability(StabilityLevel.EXPERIMENTAL)
-class IProbabilityEngine(Protocol):
-    """Probability platform contract (Phase 5)."""
+@dataclass(frozen=True, slots=True, kw_only=True)
+class FeatureVectorSnapshot:
+    """One bar's stored feature vector, keyed by feature name."""
 
-    async def assess(
+    bar_open_time: Timestamp
+    values: Mapping[str, float]
+
+
+@runtime_checkable
+@stability(StabilityLevel.BETA)
+class IProbabilityEngine(Protocol):
+    """Probability platform contract (Phase 5).
+
+    Contract evolution (5.35): assessment is bar-anchored and windowed.
+    The engine consumes an ascending series of stored feature vectors
+    (momentum terms fold over the window, exactly like feature engines
+    fold over bars) and returns one (long, short) assessment pair per
+    snapshot, aligned with the input order. Computation is pure and
+    synchronous - no I/O - so every assessment is deterministic and
+    replayable.
+    """
+
+    def assess_series(
         self,
-        subject: str,
-        feature_vector_id: uuid.UUID,
+        snapshots: Sequence[FeatureVectorSnapshot],
         context: MarketContext,
-    ) -> Result[ProbabilityAssessment]:
-        """Produce a full probabilistic judgement for ``subject``."""
+    ) -> Result[tuple[tuple[ProbabilityAssessment, ProbabilityAssessment], ...]]:
+        """(long, short) assessments per snapshot, in input order."""
         ...
 
 
