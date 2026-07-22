@@ -17,7 +17,7 @@ project stays runnable at the end of every phase (4.6).
 | 5 | Probability Platform | ✅ **complete** | The AICE confluence core behind the evolved `IProbabilityEngine` (bar-anchored, windowed, pure): thirteen evidence channels computed from stored 133-feature vectors (structure with the struct-momentum fold, liquidity gated on sweeps/springs, OB/FVG passthrough, zone, candle DNA, kinetic, delta with sos/sow compositions, sequences, trend, MTF alignment over internal/external/chart/macro biases, SMT, volume profile), trend-blended adaptive weights normalized to one (regime-composed SMT weight), the nine cross-channel interaction bonuses, the opposing-context penalty stack, and sigmoid calibration `squash((raw - 0.45) x (5.4 + tc x 1.2))` clamped [0.01, 0.99]. Assessments persist per (bar, side) with channels payload in the SQLite assessment store; `probability.assessed/failed` catalog events; `apex probability` CLI. Confidence intervals are APEX semantics (entropy-scaled width) until the research platform measures calibration. Deferred per AICE gates/later phases: IC + meta-learning weight factors and the meta calibrator (Phase 11), Kalman terms, crypto dominance context, probability smoothing (off in AICE). Four features added for exact evidence: structure internal/external bias, volume narrow-range, statistical direction (registry 133) |
 | 6 | Decision Platform | ✅ **complete** | The Central Decision Kernel behind the new `IDecisionEngine` contract (bar-anchored, windowed, pure), consuming persisted assessments + feature vectors: the AICE contributor counts (13 per-channel thresholds), the uncertainty composite (ambiguity/entropy/transition/thin-evidence/clustering), expectancy (target room vs macro extremes, rr quality, `expected_R = p*rr - (1-p) - fees`), regime-adjusted probability/uncertainty gates, RVOL + ATR-band + HTF permission + entropy standby (catalyst override) + failure-risk oracle + bar quality + expectancy + L/S edge gates, cooldown and the 13-channel cosine similarity cooldown, all three AICE execution timings (Immediate, Trigger Candle, Retest + Micro BOS with the pending arm/confirm/expire state machine), the 12-setup classification taxonomy, and signal construction (entry at close, ATR / Structure-Hybrid stop, three R-multiple targets with the macro-extreme liquidity resolver) emitting `Signal` domain objects (5.5). Every outcome is audited: signal / **pending** (armed awaiting confirmation) / veto (with failed gates) / stand-aside, persisted in the SQLite decision store; `decision.signal.fired/completed/failed` events; `apex decide` CLI. Deferred along AICE gates/later phases: position flatness (portfolio), virtual equity guard (needs trade history), crypto context, Kalman |
 | 7 | Signal Optimizer | ✅ **complete** | The Book V ten-stage pipeline behind the evolved `IOptimizer` contract (space discovered from the engine, pure, one seed determines every trial): random exploration → Latin hypercube → Bayesian (Optuna TPE, seeded) → local grid refinement → sensitivity analysis (per-parameter perturbation ranking) → stability analysis (top-candidate dispersion) → walk-forward → rolling-window (+ expanding per the validation protocol) → seeded Monte Carlo bootstrap → final ranking with the full acceptance gate (all validations + no OOS collapse + trade-count floor). The decision kernel publishes its 16-parameter search space (bounds from the AICE input declarations); every trial re-folds the CDK over stored snapshots and simulates fired signals to R outcomes (stop/target/horizon, pessimistic same-bar collisions — signal quality only, per part 5's separation from risk/execution). Multi-objective score: expectancy/net-R/profit-factor/Sharpe/Sortino/Calmar/win-rate/consistency minus drawdown/streak/variance/low-trade penalties. Runs persist in the SQLite run store; accepted winners publish the per-symbol-per-timeframe `{SYMBOL}_{TF}_signal.json` artifact with SHA256 (strict series isolation); `apex optimize-signal` CLI; per-fold re-optimization defers to the research orchestrator (Book V part 7) |
-| 8 | Risk Optimizer | ⬜ pending | Book V part 6; Book II ch. 10 |
+| 8 | Risk Optimizer | ✅ **complete** | The Book V part 6 trade-risk layer over the now-shared ten-stage core (`staged.py`: the signal optimizer refactored onto it, Constitution 2.12): the risk optimizer consumes the **fixed** decision stream (part 6's hard isolation — it never re-folds probability, evidence or signal logic) and re-manages every fired signal under each candidate plan. Search space (12 parameters, discovered): stop model (pure ATR / the signal's structure-hybrid stop) and multiple, a monotonic-by-construction three-level TP ladder (TP2/TP3 as positive steps) with volume allocations (TP3 takes the floored remainder), breakeven trigger, trailing toggle + distance, and exposure shaping (fixed / probability-adjusted / confidence-adjusted sizing × risk fraction — the R series is exposure-weighted). The managed simulator fills partials pessimistically (stop before targets, the AICE conservative resolver), moves stops to breakeven at the trigger, trails after TP2 and marks remainders at the horizon. Accepted winners publish `{SYMBOL}_{TF}_risk.json` (the shared store derives the artifact kind from the optimizer version); `apex optimize-risk` CLI. Deferred to their phases per the spec's own input requirements: Kelly/portfolio/correlation sizing and portfolio caps (Phase 9 portfolio state), liquidity/ICT/session stop models and execution models — order types, TWAP, iceberg, slippage protection (Phase 10) |
 | 9 | Portfolio Engine | ⬜ pending | Book II ch. 13/21; Book I ch. 8 |
 | 10 | Execution Engine | ⬜ pending | Book II ch. 12/20 |
 | 11 | Research Platform | ⬜ pending | Book II ch. 14/23; Book I ch. 11/12; optimization orchestrator (Book V part 7) |
@@ -26,23 +26,21 @@ project stays runnable at the end of every phase (4.6).
 | 14 | Deployment | ⬜ pending | Book II 29.20/29.25 |
 | 15 | Production Validation | ⬜ pending | Book II 29.26 acceptance criteria |
 
-## Current quality-gate results (Phase 7 closed)
+## Current quality-gate results (Phase 8 closed)
 
 - `ruff check apex tests` — clean
-- `mypy` (strict, 188 files) — clean
-- `pytest` — **340 passed**
+- `mypy` (strict, 195 files) — clean
+- `pytest` — **349 passed**
 - `python -m apex --check` — boots healthy (6 plugins, 7 modules)
-- Real-data validation: `apex optimize-signal` ran the full ten-stage
-  pipeline (136 trials) over 317 live snapshots and correctly REJECTED the
-  run — every candidate produced too few confirmed trades on 13 days of
-  history, tripping the Book V low-trade acceptance gate; no artifact was
-  published. The acceptance path (all validations green, SHA256 artifact)
-  is proven on richer synthetic data in the test suite (8 trades,
-  confidence 1.0, deterministic across seeds). Live acceptance awaits the
-  deeper backfills the research platform orchestrates (Phase 11).
-  Mid-session live catch: with_overrides used a string type comparison
-  that missed real type objects — integer parameters arrived as floats;
-  fixed with a regression test
+- Real-data validation: `apex optimize-risk` ran the ten-stage pipeline
+  (112 trials) over the fixed live decision stream and correctly rejected —
+  no signals fired in 13 days of history, so there was nothing to manage
+  (the same Book V low-trade gate that rejected the signal run). The
+  managed-trade mechanics are golden-tested: full-ladder partial fills
+  summing exactly to the allocation-weighted R, breakeven rescuing a
+  crash after TP1, trailing outperforming static stops on extended moves,
+  pessimistic same-bar collisions, and deterministic ten-stage runs.
+  Live acceptance awaits the Phase 11 deep-history orchestration
 
 ## Spec library
 
@@ -62,9 +60,10 @@ book 8 is truncated at its source ("Dependency Rule" section) — its missing
 content is fully covered by Books I-III. Priority on conflict:
 **Constitution → Book I → Book II → AICE logic**.
 
-## Next up (Phase 8)
+## Next up (Phase 9)
 
-The Risk Optimizer (Book V part 6; Book II ch. 10): per-symbol,
-per-timeframe optimization of the risk layer — stop models, target
-structure, exposure shaping — strictly isolated from signal logic,
-reusing the optimization platform's stages, stores and artifacts.
+The Portfolio Engine (Book II ch. 13/21; Book I ch. 8): positions,
+account state, exposure and portfolio-level risk caps (daily/weekly
+limits, correlation control, simultaneous-trade ceilings) — unlocking
+the deferred flatness gate in the decision kernel and the portfolio
+sizing models in the risk optimizer.
