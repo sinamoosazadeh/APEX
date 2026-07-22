@@ -634,3 +634,31 @@ def valid_tail(series: list[float | None]) -> tuple[int, list[float]]:
     """(offset of the first non-None value, dense tail from there)."""
     offset = next((i for i, value in enumerate(series) if value is not None), len(series))
     return offset, [value for value in series[offset:] if value is not None]
+
+
+def session_vwap(bars: list[Bar]) -> list[float | None]:
+    """VWAP anchored to the UTC day of each bar's open time.
+
+    Pine ``ta.vwap`` anchors to the symbol session; Toobit perpetuals
+    trade continuously, so the session is the UTC day (shared platform
+    decision, consumed by the volume family and the decision kernel).
+    """
+    out: list[float | None] = [None] * len(bars)
+    day_ms = 86_400_000
+    session_day: int | None = None
+    priced = 0.0
+    traded = 0.0
+    for i, bar in enumerate(bars):
+        day = bar.open_time.epoch_ms // day_ms
+        if day != session_day:
+            session_day = day
+            priced = 0.0
+            traded = 0.0
+        typical = (
+            float(bar.high.value) + float(bar.low.value) + float(bar.close.value)
+        ) / 3.0
+        volume = float(bar.volume.value)
+        priced += typical * volume
+        traded += volume
+        out[i] = priced / traded if traded > 0 else None
+    return out

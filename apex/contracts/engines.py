@@ -185,6 +185,47 @@ class IProbabilityEngine(Protocol):
         ...
 
 
+@dataclass(frozen=True, slots=True, kw_only=True)
+class DecisionSnapshot:
+    """One bar's decision inputs: the bar, its vector and assessment.
+
+    ``macro_high``/``macro_low`` are the last-closed macro-timeframe
+    rolling extremes at this bar (the AICE ``htf1_hi/lo`` liquidity
+    targets); None reads as the AICE na-branch.
+    """
+
+    bar: Bar
+    vector: Mapping[str, float]
+    probability_long: float
+    probability_short: float
+    channels: Mapping[str, float]
+    macro_high: float | None = None
+    macro_low: float | None = None
+
+
+@runtime_checkable
+@stability(StabilityLevel.BETA)
+class IDecisionEngine(Protocol):
+    """Decision platform contract (Phase 6, Book I ch. 9).
+
+    The Central Decision Kernel is the single decision authority: it
+    consumes an ascending series of decision snapshots (bar + stored
+    feature vector + persisted assessment) and returns one outcome per
+    snapshot - a fired signal, a vetoed readiness (recorded with its
+    failed gates for auditability) or a stand-aside. Computation is
+    pure and synchronous; state (cooldowns, pending setups, similarity
+    memory) folds over the window.
+    """
+
+    def decide_series(
+        self,
+        snapshots: Sequence["DecisionSnapshot"],
+        context: MarketContext,
+    ) -> Result[tuple[object, ...]]:
+        """One decision outcome per snapshot, in input order."""
+        ...
+
+
 @runtime_checkable
 @stability(StabilityLevel.EXPERIMENTAL)
 class IRiskEngine(Protocol):

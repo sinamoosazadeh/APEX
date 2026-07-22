@@ -71,6 +71,7 @@ class MarketConfig:
     stream_max_reconnects: int
     features: ConfigSection
     probability: ConfigSection
+    decision: ConfigSection
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -439,6 +440,7 @@ def _parse_market(section: ConfigSection) -> MarketConfig:
         ),
         features=_require_mapping(section, "features", "market"),
         probability=_require_mapping(section, "probability", "market"),
+        decision=_require_mapping(section, "decision", "market"),
     )
 
 

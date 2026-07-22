@@ -105,3 +105,28 @@ probability:                   # AICE confluence calibration (Book VI lines 2769
   probability_floor: 0.01
   probability_ceiling: 0.99
   uncertainty_scale: 0.15      # APEX CI half-width vs estimate entropy
+
+decision:                      # AICE execution inputs (Book VI gExec/gCluster)
+  probability_threshold: 0.62
+  probability_edge: 0.03
+  uncertainty_maximum: 0.45
+  minimum_contributors: 3
+  cooldown_bars: 24
+  rvol_cutoff: 1.5
+  minimum_atr_percent: 0.01
+  maximum_atr_percent: 5.0
+  entropy_maximum: 0.78
+  oracle_failure_maximum: 0.72
+  minimum_expected_r: 0.10
+  minimum_expected_edge_r: 0.03
+  fee_slippage_r: 0.02
+  stop_atr_multiple: 2.0       # sl_mult
+  target_atr_multiple: 3.5     # tp_mult
+  similarity_threshold: 0.88
+  similarity_cooldown_bars: 60
+  pending_maximum_bars: 12
+  micro_bos_length: 3
+  trigger_close_location: 0.62
+  atr_length: 14
+  ema_length: 20
+  macro_pivot_lookback: 8
