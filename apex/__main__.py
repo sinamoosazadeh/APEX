@@ -37,6 +37,7 @@ from apex.features.pipeline import FeatureComputationPipeline, FeatureComputatio
 from apex.kernel.kernel import Kernel, KernelStatus
 from apex.optimization.risk.service import RiskOptimizationService
 from apex.optimization.signal.service import OptimizationSummary, SignalOptimizationService
+from apex.portfolio.service import PortfolioService, PortfolioSummary
 from apex.probability.service import ProbabilityService, ProbabilitySummary
 
 DEFAULT_CONFIG_DIR = Path("config")
@@ -185,6 +186,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     optimize_risk.add_argument(
         "--seed", type=int, default=7, help="deterministic optimization seed"
+    )
+    portfolio = subcommands.add_parser(
+        "portfolio",
+        help="rebuild the governed portfolio from stored decisions",
+    )
+    portfolio.add_argument(
+        "--symbol",
+        required=True,
+        action="append",
+        dest="symbols",
+        help="instrument symbol (repeatable for a multi-series portfolio)",
+    )
+    portfolio.add_argument(
+        "--timeframe",
+        required=True,
+        choices=sorted(tf.value for tf in Timeframe),
+        help="bar timeframe",
+    )
+    portfolio.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="window of most-recent bars (default: market.history_bars)",
     )
     return parser
 
@@ -428,6 +452,50 @@ async def run_probability(
         await kernel.shutdown()
 
 
+def render_portfolio(summary: PortfolioSummary) -> str:
+    """Human-readable portfolio rebuild report."""
+    return "\n".join(
+        [
+            f"portfolio rebuilt: {summary.portfolio_id} "
+            f"({', '.join(summary.symbols)} {summary.timeframe.value})",
+            f"  bars loaded  : {summary.bars_loaded}",
+            f"  signals      : {summary.signals_seen} seen",
+            f"  opened       : {summary.positions_opened} positions",
+            f"  closed       : {summary.positions_closed} positions",
+            f"  rejected     : {summary.signals_rejected} signals",
+            f"  open now     : {summary.open_positions} positions",
+            f"  snapshots    : {summary.snapshots_stored} stored",
+            f"  final equity : {summary.final_equity}",
+            f"  drawdown     : {summary.final_drawdown:.4f}",
+        ]
+    )
+
+
+async def run_portfolio(
+    config_dir: Path,
+    symbols: tuple[str, ...],
+    timeframe: Timeframe,
+    bars: int,
+) -> PortfolioSummary:
+    """Boot, rebuild the portfolio from stored decisions, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
+        service = kernel.container.resolve(PortfolioService)
+        count = bars if bars > 0 else config.market.history_bars
+        now = clock.now()
+        aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        start = aligned_end.add_ms(-count * timeframe.duration_ms)
+        result = await service.rebuild(
+            symbols, timeframe, start=start, end=aligned_end
+        )
+        return result.unwrap()
+    finally:
+        await kernel.shutdown()
+
+
 def render_features(summary: FeatureComputationSummary) -> str:
     """Human-readable feature computation report."""
     return "\n".join(
@@ -517,6 +585,22 @@ def _run_windowed_command(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _run_portfolio_command(args: argparse.Namespace) -> int:
+    """Dispatch the portfolio rebuild command."""
+    if args.bars < 0:
+        raise ValidationError("--bars must be non-negative", code="VAL-130")
+    summary = asyncio.run(
+        run_portfolio(
+            args.config_dir,
+            tuple(args.symbols),
+            Timeframe(args.timeframe),
+            args.bars,
+        )
+    )
+    sys.stdout.write(render_portfolio(summary) + "\n")
+    return EXIT_OK
+
+
 def _run_optimizer_command(args: argparse.Namespace) -> int:
     """Dispatch the seeded optimizer commands."""
     runner = (
@@ -564,10 +648,17 @@ def main(argv: list[str] | None = None) -> int:
             sys.stdout.write(render_catchup(report) + "\n")
             sys.stdout.write(render_stream(stats) + "\n")
             return EXIT_OK
-        if args.command in ("features", "probability", "decide"):
-            return _run_windowed_command(args)
-        if args.command in ("optimize-signal", "optimize-risk"):
-            return _run_optimizer_command(args)
+        dispatchers = {
+            "features": _run_windowed_command,
+            "probability": _run_windowed_command,
+            "decide": _run_windowed_command,
+            "optimize-signal": _run_optimizer_command,
+            "optimize-risk": _run_optimizer_command,
+            "portfolio": _run_portfolio_command,
+        }
+        handler = dispatchers.get(args.command or "")
+        if handler is not None:
+            return handler(args)
         status = asyncio.run(run_status(args.config_dir))
     except ApexError as error:
         stage = args.command if args.command else "boot"
