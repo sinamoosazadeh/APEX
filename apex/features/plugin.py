@@ -116,6 +116,9 @@ def _structure_params(features_config: ConfigSection) -> StructureParams:
             "equal_tolerance_atr", defaults.equal_tolerance_atr
         ),
         break_decay=numbers.get("break_decay", defaults.break_decay),
+        internal_lookback=int(numbers.get("internal_lookback", defaults.internal_lookback)),
+        external_lookback=int(numbers.get("external_lookback", defaults.external_lookback)),
+        bias_ema_length=int(numbers.get("bias_ema_length", defaults.bias_ema_length)),
     )
 
 
