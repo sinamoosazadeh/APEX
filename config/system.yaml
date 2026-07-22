@@ -23,3 +23,4 @@ plugins:
     - apex.data.toobit.plugin
     - apex.features.plugin
     - apex.probability.plugin
+    - apex.decision.plugin
