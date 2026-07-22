@@ -11,3 +11,16 @@ toobit:
   kline_page_limit: 1000     # Toobit API maximum per request
   ws_ping_interval_ms: 30000 # keepalive (server drops idle links at 5 min)
   ws_recv_timeout_ms: 15000  # receive timeout driving the ping cadence
+
+execution:                   # owned by Phase 10 (Book II ch. 12/20)
+  recv_window_ms: 5000       # signed request receive window
+  taker_fee_rate: 0.0006     # Toobit futures taker
+  maker_fee_rate: 0.0002     # Toobit futures maker
+  paper_slippage_bps: 2.0    # paper market fills slip this much against the trade
+  poll_interval_ms: 1000     # live fill polling cadence
+  order_timeout_ms: 30000    # cancel policy after this long unfilled
+  max_retries: 2             # bounded signed-request retries
+  entry_order_type: market   # market | limit
+  limit_offset_bps: 5.0      # resting offset for limit entries
+  paper_patience_bars: 3     # paper limit fills wait this many bars
+  contract_infix: "-SWAP-"   # BTCUSDT -> BTC-SWAP-USDT (Book VII contracts)
