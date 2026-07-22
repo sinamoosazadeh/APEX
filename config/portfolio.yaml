@@ -9,6 +9,7 @@ account:
   risk_fraction: 0.01             # equity fraction risked per trade
   tail_loss_multiple: 3.0         # stress assumption: gap through the stop
   defensive_drawdown_fraction: 0.05
+  fee_rate: 0.0006                # taker fee per fill (Toobit futures taker)
 
 caps:                             # governance (Book I 8.15; Book V portfolio risk)
   max_open_positions: 4
