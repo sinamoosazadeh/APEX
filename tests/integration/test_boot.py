@@ -71,6 +71,7 @@ class TestKernelBoot:
                 "feature_platform",
                 "probability_platform",
                 "decision_platform",
+                "optimization_platform",
             )
             # Deterministic topological order with alphabetical tie-breaks.
             assert status.modules_started == (
@@ -82,6 +83,7 @@ class TestKernelBoot:
                 "feature_platform",
                 "probability_platform",
                 "decision_platform",
+                "optimization_platform",
             )
             assert status.events_journaled >= 10  # booting, config, modules, started
             await kernel.shutdown()
