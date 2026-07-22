@@ -50,6 +50,7 @@ class TestLoadConfig:
             "apex.decision.plugin",
             "apex.optimization.plugin",
             "apex.portfolio.plugin",
+            "apex.execution.plugin",
         )
 
     def test_exchange_config_parsed(self, config_dir: Path) -> None:
