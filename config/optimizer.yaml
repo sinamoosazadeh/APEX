@@ -2,3 +2,18 @@
 schema_version: 1
 
 schedules: {}
+
+signal:                        # Book V part 5 stage sizes and thresholds
+  random_trials: 24
+  latin_trials: 16
+  bayesian_trials: 32
+  refinement_rounds: 2
+  validation_folds: 4
+  test_share: 0.2
+  monte_carlo_resamples: 200
+  monte_carlo_minimum: 0.55
+  validation_minimum_score: 0.0
+  degradation_maximum: 0.60
+  stability_minimum: 0.40
+  horizon_bars: 96
+  top_candidates: 5
