@@ -26,3 +26,4 @@ plugins:
     - apex.decision.plugin
     - apex.optimization.plugin
     - apex.portfolio.plugin
+    - apex.execution.plugin

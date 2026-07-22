@@ -49,7 +49,12 @@ class MarketContext:
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class ExecutionContext:
-    """Ambient state for one execution attempt (Book II 4.13)."""
+    """Ambient state for one execution attempt (Book II 4.13).
+
+    ``timeframe`` anchors bar-driven execution (the paper engine fills
+    from confirmed bars of this series); live venue execution may run
+    without it.
+    """
 
     execution_id: uuid.UUID
     correlation_id: uuid.UUID
@@ -58,6 +63,7 @@ class ExecutionContext:
     symbol: str
     requested_at: Timestamp
     observed_latency: Latency | None = None
+    timeframe: Timeframe | None = None
 
     def __post_init__(self) -> None:
         ensure_not_empty(self.exchange, "exchange")

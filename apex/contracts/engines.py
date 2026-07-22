@@ -201,6 +201,11 @@ class DecisionSnapshot:
     channels: Mapping[str, float]
     macro_high: float | None = None
     macro_low: float | None = None
+    # Zone levels (Phase 10): best live order-block boundaries from
+    # the feature store (AICE ob_long_bot/ob_short_top); None is the
+    # na-branch (no live zone).
+    ob_long_bottom: float | None = None
+    ob_short_top: float | None = None
 
 
 @runtime_checkable

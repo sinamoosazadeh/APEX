@@ -1,8 +1,32 @@
-"""Execution Platform - order management, routing, fills, reconciliation (Book II ch. 12/20).
+"""Execution platform (Phase 10): paper and live order execution.
 
-Owned by Phase 10. This package intentionally contains no code yet:
-per the Master Repository Blueprint (Book II ch. 29) no file is created
-before its dependencies, and per the Constitution no placeholder logic
-is ever committed. The layer's contracts already exist in
-:mod:`apex.contracts` / :mod:`apex.core.contracts`.
+Order management, venue trading, fills and reconciliation into the
+portfolio (Book II ch. 12/20; Book VII) - the last layer between an
+approved decision and the market, bound by the golden rule: nothing
+decided upstream is ever altered here.
 """
+
+from apex.execution.config import ExecutionSettings, execution_settings
+from apex.execution.engine import LiveExecutionEngine
+from apex.execution.paper import PaperExecutionEngine
+from apex.execution.service import ExecutionService, ExecutionSummary
+from apex.execution.store import (
+    ExecutionRecord,
+    FillRecord,
+    SqliteExecutionRepository,
+)
+from apex.execution.trading.client import ToobitTradingClient, TradingCredentials
+
+__all__ = [
+    "ExecutionRecord",
+    "ExecutionService",
+    "ExecutionSettings",
+    "ExecutionSummary",
+    "FillRecord",
+    "LiveExecutionEngine",
+    "PaperExecutionEngine",
+    "SqliteExecutionRepository",
+    "ToobitTradingClient",
+    "TradingCredentials",
+    "execution_settings",
+]

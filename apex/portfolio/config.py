@@ -26,6 +26,10 @@ class AccountSettings:
     risk_fraction: float = 0.01
     tail_loss_multiple: float = 3.0
     defensive_drawdown_fraction: float = 0.05
+    # Taker fee per fill as a fraction of notional (entry and exit
+    # each charge it). 0 keeps ideal fills; the Phase 10 execution
+    # engine supplies the venue rate through portfolio.yaml.
+    fee_rate: float = 0.0
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -69,6 +73,7 @@ class PortfolioSettings:
         _require(account.initial_capital > 0, "initial_capital must be positive")
         _require(0 < account.risk_fraction <= 0.1, "risk_fraction must be in (0, 0.1]")
         _require(account.tail_loss_multiple >= 1.0, "tail_loss_multiple must be >= 1")
+        _require(0 <= account.fee_rate < 0.01, "fee_rate must be in [0, 0.01)")
         _require(
             0 < account.defensive_drawdown_fraction < 1,
             "defensive_drawdown_fraction must be in (0, 1)",
@@ -198,6 +203,7 @@ def portfolio_settings(section: ConfigSection) -> PortfolioSettings:
             "defensive_drawdown_fraction",
             account_defaults.defensive_drawdown_fraction,
         ),
+        fee_rate=_number(account_raw, "fee_rate", account_defaults.fee_rate),
     )
     caps = PortfolioCaps(
         max_open_positions=_integer(

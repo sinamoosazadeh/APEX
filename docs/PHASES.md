@@ -19,35 +19,38 @@ project stays runnable at the end of every phase (4.6).
 | 7 | Signal Optimizer | ✅ **complete** | The Book V ten-stage pipeline behind the evolved `IOptimizer` contract (space discovered from the engine, pure, one seed determines every trial): random exploration → Latin hypercube → Bayesian (Optuna TPE, seeded) → local grid refinement → sensitivity analysis (per-parameter perturbation ranking) → stability analysis (top-candidate dispersion) → walk-forward → rolling-window (+ expanding per the validation protocol) → seeded Monte Carlo bootstrap → final ranking with the full acceptance gate (all validations + no OOS collapse + trade-count floor). The decision kernel publishes its 16-parameter search space (bounds from the AICE input declarations); every trial re-folds the CDK over stored snapshots and simulates fired signals to R outcomes (stop/target/horizon, pessimistic same-bar collisions — signal quality only, per part 5's separation from risk/execution). Multi-objective score: expectancy/net-R/profit-factor/Sharpe/Sortino/Calmar/win-rate/consistency minus drawdown/streak/variance/low-trade penalties. Runs persist in the SQLite run store; accepted winners publish the per-symbol-per-timeframe `{SYMBOL}_{TF}_signal.json` artifact with SHA256 (strict series isolation); `apex optimize-signal` CLI; per-fold re-optimization defers to the research orchestrator (Book V part 7) |
 | 8 | Risk Optimizer | ✅ **complete** | The Book V part 6 trade-risk layer over the now-shared ten-stage core (`staged.py`: the signal optimizer refactored onto it, Constitution 2.12): the risk optimizer consumes the **fixed** decision stream (part 6's hard isolation — it never re-folds probability, evidence or signal logic) and re-manages every fired signal under each candidate plan. Search space (12 parameters, discovered): stop model (pure ATR / the signal's structure-hybrid stop) and multiple, a monotonic-by-construction three-level TP ladder (TP2/TP3 as positive steps) with volume allocations (TP3 takes the floored remainder), breakeven trigger, trailing toggle + distance, and exposure shaping (fixed / probability-adjusted / confidence-adjusted sizing × risk fraction — the R series is exposure-weighted). The managed simulator fills partials pessimistically (stop before targets, the AICE conservative resolver), moves stops to breakeven at the trigger, trails after TP2 and marks remainders at the horizon. Accepted winners publish `{SYMBOL}_{TF}_risk.json` (the shared store derives the artifact kind from the optimizer version); `apex optimize-risk` CLI. Deferred to their phases per the spec's own input requirements: Kelly/portfolio/correlation sizing and portfolio caps (Phase 9 portfolio state), liquidity/ICT/session stop models and execution models — order types, TWAP, iceberg, slippage protection (Phase 10) |
 | 9 | Portfolio Engine | ✅ **complete** | The Portfolio Intelligence Engine (Book II ch. 13/21; Book I ch. 8 §1) plus both unlocked deferral rewirings. **Kernel virtual ledger** (`apex/decision/ledger.py`): the AICE `var` trade block as fold state - signals arm one virtual trade per series (entry/stop/TP3, `open_r_win`), closes trigger on the first stop/target touch after the entry bar with the conservative same-bar resolver, and the closed-trade stats feed the two rewired Phase 6 deferrals: the **flatness gate** (`flat_ok` in base_gate, line 2971) and the **virtual equity guard** oracle term (+0.10 once trades ≥ 12 and `r_sum` < EMA(r_sum, 50), lines 2941-2945); all config-backed with AICE input defaults (flatness/resolver/guard toggles in market.yaml decision). **Portfolio platform** (`apex/portfolio/`, plugin #7 after decision): pure engine folding the persisted decision streams of any series set into ONE governed portfolio - series merge on bar CLOSE time, entries precede closes (AICE order), all money math exact Decimal. Position ledger (durable `Position` lineages via `evolve`, closed-trade records with exact R/PnL), account fold (cash vs marked equity, peak/drawdown, UTC-day + Monday-week realized-loss budgets, streaks, Kelly stats), exposure engine (per-symbol signed/gross/net marked notional; rolling log-return correlation reusing the shared `correlation` fold), governance (Book II 21.29 reduce-or-reject: binary caps - position ceilings, daily 2%/weekly 5% loss budgets, consecutive-loss brake, correlated-exposure ceiling - reject with full reason sets; exposure caps *reduce* quantity to the remaining headroom and reject only at zero), and the engine implementing the until-now-unimplemented `IRiskEngine.assess(signal, portfolio) → RiskAssessment` (risk-fraction sizing off cash equity, exposure headroom, tail-multiple stress loss, **constrained Kelly** fraction per Book V 4.11 - shared single source `constrained_kelly` - and the HALTED/DEFENSIVE/BALANCED posture ladder). SQLite store (positions/snapshots/rejections, rebuild-clears-scope semantics per 21.5/21.27), rebuild service + event catalog (`portfolio.position.opened/closed`, `portfolio.signal.rejected`, `portfolio.rebuilt`), `apex portfolio --symbol ... --symbol ...` CLI, deep-validated portfolio.yaml (account/caps/kelly). **Risk optimizer rewiring** (Phase 8 deferral): the sizing model set grows to six - constrained Kelly, drawdown-adjusted and daily-budget-adjusted shape on the simulator's own strictly-causal trailing history (only trades closed before an entry inform its size; a spent budget stands the trade aside, mirroring governance). Deferred to their phases: correlation-adjusted sizing enforced engine-side only (single-series sims can't exercise cross-symbol correlation; full cross-symbol backtests arrive with Phase 11 orchestration), fees/slippage on portfolio fills + real execution state (Phase 10), effective/beta exposure, sector dimensions, scenario/stress engines and allocation policies (Phases 10-11 data sources) |
-| 10 | Execution Engine | ⬜ pending | Book II ch. 12/20 |
+| 10 | Execution Engine | ✅ **complete** | The execution platform (Book II ch. 12/20; Book VII API v2) under both golden rules — execution never alters the decision (12.30), no order reaches the venue outside this layer (20.31) — plus three deferral rewirings. **Zone levels**: the "execution-phase zone store" lands as raw price features in the feature store (single source, orderblocks 1.1.0/24 features): `bull_ob_bottom`/`bear_ob_top` — the best live zone's protective boundary (AICE `ob_long_bot`/`ob_short_top`), emitted only while a zone lives (absent = na-branch). **Kernel Structure Hybrid completed** (Phase 6 deferral): `DecisionSnapshot` carries optional zone levels (populated by the decision service) and the stop prefers the order-block boundary when the bar sits inside the best zone (AICE line 3096), then the protected swing, then ATR — same risk bounds. **Risk optimizer rewiring** (Phase 8 deferral): the stop-model set grows to six — ATR, signal-hybrid, ICT (beyond the OB boundary), LIQUIDITY (beyond the external/macro liquidity extreme), SESSION (beyond the strictly-causal UTC-day extreme), VOLATILITY (regime-scaled via the shared `volatility_regime_factor`) — every level model falling back to ATR on the na-branch; entry models MARKET (pays the configured slippage share on top of the AICE fee bundle) vs LIMIT (rests at an ATR offset, fills on first touch within its patience, stands aside when unfilled); the space grows to 15 parameters and the service feeds signal-bar `StopLevels` from the snapshots. **Execution platform** (`apex/execution/`, plugin #8 after portfolio): signed `ToobitTradingClient` (Book VII HMAC-SHA256 over the urlencoded payload + X-BB-APIKEY; env credentials `TOOBIT_API_KEY/SECRET` until the Phase 13 secrets platform — secrets never logged or repr'd; injectable transport; bounded retries on 429/5xx), anti-corruption translator (contract ids `BTC-SWAP-USDT`, v2 envelopes, side+positionSide, statuses, fills; deterministic idempotent client order ids), **LiveExecutionEngine** (submit → poll to terminal → timeout-cancel policy → user-trades fills; bracket SL/TP rides the venue's attached mark-price triggers so protection survives process death, 12.26), **PaperExecutionEngine** on the same `IExecutionEngine` contract (deterministic fills: market at the first confirmed bar open after the request ± configured slippage bps + taker fee; limit on first touch within patience + maker fee; unfilled = expiry — the run-mode default and the sandbox validation path), execution audit store (12.29: executions + fills, full reconstruction), `ExecutionService` (readiness re-check 20.25: `IRiskEngine.assess` against stored portfolio state + statistics before any order; HALTED rejects with reasons; executed fills fold into the portfolio's positions at actual fill prices; execution anchors at the signal bar's close so paper replays deterministically and live coincides), events, `apex execute` CLI (paper unless run_mode live + credentials), deep-validated `execution` section in exchange.yaml, `exchange_registry` flips toobit `trading: true`. **Portfolio fee model** (Phase 9 deferral): the ledger charges the configured taker rate on entry+exit notionals into realized PnL (R stays price-geometry, matching the kernel ledger); portfolio.yaml carries the venue rate. Deferred with documentation: smart order routing (single venue), order-book analyzer / market-impact / fill-probability / TWAP/VWAP/POV/iceberg engines (book-depth streams), user-data WebSocket fills via listenKey (REST polling now; Phase 12 monitoring), adaptive execution learning + AI stop selection (Phase 11 research), latency budgeting (live telemetry), ladder legs as venue algo orders |
 | 11 | Research Platform | ⬜ pending | Book II ch. 14/23; Book I ch. 11/12; optimization orchestrator (Book V part 7) |
 | 12 | Monitoring Platform | ⬜ pending | Book II ch. 26; Book I ch. 10; Telegram console (Book IV) |
 | 13 | Security Platform | ⬜ pending | Book II ch. 25; Book I ch. 13 |
 | 14 | Deployment | ⬜ pending | Book II 29.20/29.25 |
 | 15 | Production Validation | ⬜ pending | Book II 29.26 acceptance criteria |
 
-## Current quality-gate results (Phase 9 closed)
+## Current quality-gate results (Phase 10 closed)
 
 - `ruff check apex tests` — clean
-- `mypy` (strict, 209 files) — clean
-- `pytest` — **400 passed**
-- `python -m apex --check` — boots healthy (7 plugins, 8 modules)
+- `mypy` (strict, 221 files) — clean
+- `pytest` — **433 passed**
+- `python -m apex --check` — boots healthy (8 plugins, 9 modules)
 - Real-data validation (520 fresh Toobit bars × BTCUSDT/ETHUSDT × 1h/4h,
-  zero gaps): the full pipeline ran live (55,497 features, 636
-  assessments, 318 decisions per symbol — 0 signals under production
-  gates, the honest AICE selectivity on 13 quiet days; 2 pendings armed);
-  `apex portfolio` rebuilt the two-series portfolio end-to-end. A
-  relaxed-threshold in-memory fold then exercised every Phase 9 mechanism
-  on real prices: the kernel flatness ledger suppressed an overlapping
-  signal live, 4 positions opened and closed on exact stop touches
-  (-1.00 R each, exact Decimal PnL), the exposure headroom visibly
-  reduced position risk (35% symbol cap binding on tight crypto stops —
-  Book II 21.29 adjusted trades), governance fired both
-  `correlated_exposure` (ETH vs open BTC, ρ > 0.85) and the
-  `consecutive_losses` brake, and the account folded to 9854.50 USDT
-  with 1.85% drawdown. `apex optimize-risk` ran 112 trials over the
-  extended six-model sizing space and again rejected honestly on the
-  0-signal stream (Book V low-trade gate)
+  zero gaps): the pipeline ran live with the zone-level features
+  (56,090/56,183 features; 486 bull / 107 bear zone-level bars at real
+  prices; 654 assessments, 327 decisions per symbol — 0 signals under
+  production gates, honest selectivity; 2 pendings armed). `apex
+  execute` reported the honest `EXE-030` no-signal rejection and `apex
+  portfolio` rebuilt cleanly. The **production ExecutionService then
+  filled a relaxed live-price signal end to end on paper**: admission
+  re-check sized 0.0549 BTC under the exposure headroom, the market
+  order filled at the next real bar's open +2 bps (63762.60 vs decision
+  63749.85, slippage 12.75 recorded), the exact taker fee (2.10 USDT)
+  charged, the position written at the actual fill entry with the
+  signal's stop, and the audit store captured 1 execution + 1 fill row.
+  The client's HMAC signing is pinned to Book VII's own algorithm
+  (openssl-verified vector). `apex optimize-risk` ran 124 trials over
+  the 15-parameter stop/entry/sizing space with signal-bar levels wired
+  and again rejected honestly on the 0-signal stream (Book V low-trade
+  gate); live acceptance still awaits the Phase 11 deep-history
+  orchestration
 
 ## Spec library
 
@@ -67,12 +70,13 @@ book 8 is truncated at its source ("Dependency Rule" section) — its missing
 content is fully covered by Books I-III. Priority on conflict:
 **Constitution → Book I → Book II → AICE logic**.
 
-## Next up (Phase 10)
+## Next up (Phase 11)
 
-The Execution Engine (Book II ch. 12/20): order construction and
-lifecycle against the Toobit trading API, fills/reconciliation into
-the portfolio's positions, order types and execution policies — 
-unlocking the risk optimizer's deferred execution models (order
-types, TWAP, iceberg, slippage protection), the liquidity/ICT/session
-stop models, fee/slippage-aware portfolio fills, and AICE's OB-bottom
-Structure Hybrid stop variant (execution-phase zone store).
+The Research Platform (Book II ch. 14/23; Book I ch. 11/12) and the
+optimization orchestrator (Book V part 7): deep-history orchestration
+(multi-series backfill and long-window optimizer acceptance), per-fold
+walk-forward re-optimization, IC + meta-learning weight factors and
+the meta calibrator for the probability platform, calibration
+measurement for confidence intervals, setup/feature attribution from
+closed trades, drift detection, experiment management — and adaptive
+execution learning over the Phase 10 audit store.

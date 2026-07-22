@@ -23,6 +23,7 @@ from apex.decision.kernel import CentralDecisionKernel, DecisionParams
 from apex.decision.service import DecisionService
 from apex.optimization.objective import ObjectiveWeights
 from apex.optimization.risk.engine import RiskOptimizer
+from apex.optimization.risk.simulator import StopLevels
 from apex.optimization.signal.service import OptimizationSummary
 from apex.optimization.signal.store import SignalOptimizationStore
 from apex.optimization.staged import StageSettings
@@ -54,7 +55,9 @@ class RiskOptimizationService:
         bus: IEventBus,
         clock: Clock,
         logger: StructuredLogger,
+        slippage_r: float = 0.01,
     ) -> None:
+        self._slippage_r = slippage_r
         self._exchange_id = exchange_id
         self._base_params = base_params
         self._settings = settings
@@ -87,6 +90,15 @@ class RiskOptimizationService:
             assert decided.error is not None
             await self._announce_failure(symbol, timeframe, decided.error)
             return Result.failure(decided.error)
+        levels = {
+            snapshot.bar.open_time.epoch_ms: StopLevels(
+                ob_long_bottom=snapshot.ob_long_bottom,
+                ob_short_top=snapshot.ob_short_top,
+                macro_high=snapshot.macro_high,
+                macro_low=snapshot.macro_low,
+            )
+            for snapshot in snapshots
+        }
         optimizer = RiskOptimizer(
             outcomes=decided.unwrap(),
             bars=[snapshot.bar for snapshot in snapshots],
@@ -95,6 +107,8 @@ class RiskOptimizationService:
             fee_r=self._base_params.fee_slippage_r,
             settings=self._settings,
             weights=self._weights,
+            levels=levels,
+            slippage_r=self._slippage_r,
         )
         result = optimizer.optimize_detailed(seed=seed)
         if not result.ok:

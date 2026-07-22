@@ -19,6 +19,7 @@ signal:                        # Book V part 5 stage sizes and thresholds
   top_candidates: 5
 
 risk:                          # Book V part 6 stage sizes (shared defaults)
+  slippage_r: 0.01             # crossing cost a market entry pays (limit fills avoid it)
   random_trials: 24
   latin_trials: 16
   bayesian_trials: 32

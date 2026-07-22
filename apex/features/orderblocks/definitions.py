@@ -7,7 +7,10 @@ from apex.features.registry import FeatureDefinition
 # 1.0.1: FVG trendQ rewired onto the migrated zero-lag momentum filter.
 # 1.0.2: mtfQ/htfQ and the FVG locQ HTF branch rewired onto the HTF
 # context computed from closed macro bars.
-_VERSION = SemanticVersion(1, 0, 2)
+# 1.1.0: zone levels - the best zone's protective boundary emitted as
+# raw price features (AICE ob_long_bot/ob_short_top; Phase 10 unlocks
+# the OB-bottom Structure Hybrid stop and the ICT stop model).
+_VERSION = SemanticVersion(1, 1, 0)
 
 _DESCRIPTIONS: dict[str, str] = {
     "orderblocks.ob_long_confidence": (
@@ -40,6 +43,14 @@ _DESCRIPTIONS: dict[str, str] = {
     "orderblocks.ifvg_bear": "Bull FVG inverted this bar (close through its bottom)",
     "orderblocks.bpr_bull": "Balanced price range: new bull FVG after a bear FVG last bar",
     "orderblocks.bpr_bear": "Balanced price range: new bear FVG after a bull FVG last bar",
+    "orderblocks.bull_ob_bottom": (
+        "Raw price: bottom of the best live bull order block (AICE ob_long_bot); "
+        "absent while no bull zone is live"
+    ),
+    "orderblocks.bear_ob_top": (
+        "Raw price: top of the best live bear order block (AICE ob_short_top); "
+        "absent while no bear zone is live"
+    ),
 }
 
 
