@@ -7,6 +7,8 @@ Commands:
 - ``sync``           catch up every configured series to the present
 - ``stream``         sync, then consume the live WebSocket feed for a
                      bounded duration (bars close, ticks persist)
+- ``decide``         run the Central Decision Kernel over stored
+  assessments (signals, vetoes, stand-asides)
 - ``probability``    assess stored feature vectors into calibrated
   per-side probabilities
 - ``features``       compute registered feature families over stored
@@ -28,6 +30,7 @@ from apex.core.exceptions import ApexError, ValidationError
 from apex.data.catchup import CatchUpReport, CatchUpService
 from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
 from apex.data.streaming import MarketStreamService, StreamStats
+from apex.decision.service import DecisionService, DecisionSummary
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
 from apex.probability.service import ProbabilityService, ProbabilitySummary
@@ -117,6 +120,23 @@ def build_parser() -> argparse.ArgumentParser:
         help="bar timeframe",
     )
     probability.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="window of most-recent bars (default: market.history_bars)",
+    )
+    decide = subcommands.add_parser(
+        "decide",
+        help="run the Central Decision Kernel over stored assessments",
+    )
+    decide.add_argument("--symbol", required=True, help="instrument symbol")
+    decide.add_argument(
+        "--timeframe",
+        required=True,
+        choices=sorted(tf.value for tf in Timeframe),
+        help="bar timeframe",
+    )
+    decide.add_argument(
         "--bars",
         type=int,
         default=0,
@@ -219,6 +239,45 @@ async def run_stream(config_dir: Path, seconds: int) -> tuple[CatchUpReport, Str
             duration_ms=seconds * 1000
         )
         return report, stats
+    finally:
+        await kernel.shutdown()
+
+
+def render_decision(summary: DecisionSummary) -> str:
+    """Human-readable decision run report."""
+    return "\n".join(
+        [
+            f"decisions computed: {summary.exchange} {summary.symbol} "
+            f"{summary.timeframe.value}",
+            f"  bars loaded  : {summary.bars_loaded}",
+            f"  bars decided : {summary.bars_decided}",
+            f"  signals      : {summary.signals_fired} fired",
+            f"  pendings     : {summary.pendings} armed",
+            f"  vetoes       : {summary.vetoes}",
+            f"  records      : {summary.records_stored} stored",
+        ]
+    )
+
+
+async def run_decide(
+    config_dir: Path,
+    symbol: str,
+    timeframe: Timeframe,
+    bars: int,
+) -> DecisionSummary:
+    """Boot, decide over stored assessments, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
+        service = kernel.container.resolve(DecisionService)
+        count = bars if bars > 0 else config.market.history_bars
+        now = clock.now()
+        aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        start = aligned_end.add_ms(-count * timeframe.duration_ms)
+        result = await service.compute(symbol, timeframe, start=start, end=aligned_end)
+        return result.unwrap()
     finally:
         await kernel.shutdown()
 
@@ -331,6 +390,14 @@ def _run_windowed_command(args: argparse.Namespace) -> int:
         )
         sys.stdout.write(render_features(feature_summary) + "\n")
         return EXIT_OK
+    if args.command == "decide":
+        decision_summary = asyncio.run(
+            run_decide(
+                args.config_dir, args.symbol, Timeframe(args.timeframe), args.bars
+            )
+        )
+        sys.stdout.write(render_decision(decision_summary) + "\n")
+        return EXIT_OK
     probability_summary = asyncio.run(
         run_probability(
             args.config_dir, args.symbol, Timeframe(args.timeframe), args.bars
@@ -368,7 +435,7 @@ def main(argv: list[str] | None = None) -> int:
             sys.stdout.write(render_catchup(report) + "\n")
             sys.stdout.write(render_stream(stats) + "\n")
             return EXIT_OK
-        if args.command in ("features", "probability"):
+        if args.command in ("features", "probability", "decide"):
             return _run_windowed_command(args)
         status = asyncio.run(run_status(args.config_dir))
     except ApexError as error:
