@@ -18,7 +18,7 @@ from typing import Final
 
 from apex.core.exceptions import StorageError
 from apex.core.time.timestamp import Timestamp
-from apex.optimization.signal.engine import SignalOptimizationReport
+from apex.optimization.staged import OptimizationReport as SignalOptimizationReport
 
 _SCHEMA: Final[str] = """
 CREATE TABLE IF NOT EXISTS optimization_runs (
@@ -166,7 +166,8 @@ class SignalOptimizationStore:
         document = artifact_document(
             report, created_at=created_at, apex_version=apex_version
         )
-        path = self._artifacts / f"{report.symbol}_{report.timeframe}_signal.json"
+        kind = report.optimizer_version.split("-", 1)[0]
+        path = self._artifacts / f"{report.symbol}_{report.timeframe}_{kind}.json"
 
         def write() -> None:
             path.write_text(json.dumps(document, indent=2, sort_keys=True))
