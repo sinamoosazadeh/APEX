@@ -85,14 +85,22 @@ class DecisionService:
         *,
         start: Timestamp,
         end: Timestamp,
+        kernel_override: CentralDecisionKernel | None = None,
     ) -> Result[DecisionSummary]:
-        """Decide every assessed confirmed bar in [start, end)."""
+        """Decide every assessed confirmed bar in [start, end).
+
+        ``kernel_override`` is the runtime injector's hook (Book V
+        part 7): a kernel carrying the series' active optimized
+        parameters and learning state replaces the config-built one
+        for this run only.
+        """
         bars = await self._bars.get_range(
             self._exchange_id, symbol, timeframe, start=start, end=end, closed_only=True
         )
         snapshots = await self.build_snapshots(bars, symbol, timeframe, end)
         context = MarketContext(symbol=symbol, timeframe=timeframe, as_of=self._clock.now())
-        result = self._kernel.decide_series(snapshots, context)
+        kernel = kernel_override if kernel_override is not None else self._kernel
+        result = kernel.decide_series(snapshots, context)
         if not result.ok:
             assert result.error is not None
             await self._announce_failure(symbol, timeframe, result.error)
