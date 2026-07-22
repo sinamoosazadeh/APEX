@@ -7,6 +7,10 @@ Commands:
 - ``sync``           catch up every configured series to the present
 - ``stream``         sync, then consume the live WebSocket feed for a
                      bounded duration (bars close, ticks persist)
+- ``execute``        execute the latest fired signal (paper unless
+                     ``--live`` with run_mode live + credentials)
+- ``portfolio``      rebuild the governed portfolio from stored
+                     decisions across one or more symbols
 - ``optimize-risk``  run the ten-stage Book V risk optimizer
 - ``optimize-signal`` run the ten-stage Book V signal optimizer
 - ``decide``         run the Central Decision Kernel over stored
@@ -33,6 +37,7 @@ from apex.data.catchup import CatchUpReport, CatchUpService
 from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
 from apex.data.streaming import MarketStreamService, StreamStats
 from apex.decision.service import DecisionService, DecisionSummary
+from apex.execution.service import ExecutionService, ExecutionSummary
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
 from apex.optimization.risk.service import RiskOptimizationService
@@ -209,6 +214,28 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=0,
         help="window of most-recent bars (default: market.history_bars)",
+    )
+    execute = subcommands.add_parser(
+        "execute",
+        help="execute the latest fired signal (paper unless --live)",
+    )
+    execute.add_argument("--symbol", required=True, help="instrument symbol")
+    execute.add_argument(
+        "--timeframe",
+        required=True,
+        choices=sorted(tf.value for tf in Timeframe),
+        help="bar timeframe",
+    )
+    execute.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="signal search window in bars (default: market.history_bars)",
+    )
+    execute.add_argument(
+        "--live",
+        action="store_true",
+        help="execute at the venue (requires run_mode live + credentials)",
     )
     return parser
 
@@ -585,6 +612,69 @@ def _run_windowed_command(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def render_execution(summary: ExecutionSummary) -> str:
+    """Human-readable execution report."""
+    lines = [
+        f"execution {summary.status}: {summary.symbol} {summary.timeframe.value} "
+        f"({summary.mode})",
+        f"  execution id : {summary.execution_id}",
+        f"  direction    : {summary.direction}",
+        f"  order type   : {summary.order_type}",
+        f"  quantity     : {summary.filled_quantity} / {summary.requested_quantity}",
+        f"  decision px  : {summary.decision_price}",
+        f"  fill px      : {summary.fill_price or '-'}",
+        f"  slippage     : {summary.slippage or '-'}",
+        f"  fees         : {summary.fees}",
+        f"  position     : {'opened' if summary.position_opened else 'not opened'}",
+    ]
+    if summary.reasons:
+        lines.append(f"  reasons      : {', '.join(summary.reasons)}")
+    return "\n".join(lines)
+
+
+async def run_execute(
+    config_dir: Path,
+    symbol: str,
+    timeframe: Timeframe,
+    bars: int,
+    live: bool,
+) -> ExecutionSummary:
+    """Boot, execute the latest fired signal, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
+        service = kernel.container.resolve(ExecutionService)
+        count = bars if bars > 0 else config.market.history_bars
+        now = clock.now()
+        aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        start = aligned_end.add_ms(-count * timeframe.duration_ms)
+        result = await service.execute_latest_signal(
+            symbol, timeframe, start=start, end=aligned_end, live=live
+        )
+        return result.unwrap()
+    finally:
+        await kernel.shutdown()
+
+
+def _run_execute_command(args: argparse.Namespace) -> int:
+    """Dispatch the execution command."""
+    if args.bars < 0:
+        raise ValidationError("--bars must be non-negative", code="VAL-130")
+    summary = asyncio.run(
+        run_execute(
+            args.config_dir,
+            args.symbol,
+            Timeframe(args.timeframe),
+            args.bars,
+            args.live,
+        )
+    )
+    sys.stdout.write(render_execution(summary) + "\n")
+    return EXIT_OK
+
+
 def _run_portfolio_command(args: argparse.Namespace) -> int:
     """Dispatch the portfolio rebuild command."""
     if args.bars < 0:
@@ -655,6 +745,7 @@ def main(argv: list[str] | None = None) -> int:
             "optimize-signal": _run_optimizer_command,
             "optimize-risk": _run_optimizer_command,
             "portfolio": _run_portfolio_command,
+            "execute": _run_execute_command,
         }
         handler = dispatchers.get(args.command or "")
         if handler is not None:
