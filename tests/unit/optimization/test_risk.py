@@ -9,16 +9,25 @@ from apex.domain.market import Bar
 from apex.features.calculations import wilder_atr
 from apex.optimization.objective import ObjectiveWeights
 from apex.optimization.risk.engine import RiskOptimizer
-from apex.optimization.risk.simulator import decode_plan, manage_trades, position_size
+from apex.optimization.risk.simulator import (
+    SizingContext,
+    decode_plan,
+    manage_trades,
+    position_size,
+)
 from apex.optimization.risk.space import (
     RISK_SEARCH_SPACE,
+    SIZING_BUDGET,
     SIZING_CONFIDENCE,
+    SIZING_DRAWDOWN,
     SIZING_FIXED,
+    SIZING_KELLY,
     SIZING_PROBABILITY,
     STOP_MODEL_SIGNAL,
 )
 from apex.optimization.simulator import SimulatedTrade
 from apex.optimization.staged import StageSettings
+from apex.portfolio.account import TradeStatistics
 
 from tests.conftest import T0
 from tests.unit.decision.test_decision import make_bar
@@ -74,6 +83,63 @@ class TestPlanDecoding:
         # p = 0.85 -> clamp(1.7) = 1.5 exposure boost.
         assert position_size(prob, outcome) == pytest.approx(1.5)
         assert position_size(conf, outcome) <= position_size(prob, outcome)
+
+    def context(
+        self,
+        *,
+        trades: int = 20,
+        wins: int = 12,
+        average_win_r: float = 2.0,
+        average_loss_r: float = -1.0,
+        drawdown_r: float = 0.0,
+        day_loss_r: float = 0.0,
+    ) -> SizingContext:
+        losses = trades - wins
+        return SizingContext(
+            statistics=TradeStatistics(
+                trades=trades, wins=wins, losses=losses,
+                r_sum=wins * average_win_r + losses * average_loss_r,
+                average_win_r=average_win_r, average_loss_r=average_loss_r,
+                consecutive_losses=0,
+            ),
+            drawdown_r=drawdown_r,
+            day_loss_r=day_loss_r,
+        )
+
+    def test_history_models_fall_back_without_context(self) -> None:
+        outcome = signal_outcome(3, rising(8))
+        for model in (SIZING_KELLY, SIZING_DRAWDOWN, SIZING_BUDGET):
+            plan = decode_plan({**BASE_OVERRIDES, "sizing_model": float(model)})
+            assert position_size(plan, outcome) == pytest.approx(1.0)
+
+    def test_kelly_scales_with_the_edge(self) -> None:
+        outcome = signal_outcome(3, rising(8))
+        plan = decode_plan({**BASE_OVERRIDES, "sizing_model": float(SIZING_KELLY)})
+        # Strong edge: p=0.6, payoff 2 -> kelly 0.2 vs neutral 0.125 -> 1.6x
+        # clamped to the 1.5 ceiling.
+        strong = self.context()
+        assert position_size(plan, outcome, strong) == pytest.approx(1.5)
+        # No edge: p=0.3, payoff 1 -> kelly 0 -> floored exposure.
+        weak = self.context(wins=6, average_win_r=1.0)
+        assert position_size(plan, outcome, weak) == pytest.approx(0.5)
+        # Below the minimum trade count: neutral (fresh chart).
+        fresh = self.context(trades=5, wins=3)
+        assert position_size(plan, outcome, fresh) == pytest.approx(1.0)
+
+    def test_drawdown_shrinks_exposure(self) -> None:
+        outcome = signal_outcome(3, rising(8))
+        plan = decode_plan({**BASE_OVERRIDES, "sizing_model": float(SIZING_DRAWDOWN)})
+        assert position_size(plan, outcome, self.context()) == pytest.approx(1.0)
+        deep = self.context(drawdown_r=5.0)
+        assert position_size(plan, outcome, deep) == pytest.approx(0.5)
+
+    def test_budget_stands_aside_when_spent(self) -> None:
+        outcome = signal_outcome(3, rising(8))
+        plan = decode_plan({**BASE_OVERRIDES, "sizing_model": float(SIZING_BUDGET)})
+        half = self.context(day_loss_r=1.0)
+        assert position_size(plan, outcome, half) == pytest.approx(0.5)
+        spent = self.context(day_loss_r=2.0)
+        assert position_size(plan, outcome, spent) == 0.0
 
 
 class TestManagedTrades:
