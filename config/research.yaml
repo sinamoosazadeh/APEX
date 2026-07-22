@@ -1,4 +1,14 @@
-# Research platform configuration - owned by Phase 11.
+# Research platform configuration - owned by Phase 11 (Book II ch. 14/23).
 schema_version: 1
+
+learning:                        # AICE online-learning inputs (Book VI gLearn/gCal)
+  feature_prior: 6.0
+  adapt_strength: 0.65
+  feature_minimum_sample: 25.0
+  calibration_minimum_sample: 25.0
+  calibration_maximum_blend: 0.65
+
+orchestrator:
+  default_window_bars: 480       # job window when a job carries none
 
 experiments: {}
