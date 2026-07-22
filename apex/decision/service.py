@@ -169,6 +169,8 @@ class DecisionService:
                     channels=long_record.channels,
                     macro_high=macro_high,
                     macro_low=macro_low,
+                    ob_long_bottom=vector.get("orderblocks.bull_ob_bottom"),
+                    ob_short_top=vector.get("orderblocks.bear_ob_top"),
                 )
             )
         return snapshots
