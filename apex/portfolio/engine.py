@@ -15,9 +15,8 @@ AICE order the kernel ledger follows), and all money arithmetic is
 exact Decimal. Sizing uses realized (cash) equity - unrealized PnL is
 not bankable - while exposure caps measure against marked equity.
 
-Documented deferrals: fills are ideal until the execution engine
-lands (Phase 10); effective/beta exposure, sector dimensions and the
-scenario/stress engines need their data sources (Phases 10-11).
+Documented deferrals: effective/beta exposure, sector dimensions and
+the scenario/stress engines need their data sources (Phases 11+).
 """
 
 from collections.abc import Sequence
@@ -318,6 +317,7 @@ class PortfolioEngine:
                 bar,
                 conservative=self._conservative,
                 currency=self._settings.account.base_currency,
+                fee_rate=Decimal(str(self._settings.account.fee_rate)),
             )
             if closed is None:
                 remaining.append(lot)
