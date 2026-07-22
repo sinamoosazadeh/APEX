@@ -142,13 +142,15 @@ def load_config(
         _check_schema_version(section, file_name)
         raw_sections[file_name] = section
 
-    phase_sections = {name: raw_sections[name] for name in PHASE_OWNED_FILES}
+    # Raw sections stay reachable for every file: phase-owned files are
+    # parsed by their phases' plugins, and deep-validated files may carry
+    # additional phase-owned sections (e.g. exchange.execution, Phase 10).
     return AppConfig(
         system=_parse_system(raw_sections["system"]),
         logging=_parse_logging(raw_sections["logging"]),
         market=_parse_market(raw_sections["market"]),
         toobit=_parse_exchange(raw_sections["exchange"]),
-        sections=phase_sections,
+        sections=dict(raw_sections),
         config_dir=str(config_dir),
         config_hash=content_hash(raw_sections),
     )
