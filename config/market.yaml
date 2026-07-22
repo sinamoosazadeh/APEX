@@ -25,6 +25,9 @@ features:
     displacement_body_atr: 1.2
     equal_tolerance_atr: 0.10
     break_decay: 0.985
+    internal_lookback: 3       # int_piv_lb
+    external_lookback: 21      # ext_piv_lb
+    bias_ema_length: 50
   liquidity:                   # AICE liquidity family (Book VI inputs)
     chart_lookback: 8
     internal_lookback: 3
@@ -93,3 +96,12 @@ features:
     stc_fast: 23
     stc_slow: 50
     cci_length: 20
+
+probability:                   # AICE confluence calibration (Book VI lines 2769-2771)
+  momentum_length: 10          # struct_mom EMA
+  calibration_offset: 0.45
+  calibration_gain_base: 5.4
+  calibration_gain_slope: 1.2
+  probability_floor: 0.01
+  probability_ceiling: 0.99
+  uncertainty_scale: 0.15      # APEX CI half-width vs estimate entropy
