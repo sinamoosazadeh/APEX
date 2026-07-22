@@ -101,6 +101,7 @@ FEATURE_NAMES: tuple[str, ...] = (
     "statistical.is_trending",
     "statistical.is_ranging",
     "statistical.market_entropy",
+    "statistical.direction",
     "statistical.persistence",
     "statistical.body_rank",
     "statistical.impulse_efficiency",
@@ -501,6 +502,7 @@ class StatisticalEngine:
             and body_rank > _FLIP_BODY_RANK
         )
         return {
+            "statistical.direction": (float(direction), float(direction)),
             "statistical.persistence": (persistence, persistence * 2.0 - 1.0),
             "statistical.body_rank": (body_rank, body_rank * 2.0 - 1.0),
             "statistical.impulse_efficiency": (impulse, impulse * 2.0 - 1.0),
