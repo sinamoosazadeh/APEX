@@ -91,6 +91,10 @@ def signal_outcome(index: int, bars: list[Bar]) -> DecisionOutcome:
         rvol_gate_enabled=False,
         similarity_cooldown_enabled=False,
         cooldown_bars=1,
+        # Simulator tests exercise trade management, not the kernel's
+        # virtual ledger; the flatness gate is covered in the decision
+        # suite.
+        flatness_gate_enabled=False,
     )
     kernel = CentralDecisionKernel(params=params, clock=ManualClock(T0))
     snapshots = [
