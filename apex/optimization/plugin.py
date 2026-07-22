@@ -16,6 +16,7 @@ from apex.decision.plugin import _decision_params
 from apex.decision.service import DecisionService
 from apex.kernel.container import ServiceContainer
 from apex.optimization.objective import ObjectiveWeights
+from apex.optimization.risk.service import RiskOptimizationService
 from apex.optimization.signal.engine import OptimizerSettings
 from apex.optimization.signal.service import SignalOptimizationService
 from apex.optimization.signal.store import SignalOptimizationStore
@@ -77,9 +78,9 @@ def _numbers(section: ConfigSection) -> dict[str, float]:
     return numbers
 
 
-def _settings(optimizer_config: ConfigSection) -> OptimizerSettings:
-    """Signal optimizer settings: config overrides on Book V defaults."""
-    raw = optimizer_config.get("signal", {})
+def _settings(optimizer_config: ConfigSection, key: str) -> OptimizerSettings:
+    """Optimizer stage settings: config overrides on Book V defaults."""
+    raw = optimizer_config.get(key, {})
     numbers = _numbers(raw if isinstance(raw, dict) else {})
     defaults = OptimizerSettings()
     return OptimizerSettings(
@@ -120,7 +121,7 @@ class OptimizationPlatformPlugin:
             version=SemanticVersion(0, 1, 0),
             kind=PluginKind.SERVICE,
             api_version=SemanticVersion(1, 0, 0),
-            description="Signal optimizer: ten-stage search, run store, artifacts",
+            description="Signal and risk optimizers: ten-stage search, stores, artifacts",
             stability=StabilityLevel.BETA,
             requires=("decision_platform",),
         )
@@ -137,10 +138,11 @@ class OptimizationPlatformPlugin:
             database_path=data_dir / OPTIMIZATION_DATABASE_FILENAME,
             artifact_dir=data_dir / ARTIFACT_DIRECTORY,
         )
+        base_params = _decision_params(config.market.decision)
         service = SignalOptimizationService(
             exchange_id="toobit",
-            base_params=_decision_params(config.market.decision),
-            settings=_settings(optimizer_config),
+            base_params=base_params,
+            settings=_settings(optimizer_config, "signal"),
             weights=ObjectiveWeights(),
             decision_service=container.resolve(DecisionService),
             bar_repository=container.resolve(SqliteBarRepository),
@@ -149,8 +151,21 @@ class OptimizationPlatformPlugin:
             clock=clock,
             logger=loggers.get("optimization.signal"),
         )
+        risk_service = RiskOptimizationService(
+            exchange_id="toobit",
+            base_params=base_params,
+            settings=_settings(optimizer_config, "risk"),
+            weights=ObjectiveWeights(),
+            decision_service=container.resolve(DecisionService),
+            bar_repository=container.resolve(SqliteBarRepository),
+            store=store,
+            bus=bus,
+            clock=clock,
+            logger=loggers.get("optimization.risk"),
+        )
         container.register_instance(SignalOptimizationStore, store)
         container.register_instance(SignalOptimizationService, service)
+        container.register_instance(RiskOptimizationService, risk_service)
         return [
             OptimizationPlatformModule(
                 store=store,

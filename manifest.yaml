@@ -5,26 +5,26 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.9.0
-  phase: 8            # Phase 7 complete (Signal Optimizer); Phase 8 next
-  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7]
+  version: 0.10.0
+  phase: 9            # Phase 8 complete (Risk Optimizer); Phase 9 next
+  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 config_schema_version: 1
 contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.9.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.10.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.contracts: { version: 0.9.0, stability: beta,         owner: foundation }
-  apex.kernel:    { version: 0.9.0, stability: beta,         owner: foundation }
+  apex.contracts: { version: 0.10.0, stability: beta,         owner: foundation }
+  apex.kernel:    { version: 0.10.0, stability: beta,         owner: foundation }
   apex.storage:   { version: 0.2.0, stability: beta,         owner: data-platform }
   apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
-  apex.features:  { version: 0.9.0, stability: beta,         owner: feature-platform }
+  apex.features:  { version: 0.10.0, stability: beta,         owner: feature-platform }
   apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
   apex.probability: { version: 0.1.0, stability: beta,       owner: probability-platform }
   apex.decision:  { version: 0.1.1, stability: beta,         owner: decision-platform }
-  apex.optimization: { version: 0.1.0, stability: beta,      owner: optimization-platform }
+  apex.optimization: { version: 0.2.0, stability: beta,      owner: optimization-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
@@ -61,6 +61,6 @@ exchange_registry:
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 340
+  tests_passed: 349
   boot_check: pass
-  live_smoke: ten-stage optimizer ran live (136 trials) and honestly rejected on thin history
+  live_smoke: signal + risk optimizers ran live (136 + 112 trials), honest Book V rejections on thin history

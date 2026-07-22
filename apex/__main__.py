@@ -7,6 +7,7 @@ Commands:
 - ``sync``           catch up every configured series to the present
 - ``stream``         sync, then consume the live WebSocket feed for a
                      bounded duration (bars close, ticks persist)
+- ``optimize-risk``  run the ten-stage Book V risk optimizer
 - ``optimize-signal`` run the ten-stage Book V signal optimizer
 - ``decide``         run the Central Decision Kernel over stored
   assessments (signals, vetoes, stand-asides)
@@ -34,6 +35,7 @@ from apex.data.streaming import MarketStreamService, StreamStats
 from apex.decision.service import DecisionService, DecisionSummary
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
+from apex.optimization.risk.service import RiskOptimizationService
 from apex.optimization.signal.service import OptimizationSummary, SignalOptimizationService
 from apex.probability.service import ProbabilityService, ProbabilitySummary
 
@@ -164,6 +166,26 @@ def build_parser() -> argparse.ArgumentParser:
     optimize.add_argument(
         "--seed", type=int, default=7, help="deterministic optimization seed"
     )
+    optimize_risk = subcommands.add_parser(
+        "optimize-risk",
+        help="run the ten-stage risk optimizer over the fixed decisions",
+    )
+    optimize_risk.add_argument("--symbol", required=True, help="instrument symbol")
+    optimize_risk.add_argument(
+        "--timeframe",
+        required=True,
+        choices=sorted(tf.value for tf in Timeframe),
+        help="bar timeframe",
+    )
+    optimize_risk.add_argument(
+        "--bars",
+        type=int,
+        default=0,
+        help="window of most-recent bars (default: market.history_bars)",
+    )
+    optimize_risk.add_argument(
+        "--seed", type=int, default=7, help="deterministic optimization seed"
+    )
     return parser
 
 
@@ -277,6 +299,32 @@ def render_optimization(summary: OptimizationSummary) -> str:
             f"  artifact     : {summary.artifact_path or '(none - rejected)'}",
         ]
     )
+
+
+async def run_optimize_risk(
+    config_dir: Path,
+    symbol: str,
+    timeframe: Timeframe,
+    bars: int,
+    seed: int,
+) -> OptimizationSummary:
+    """Boot, risk-optimize one series, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        config = kernel.container.resolve(AppConfig)
+        clock = kernel.container.resolve(IClock)  # type: ignore[type-abstract]
+        service = kernel.container.resolve(RiskOptimizationService)
+        count = bars if bars > 0 else config.market.history_bars
+        now = clock.now()
+        aligned_end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        start = aligned_end.add_ms(-count * timeframe.duration_ms)
+        result = await service.optimize(
+            symbol, timeframe, start=start, end=aligned_end, seed=seed
+        )
+        return result.unwrap()
+    finally:
+        await kernel.shutdown()
 
 
 async def run_optimize_signal(
@@ -469,6 +517,25 @@ def _run_windowed_command(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _run_optimizer_command(args: argparse.Namespace) -> int:
+    """Dispatch the seeded optimizer commands."""
+    runner = (
+        run_optimize_signal if args.command == "optimize-signal" else run_optimize_risk
+    )
+    summary = asyncio.run(
+        runner(
+            args.config_dir, args.symbol, Timeframe(args.timeframe),
+            args.bars, args.seed,
+        )
+    )
+    label = "signal" if args.command == "optimize-signal" else "risk"
+    sys.stdout.write(
+        render_optimization(summary).replace("signal optimization", f"{label} optimization")
+        + "\n"
+    )
+    return EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     """CLI entrypoint."""
     args = build_parser().parse_args(argv)
@@ -499,15 +566,8 @@ def main(argv: list[str] | None = None) -> int:
             return EXIT_OK
         if args.command in ("features", "probability", "decide"):
             return _run_windowed_command(args)
-        if args.command == "optimize-signal":
-            optimization = asyncio.run(
-                run_optimize_signal(
-                    args.config_dir, args.symbol, Timeframe(args.timeframe),
-                    args.bars, args.seed,
-                )
-            )
-            sys.stdout.write(render_optimization(optimization) + "\n")
-            return EXIT_OK
+        if args.command in ("optimize-signal", "optimize-risk"):
+            return _run_optimizer_command(args)
         status = asyncio.run(run_status(args.config_dir))
     except ApexError as error:
         stage = args.command if args.command else "boot"
