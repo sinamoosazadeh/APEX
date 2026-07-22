@@ -36,7 +36,13 @@ from apex.core.types import Confidence, Reliability, Weight
 from apex.core.validation import ensure_in_range, ensure_positive
 from apex.domain.feature import Feature
 from apex.domain.market import Bar
-from apex.features.calculations import PivotTracker, StructureFold, clamp, wilder_atr
+from apex.features.calculations import (
+    PivotTracker,
+    StructureFold,
+    clamp,
+    struct_bias_series,
+    wilder_atr,
+)
 
 FAMILY = "structure"
 _SOURCE = "apex.features.structure"
@@ -67,6 +73,8 @@ FEATURE_NAMES: tuple[str, ...] = (
     "structure.equal_lows",
     "structure.swing_high_distance",
     "structure.swing_low_distance",
+    "structure.internal_bias",
+    "structure.external_bias",
 )
 
 
@@ -79,8 +87,14 @@ class StructureParams:
     displacement_body_atr: float = 1.20
     equal_tolerance_atr: float = 0.10
     break_decay: float = 0.985
+    internal_lookback: int = 3
+    external_lookback: int = 21
+    bias_ema_length: int = 50
 
     def __post_init__(self) -> None:
+        ensure_positive(self.internal_lookback, "internal_lookback")
+        ensure_positive(self.external_lookback, "external_lookback")
+        ensure_positive(self.bias_ema_length, "bias_ema_length")
         ensure_positive(self.pivot_lookback, "pivot_lookback")
         ensure_positive(self.atr_length, "atr_length")
         ensure_positive(self.displacement_body_atr, "displacement_body_atr")
@@ -133,10 +147,18 @@ class MarketStructureEngine:
             break_decay=params.break_decay,
         )
         atr_series = wilder_atr(bars, params.atr_length)
+        internal = struct_bias_series(
+            bars, lookback=params.internal_lookback, ema_length=params.bias_ema_length
+        )
+        external = struct_bias_series(
+            bars, lookback=params.external_lookback, ema_length=params.bias_ema_length
+        )
         features: list[Feature] = []
         for index, bar in enumerate(bars):
             atr = atr_series[index]
             snapshot = self._step(fold, bars, index, atr)
+            snapshot["structure.internal_bias"] = float(internal[index].bias)
+            snapshot["structure.external_bias"] = float(external[index].bias)
             if index >= params.warmup_bars and atr is not None:
                 features.extend(self._emit(bar, snapshot))
         return features
