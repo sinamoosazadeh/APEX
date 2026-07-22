@@ -215,7 +215,12 @@ class TestEngineContract:
     def test_all_names_and_normalized_bounds(self) -> None:
         features = compute(order_block_scenario())
         emitted = {feature.name for feature in features}
-        assert emitted == set(FEATURE_NAMES)
+        # Zone levels are conditional: emitted only while a zone lives
+        # (an absent key is the AICE na-branch).
+        level_names = {"orderblocks.bull_ob_bottom", "orderblocks.bear_ob_top"}
+        assert set(FEATURE_NAMES) - level_names <= emitted <= set(FEATURE_NAMES)
+        # The scenario creates a bull order block: its level must be live.
+        assert "orderblocks.bull_ob_bottom" in emitted
         assert all(-1.0 <= feature.normalized_value <= 1.0 for feature in features)
 
     def test_deterministic_and_causal(self) -> None:
