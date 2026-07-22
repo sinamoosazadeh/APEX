@@ -45,8 +45,9 @@ from apex.core.result import Result
 from apex.core.time.clock import Clock
 from apex.core.types import Entropy, Probability
 from apex.core.validation import ensure_in_range, ensure_positive
+from apex.domain.learning import CHANNEL_COUNT, LearningParams, LearningState
 from apex.domain.probability import ConfidenceInterval, ProbabilityAssessment
-from apex.features.calculations import clamp, ema, entropy01, squash
+from apex.features.calculations import clamp, correlation, ema, entropy01, squash
 from apex.probability.evidence import (
     EvidenceChannels,
     compute_evidence,
@@ -108,6 +109,11 @@ class ConfluenceParams:
     """Tunables of the confluence engine (AICE input defaults)."""
 
     momentum_length: int = 10
+    # AICE learning inputs (Book VI lines 34-40), Phase 11.
+    adaptive_weights_enabled: bool = True
+    ic_length: int = 200
+    ic_horizon: int = 12
+    ic_strength: float = 0.35
     calibration_offset: float = 0.45
     calibration_gain_base: float = 5.4
     calibration_gain_slope: float = 1.2
@@ -117,6 +123,9 @@ class ConfluenceParams:
 
     def __post_init__(self) -> None:
         ensure_positive(self.momentum_length, "momentum_length")
+        ensure_in_range(self.ic_length, 50, 1000, "ic_length")
+        ensure_in_range(self.ic_horizon, 2, 100, "ic_horizon")
+        ensure_in_range(self.ic_strength, 0.0, 1.0, "ic_strength")
         ensure_in_range(self.calibration_offset, 0.0, 1.0, "calibration_offset")
         ensure_positive(self.calibration_gain_base, "calibration_gain_base")
         ensure_in_range(self.calibration_gain_slope, 0.0, 10.0, "calibration_gain_slope")
@@ -140,9 +149,20 @@ class BarProbabilities:
 class ConfluenceProbabilityEngine:
     """Fuses stored evidence into calibrated per-side probabilities."""
 
-    def __init__(self, *, params: ConfluenceParams, clock: Clock) -> None:
+    def __init__(
+        self,
+        *,
+        params: ConfluenceParams,
+        clock: Clock,
+        learning: LearningState | None = None,
+        learning_params: LearningParams | None = None,
+    ) -> None:
         self._params = params
         self._clock = clock
+        # Accumulated closed-trade knowledge (research artifact); None
+        # is the fresh chart - every factor 1.0 (Phase 11).
+        self._learning = learning
+        self._learning_params = learning_params or LearningParams()
 
     def assess_series(
         self,
@@ -176,12 +196,63 @@ class ConfluenceProbabilityEngine:
     ) -> list[BarProbabilities]:
         pulses = [self._pulse(snapshot.values) for snapshot in snapshots]
         momentum = ema(pulses, self._params.momentum_length)
-        out: list[BarProbabilities] = []
+        channel_series: list[EvidenceChannels] = []
         for index, snapshot in enumerate(snapshots):
             mom = momentum[index] or 0.0
-            channels = compute_evidence(snapshot.values, mom)
-            out.append(self._assess_bar(snapshot, channels))
+            channel_series.append(compute_evidence(snapshot.values, mom))
+        ic_factors = self._ic_factors(snapshots, channel_series)
+        out: list[BarProbabilities] = []
+        for index, snapshot in enumerate(snapshots):
+            out.append(
+                self._assess_bar(snapshot, channel_series[index], ic_factors[index])
+            )
         return out
+
+    def _ic_factors(
+        self,
+        snapshots: list[FeatureVectorSnapshot],
+        channel_series: list[EvidenceChannels],
+    ) -> list[tuple[float, ...]]:
+        """Rolling IC weight factors per bar (AICE lines 2672-2687).
+
+        ``f_ic``: the correlation, over ``ic_length`` bars, of each
+        channel's edge lagged by the horizon against the completed
+        horizon return - strictly causal (only finished forward
+        windows inform a bar). Neutral (1.0) until closes exist and
+        the window warms up, and when adaptive weights are off.
+        """
+        params = self._params
+        count = len(snapshots)
+        neutral = tuple(1.0 for _ in range(CHANNEL_COUNT))
+        factors = [neutral] * count
+        if not params.adaptive_weights_enabled or count <= params.ic_horizon:
+            return factors
+        closes = [snapshot.close for snapshot in snapshots]
+        if any(close is None or close <= 0 for close in closes):
+            return factors
+        horizon = params.ic_horizon
+        returns = [
+            closes[i] / closes[i - horizon] - 1.0  # type: ignore[operator]
+            for i in range(horizon, count)
+        ]
+        edges_by_channel = [
+            [pairs[channel][0] - pairs[channel][1] for pairs in
+             (bar.pairs() for bar in channel_series)]
+            for channel in range(CHANNEL_COUNT)
+        ]
+        correlations = [
+            correlation(edges[: count - horizon], returns, params.ic_length)
+            for edges in edges_by_channel
+        ]
+        for i in range(horizon, count):
+            row = []
+            for channel in range(CHANNEL_COUNT):
+                ic = correlations[channel][i - horizon]
+                row.append(
+                    clamp(1.0 + (ic or 0.0) * params.ic_strength, 0.65, 1.35)
+                )
+            factors[i] = tuple(row)
+        return factors
 
     def _pulse(self, values: Mapping[str, float]) -> float:
         """AICE struct_pulse (line 2583): +1 up break, -1 down break."""
@@ -195,9 +266,10 @@ class ConfluenceProbabilityEngine:
         self,
         snapshot: FeatureVectorSnapshot,
         channels: EvidenceChannels,
+        ic_factors: tuple[float, ...],
     ) -> BarProbabilities:
         vector = snapshot.values
-        weights = self._weights(vector, channels)
+        weights = self._weights(vector, channels, ic_factors)
         pairs = channels.pairs()
         base_long = sum(weight * pair[0] for weight, pair in zip(weights, pairs, strict=True))
         base_short = sum(weight * pair[1] for weight, pair in zip(weights, pairs, strict=True))
@@ -222,9 +294,18 @@ class ConfluenceProbabilityEngine:
         )
 
     def _weights(
-        self, values: Mapping[str, float], channels: EvidenceChannels
+        self,
+        values: Mapping[str, float],
+        channels: EvidenceChannels,
+        ic_factors: tuple[float, ...],
     ) -> tuple[float, ...]:
-        """Adaptive, normalized channel weights (AICE lines 2632-2718)."""
+        """Adaptive, normalized channel weights (AICE lines 2632-2718).
+
+        Phase 11: each raw weight scales by the closed-trade channel
+        factor (Beta posterior, ``f_feature_factor``) and the rolling
+        IC factor before normalization - ``rw_i = bw_i x ff_i x icf_i``
+        (lines 2689-2701).
+        """
         trend_confidence = read(values, "statistical.trend_confidence")
         raw = [
             max(intercept + slope * trend_confidence, 0.0)
@@ -244,6 +325,17 @@ class ConfluenceProbabilityEngine:
         )
         raw.append(smt_weight)
         raw.append(_PROFILE_WEIGHT)
+        if self._params.adaptive_weights_enabled:
+            raw = [
+                weight
+                * (
+                    self._learning.channel_factor(index, self._learning_params)
+                    if self._learning is not None
+                    else 1.0
+                )
+                * ic_factors[index]
+                for index, weight in enumerate(raw)
+            ]
         total = sum(raw)
         return tuple(weight / total for weight in raw)
 
