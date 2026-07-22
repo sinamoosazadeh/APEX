@@ -951,23 +951,31 @@ class CentralDecisionKernel:
         *,
         bullish: bool,
     ) -> float:
-        """ATR stop, upgraded to the protected swing when in bounds.
+        """ATR stop, upgraded to the structure level when in bounds.
 
-        The AICE Structure Hybrid prefers the order-block boundary; the
-        zone store lands with the execution phase, so the protected
-        swing branch applies meanwhile (documented in the module note).
+        The full AICE Structure Hybrid (lines 3095-3103/3156-3164):
+        the order-block boundary leads when the bar sits inside the
+        best zone and its level is live (Phase 10 zone features);
+        otherwise the protected swing (approximated by the macro
+        extreme); falls back to the ATR stop outside risk bounds.
         """
         params = self._params
         sign = 1.0 if bullish else -1.0
         atr_stop = close - sign * risk_atr * params.stop_atr_multiple
         if params.stop_model != STOP_STRUCTURE_HYBRID:
             return atr_stop
-        swing = snapshot.macro_low if bullish else snapshot.macro_high
-        # Chart protected swing approximated by the macro extreme when
-        # available; falls back to the ATR stop outside risk bounds.
-        if swing is None:
+        inside_zone = flag(
+            snapshot.vector,
+            "orderblocks.in_bull_ob" if bullish else "orderblocks.in_bear_ob",
+        )
+        zone_level = snapshot.ob_long_bottom if bullish else snapshot.ob_short_top
+        if inside_zone and zone_level is not None:
+            level: float | None = zone_level
+        else:
+            level = snapshot.macro_low if bullish else snapshot.macro_high
+        if level is None:
             return atr_stop
-        candidate = swing - sign * risk_atr * _STOP_BUFFER_ATR
+        candidate = level - sign * risk_atr * _STOP_BUFFER_ATR
         risk = (close - candidate) if bullish else (candidate - close)
         max_risk = risk_atr * params.stop_atr_multiple * _STOP_MAX_FACTOR
         min_risk = risk_atr * _STOP_MIN_ATR
