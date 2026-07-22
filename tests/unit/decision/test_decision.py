@@ -208,6 +208,14 @@ class TestKernelSignals:
             outcome.action for outcome in second
         ]
 
+    def test_overrides_preserve_integer_fields(self) -> None:
+        params = PARAMS.with_overrides(
+            {"micro_bos_length": 5.0, "probability_threshold": 0.7}
+        )
+        assert isinstance(params.micro_bos_length, int)
+        assert params.micro_bos_length == 5
+        assert params.probability_threshold == pytest.approx(0.7)
+
     def test_invalid_params_are_rejected(self) -> None:
         with pytest.raises(Exception, match="timing"):
             DecisionParams(execution_timing="warp_speed")

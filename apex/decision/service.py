@@ -90,7 +90,7 @@ class DecisionService:
         bars = await self._bars.get_range(
             self._exchange_id, symbol, timeframe, start=start, end=end, closed_only=True
         )
-        snapshots = await self._snapshots(bars, symbol, timeframe, end)
+        snapshots = await self.build_snapshots(bars, symbol, timeframe, end)
         context = MarketContext(symbol=symbol, timeframe=timeframe, as_of=self._clock.now())
         result = self._kernel.decide_series(snapshots, context)
         if not result.ok:
@@ -116,13 +116,14 @@ class DecisionService:
         await self._announce(summary, outcomes)
         return Result.success(summary)
 
-    async def _snapshots(
+    async def build_snapshots(
         self,
         bars: list[Bar],
         symbol: str,
         timeframe: Timeframe,
         end: Timestamp,
     ) -> list[DecisionSnapshot]:
+        """Assemble decision snapshots (public: the optimizer replays them)."""
         macro_bars = await self._bars.get_range(
             self._exchange_id,
             symbol,

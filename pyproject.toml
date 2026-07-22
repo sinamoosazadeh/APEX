@@ -1,6 +1,6 @@
 [project]
 name = "apex"
-version = "0.8.0"
+version = "0.9.0"
 description = "APEX - Autonomous Probabilistic Execution eXchange: institutional-grade crypto trading intelligence platform."
 readme = "README.md"
 requires-python = ">=3.13"
@@ -10,6 +10,7 @@ dependencies = [
     "pyyaml>=6.0.2",
     "httpx>=0.28",
     "websockets>=13",
+    "optuna>=4.9.0",
 ]
 
 [project.scripts]

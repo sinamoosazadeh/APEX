@@ -173,6 +173,20 @@ class DecisionParams:
         """AICE ``base_rr = tp_mult / sl_mult`` (line 2887)."""
         return self.target_atr_multiple / self.stop_atr_multiple
 
+    def with_overrides(self, overrides: Mapping[str, float]) -> "DecisionParams":
+        """A copy with numeric fields replaced (optimizer trials)."""
+        from dataclasses import fields, replace
+
+        integer_fields = {
+            field.name
+            for field in fields(self)
+            if field.type is int or field.type == "int"
+        }
+        kwargs: dict[str, float | int] = {}
+        for name, value in overrides.items():
+            kwargs[name] = round(value) if name in integer_fields else value
+        return replace(self, **kwargs)  # type: ignore[arg-type]
+
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class DecisionOutcome:
