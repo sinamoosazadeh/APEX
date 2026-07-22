@@ -204,6 +204,18 @@ class TestLedger:
         assert closed is not None
         assert closed[1].reason == "stop"
 
+    def test_fee_rate_charges_both_notionals(self) -> None:
+        lot = self.lot()
+        closed = close_lot(
+            lot, make_bar(3, 104, 106.5, 103, 105), conservative=True,
+            currency="USDT", fee_rate=Decimal("0.001"),
+        )
+        assert closed is not None
+        _, trade = closed
+        # Gross 200; fees = (102 + 106) x 50 x 0.001 = 10.4.
+        assert trade.realized_pnl.amount == Decimal("189.6")
+        assert trade.realized_r == pytest.approx(2.0)  # geometry unchanged
+
     def test_short_side_mirrors(self) -> None:
         lot = self.lot(direction=Direction.SHORT)
         closed = close_lot(
