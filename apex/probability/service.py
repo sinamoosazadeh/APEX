@@ -88,14 +88,21 @@ class ProbabilityService:
         *,
         start: Timestamp,
         end: Timestamp,
+        engine_override: ConfluenceProbabilityEngine | None = None,
     ) -> Result[ProbabilitySummary]:
-        """Assess every fully-featured confirmed bar in [start, end)."""
+        """Assess every fully-featured confirmed bar in [start, end).
+
+        ``engine_override`` is the runtime injector's hook (Book V
+        part 7): an engine carrying researched learning state replaces
+        the config-built one for this run only.
+        """
         bars = await self._bars.get_range(
             self._exchange_id, symbol, timeframe, start=start, end=end, closed_only=True
         )
         snapshots = await self._snapshots(bars, symbol, timeframe)
         context = MarketContext(symbol=symbol, timeframe=timeframe, as_of=self._clock.now())
-        result = self._engine.assess_series_detailed(snapshots, context)
+        engine = engine_override if engine_override is not None else self._engine
+        result = engine.assess_series_detailed(snapshots, context)
         if not result.ok:
             assert result.error is not None
             await self._announce_failure(symbol, timeframe, result.error)
@@ -129,7 +136,11 @@ class ProbabilityService:
             vector = {feature.name: feature.value for feature in features}
             if all(name in vector for name in REQUIRED_FEATURES):
                 snapshots.append(
-                    FeatureVectorSnapshot(bar_open_time=bar.open_time, values=vector)
+                    FeatureVectorSnapshot(
+                        bar_open_time=bar.open_time,
+                        values=vector,
+                        close=float(bar.close.value),
+                    )
                 )
         return snapshots
 
