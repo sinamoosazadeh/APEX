@@ -27,3 +27,4 @@ plugins:
     - apex.optimization.plugin
     - apex.portfolio.plugin
     - apex.execution.plugin
+    - apex.research.plugin
