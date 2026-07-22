@@ -11,11 +11,13 @@ from apex.optimization.objective import ObjectiveWeights
 from apex.optimization.risk.engine import RiskOptimizer
 from apex.optimization.risk.simulator import (
     SizingContext,
+    StopLevels,
     decode_plan,
     manage_trades,
     position_size,
 )
 from apex.optimization.risk.space import (
+    ENTRY_LIMIT,
     RISK_SEARCH_SPACE,
     SIZING_BUDGET,
     SIZING_CONFIDENCE,
@@ -23,6 +25,10 @@ from apex.optimization.risk.space import (
     SIZING_FIXED,
     SIZING_KELLY,
     SIZING_PROBABILITY,
+    STOP_MODEL_ATR,
+    STOP_MODEL_ICT_OB,
+    STOP_MODEL_LIQUIDITY,
+    STOP_MODEL_SESSION,
     STOP_MODEL_SIGNAL,
 )
 from apex.optimization.simulator import SimulatedTrade
@@ -268,3 +274,106 @@ class TestRiskOptimizer:
         assert len(report.sensitivity) == len(RISK_SEARCH_SPACE)
         assert report.trials >= 12
         assert 0.0 <= report.confidence <= 1.0
+
+
+class TestStopModels:
+    def managed_with(
+        self,
+        stop_model: int,
+        *,
+        levels: dict[int, StopLevels] | None = None,
+    ) -> list[SimulatedTrade]:
+        bars = rising(60)
+        outcome = signal_outcome(3, bars)
+        overrides = {
+            **BASE_OVERRIDES,
+            "stop_model": float(stop_model),
+            "stop_atr_multiple": 1.0,
+        }
+        return manage_trades(
+            (outcome,), bars, decode_plan(overrides),
+            atr=wilder_atr(bars, 3), fee_r=0.0, horizon_bars=40,
+            levels=levels,
+        )
+
+    def test_level_models_fall_back_to_atr_when_absent(self) -> None:
+        atr_trades = self.managed_with(STOP_MODEL_ATR)
+        for model in (STOP_MODEL_ICT_OB, STOP_MODEL_LIQUIDITY):
+            trades = self.managed_with(model)  # no levels supplied
+            assert [t.r_multiple for t in trades] == [
+                t.r_multiple for t in atr_trades
+            ]
+
+    def test_ict_level_changes_the_geometry(self) -> None:
+        bars = rising(60)
+        outcome = signal_outcome(3, bars)
+        signal_ms = outcome.bar_open_ms
+        entry = float(outcome.signal.entry_zone.lower.value)  # type: ignore[union-attr]
+        levels = {
+            signal_ms: StopLevels(ob_long_bottom=entry - 1.0)
+        }
+        with_level = self.managed_with(STOP_MODEL_ICT_OB, levels=levels)
+        without = self.managed_with(STOP_MODEL_ATR)
+        assert with_level and without
+        # A tighter structural stop means a different R geometry on the
+        # same rising series.
+        assert with_level[0].r_multiple != without[0].r_multiple
+
+    def test_session_stop_uses_the_day_extreme(self) -> None:
+        trades = self.managed_with(STOP_MODEL_SESSION)
+        assert trades  # computable purely from bars, no levels needed
+
+
+class TestEntryModels:
+    def test_market_pays_the_slippage_share(self) -> None:
+        bars = rising(60)
+        outcome = signal_outcome(3, bars)
+        plan = decode_plan(BASE_OVERRIDES)
+        base = manage_trades(
+            (outcome,), bars, plan, atr=wilder_atr(bars, 3),
+            fee_r=0.0, horizon_bars=40,
+        )
+        slipped = manage_trades(
+            (outcome,), bars, plan, atr=wilder_atr(bars, 3),
+            fee_r=0.0, horizon_bars=40, slippage_r=0.05,
+        )
+        assert slipped[0].r_multiple == pytest.approx(
+            base[0].r_multiple - 0.05
+        )
+
+    def test_limit_fills_on_touch_without_slippage(self) -> None:
+        bars = rising(60)
+        outcome = signal_outcome(3, bars)
+        overrides = {
+            **BASE_OVERRIDES,
+            "entry_model": float(ENTRY_LIMIT),
+            "limit_offset_atr": 0.1,
+            "limit_patience_bars": 3.0,
+        }
+        trades = manage_trades(
+            (outcome,), bars, decode_plan(overrides),
+            atr=wilder_atr(bars, 3), fee_r=0.0, horizon_bars=40,
+            slippage_r=0.05,
+        )
+        # Rising bars dip 0.4 under each open: a 0.1-ATR offset fills.
+        assert len(trades) == 1
+
+    def test_unreachable_limit_stands_aside(self) -> None:
+        overrides = {
+            **BASE_OVERRIDES,
+            "entry_model": float(ENTRY_LIMIT),
+            "limit_offset_atr": 0.5,   # quantized space maximum
+            "limit_patience_bars": 1.0,
+        }
+        # Steepen the series so the shallow pullback never reaches the
+        # deep limit within one bar of patience.
+        steep = [
+            make_bar(i, 100.0 + 3 * i, 102.5 + 3 * i, 99.9 + 3 * i, 102.0 + 3 * i)
+            for i in range(60)
+        ]
+        steep_outcome = signal_outcome(3, steep)
+        trades = manage_trades(
+            (steep_outcome,), steep, decode_plan(overrides),
+            atr=wilder_atr(steep, 3), fee_r=0.0, horizon_bars=40,
+        )
+        assert trades == []
