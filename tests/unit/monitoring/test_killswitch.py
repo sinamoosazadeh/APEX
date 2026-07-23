@@ -1,1 +1,175 @@
-IiIiS2lsbCBzd2l0Y2g6IHRyYW5zaXRpb25zLCBwZXJtaXNzaW9ucywgYXV0by1lbmdhZ2UsIFNBRkVfTU9ERSBjYW5jZWwuIiIiCgppbXBvcnQgYXN5bmNpbwpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKCmltcG9ydCBweXRlc3QKZnJvbSBhcGV4LmNvcmUuZXhjZXB0aW9ucyBpbXBvcnQgTW9uaXRvcmluZ0Vycm9yCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IE1hbnVhbENsb2NrCmZyb20gYXBleC5tb25pdG9yaW5nLmNvbGxlY3RvciBpbXBvcnQgVGVsZW1ldHJ5Q29sbGVjdG9yCmZyb20gYXBleC5tb25pdG9yaW5nLmtpbGxzd2l0Y2ggaW1wb3J0IEtpbGxTd2l0Y2hFbmdpbmUKZnJvbSBhcGV4Lm1vbml0b3JpbmcucmVjb3JkcyBpbXBvcnQgQWxlcnRTZXZlcml0eSwgS2lsbFN3aXRjaExldmVsCmZyb20gYXBleC5tb25pdG9yaW5nLnNsbyBpbXBvcnQgRXJyb3JCdWRnZXRUcmFja2VyCgpmcm9tIHRlc3RzLmNvbmZ0ZXN0IGltcG9ydCBUMApmcm9tIHRlc3RzLnVuaXQubW9uaXRvcmluZy5zdXBwb3J0IGltcG9ydCBsb2dnZXIsIG1ha2VfYnVzLCBzZXR0aW5ncywgc3RvcmVfYXQKCgphc3luYyBkZWYgZW5naW5lKAogICAgdG1wX3BhdGg6IFBhdGgsCiAgICBjbG9jazogTWFudWFsQ2xvY2ssCiAgICAqLAogICAgY2FuY2VsbGVyOiBvYmplY3QgPSBOb25lLAogICAgYXV0bzogYm9vbCA9IFRydWUsCikgLT4gS2lsbFN3aXRjaEVuZ2luZToKICAgIHN0b3JlID0gc3RvcmVfYXQodG1wX3BhdGgpCiAgICBhd2FpdCBzdG9yZS5vcGVuKCkKICAgIHJldHVybiBLaWxsU3dpdGNoRW5naW5lKAogICAgICAgIHNldHRpbmdzPXNldHRpbmdzKGtpbGxfc3dpdGNoX2F1dG9fZW5nYWdlPWF1dG8pLAogICAgICAgIHN0b3JlPXN0b3JlLAogICAgICAgIGJ1cz1tYWtlX2J1cyhjbG9jayksCiAgICAgICAgY2xvY2s9Y2xvY2ssCiAgICAgICAgbG9nZ2VyPWxvZ2dlcigpLAogICAgICAgIG9yZGVyX2NhbmNlbGxlcj1jYW5jZWxsZXIsICAjIHR5cGU6IGlnbm9yZVthcmctdHlwZV0KICAgICkKCgpjbGFzcyBUZXN0VHJhbnNpdGlvbnM6CiAgICBkZWYgdGVzdF9kZWZhdWx0X2xldmVsX2FsbG93c19ldmVyeXRoaW5nKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIHN3aXRjaCA9IGF3YWl0IGVuZ2luZSh0bXBfcGF0aCwgTWFudWFsQ2xvY2soVDApKQogICAgICAgICAgICBhc3NlcnQgKGF3YWl0IHN3aXRjaC5sZXZlbCgpKSBpcyBLaWxsU3dpdGNoTGV2ZWwuTk9ORQogICAgICAgICAgICBhc3NlcnQgYXdhaXQgc3dpdGNoLmFsbG93c19uZXdfZW50cmllcygpCiAgICAgICAgICAgIGFzc2VydCBhd2FpdCBzd2l0Y2guYWxsb3dzX3Byb2Nlc3NpbmcoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X2VuZ2FnZV9hbmRfcmVsZWFzZV9sYWRkZXIoc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgc3dpdGNoID0gYXdhaXQgZW5naW5lKHRtcF9wYXRoLCBNYW51YWxDbG9jayhUMCkpCiAgICAgICAgICAgIGF3YWl0IHN3aXRjaC5lbmdhZ2UoCiAgICAgICAgICAgICAgICBLaWxsU3dpdGNoTGV2ZWwuRU5UUklFU19ESVNBQkxFRCwgcmVhc29uPSJ0ZXN0IiwgYWN0b3I9Im9wIgogICAgICAgICAgICApCiAgICAgICAgICAgIGFzc2VydCBub3QgYXdhaXQgc3dpdGNoLmFsbG93c19uZXdfZW50cmllcygpCiAgICAgICAgICAgIGFzc2VydCBhd2FpdCBzd2l0Y2guYWxsb3dzX3Byb2Nlc3NpbmcoKQogICAgICAgICAgICBhd2FpdCBzd2l0Y2guZW5nYWdlKEtpbGxTd2l0Y2hMZXZlbC5QQVVTRUQsIHJlYXNvbj0idGVzdCIsIGFjdG9yPSJvcCIpCiAgICAgICAgICAgIGFzc2VydCBub3QgYXdhaXQgc3dpdGNoLmFsbG93c19wcm9jZXNzaW5nKCkKICAgICAgICAgICAgcmVjb3JkID0gYXdhaXQgc3dpdGNoLnJlbGVhc2UocmVhc29uPSJkb25lIiwgYWN0b3I9Im9wIikKICAgICAgICAgICAgYXNzZXJ0IHJlY29yZC5sZXZlbCBpcyBLaWxsU3dpdGNoTGV2ZWwuTk9ORQogICAgICAgICAgICBhc3NlcnQgYXdhaXQgc3dpdGNoLmFsbG93c19uZXdfZW50cmllcygpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgogICAgZGVmIHRlc3RfZW5nYWdlX25vbmVfaXNfcmVqZWN0ZWQoc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgc3dpdGNoID0gYXdhaXQgZW5naW5lKHRtcF9wYXRoLCBNYW51YWxDbG9jayhUMCkpCiAgICAgICAgICAgIHdpdGggcHl0ZXN0LnJhaXNlcyhNb25pdG9yaW5nRXJyb3IpOgogICAgICAgICAgICAgICAgYXdhaXQgc3dpdGNoLmVuZ2FnZShLaWxsU3dpdGNoTGV2ZWwuTk9ORSwgcmVhc29uPSJ4IiwgYWN0b3I9Im9wIikKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCgpjbGFzcyBUZXN0QXV0b0VuZ2FnZToKICAgIGRlZiB0ZXN0X2JlbG93X3RocmVzaG9sZF9kb2VzX25vdGhpbmcoc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgc3dpdGNoID0gYXdhaXQgZW5naW5lKHRtcF9wYXRoLCBNYW51YWxDbG9jayhUMCkpCiAgICAgICAgICAgIGVuZ2FnZWQgPSBhd2FpdCBzd2l0Y2guYXV0b19lbmdhZ2UoCiAgICAgICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5LkhJR0gsIHJlYXNvbj0ieCIKICAgICAgICAgICAgKQogICAgICAgICAgICBhc3NlcnQgZW5nYWdlZCBpcyBGYWxzZQogICAgICAgICAgICBhc3NlcnQgKGF3YWl0IHN3aXRjaC5sZXZlbCgpKSBpcyBLaWxsU3dpdGNoTGV2ZWwuTk9ORQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X2Rpc2FibGVkX3BvbGljeV9uZXZlcl9lbmdhZ2VzKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIHN3aXRjaCA9IGF3YWl0IGVuZ2luZSh0bXBfcGF0aCwgTWFudWFsQ2xvY2soVDApLCBhdXRvPUZhbHNlKQogICAgICAgICAgICBlbmdhZ2VkID0gYXdhaXQgc3dpdGNoLmF1dG9fZW5nYWdlKAogICAgICAgICAgICAgICAgc2V2ZXJpdHk9QWxlcnRTZXZlcml0eS5FTUVSR0VOQ1ksIHJlYXNvbj0ieCIKICAgICAgICAgICAgKQogICAgICAgICAgICBhc3NlcnQgZW5nYWdlZCBpcyBGYWxzZQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X25vX2Rvd25ncmFkZV93aGVuX2FscmVhZHlfc3RyaWN0ZXIoc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgc3dpdGNoID0gYXdhaXQgZW5naW5lKHRtcF9wYXRoLCBNYW51YWxDbG9jayhUMCkpCiAgICAgICAgICAgIGF3YWl0IHN3aXRjaC5lbmdhZ2UoS2lsbFN3aXRjaExldmVsLlNBRkVfTU9ERSwgcmVhc29uPSJ4IiwgYWN0b3I9Im9wIikKICAgICAgICAgICAgZW5nYWdlZCA9IGF3YWl0IHN3aXRjaC5hdXRvX2VuZ2FnZSgKICAgICAgICAgICAgICAgIHNldmVyaXR5PUFsZXJ0U2V2ZXJpdHkuRU1FUkdFTkNZLCByZWFzb249InkiCiAgICAgICAgICAgICkKICAgICAgICAgICAgYXNzZXJ0IGVuZ2FnZWQgaXMgRmFsc2UKICAgICAgICAgICAgYXNzZXJ0IChhd2FpdCBzd2l0Y2gubGV2ZWwoKSkgaXMgS2lsbFN3aXRjaExldmVsLlNBRkVfTU9ERQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKCmNsYXNzIFRlc3RTYWZlTW9kZToKICAgIGRlZiB0ZXN0X3NhZmVfbW9kZV9jYW5jZWxzX3Jlc3Rpbmdfb3JkZXJzKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGNhbGxzID0geyJjb3VudCI6IDB9CgogICAgICAgIGFzeW5jIGRlZiBjYW5jZWxsZXIoKSAtPiBpbnQ6CiAgICAgICAgICAgIGNhbGxzWyJjb3VudCJdICs9IDEKICAgICAgICAgICAgcmV0dXJuIDIKCiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgc3dpdGNoID0gYXdhaXQgZW5naW5lKHRtcF9wYXRoLCBNYW51YWxDbG9jayhUMCksIGNhbmNlbGxlcj1jYW5jZWxsZXIpCiAgICAgICAgICAgIGF3YWl0IHN3aXRjaC5lbmdhZ2UoS2lsbFN3aXRjaExldmVsLlNBRkVfTU9ERSwgcmVhc29uPSJ4IiwgYWN0b3I9Im9wIikKICAgICAgICAgICAgYXNzZXJ0IGNhbGxzWyJjb3VudCJdID09IDEKICAgICAgICAgICAgYXNzZXJ0IGF3YWl0IHN3aXRjaC5jYW5jZWxfcmVzdGluZ19vcmRlcnMoKSA9PSAyCiAgICAgICAgICAgIGFzc2VydCBjYWxsc1siY291bnQiXSA9PSAyCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgogICAgZGVmIHRlc3Rfd2l0aG91dF9jYW5jZWxsZXJfcmV0dXJuc196ZXJvKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIHN3aXRjaCA9IGF3YWl0IGVuZ2luZSh0bXBfcGF0aCwgTWFudWFsQ2xvY2soVDApKQogICAgICAgICAgICBhc3NlcnQgYXdhaXQgc3dpdGNoLmNhbmNlbF9yZXN0aW5nX29yZGVycygpID09IDAKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCgpjbGFzcyBUZXN0RXJyb3JCdWRnZXQ6CiAgICBkZWYgdGVzdF9idWRnZXRfZXhoYXVzdGlvbl9ibG9ja3NfcHJvbW90aW9uKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIHN0b3JlID0gc3RvcmVfYXQodG1wX3BhdGgpCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICBjb25maWcgPSBzZXR0aW5ncygpCiAgICAgICAgICAgIHRyYWNrZXIgPSBFcnJvckJ1ZGdldFRyYWNrZXIoc2V0dGluZ3M9Y29uZmlnLCBzdG9yZT1zdG9yZSwgY2xvY2s9Y2xvY2spCiAgICAgICAgICAgIGNvbGxlY3RvciA9IFRlbGVtZXRyeUNvbGxlY3RvcihzdG9yZT1zdG9yZSwgY2xvY2s9Y2xvY2ssIGxvZ2dlcj1sb2dnZXIoKSkKICAgICAgICAgICAgZm9yIF8gaW4gcmFuZ2UoNSk6CiAgICAgICAgICAgICAgICBjb2xsZWN0b3Iub3BlcmF0aW9uKCkKICAgICAgICAgICAgYXdhaXQgY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICAgICAgaGVhbHRoeSA9IGF3YWl0IHRyYWNrZXIuc3RhdHVzKCkKICAgICAgICAgICAgYXNzZXJ0IG5vdCBoZWFsdGh5LmV4aGF1c3RlZAogICAgICAgICAgICBhc3NlcnQgYXdhaXQgdHJhY2tlci5wcm9tb3Rpb25fcGVybWl0dGVkKCkKICAgICAgICAgICAgZm9yIF8gaW4gcmFuZ2UoMik6ICAjIDIgZXJyb3JzIC8gNSBvcGVyYXRpb25zID0gNDAlID4gMjAlIGJ1ZGdldAogICAgICAgICAgICAgICAgY29sbGVjdG9yLmVycm9yKCkKICAgICAgICAgICAgYXdhaXQgY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICAgICAgZXhoYXVzdGVkID0gYXdhaXQgdHJhY2tlci5zdGF0dXMoKQogICAgICAgICAgICBhc3NlcnQgZXhoYXVzdGVkLmV4aGF1c3RlZAogICAgICAgICAgICBhc3NlcnQgZXhoYXVzdGVkLmVycm9ycyA9PSAyCiAgICAgICAgICAgIGFzc2VydCBub3QgYXdhaXQgdHJhY2tlci5wcm9tb3Rpb25fcGVybWl0dGVkKCkKICAgICAgICAgICAgYXdhaXQgc3RvcmUuY2xvc2UoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X3RoaW5fc2FtcGxlX25ldmVyX2V4aGF1c3RzKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIHN0b3JlID0gc3RvcmVfYXQodG1wX3BhdGgpCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICB0cmFja2VyID0gRXJyb3JCdWRnZXRUcmFja2VyKAogICAgICAgICAgICAgICAgc2V0dGluZ3M9c2V0dGluZ3MoKSwgc3RvcmU9c3RvcmUsIGNsb2NrPWNsb2NrCiAgICAgICAgICAgICkKICAgICAgICAgICAgY29sbGVjdG9yID0gVGVsZW1ldHJ5Q29sbGVjdG9yKHN0b3JlPXN0b3JlLCBjbG9jaz1jbG9jaywgbG9nZ2VyPWxvZ2dlcigpKQogICAgICAgICAgICBjb2xsZWN0b3Iub3BlcmF0aW9uKCkKICAgICAgICAgICAgY29sbGVjdG9yLmVycm9yKCkKICAgICAgICAgICAgYXdhaXQgY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICAgICAgc3RhdHVzID0gYXdhaXQgdHJhY2tlci5zdGF0dXMoKQogICAgICAgICAgICBhc3NlcnQgc3RhdHVzLmVycm9yX3JhdGUgPT0gMS4wCiAgICAgICAgICAgIGFzc2VydCBub3Qgc3RhdHVzLmV4aGF1c3RlZCAgIyBiZWxvdyBzbG9fbWluX29wZXJhdGlvbnMKICAgICAgICAgICAgYXdhaXQgc3RvcmUuY2xvc2UoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQo=
+"""Kill switch: transitions, permissions, auto-engage, SAFE_MODE cancel."""
+
+import asyncio
+from pathlib import Path
+
+import pytest
+from apex.core.exceptions import MonitoringError
+from apex.core.time.clock import ManualClock
+from apex.monitoring.collector import TelemetryCollector
+from apex.monitoring.killswitch import KillSwitchEngine
+from apex.monitoring.records import AlertSeverity, KillSwitchLevel
+from apex.monitoring.slo import ErrorBudgetTracker
+
+from tests.conftest import T0
+from tests.unit.monitoring.support import logger, make_bus, settings, store_at
+
+
+async def engine(
+    tmp_path: Path,
+    clock: ManualClock,
+    *,
+    canceller: object = None,
+    auto: bool = True,
+) -> KillSwitchEngine:
+    store = store_at(tmp_path)
+    await store.open()
+    return KillSwitchEngine(
+        settings=settings(kill_switch_auto_engage=auto),
+        store=store,
+        bus=make_bus(clock),
+        clock=clock,
+        logger=logger(),
+        order_canceller=canceller,  # type: ignore[arg-type]
+    )
+
+
+class TestTransitions:
+    def test_default_level_allows_everything(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0))
+            assert (await switch.level()) is KillSwitchLevel.NONE
+            assert await switch.allows_new_entries()
+            assert await switch.allows_processing()
+
+        asyncio.run(scenario())
+
+    def test_engage_and_release_ladder(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0))
+            await switch.engage(
+                KillSwitchLevel.ENTRIES_DISABLED, reason="test", actor="op"
+            )
+            assert not await switch.allows_new_entries()
+            assert await switch.allows_processing()
+            await switch.engage(KillSwitchLevel.PAUSED, reason="test", actor="op")
+            assert not await switch.allows_processing()
+            record = await switch.release(reason="done", actor="op")
+            assert record.level is KillSwitchLevel.NONE
+            assert await switch.allows_new_entries()
+
+        asyncio.run(scenario())
+
+    def test_engage_none_is_rejected(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0))
+            with pytest.raises(MonitoringError):
+                await switch.engage(KillSwitchLevel.NONE, reason="x", actor="op")
+
+        asyncio.run(scenario())
+
+
+class TestAutoEngage:
+    def test_below_threshold_does_nothing(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0))
+            engaged = await switch.auto_engage(
+                severity=AlertSeverity.HIGH, reason="x"
+            )
+            assert engaged is False
+            assert (await switch.level()) is KillSwitchLevel.NONE
+
+        asyncio.run(scenario())
+
+    def test_disabled_policy_never_engages(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0), auto=False)
+            engaged = await switch.auto_engage(
+                severity=AlertSeverity.EMERGENCY, reason="x"
+            )
+            assert engaged is False
+
+        asyncio.run(scenario())
+
+    def test_no_downgrade_when_already_stricter(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0))
+            await switch.engage(KillSwitchLevel.SAFE_MODE, reason="x", actor="op")
+            engaged = await switch.auto_engage(
+                severity=AlertSeverity.EMERGENCY, reason="y"
+            )
+            assert engaged is False
+            assert (await switch.level()) is KillSwitchLevel.SAFE_MODE
+
+        asyncio.run(scenario())
+
+
+class TestSafeMode:
+    def test_safe_mode_cancels_resting_orders(self, tmp_path: Path) -> None:
+        calls = {"count": 0}
+
+        async def canceller() -> int:
+            calls["count"] += 1
+            return 2
+
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0), canceller=canceller)
+            await switch.engage(KillSwitchLevel.SAFE_MODE, reason="x", actor="op")
+            assert calls["count"] == 1
+            assert await switch.cancel_resting_orders() == 2
+            assert calls["count"] == 2
+
+        asyncio.run(scenario())
+
+    def test_without_canceller_returns_zero(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            switch = await engine(tmp_path, ManualClock(T0))
+            assert await switch.cancel_resting_orders() == 0
+
+        asyncio.run(scenario())
+
+
+class TestErrorBudget:
+    def test_budget_exhaustion_blocks_promotion(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            store = store_at(tmp_path)
+            await store.open()
+            config = settings()
+            tracker = ErrorBudgetTracker(settings=config, store=store, clock=clock)
+            collector = TelemetryCollector(store=store, clock=clock, logger=logger())
+            for _ in range(5):
+                collector.operation()
+            await collector.flush()
+            healthy = await tracker.status()
+            assert not healthy.exhausted
+            assert await tracker.promotion_permitted()
+            for _ in range(2):  # 2 errors / 5 operations = 40% > 20% budget
+                collector.error()
+            await collector.flush()
+            exhausted = await tracker.status()
+            assert exhausted.exhausted
+            assert exhausted.errors == 2
+            assert not await tracker.promotion_permitted()
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_thin_sample_never_exhausts(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            store = store_at(tmp_path)
+            await store.open()
+            tracker = ErrorBudgetTracker(
+                settings=settings(), store=store, clock=clock
+            )
+            collector = TelemetryCollector(store=store, clock=clock, logger=logger())
+            collector.operation()
+            collector.error()
+            await collector.flush()
+            status = await tracker.status()
+            assert status.error_rate == 1.0
+            assert not status.exhausted  # below slo_min_operations
+            await store.close()
+
+        asyncio.run(scenario())
