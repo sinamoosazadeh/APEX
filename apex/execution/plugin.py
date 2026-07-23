@@ -1,10 +1,12 @@
 """Execution platform plugin (Book II ch. 12/20, Book VII).
 
 Wires the Phase 10 slice: execution settings (exchange.yaml) -> the
-signed Toobit trading client (env credentials; absent credentials
-leave the platform paper-only) -> paper and live execution engines ->
-execution audit store -> execution service -> kernel module. Requires
-the portfolio platform: every execution re-checks admission there.
+signed Toobit trading client (vault-first credentials with an
+environment fallback since Phase 13; absent credentials leave the
+platform paper-only) -> paper and live execution engines -> execution
+audit store -> execution service -> kernel module. Requires the
+portfolio platform (every execution re-checks admission there) and
+the security platform (credential resolution, 13.7).
 """
 
 from collections.abc import Sequence
@@ -27,9 +29,20 @@ from apex.plugins.contract import PluginManifest
 from apex.portfolio.config import portfolio_settings
 from apex.portfolio.engine import PortfolioEngine
 from apex.portfolio.store import SqlitePortfolioRepository
+from apex.security.service import SecurityService
+from apex.security.vault import SECRET_TOOBIT_KEY, SECRET_TOOBIT_SECRET
 from apex.storage.bars import SqliteBarRepository
 
 EXECUTION_DATABASE_FILENAME = "executions.sqlite"
+
+
+def _credentials(security: SecurityService) -> TradingCredentials | None:
+    """Vault-first trading credentials with environment fallback (13.7)."""
+    key = security.secret(SECRET_TOOBIT_KEY)
+    secret = security.secret(SECRET_TOOBIT_SECRET)
+    if key and secret:
+        return TradingCredentials(api_key=key, api_secret=secret)
+    return TradingCredentials.from_environment()
 
 
 class ExecutionPlatformModule:
@@ -94,7 +107,7 @@ class ExecutionPlatformPlugin:
             api_version=SemanticVersion(1, 0, 0),
             description="Paper and live execution engines, trading client, audit",
             stability=StabilityLevel.BETA,
-            requires=("portfolio_platform",),
+            requires=("portfolio_platform", "security_platform"),
         )
 
     def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
@@ -116,7 +129,7 @@ class ExecutionPlatformPlugin:
             retry_backoff_ms=config.toobit.retry_backoff_ms,
             clock=clock,
             logger=loggers.get("execution.client"),
-            credentials=TradingCredentials.from_environment(),
+            credentials=_credentials(container.resolve(SecurityService)),
         )
         paper = PaperExecutionEngine(
             settings=settings,
