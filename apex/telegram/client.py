@@ -1,1 +1,165 @@
-IiIiVGVsZWdyYW0gQm90IEFQSSBjbGllbnQgKEJvb2sgSVYgdHJhbnNwb3J0IGxheWVyKS4KCkEgbWluaW1hbCwgZGVwZW5kZW5jeS1saWdodCBjbGllbnQgb3ZlciBodHRweDogbG9uZy1wb2xsIGdldFVwZGF0ZXMsCnNlbmRNZXNzYWdlLCBlZGl0TWVzc2FnZVRleHQgYW5kIGFuc3dlckNhbGxiYWNrUXVlcnkgLSBldmVyeXRoaW5nIHRoZQpjb25zb2xlIG5lZWRzLCBub3RoaW5nIG1vcmUuIFRoZSB0cmFuc3BvcnQgaXMgaW5qZWN0YWJsZSBmb3IgdGVzdHMKKHRoZSBwbGF0Zm9ybSdzIHN0YW5kYXJkIHNlYW0pOyB0aGUgYm90IHRva2VuIG5ldmVyIGFwcGVhcnMgaW4gbG9ncwpvciBlcnJvciBkZXRhaWxzIC0gZXJyb3JzIGNhcnJ5IHRoZSBBUEkgbWV0aG9kIG5hbWUgb25seS4KIiIiCgppbXBvcnQganNvbgpmcm9tIHR5cGluZyBpbXBvcnQgRmluYWwKCmltcG9ydCBodHRweAoKZnJvbSBhcGV4LmNvcmUuZXhjZXB0aW9ucyBpbXBvcnQgVGVsZWdyYW1FcnJvcgpmcm9tIGFwZXguY29yZS5sb2dnaW5nIGltcG9ydCBTdHJ1Y3R1cmVkTG9nZ2VyCmZyb20gYXBleC5jb3JlLnNlcmlhbGl6YXRpb24gaW1wb3J0IEpzb25WYWx1ZQoKX0JBU0VfVVJMOiBGaW5hbFtzdHJdID0gImh0dHBzOi8vYXBpLnRlbGVncmFtLm9yZyIKIyBMb25nIHBvbGxzIGhvbGQgdGhlIGNvbm5lY3Rpb24gdXAgdG8gcG9sbF90aW1lb3V0X3M7IHRoZSB0cmFuc3BvcnQKIyB0aW1lb3V0IG11c3QgY29tZm9ydGFibHkgZXhjZWVkIGl0LgpfVElNRU9VVF9NQVJHSU5fUzogRmluYWxbZmxvYXRdID0gMTAuMAoKCmNsYXNzIFRlbGVncmFtQm90Q2xpZW50OgogICAgIiIiQXN5bmMgY2xpZW50IGZvciB0aGUgaGFuZGZ1bCBvZiBCb3QgQVBJIG1ldGhvZHMgdGhlIGNvbnNvbGUgdXNlcy4iIiIKCiAgICBkZWYgX19pbml0X18oCiAgICAgICAgc2VsZiwKICAgICAgICAqLAogICAgICAgIHRva2VuOiBzdHIsCiAgICAgICAgcG9sbF90aW1lb3V0X3M6IGludCwKICAgICAgICBsb2dnZXI6IFN0cnVjdHVyZWRMb2dnZXIsCiAgICAgICAgYmFzZV91cmw6IHN0ciA9IF9CQVNFX1VSTCwKICAgICAgICB0cmFuc3BvcnQ6IGh0dHB4LkFzeW5jQmFzZVRyYW5zcG9ydCB8IE5vbmUgPSBOb25lLAogICAgKSAtPiBOb25lOgogICAgICAgIHNlbGYuX3Rva2VuID0gdG9rZW4KICAgICAgICBzZWxmLl9wb2xsX3RpbWVvdXRfcyA9IHBvbGxfdGltZW91dF9zCiAgICAgICAgc2VsZi5fbG9nZ2VyID0gbG9nZ2VyCiAgICAgICAgc2VsZi5fYmFzZV91cmwgPSBiYXNlX3VybC5yc3RyaXAoIi8iKQogICAgICAgIHNlbGYuX3RyYW5zcG9ydCA9IHRyYW5zcG9ydAogICAgICAgIHNlbGYuX2NsaWVudDogaHR0cHguQXN5bmNDbGllbnQgfCBOb25lID0gTm9uZQoKICAgIGFzeW5jIGRlZiBvcGVuKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgIiIiQ3JlYXRlIHRoZSBIVFRQIHNlc3Npb24gKG5vIG5ldHdvcmsgY29udGFjdCkuIiIiCiAgICAgICAgaWYgc2VsZi5fY2xpZW50IGlzIG5vdCBOb25lOgogICAgICAgICAgICByYWlzZSBUZWxlZ3JhbUVycm9yKCJ0ZWxlZ3JhbSBjbGllbnQgaXMgYWxyZWFkeSBvcGVuIiwgY29kZT0iVEdNLTAxMCIpCiAgICAgICAgc2VsZi5fY2xpZW50ID0gaHR0cHguQXN5bmNDbGllbnQoCiAgICAgICAgICAgIGJhc2VfdXJsPXNlbGYuX2Jhc2VfdXJsLAogICAgICAgICAgICB0aW1lb3V0PXNlbGYuX3BvbGxfdGltZW91dF9zICsgX1RJTUVPVVRfTUFSR0lOX1MsCiAgICAgICAgICAgIHRyYW5zcG9ydD1zZWxmLl90cmFuc3BvcnQsCiAgICAgICAgKQoKICAgIGFzeW5jIGRlZiBjbG9zZShzZWxmKSAtPiBOb25lOgogICAgICAgICIiIkNsb3NlIHRoZSBIVFRQIHNlc3Npb247IGlkZW1wb3RlbnQuIiIiCiAgICAgICAgaWYgc2VsZi5fY2xpZW50IGlzIG5vdCBOb25lOgogICAgICAgICAgICBhd2FpdCBzZWxmLl9jbGllbnQuYWNsb3NlKCkKICAgICAgICAgICAgc2VsZi5fY2xpZW50ID0gTm9uZQoKICAgICMgLS0tIE1ldGhvZHMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgZ2V0X21lKHNlbGYpIC0+IGRpY3Rbc3RyLCBKc29uVmFsdWVdOgogICAgICAgICIiImdldE1lIC0gaWRlbnRpdHkgY2hlY2suIiIiCiAgICAgICAgcmVzdWx0ID0gYXdhaXQgc2VsZi5fY2FsbCgiZ2V0TWUiLCB7fSkKICAgICAgICByZXR1cm4gcmVzdWx0IGlmIGlzaW5zdGFuY2UocmVzdWx0LCBkaWN0KSBlbHNlIHt9CgogICAgYXN5bmMgZGVmIGdldF91cGRhdGVzKHNlbGYsICosIG9mZnNldDogaW50KSAtPiBsaXN0W2RpY3Rbc3RyLCBKc29uVmFsdWVdXToKICAgICAgICAiIiJnZXRVcGRhdGVzIGxvbmcgcG9sbCBmcm9tIGBgb2Zmc2V0YGAuIiIiCiAgICAgICAgcmVzdWx0ID0gYXdhaXQgc2VsZi5fY2FsbCgKICAgICAgICAgICAgImdldFVwZGF0ZXMiLAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAib2Zmc2V0Ijogb2Zmc2V0LAogICAgICAgICAgICAgICAgInRpbWVvdXQiOiBzZWxmLl9wb2xsX3RpbWVvdXRfcywKICAgICAgICAgICAgICAgICJhbGxvd2VkX3VwZGF0ZXMiOiBbIm1lc3NhZ2UiLCAiY2FsbGJhY2tfcXVlcnkiXSwKICAgICAgICAgICAgfSwKICAgICAgICApCiAgICAgICAgaWYgbm90IGlzaW5zdGFuY2UocmVzdWx0LCBsaXN0KToKICAgICAgICAgICAgcmV0dXJuIFtdCiAgICAgICAgcmV0dXJuIFtpdGVtIGZvciBpdGVtIGluIHJlc3VsdCBpZiBpc2luc3RhbmNlKGl0ZW0sIGRpY3QpXQoKICAgIGFzeW5jIGRlZiBzZW5kX21lc3NhZ2UoCiAgICAgICAgc2VsZiwKICAgICAgICBjaGF0X2lkOiBpbnQsCiAgICAgICAgdGV4dDogc3RyLAogICAgICAgICosCiAgICAgICAga2V5Ym9hcmQ6IEpzb25WYWx1ZSB8IE5vbmUgPSBOb25lLAogICAgKSAtPiBpbnQ6CiAgICAgICAgIiIic2VuZE1lc3NhZ2U7IHJldHVybnMgdGhlIG5ldyBtZXNzYWdlIGlkLiIiIgogICAgICAgIHBhcmFtczogZGljdFtzdHIsIEpzb25WYWx1ZV0gPSB7ImNoYXRfaWQiOiBjaGF0X2lkLCAidGV4dCI6IHRleHR9CiAgICAgICAgaWYga2V5Ym9hcmQgaXMgbm90IE5vbmU6CiAgICAgICAgICAgIHBhcmFtc1sicmVwbHlfbWFya3VwIl0gPSBqc29uLmR1bXBzKGtleWJvYXJkKQogICAgICAgIHJlc3VsdCA9IGF3YWl0IHNlbGYuX2NhbGwoInNlbmRNZXNzYWdlIiwgcGFyYW1zKQogICAgICAgIGlmIGlzaW5zdGFuY2UocmVzdWx0LCBkaWN0KToKICAgICAgICAgICAgbWVzc2FnZV9pZCA9IHJlc3VsdC5nZXQoIm1lc3NhZ2VfaWQiKQogICAgICAgICAgICBpZiBpc2luc3RhbmNlKG1lc3NhZ2VfaWQsIGludCk6CiAgICAgICAgICAgICAgICByZXR1cm4gbWVzc2FnZV9pZAogICAgICAgIHJhaXNlIFRlbGVncmFtRXJyb3IoInNlbmRNZXNzYWdlIHJldHVybmVkIG5vIG1lc3NhZ2UgaWQiLCBjb2RlPSJUR00tMDExIikKCiAgICBhc3luYyBkZWYgZWRpdF9tZXNzYWdlKAogICAgICAgIHNlbGYsCiAgICAgICAgY2hhdF9pZDogaW50LAogICAgICAgIG1lc3NhZ2VfaWQ6IGludCwKICAgICAgICB0ZXh0OiBzdHIsCiAgICAgICAgKiwKICAgICAgICBrZXlib2FyZDogSnNvblZhbHVlIHwgTm9uZSA9IE5vbmUsCiAgICApIC0+IE5vbmU6CiAgICAgICAgIiIiZWRpdE1lc3NhZ2VUZXh0IC0gdGhlIG5hdmlnYXRpb24gZWRpdC1pbi1wbGFjZSBwb2xpY3kuIiIiCiAgICAgICAgcGFyYW1zOiBkaWN0W3N0ciwgSnNvblZhbHVlXSA9IHsKICAgICAgICAgICAgImNoYXRfaWQiOiBjaGF0X2lkLAogICAgICAgICAgICAibWVzc2FnZV9pZCI6IG1lc3NhZ2VfaWQsCiAgICAgICAgICAgICJ0ZXh0IjogdGV4dCwKICAgICAgICB9CiAgICAgICAgaWYga2V5Ym9hcmQgaXMgbm90IE5vbmU6CiAgICAgICAgICAgIHBhcmFtc1sicmVwbHlfbWFya3VwIl0gPSBqc29uLmR1bXBzKGtleWJvYXJkKQogICAgICAgIGF3YWl0IHNlbGYuX2NhbGwoImVkaXRNZXNzYWdlVGV4dCIsIHBhcmFtcykKCiAgICBhc3luYyBkZWYgYW5zd2VyX2NhbGxiYWNrKAogICAgICAgIHNlbGYsIGNhbGxiYWNrX3F1ZXJ5X2lkOiBzdHIsICosIHRleHQ6IHN0ciB8IE5vbmUgPSBOb25lCiAgICApIC0+IE5vbmU6CiAgICAgICAgIiIiYW5zd2VyQ2FsbGJhY2tRdWVyeSAtIGV2ZXJ5IGNhbGxiYWNrIGlzIGFja25vd2xlZGdlZC4iIiIKICAgICAgICBwYXJhbXM6IGRpY3Rbc3RyLCBKc29uVmFsdWVdID0geyJjYWxsYmFja19xdWVyeV9pZCI6IGNhbGxiYWNrX3F1ZXJ5X2lkfQogICAgICAgIGlmIHRleHQgaXMgbm90IE5vbmU6CiAgICAgICAgICAgIHBhcmFtc1sidGV4dCJdID0gdGV4dAogICAgICAgIGF3YWl0IHNlbGYuX2NhbGwoImFuc3dlckNhbGxiYWNrUXVlcnkiLCBwYXJhbXMpCgogICAgIyAtLS0gVHJhbnNwb3J0IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgZGVmIF9yZXF1aXJlX2NsaWVudChzZWxmKSAtPiBodHRweC5Bc3luY0NsaWVudDoKICAgICAgICBpZiBzZWxmLl9jbGllbnQgaXMgTm9uZToKICAgICAgICAgICAgcmFpc2UgVGVsZWdyYW1FcnJvcigidGVsZWdyYW0gY2xpZW50IGlzIG5vdCBvcGVuIiwgY29kZT0iVEdNLTAxMiIpCiAgICAgICAgcmV0dXJuIHNlbGYuX2NsaWVudAoKICAgIGFzeW5jIGRlZiBfY2FsbChzZWxmLCBtZXRob2Q6IHN0ciwgcGFyYW1zOiBkaWN0W3N0ciwgSnNvblZhbHVlXSkgLT4gSnNvblZhbHVlOgogICAgICAgICIiIlBPU1Qgb25lIEJvdCBBUEkgbWV0aG9kOyBlcnJvcnMgbmV2ZXIgY2FycnkgdGhlIHRva2VuLiIiIgogICAgICAgIGNsaWVudCA9IHNlbGYuX3JlcXVpcmVfY2xpZW50KCkKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJlc3BvbnNlID0gYXdhaXQgY2xpZW50LnBvc3QoZiIvYm90e3NlbGYuX3Rva2VufS97bWV0aG9kfSIsIGpzb249cGFyYW1zKQogICAgICAgIGV4Y2VwdCBodHRweC5IVFRQRXJyb3IgYXMgZXJyb3I6CiAgICAgICAgICAgIHJhaXNlIFRlbGVncmFtRXJyb3IoCiAgICAgICAgICAgICAgICAidGVsZWdyYW0gdHJhbnNwb3J0IGZhaWx1cmUiLAogICAgICAgICAgICAgICAgY29kZT0iVEdNLTAxMyIsCiAgICAgICAgICAgICAgICBkZXRhaWxzPXsibWV0aG9kIjogbWV0aG9kLCAicmVhc29uIjogdHlwZShlcnJvcikuX19uYW1lX199LAogICAgICAgICAgICApIGZyb20gZXJyb3IKICAgICAgICBpZiByZXNwb25zZS5zdGF0dXNfY29kZSAhPSAyMDA6CiAgICAgICAgICAgIHJhaXNlIFRlbGVncmFtRXJyb3IoCiAgICAgICAgICAgICAgICAidGVsZWdyYW0gQVBJIHJlamVjdGVkIHRoZSByZXF1ZXN0IiwKICAgICAgICAgICAgICAgIGNvZGU9IlRHTS0wMTQiLAogICAgICAgICAgICAgICAgZGV0YWlscz17Im1ldGhvZCI6IG1ldGhvZCwgInN0YXR1cyI6IHJlc3BvbnNlLnN0YXR1c19jb2RlfSwKICAgICAgICAgICAgKQogICAgICAgIHRyeToKICAgICAgICAgICAgcGF5bG9hZCA9IHJlc3BvbnNlLmpzb24oKQogICAgICAgIGV4Y2VwdCBWYWx1ZUVycm9yIGFzIGVycm9yOgogICAgICAgICAgICByYWlzZSBUZWxlZ3JhbUVycm9yKAogICAgICAgICAgICAgICAgInRlbGVncmFtIEFQSSByZXR1cm5lZCBpbnZhbGlkIEpTT04iLAogICAgICAgICAgICAgICAgY29kZT0iVEdNLTAxNSIsCiAgICAgICAgICAgICAgICBkZXRhaWxzPXsibWV0aG9kIjogbWV0aG9kfSwKICAgICAgICAgICAgKSBmcm9tIGVycm9yCiAgICAgICAgaWYgbm90IGlzaW5zdGFuY2UocGF5bG9hZCwgZGljdCkgb3IgcGF5bG9hZC5nZXQoIm9rIikgaXMgbm90IFRydWU6CiAgICAgICAgICAgIHJhaXNlIFRlbGVncmFtRXJyb3IoCiAgICAgICAgICAgICAgICAidGVsZWdyYW0gQVBJIHJlcG9ydGVkIGZhaWx1cmUiLAogICAgICAgICAgICAgICAgY29kZT0iVEdNLTAxNiIsCiAgICAgICAgICAgICAgICBkZXRhaWxzPXsibWV0aG9kIjogbWV0aG9kfSwKICAgICAgICAgICAgKQogICAgICAgIHJlc3VsdDogSnNvblZhbHVlID0gcGF5bG9hZC5nZXQoInJlc3VsdCIpCiAgICAgICAgcmV0dXJuIHJlc3VsdAo=
+"""Telegram Bot API client (Book IV transport layer).
+
+A minimal, dependency-light client over httpx: long-poll getUpdates,
+sendMessage, editMessageText and answerCallbackQuery - everything the
+console needs, nothing more. The transport is injectable for tests
+(the platform's standard seam); the bot token never appears in logs
+or error details - errors carry the API method name only.
+"""
+
+import json
+from typing import Final
+
+import httpx
+
+from apex.core.exceptions import TelegramError
+from apex.core.logging import StructuredLogger
+from apex.core.serialization import JsonValue
+
+_BASE_URL: Final[str] = "https://api.telegram.org"
+# Long polls hold the connection up to poll_timeout_s; the transport
+# timeout must comfortably exceed it.
+_TIMEOUT_MARGIN_S: Final[float] = 10.0
+
+
+class TelegramBotClient:
+    """Async client for the handful of Bot API methods the console uses."""
+
+    def __init__(
+        self,
+        *,
+        token: str,
+        poll_timeout_s: int,
+        logger: StructuredLogger,
+        base_url: str = _BASE_URL,
+        transport: httpx.AsyncBaseTransport | None = None,
+    ) -> None:
+        self._token = token
+        self._poll_timeout_s = poll_timeout_s
+        self._logger = logger
+        self._base_url = base_url.rstrip("/")
+        self._transport = transport
+        self._client: httpx.AsyncClient | None = None
+
+    async def open(self) -> None:
+        """Create the HTTP session (no network contact)."""
+        if self._client is not None:
+            raise TelegramError("telegram client is already open", code="TGM-010")
+        self._client = httpx.AsyncClient(
+            base_url=self._base_url,
+            timeout=self._poll_timeout_s + _TIMEOUT_MARGIN_S,
+            transport=self._transport,
+        )
+
+    async def close(self) -> None:
+        """Close the HTTP session; idempotent."""
+        if self._client is not None:
+            await self._client.aclose()
+            self._client = None
+
+    # --- Methods -----------------------------------------------------------------
+
+    async def get_me(self) -> dict[str, JsonValue]:
+        """getMe - identity check."""
+        result = await self._call("getMe", {})
+        return result if isinstance(result, dict) else {}
+
+    async def get_updates(self, *, offset: int) -> list[dict[str, JsonValue]]:
+        """getUpdates long poll from ``offset``."""
+        result = await self._call(
+            "getUpdates",
+            {
+                "offset": offset,
+                "timeout": self._poll_timeout_s,
+                "allowed_updates": ["message", "callback_query"],
+            },
+        )
+        if not isinstance(result, list):
+            return []
+        return [item for item in result if isinstance(item, dict)]
+
+    async def send_message(
+        self,
+        chat_id: int,
+        text: str,
+        *,
+        keyboard: JsonValue | None = None,
+    ) -> int:
+        """sendMessage; returns the new message id."""
+        params: dict[str, JsonValue] = {"chat_id": chat_id, "text": text}
+        if keyboard is not None:
+            params["reply_markup"] = json.dumps(keyboard)
+        result = await self._call("sendMessage", params)
+        if isinstance(result, dict):
+            message_id = result.get("message_id")
+            if isinstance(message_id, int):
+                return message_id
+        raise TelegramError("sendMessage returned no message id", code="TGM-011")
+
+    async def edit_message(
+        self,
+        chat_id: int,
+        message_id: int,
+        text: str,
+        *,
+        keyboard: JsonValue | None = None,
+    ) -> None:
+        """editMessageText - the navigation edit-in-place policy."""
+        params: dict[str, JsonValue] = {
+            "chat_id": chat_id,
+            "message_id": message_id,
+            "text": text,
+        }
+        if keyboard is not None:
+            params["reply_markup"] = json.dumps(keyboard)
+        await self._call("editMessageText", params)
+
+    async def answer_callback(
+        self, callback_query_id: str, *, text: str | None = None
+    ) -> None:
+        """answerCallbackQuery - every callback is acknowledged."""
+        params: dict[str, JsonValue] = {"callback_query_id": callback_query_id}
+        if text is not None:
+            params["text"] = text
+        await self._call("answerCallbackQuery", params)
+
+    # --- Transport -----------------------------------------------------------------
+
+    def _require_client(self) -> httpx.AsyncClient:
+        if self._client is None:
+            raise TelegramError("telegram client is not open", code="TGM-012")
+        return self._client
+
+    async def _call(self, method: str, params: dict[str, JsonValue]) -> JsonValue:
+        """POST one Bot API method; errors never carry the token."""
+        client = self._require_client()
+        try:
+            response = await client.post(f"/bot{self._token}/{method}", json=params)
+        except httpx.HTTPError as error:
+            raise TelegramError(
+                "telegram transport failure",
+                code="TGM-013",
+                details={"method": method, "reason": type(error).__name__},
+            ) from error
+        if response.status_code != 200:
+            raise TelegramError(
+                "telegram API rejected the request",
+                code="TGM-014",
+                details={"method": method, "status": response.status_code},
+            )
+        try:
+            payload = response.json()
+        except ValueError as error:
+            raise TelegramError(
+                "telegram API returned invalid JSON",
+                code="TGM-015",
+                details={"method": method},
+            ) from error
+        if not isinstance(payload, dict) or payload.get("ok") is not True:
+            raise TelegramError(
+                "telegram API reported failure",
+                code="TGM-016",
+                details={"method": method},
+            )
+        result: JsonValue = payload.get("result")
+        return result
