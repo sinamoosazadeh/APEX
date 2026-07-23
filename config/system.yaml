@@ -28,3 +28,5 @@ plugins:
     - apex.portfolio.plugin
     - apex.execution.plugin
     - apex.research.plugin
+    - apex.monitoring.plugin
+    - apex.telegram.plugin
