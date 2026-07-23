@@ -1,1 +1,454 @@
-IiIiVGVsZWdyYW0gbWVzc2FnZSBidWlsZGVyIChCb29rIElWIFBhcnQgMTUgZGVzaWduIHN5c3RlbSkuCgpFdmVyeSBvdXRnb2luZyB0ZXh0IHJlbmRlcnMgaGVyZSAtIG5vIGhhcmRjb2RlZCBzdHJpbmdzIGluIGhhbmRsZXJzLgpUaGUgYmluZGluZyBydWxlcyBpbXBsZW1lbnRlZDogb25lIGNvbmNlcHQgcGVyIGxpbmUgd2l0aCBkb3QtbGVhZGVyCmFsaWdubWVudCwgdGhlIHJlc3RyaWN0ZWQgZW1vamkgc2V0IChkZWNvcmF0aXZlIGVtb2ppIGFyZSBiYW5uZWQpLAp0aGUgZml4ZWQgcGFnZSB0ZW1wbGF0ZSAodGl0bGUgLT4gY29udGV4dCAtPiBzdW1tYXJ5IC0+IG1ldHJpY3MgLT4KYWN0aW9ucyksIHRoZSBmaXhlZCBzdGF0dXMgdm9jYWJ1bGFyeSwgZm9ybWF0dGVkIG51bWJlcnMsIGFuZAp0d28td29yZCBidXR0b24gbGFiZWxzLgoiIiIKCmZyb20gdHlwaW5nIGltcG9ydCBGaW5hbAoKZnJvbSBhcGV4LmNvcmUuc2VyaWFsaXphdGlvbiBpbXBvcnQgSnNvblZhbHVlCmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IEtpbGxTd2l0Y2hMZXZlbCwgT3BlcmF0aW9uc1N0YXR1cwpmcm9tIGFwZXgucG9ydGZvbGlvLnN0b3JlIGltcG9ydCBQb3NpdGlvblJlY29yZApmcm9tIGFwZXgucmVzZWFyY2guc3RvcmUgaW1wb3J0IFByb21vdGlvblJlY29yZCwgUmVzZWFyY2hKb2IKCiMgVGhlIGFsbG93ZWQgZW1vamkgc2V0IChQYXJ0IDE1IHByaW5jaXBsZSA3KS4KRV9DSEFSVDogRmluYWxbc3RyXSA9ICJcVTAwMDFmNGNhIiAgICAgICMgYmFyIGNoYXJ0CkVfVVA6IEZpbmFsW3N0cl0gPSAiXFUwMDAxZjRjOCIgICAgICAgICAjIHVwd2FyZHMgdHJlbmQKRV9XQVJOOiBGaW5hbFtzdHJdID0gIuKaoCIgICAgICAgICAgICMgd2FybmluZwpFX0VSUk9SOiBGaW5hbFtzdHJdID0gIuKdjCIgICAgICAgICAgIyBjcm9zcyBtYXJrCkVfT0s6IEZpbmFsW3N0cl0gPSAi4pyFIiAgICAgICAgICAgICAjIGNoZWNrIG1hcmsKRV9NT05FWTogRmluYWxbc3RyXSA9ICJcVTAwMDFmNGIwIiAgICAgICMgbW9uZXkgYmFnCkVfQlJBSU46IEZpbmFsW3N0cl0gPSAiXFUwMDAxZjllMCIgICAgICAjIGJyYWluCkVfR0VBUjogRmluYWxbc3RyXSA9ICLimpkiICAgICAgICAgICAjIGdlYXIKRV9GT0xERVI6IEZpbmFsW3N0cl0gPSAiXFUwMDAxZjRjMSIgICAgICMgZm9sZGVyCkVfQU5URU5OQTogRmluYWxbc3RyXSA9ICJcVTAwMDFmNGUxIiAgICAjIGFudGVubmEKRV9IRUFSVDogRmluYWxbc3RyXSA9ICLinaQiICAgICAgICAgICMgaGVhcnQKRV9HUkVFTjogRmluYWxbc3RyXSA9ICJcVTAwMDFmN2UyIiAgICAgICMgZ3JlZW4gY2lyY2xlCkVfWUVMTE9XOiBGaW5hbFtzdHJdID0gIlxVMDAwMWY3ZTEiICAgICAjIHllbGxvdyBjaXJjbGUKRV9SRUQ6IEZpbmFsW3N0cl0gPSAiXFUwMDAxZjUzNCIgICAgICAgICMgcmVkIGNpcmNsZQpFX1dISVRFOiBGaW5hbFtzdHJdID0gIuKaqiIgICAgICAgICAgIyB3aGl0ZSBjaXJjbGUKCl9MRUFERVJfV0lEVEg6IEZpbmFsW2ludF0gPSAyMgoKX0hFQUxUSF9ET1Q6IEZpbmFsW2RpY3Rbc3RyLCBzdHJdXSA9IHsKICAgICJoZWFsdGh5IjogRV9HUkVFTiwKICAgICJ3YXJuaW5nIjogRV9ZRUxMT1csCiAgICAiY3JpdGljYWwiOiBFX1JFRCwKICAgICJvZmZsaW5lIjogRV9XSElURSwKfQoKdHlwZSBLZXlib2FyZCA9IGRpY3Rbc3RyLCBKc29uVmFsdWVdCgoKZGVmIGxlYWRlcihsYWJlbDogc3RyLCB2YWx1ZTogc3RyKSAtPiBzdHI6CiAgICAiIiJPbmUgZG90LWxlYWRlciBtZXRyaWMgbGluZSAoUGFydCAxNSBwcmluY2lwbGUgNCkuIiIiCiAgICBkb3RzID0gbWF4KF9MRUFERVJfV0lEVEggLSBsZW4obGFiZWwpLCAzKQogICAgcmV0dXJuIGYie2xhYmVsfSB7Jy4nICogZG90c30ge3ZhbHVlfSIKCgpkZWYga2V5Ym9hcmQocm93czogbGlzdFtsaXN0W3R1cGxlW3N0ciwgc3RyXV1dKSAtPiBLZXlib2FyZDoKICAgICIiIkFuIGlubGluZSBrZXlib2FyZCBmcm9tIChsYWJlbCwgY2FsbGJhY2tfZGF0YSkgcm93cy4iIiIKICAgIHJldHVybiB7CiAgICAgICAgImlubGluZV9rZXlib2FyZCI6IFsKICAgICAgICAgICAgW3sidGV4dCI6IGxhYmVsLCAiY2FsbGJhY2tfZGF0YSI6IGRhdGF9IGZvciBsYWJlbCwgZGF0YSBpbiByb3ddCiAgICAgICAgICAgIGZvciByb3cgaW4gcm93cwogICAgICAgIF0KICAgIH0KCgpkZWYgX3BhZ2VyX3JvdyhwcmVmaXg6IHN0ciwgcGFnZTogaW50LCBwYWdlczogaW50KSAtPiBsaXN0W3R1cGxlW3N0ciwgc3RyXV06CiAgICAiIiJUaGUgUHJldmlvdXMgfCBuIC8gbSB8IE5leHQgcGFnaW5hdGlvbiBjb252ZW50aW9uLiIiIgogICAgcm93OiBsaXN0W3R1cGxlW3N0ciwgc3RyXV0gPSBbXQogICAgaWYgcGFnZSA+IDA6CiAgICAgICAgcm93LmFwcGVuZCgoIlByZXZpb3VzIiwgZiJ7cHJlZml4fS5wYWdlLntwYWdlIC0gMX0iKSkKICAgIHJvdy5hcHBlbmQoKGYie3BhZ2UgKyAxfSAvIHttYXgocGFnZXMsIDEpfSIsICJub29wIikpCiAgICBpZiBwYWdlICsgMSA8IHBhZ2VzOgogICAgICAgIHJvdy5hcHBlbmQoKCJOZXh0IiwgZiJ7cHJlZml4fS5wYWdlLntwYWdlICsgMX0iKSkKICAgIHJldHVybiByb3cKCgojIC0tLSBNZW51cyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCgpkZWYgbWFpbl9tZW51KHJvbGU6IHN0cikgLT4gdHVwbGVbc3RyLCBLZXlib2FyZF06CiAgICAiIiJUaGUgbWFpbiBtZW51IChhZG1pbiBzZWVzIHRoZSBmdWxsIHN1cmZhY2UpLiIiIgogICAgbGluZXMgPSBbZiJ7RV9DSEFSVH0gQVBFWCBDb25zb2xlIiwgIiIsICJTZWxlY3QgYSBzZWN0aW9uLiJdCiAgICByb3dzOiBsaXN0W2xpc3RbdHVwbGVbc3RyLCBzdHJdXV0gPSBbCiAgICAgICAgWygiU3RhdHVzIiwgIm1lbnUuc3RhdHVzIiksICgiUG9ydGZvbGlvIiwgIm1lbnUucG9ydGZvbGlvIildLAogICAgICAgIFsoIlBvc2l0aW9ucyIsICJtZW51LnBvc2l0aW9ucyIpLCAoIlJlcG9ydHMiLCAibWVudS5yZXBvcnRzIildLAogICAgICAgIFsoIkhlYWx0aCIsICJtZW51LmhlYWx0aCIpLCAoIkhlbHAiLCAibWVudS5oZWxwIildLAogICAgXQogICAgaWYgcm9sZSA9PSAiYWRtaW4iOgogICAgICAgIGxpbmVzLmluc2VydCgxLCAiXFUwMDAxZjZlMSBBRE1JTiIpCiAgICAgICAgcm93cy5pbnNlcnQoMiwgWygiT3B0aW1pemF0aW9uIiwgIm1lbnUub3B0aW1pemF0aW9uIiksICgiRW1lcmdlbmN5IiwgIm1lbnUuZW1lcmdlbmN5IildKQogICAgcmV0dXJuICJcbiIuam9pbihsaW5lcyksIGtleWJvYXJkKHJvd3MpCgoKZGVmIG9wc19zdGF0dXMoc3RhdHVzOiBPcGVyYXRpb25zU3RhdHVzKSAtPiB0dXBsZVtzdHIsIEtleWJvYXJkXToKICAgICIiIlRoZSB1bmlmaWVkIG9wZXJhdGlvbnMgY2VudGVyIHNjcmVlbiAoQm9vayBJSSAyNi4yOSkuIiIiCiAgICBidWRnZXQgPSBzdGF0dXMuZXJyb3JfYnVkZ2V0CiAgICBsaW5lcyA9IFsKICAgICAgICBmIntFX0FOVEVOTkF9IFN0YXR1cyIsCiAgICAgICAgIiIsCiAgICAgICAgbGVhZGVyKCJIZWFsdGgiLCBfZG90KHN0YXR1cy5vdmVyYWxsX2hlYWx0aC52YWx1ZSkpLAogICAgICAgIGxlYWRlcigiS2lsbCBTd2l0Y2giLCBfc3dpdGNoX2xhYmVsKHN0YXR1cy5raWxsX3N3aXRjaCkpLAogICAgICAgIGxlYWRlcigiT3BlbiBJbmNpZGVudHMiLCBzdHIoc3RhdHVzLmluY2lkZW50c19vcGVuKSksCiAgICAgICAgbGVhZGVyKCJFcXVpdHkiLCBzdGF0dXMuZXF1aXR5KSwKICAgICAgICBsZWFkZXIoIkRyYXdkb3duIiwgZiJ7c3RhdHVzLmRyYXdkb3duOi4yJX0iKSwKICAgICAgICBsZWFkZXIoIk9wZW4gUG9zaXRpb25zIiwgc3RyKHN0YXR1cy5vcGVuX3Bvc2l0aW9ucykpLAogICAgICAgIGxlYWRlcigiQ2xvc2VkIFRyYWRlcyIsIHN0cihzdGF0dXMuY2xvc2VkX3RyYWRlcykpLAogICAgICAgIGxlYWRlcigiV2luIFJhdGUiLCBmIntzdGF0dXMud2luX3JhdGU6LjIlfSIpLAogICAgICAgIGxlYWRlcigiTmV0IFIiLCBmIntzdGF0dXMucl9zdW06LjJmfSIpLAogICAgICAgIGxlYWRlcigiSm9icyBQZW5kaW5nIiwgc3RyKHN0YXR1cy5qb2JzX3BlbmRpbmcpKSwKICAgICAgICBsZWFkZXIoIlNoYWRvdyIsIHN0cihzdGF0dXMucHJvbW90aW9uc19zaGFkb3cpKSwKICAgICAgICBsZWFkZXIoIkF3YWl0IEFwcHJvdmFsIiwgc3RyKHN0YXR1cy5wcm9tb3Rpb25zX3BlbmRpbmdfYXBwcm92YWwpKSwKICAgICAgICBsZWFkZXIoIkVycm9yIFJhdGUiLCBmIntidWRnZXQuZXJyb3JfcmF0ZTouMiV9IC8ge2J1ZGdldC5idWRnZXQ6LjIlfSIpLAogICAgICAgIGxlYWRlcigiQnVkZ2V0IiwgIkVYSEFVU1RFRCIgaWYgYnVkZ2V0LmV4aGF1c3RlZCBlbHNlICJPSyIpLAogICAgXQogICAgaWYgc3RhdHVzLmFsZXJ0c19yZWNlbnQ6CiAgICAgICAgbGluZXMuZXh0ZW5kKFsiIiwgIlJlY2VudCBhbGVydHM6Il0pCiAgICAgICAgbGluZXMuZXh0ZW5kKAogICAgICAgICAgICBmIntFX1dBUk59IFt7YWxlcnQuc2V2ZXJpdHkudmFsdWV9XSB7YWxlcnQubWVzc2FnZX0gKHh7YWxlcnQuY291bnR9KSIKICAgICAgICAgICAgZm9yIGFsZXJ0IGluIHN0YXR1cy5hbGVydHNfcmVjZW50WzozXQogICAgICAgICkKICAgIHJvd3MgPSBbCiAgICAgICAgWygiUmVmcmVzaCIsICJtZW51LnN0YXR1cyIpLCAoIkhlYWx0aCIsICJtZW51LmhlYWx0aCIpXSwKICAgICAgICBbKCJCYWNrIiwgIm1lbnUubWFpbiIpXSwKICAgIF0KICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpLCBrZXlib2FyZChyb3dzKQoKCmRlZiBwb3J0Zm9saW9fdmlldyhzdGF0dXM6IE9wZXJhdGlvbnNTdGF0dXMpIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiVGhlIHBvcnRmb2xpbyBkYXNoYm9hcmQgaGVhZGxpbmUgZmlndXJlcy4iIiIKICAgIGxpbmVzID0gWwogICAgICAgIGYie0VfTU9ORVl9IFBvcnRmb2xpbyIsCiAgICAgICAgIiIsCiAgICAgICAgbGVhZGVyKCJFcXVpdHkiLCBzdGF0dXMuZXF1aXR5KSwKICAgICAgICBsZWFkZXIoIkNhc2giLCBzdGF0dXMuY2FzaCksCiAgICAgICAgbGVhZGVyKCJEcmF3ZG93biIsIGYie3N0YXR1cy5kcmF3ZG93bjouMiV9IiksCiAgICAgICAgbGVhZGVyKCJPcGVuIFBvc2l0aW9ucyIsIHN0cihzdGF0dXMub3Blbl9wb3NpdGlvbnMpKSwKICAgICAgICBsZWFkZXIoIkNsb3NlZCBUcmFkZXMiLCBzdHIoc3RhdHVzLmNsb3NlZF90cmFkZXMpKSwKICAgICAgICBsZWFkZXIoIldpbiBSYXRlIiwgZiJ7c3RhdHVzLndpbl9yYXRlOi4yJX0iKSwKICAgICAgICBsZWFkZXIoIk5ldCBSIiwgZiJ7c3RhdHVzLnJfc3VtOi4yZn0iKSwKICAgIF0KICAgIHJvd3MgPSBbCiAgICAgICAgWygiUG9zaXRpb25zIiwgIm1lbnUucG9zaXRpb25zIiksICgiUmVwb3J0cyIsICJtZW51LnJlcG9ydHMiKV0sCiAgICAgICAgWygiQmFjayIsICJtZW51Lm1haW4iKV0sCiAgICBdCiAgICByZXR1cm4gIlxuIi5qb2luKGxpbmVzKSwga2V5Ym9hcmQocm93cykKCgpkZWYgcG9zaXRpb25zX3BhZ2UoCiAgICByZWNvcmRzOiBsaXN0W1Bvc2l0aW9uUmVjb3JkXSwgKiwgcGFnZTogaW50LCBwYWdlX3NpemU6IGludAopIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiT25lIHBhZ2Ugb2Ygb3BlbiBwb3NpdGlvbnMuIiIiCiAgICBwYWdlcyA9IG1heCgobGVuKHJlY29yZHMpICsgcGFnZV9zaXplIC0gMSkgLy8gcGFnZV9zaXplLCAxKQogICAgcGFnZSA9IG1pbihtYXgocGFnZSwgMCksIHBhZ2VzIC0gMSkKICAgIHdpbmRvdyA9IHJlY29yZHNbcGFnZSAqIHBhZ2Vfc2l6ZSA6IChwYWdlICsgMSkgKiBwYWdlX3NpemVdCiAgICBsaW5lcyA9IFtmIntFX1VQfSBPcGVuIFBvc2l0aW9ucyAoe2xlbihyZWNvcmRzKX0pIiwgIiJdCiAgICBpZiBub3Qgd2luZG93OgogICAgICAgIGxpbmVzLmFwcGVuZCgiTm8gb3BlbiBwb3NpdGlvbnMuIikKICAgIGZvciByZWNvcmQgaW4gd2luZG93OgogICAgICAgIGxpbmVzLmV4dGVuZCgKICAgICAgICAgICAgWwogICAgICAgICAgICAgICAgZiJ7cmVjb3JkLnN5bWJvbH0ge3JlY29yZC50aW1lZnJhbWUudmFsdWV9IHtyZWNvcmQuZGlyZWN0aW9uLnVwcGVyKCl9IiwKICAgICAgICAgICAgICAgIGxlYWRlcigiICBFbnRyeSIsIHN0cihyZWNvcmQuZW50cnkpKSwKICAgICAgICAgICAgICAgIGxlYWRlcigiICBTdG9wIiwgc3RyKHJlY29yZC5zdG9wKSksCiAgICAgICAgICAgICAgICBsZWFkZXIoIiAgVGFyZ2V0Iiwgc3RyKHJlY29yZC50YXJnZXQpKSwKICAgICAgICAgICAgICAgIGxlYWRlcigiICBRdWFudGl0eSIsIHN0cihyZWNvcmQucXVhbnRpdHkpKSwKICAgICAgICAgICAgICAgICIiLAogICAgICAgICAgICBdCiAgICAgICAgKQogICAgcm93cyA9IFtfcGFnZXJfcm93KCJwb3NpdGlvbnMiLCBwYWdlLCBwYWdlcyksIFsoIkJhY2siLCAibWVudS5tYWluIildXQogICAgcmV0dXJuICJcbiIuam9pbihsaW5lcykucnN0cmlwKCksIGtleWJvYXJkKHJvd3MpCgoKZGVmIG9wdGltaXphdGlvbl9ob21lKAogICAgc3RhdHVzOiBPcGVyYXRpb25zU3RhdHVzLCAqLCBxdWV1ZV9wYXVzZWQ6IGJvb2wKKSAtPiB0dXBsZVtzdHIsIEtleWJvYXJkXToKICAgICIiIlRoZSBPcHRpbWl6YXRpb24gQ2VudGVyIChCb29rIFYgcGFydCA3IFRlbGVncmFtIG1lbnUpLiIiIgogICAgbGluZXMgPSBbCiAgICAgICAgZiJ7RV9CUkFJTn0gT3B0aW1pemF0aW9uIiwKICAgICAgICAiIiwKICAgICAgICBsZWFkZXIoIlF1ZXVlIiwgIlBBVVNFRCIgaWYgcXVldWVfcGF1c2VkIGVsc2UgIlJVTk5JTkciKSwKICAgICAgICBsZWFkZXIoIkpvYnMgUGVuZGluZyIsIHN0cihzdGF0dXMuam9ic19wZW5kaW5nKSksCiAgICAgICAgbGVhZGVyKCJKb2JzIFJ1bm5pbmciLCBzdHIoc3RhdHVzLmpvYnNfcnVubmluZykpLAogICAgICAgIGxlYWRlcigiU2hhZG93Iiwgc3RyKHN0YXR1cy5wcm9tb3Rpb25zX3NoYWRvdykpLAogICAgICAgIGxlYWRlcigiQXdhaXQgQXBwcm92YWwiLCBzdHIoc3RhdHVzLnByb21vdGlvbnNfcGVuZGluZ19hcHByb3ZhbCkpLAogICAgXQogICAgcGF1c2VfbGFiZWwgPSAoIlJlc3VtZSBRdWV1ZSIsICJvcHRpbWl6YXRpb24ucmVzdW1lIikgaWYgcXVldWVfcGF1c2VkIGVsc2UgKAogICAgICAgICJQYXVzZSBRdWV1ZSIsICJvcHRpbWl6YXRpb24ucGF1c2UiCiAgICApCiAgICByb3dzID0gWwogICAgICAgIFsoIlNob3cgUXVldWUiLCAib3B0aW1pemF0aW9uLnF1ZXVlIiksICgiUHJvbW90aW9ucyIsICJvcHRpbWl6YXRpb24ucHJvbW90aW9ucyIpXSwKICAgICAgICBbcGF1c2VfbGFiZWwsICgiUm9sbGJhY2siLCAib3B0aW1pemF0aW9uLnJvbGxiYWNrIildLAogICAgICAgIFsoIkJhY2siLCAibWVudS5tYWluIildLAogICAgXQogICAgcmV0dXJuICJcbiIuam9pbihsaW5lcyksIGtleWJvYXJkKHJvd3MpCgoKZGVmIHF1ZXVlX3BhZ2UoCiAgICBqb2JzOiBsaXN0W1Jlc2VhcmNoSm9iXSwgKiwgcGFnZTogaW50LCBwYWdlX3NpemU6IGludAopIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiT25lIHBhZ2Ugb2YgdGhlIG9wdGltaXphdGlvbiBxdWV1ZS4iIiIKICAgIHBhZ2VzID0gbWF4KChsZW4oam9icykgKyBwYWdlX3NpemUgLSAxKSAvLyBwYWdlX3NpemUsIDEpCiAgICBwYWdlID0gbWluKG1heChwYWdlLCAwKSwgcGFnZXMgLSAxKQogICAgd2luZG93ID0gam9ic1twYWdlICogcGFnZV9zaXplIDogKHBhZ2UgKyAxKSAqIHBhZ2Vfc2l6ZV0KICAgIGxpbmVzID0gW2Yie0VfRk9MREVSfSBRdWV1ZSAoe2xlbihqb2JzKX0pIiwgIiJdCiAgICBpZiBub3Qgd2luZG93OgogICAgICAgIGxpbmVzLmFwcGVuZCgiUXVldWUgaXMgZW1wdHkuIikKICAgIGxpbmVzLmV4dGVuZCgKICAgICAgICBmIiN7am9iLmpvYl9pZH0ge2pvYi5zeW1ib2x9IHtqb2IudGltZWZyYW1lLnZhbHVlfSB7am9iLmtpbmR9ICIKICAgICAgICBmIlt7X3N0YXR1c193b3JkKGpvYi5zdGF0dXMpfV0gYXR0ZW1wdHMge2pvYi5hdHRlbXB0c30iCiAgICAgICAgZm9yIGpvYiBpbiB3aW5kb3cKICAgICkKICAgIHJvd3MgPSBbX3BhZ2VyX3JvdygicXVldWUiLCBwYWdlLCBwYWdlcyksIFsoIkJhY2siLCAibWVudS5vcHRpbWl6YXRpb24iKV1dCiAgICByZXR1cm4gIlxuIi5qb2luKGxpbmVzKSwga2V5Ym9hcmQocm93cykKCgpkZWYgcHJvbW90aW9uc19wYWdlKAogICAgcmVjb3JkczogbGlzdFtQcm9tb3Rpb25SZWNvcmRdLCAqLCBwYWdlOiBpbnQsIHBhZ2Vfc2l6ZTogaW50LCBhZG1pbjogYm9vbAopIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiT25lIHBhZ2Ugb2YgdGhlIHByb21vdGlvbiBwaXBlbGluZSB3aXRoIGFwcHJvdmFsIGFjdGlvbnMuIiIiCiAgICBwYWdlcyA9IG1heCgobGVuKHJlY29yZHMpICsgcGFnZV9zaXplIC0gMSkgLy8gcGFnZV9zaXplLCAxKQogICAgcGFnZSA9IG1pbihtYXgocGFnZSwgMCksIHBhZ2VzIC0gMSkKICAgIHdpbmRvdyA9IHJlY29yZHNbcGFnZSAqIHBhZ2Vfc2l6ZSA6IChwYWdlICsgMSkgKiBwYWdlX3NpemVdCiAgICBsaW5lcyA9IFtmIntFX0JSQUlOfSBQcm9tb3Rpb25zICh7bGVuKHJlY29yZHMpfSkiLCAiIl0KICAgIGlmIG5vdCB3aW5kb3c6CiAgICAgICAgbGluZXMuYXBwZW5kKCJObyBwcm9tb3Rpb25zIHJlZ2lzdGVyZWQuIikKICAgIHJvd3M6IGxpc3RbbGlzdFt0dXBsZVtzdHIsIHN0cl1dXSA9IFtdCiAgICBmb3IgcmVjb3JkIGluIHdpbmRvdzoKICAgICAgICBsaW5lcy5hcHBlbmQoCiAgICAgICAgICAgIGYiI3tyZWNvcmQucHJvbW90aW9uX2lkfSB7cmVjb3JkLnN5bWJvbH0ge3JlY29yZC50aW1lZnJhbWUudmFsdWV9ICIKICAgICAgICAgICAgZiJ7cmVjb3JkLmtpbmR9IFt7X3N0YXR1c193b3JkKHJlY29yZC5zdGF0dXMpfV0iCiAgICAgICAgKQogICAgICAgIGlmIGFkbWluIGFuZCByZWNvcmQuc3RhdHVzID09ICJwYXNzZWQiOgogICAgICAgICAgICByb3dzLmFwcGVuZCgKICAgICAgICAgICAgICAgIFsKICAgICAgICAgICAgICAgICAgICAoIkFwcHJvdmUiLCBmInByb21vdGlvbi5hcHByb3ZlLntyZWNvcmQucHJvbW90aW9uX2lkfSIpLAogICAgICAgICAgICAgICAgICAgICgiUmVqZWN0IiwgZiJwcm9tb3Rpb24ucmVqZWN0LntyZWNvcmQucHJvbW90aW9uX2lkfSIpLAogICAgICAgICAgICAgICAgXQogICAgICAgICAgICApCiAgICByb3dzLmFwcGVuZChfcGFnZXJfcm93KCJwcm9tb3Rpb25zIiwgcGFnZSwgcGFnZXMpKQogICAgcm93cy5hcHBlbmQoWygiQmFjayIsICJtZW51Lm9wdGltaXphdGlvbiIpXSkKICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpLCBrZXlib2FyZChyb3dzKQoKCmRlZiByb2xsYmFja19tZW51KHNlcmllczogbGlzdFt0dXBsZVtzdHIsIHN0cl1dKSAtPiB0dXBsZVtzdHIsIEtleWJvYXJkXToKICAgICIiIlBpY2sgYSBzZXJpZXMgdG8gcm9sbCBiYWNrIHRvIGl0cyBwcmV2aW91cyBhcnRpZmFjdC4iIiIKICAgIGxpbmVzID0gW2Yie0VfR0VBUn0gUm9sbGJhY2siLCAiIiwgIlNlbGVjdCBhIHNlcmllcy4iXQogICAgcm93cyA9IFsKICAgICAgICBbKGYie3N5bWJvbH0ge3RpbWVmcmFtZX0iLCBmInJvbGxiYWNrLntzeW1ib2x9Lnt0aW1lZnJhbWV9IildCiAgICAgICAgZm9yIHN5bWJvbCwgdGltZWZyYW1lIGluIHNlcmllcwogICAgXQogICAgcm93cy5hcHBlbmQoWygiQmFjayIsICJtZW51Lm9wdGltaXphdGlvbiIpXSkKICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpLCBrZXlib2FyZChyb3dzKQoKCmRlZiBlbWVyZ2VuY3lfdmlldyhsZXZlbDogS2lsbFN3aXRjaExldmVsLCByZWFzb246IHN0cikgLT4gdHVwbGVbc3RyLCBLZXlib2FyZF06CiAgICAiIiJUaGUgRW1lcmdlbmN5IENlbnRlciAoQm9vayBJViA3LjkpLiIiIgogICAgbGluZXMgPSBbCiAgICAgICAgZiJ7RV9XQVJOfSBFbWVyZ2VuY3kiLAogICAgICAgICIiLAogICAgICAgIGxlYWRlcigiS2lsbCBTd2l0Y2giLCBfc3dpdGNoX2xhYmVsKGxldmVsKSksCiAgICBdCiAgICBpZiByZWFzb246CiAgICAgICAgbGluZXMuYXBwZW5kKGxlYWRlcigiUmVhc29uIiwgcmVhc29uKSkKICAgIHJvd3MgPSBbCiAgICAgICAgWygiUGF1c2UgVHJhZGluZyIsICJlbWVyZ2VuY3kucGF1c2UiKSwgKCJSZXN1bWUgVHJhZGluZyIsICJlbWVyZ2VuY3kucmVzdW1lIildLAogICAgICAgIFsoIkRpc2FibGUgRW50cmllcyIsICJlbWVyZ2VuY3kuZGlzYWJsZV9lbnRyaWVzIildLAogICAgICAgIFsoIlNhZmUgTW9kZSIsICJlbWVyZ2VuY3kuc2FmZV9tb2RlIiksICgiQ2FuY2VsIE9yZGVycyIsICJlbWVyZ2VuY3kuY2FuY2VsX29yZGVycyIpXSwKICAgICAgICBbKCJCYWNrIiwgIm1lbnUubWFpbiIpXSwKICAgIF0KICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpLCBrZXlib2FyZChyb3dzKQoKCmRlZiBjb25maXJtX3ZpZXcoYWN0aW9uX2xhYmVsOiBzdHIsIG5vbmNlOiBzdHIpIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiVGhlIHR3by1zdGVwIGNvbmZpcm1hdGlvbiBnYXRlIChCb29rIElWIHByaW5jaXBsZSAzKS4iIiIKICAgIGxpbmVzID0gWwogICAgICAgIGYie0VfV0FSTn0gV2FybmluZyIsCiAgICAgICAgZiJUaGlzIHdpbGwgZXhlY3V0ZToge2FjdGlvbl9sYWJlbH0uIiwKICAgICAgICAiUGxlYXNlIGNvbmZpcm0uIiwKICAgIF0KICAgIHJvd3MgPSBbWygiQ29uZmlybSIsIGYiY29uZmlybS57bm9uY2V9IiksICgiQ2FuY2VsIiwgZiJjYW5jZWwue25vbmNlfSIpXV0KICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpLCBrZXlib2FyZChyb3dzKQoKCmRlZiByZXBvcnRzX3ZpZXcoc3RhdHVzOiBPcGVyYXRpb25zU3RhdHVzKSAtPiB0dXBsZVtzdHIsIEtleWJvYXJkXToKICAgICIiIlRoZSBwZXJmb3JtYW5jZSByZXBvcnQgaGVhZGxpbmUgKGNsb3NlZC10cmFkZSBzdGF0aXN0aWNzKS4iIiIKICAgIGxpbmVzID0gWwogICAgICAgIGYie0VfRk9MREVSfSBQZXJmb3JtYW5jZSIsCiAgICAgICAgIiIsCiAgICAgICAgbGVhZGVyKCJDbG9zZWQgVHJhZGVzIiwgc3RyKHN0YXR1cy5jbG9zZWRfdHJhZGVzKSksCiAgICAgICAgbGVhZGVyKCJXaW4gUmF0ZSIsIGYie3N0YXR1cy53aW5fcmF0ZTouMiV9IiksCiAgICAgICAgbGVhZGVyKCJOZXQgUiIsIGYie3N0YXR1cy5yX3N1bTouMmZ9IiksCiAgICAgICAgbGVhZGVyKCJFcXVpdHkiLCBzdGF0dXMuZXF1aXR5KSwKICAgICAgICBsZWFkZXIoIkRyYXdkb3duIiwgZiJ7c3RhdHVzLmRyYXdkb3duOi4yJX0iKSwKICAgICAgICBsZWFkZXIoIlNuYXBzaG90cyIsIHN0cihzdGF0dXMuc25hcHNob3RzX3N0b3JlZCkpLAogICAgXQogICAgcm93cyA9IFtbKCJCYWNrIiwgIm1lbnUubWFpbiIpXV0KICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpLCBrZXlib2FyZChyb3dzKQoKCmRlZiBoZWFsdGhfdmlldyhzdGF0dXM6IE9wZXJhdGlvbnNTdGF0dXMpIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiUGVyLW1vZHVsZSBoZWFsdGggYW5kIGhlYXJ0YmVhdCBmcmVzaG5lc3MuIiIiCiAgICBsaW5lcyA9IFtmIntFX0hFQVJUfSBIZWFsdGgiLCAiIl0KICAgIGxpbmVzLmV4dGVuZCgKICAgICAgICBmIntfZG90KGNvbXBvbmVudC5zdGF0ZS52YWx1ZSl9IHtjb21wb25lbnQuY29tcG9uZW50fSIKICAgICAgICBmb3IgY29tcG9uZW50IGluIHN0YXR1cy5jb21wb25lbnRzCiAgICApCiAgICBpZiBzdGF0dXMuaGVhcnRiZWF0czoKICAgICAgICBsaW5lcy5leHRlbmQoWyIiLCAiSGVhcnRiZWF0czoiXSkKICAgICAgICBsaW5lcy5leHRlbmQoCiAgICAgICAgICAgIGxlYWRlcihiZWF0LmNvbXBvbmVudCwgZiJ7YmVhdC5hZ2VfbXMgLy8gMTAwMH1zIgogICAgICAgICAgICAgICAgICAgKyAoIiBTVEFMRSIgaWYgYmVhdC5zdGFsZSBlbHNlICIiKSkKICAgICAgICAgICAgZm9yIGJlYXQgaW4gc3RhdHVzLmhlYXJ0YmVhdHMKICAgICAgICApCiAgICByb3dzID0gW1soIlJlZnJlc2giLCAibWVudS5oZWFsdGgiKV0sIFsoIkJhY2siLCAibWVudS5tYWluIildXQogICAgcmV0dXJuICJcbiIuam9pbihsaW5lcyksIGtleWJvYXJkKHJvd3MpCgoKZGVmIGhlbHBfdmlldyhyb2xlOiBzdHIpIC0+IHR1cGxlW3N0ciwgS2V5Ym9hcmRdOgogICAgIiIiQ29tbWFuZCByZWZlcmVuY2UuIiIiCiAgICBsaW5lcyA9IFsKICAgICAgICBmIntFX0NIQVJUfSBIZWxwIiwKICAgICAgICAiIiwKICAgICAgICAiL21lbnUgLSBtYWluIG1lbnUiLAogICAgICAgICIvc3RhdHVzIC0gb3BlcmF0aW9ucyBzdGF0dXMiLAogICAgICAgICIvcG9ydGZvbGlvIC0gcG9ydGZvbGlvIGRhc2hib2FyZCIsCiAgICAgICAgIi9yZXBvcnRzIC0gcGVyZm9ybWFuY2UgcmVwb3J0IiwKICAgICAgICAiL2hlYWx0aCAtIG1vZHVsZSBoZWFsdGgiLAogICAgXQogICAgaWYgcm9sZSA9PSAiYWRtaW4iOgogICAgICAgIGxpbmVzLmV4dGVuZCgKICAgICAgICAgICAgWwogICAgICAgICAgICAgICAgIi9vcHRpbWl6ZXIgLSBvcHRpbWl6YXRpb24gY2VudGVyIiwKICAgICAgICAgICAgICAgICIvZW1lcmdlbmN5IC0gZW1lcmdlbmN5IGNlbnRlciIsCiAgICAgICAgICAgIF0KICAgICAgICApCiAgICByb3dzID0gW1soIkJhY2siLCAibWVudS5tYWluIildXQogICAgcmV0dXJuICJcbiIuam9pbihsaW5lcyksIGtleWJvYXJkKHJvd3MpCgoKZGVmIGRlbmllZF92aWV3KCkgLT4gc3RyOgogICAgIiIiVGhlIHVuYXV0aG9yaXplZCByZXBseS4iIiIKICAgIHJldHVybiBmIntFX0VSUk9SfSBFcnJvclxuUmVhc29uOiBub3QgYXV0aG9yaXplZFxuU3VnZ2VzdGVkIEFjdGlvbjogY29udGFjdCB0aGUgb3BlcmF0b3IiCgoKZGVmIGRvbmVfdmlldyhtZXNzYWdlOiBzdHIpIC0+IHN0cjoKICAgICIiIlRoZSBzdGFuZGFyZCBzdWNjZXNzIGZvcm1hdC4iIiIKICAgIHJldHVybiBmIntFX09LfSBDb21wbGV0ZWRcbnttZXNzYWdlfSIKCgpkZWYgZmFpbGVkX3ZpZXcocmVhc29uOiBzdHIsIHN1Z2dlc3Rpb246IHN0cikgLT4gc3RyOgogICAgIiIiVGhlIHN0YW5kYXJkIGVycm9yIGZvcm1hdC4iIiIKICAgIHJldHVybiAoCiAgICAgICAgZiJ7RV9FUlJPUn0gRXJyb3JcblJlYXNvbjoge3JlYXNvbn1cbiIKICAgICAgICBmIlN1Z2dlc3RlZCBBY3Rpb246IHtzdWdnZXN0aW9ufSIKICAgICkKCgojIC0tLSBOb3RpZmljYXRpb25zIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgoKZGVmIGFsZXJ0X25vdGlmaWNhdGlvbihwYXlsb2FkOiBkaWN0W3N0ciwgSnNvblZhbHVlXSkgLT4gc3RyOgogICAgIiIiUHVzaCB0ZXh0IGZvciBvbmUgbW9uaXRvcmluZyBhbGVydC4iIiIKICAgIHNldmVyaXR5ID0gc3RyKHBheWxvYWQuZ2V0KCJzZXZlcml0eSIsICIiKSkKICAgIG1lc3NhZ2UgPSBzdHIocGF5bG9hZC5nZXQoIm1lc3NhZ2UiLCAiIikpCiAgICByZXR1cm4gZiJ7RV9XQVJOfSBBbGVydCBbe3NldmVyaXR5fV1cbnttZXNzYWdlfSIKCgpkZWYga2lsbF9zd2l0Y2hfbm90aWZpY2F0aW9uKHBheWxvYWQ6IGRpY3Rbc3RyLCBKc29uVmFsdWVdKSAtPiBzdHI6CiAgICAiIiJQdXNoIHRleHQgZm9yIG9uZSBraWxsLXN3aXRjaCB0cmFuc2l0aW9uLiIiIgogICAgbGV2ZWwgPSBzdHIocGF5bG9hZC5nZXQoImxldmVsIiwgIiIpKQogICAgcmVhc29uID0gc3RyKHBheWxvYWQuZ2V0KCJyZWFzb24iLCAiIikpCiAgICBhY3RvciA9IHN0cihwYXlsb2FkLmdldCgiYWN0b3IiLCAiIikpCiAgICByZXR1cm4gZiJ7RV9XQVJOfSBLaWxsIFN3aXRjaFxue2xlYWRlcignTGV2ZWwnLCBsZXZlbCl9XG4iICsgIlxuIi5qb2luKAogICAgICAgIFtsZWFkZXIoIlJlYXNvbiIsIHJlYXNvbiksIGxlYWRlcigiQWN0b3IiLCBhY3RvcildCiAgICApCgoKZGVmIGZpbGxfbm90aWZpY2F0aW9uKHBheWxvYWQ6IGRpY3Rbc3RyLCBKc29uVmFsdWVdKSAtPiBzdHI6CiAgICAiIiJQdXNoIHRleHQgZm9yIG9uZSBleGVjdXRpb24gb3V0Y29tZS4iIiIKICAgIHN0YXR1cyA9IHN0cihwYXlsb2FkLmdldCgic3RhdHVzIiwgIiIpKQogICAgc3ltYm9sID0gc3RyKHBheWxvYWQuZ2V0KCJzeW1ib2wiLCAiIikpCiAgICBtb2RlID0gc3RyKHBheWxvYWQuZ2V0KCJtb2RlIiwgIiIpKQogICAgcHJpY2UgPSBwYXlsb2FkLmdldCgiZmlsbF9wcmljZSIpCiAgICBib2R5ID0gWwogICAgICAgIGYie0VfT0t9IEV4ZWN1dGlvbiB7X3N0YXR1c193b3JkKHN0YXR1cyl9IiwKICAgICAgICBsZWFkZXIoIlN5bWJvbCIsIHN5bWJvbCksCiAgICAgICAgbGVhZGVyKCJNb2RlIiwgbW9kZSksCiAgICBdCiAgICBpZiBwcmljZSBpcyBub3QgTm9uZToKICAgICAgICBib2R5LmFwcGVuZChsZWFkZXIoIkZpbGwiLCBzdHIocHJpY2UpKSkKICAgIHJldHVybiAiXG4iLmpvaW4oYm9keSkKCgpkZWYgc2lnbmFsX25vdGlmaWNhdGlvbihwYXlsb2FkOiBkaWN0W3N0ciwgSnNvblZhbHVlXSkgLT4gc3RyOgogICAgIiIiUHVzaCB0ZXh0IGZvciBvbmUgZmlyZWQgc2lnbmFsLiIiIgogICAgc3ltYm9sID0gc3RyKHBheWxvYWQuZ2V0KCJzeW1ib2wiLCAiIikpCiAgICB0aW1lZnJhbWUgPSBzdHIocGF5bG9hZC5nZXQoInRpbWVmcmFtZSIsICIiKSkKICAgIGRpcmVjdGlvbiA9IHN0cihwYXlsb2FkLmdldCgiZGlyZWN0aW9uIiwgIiIpKQogICAgcHJvYmFiaWxpdHkgPSBwYXlsb2FkLmdldCgicHJvYmFiaWxpdHkiKQogICAgYm9keSA9IFsKICAgICAgICBmIntFX1VQfSBTaWduYWwiLAogICAgICAgIGxlYWRlcigiU3ltYm9sIiwgc3ltYm9sKSwKICAgICAgICBsZWFkZXIoIlRpbWVmcmFtZSIsIHRpbWVmcmFtZSksCiAgICAgICAgbGVhZGVyKCJEaXJlY3Rpb24iLCBkaXJlY3Rpb24udXBwZXIoKSksCiAgICBdCiAgICBpZiBpc2luc3RhbmNlKHByb2JhYmlsaXR5LCAoaW50LCBmbG9hdCkpOgogICAgICAgIGJvZHkuYXBwZW5kKGxlYWRlcigiUHJvYmFiaWxpdHkiLCBmIntmbG9hdChwcm9iYWJpbGl0eSk6LjIlfSIpKQogICAgcmV0dXJuICJcbiIuam9pbihib2R5KQoKCmRlZiBwcm9tb3Rpb25fbm90aWZpY2F0aW9uKHBheWxvYWQ6IGRpY3Rbc3RyLCBKc29uVmFsdWVdKSAtPiBzdHI6CiAgICAiIiJQdXNoIHRleHQgZm9yIG9uZSBwcm9tb3Rpb24gcGlwZWxpbmUgdHJhbnNpdGlvbi4iIiIKICAgIHN5bWJvbCA9IHN0cihwYXlsb2FkLmdldCgic3ltYm9sIiwgIiIpKQogICAgdGltZWZyYW1lID0gc3RyKHBheWxvYWQuZ2V0KCJ0aW1lZnJhbWUiLCAiIikpCiAgICBzdGF0dXMgPSBzdHIocGF5bG9hZC5nZXQoInN0YXR1cyIsIHBheWxvYWQuZ2V0KCJraW5kIiwgIiIpKSkKICAgIHJldHVybiAiXG4iLmpvaW4oCiAgICAgICAgWwogICAgICAgICAgICBmIntFX0JSQUlOfSBQcm9tb3Rpb24iLAogICAgICAgICAgICBsZWFkZXIoIlNlcmllcyIsIGYie3N5bWJvbH0ge3RpbWVmcmFtZX0iKSwKICAgICAgICAgICAgbGVhZGVyKCJTdGF0dXMiLCBfc3RhdHVzX3dvcmQoc3RhdHVzKSksCiAgICAgICAgXQogICAgKQoKCiMgLS0tIFZvY2FidWxhcnkgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCgpkZWYgX2RvdChoZWFsdGg6IHN0cikgLT4gc3RyOgogICAgcmV0dXJuIGYie19IRUFMVEhfRE9ULmdldChoZWFsdGgsIEVfV0hJVEUpfSB7aGVhbHRoLnVwcGVyKCl9IgoKCmRlZiBfc3dpdGNoX2xhYmVsKGxldmVsOiBLaWxsU3dpdGNoTGV2ZWwpIC0+IHN0cjoKICAgIGlmIGxldmVsIGlzIEtpbGxTd2l0Y2hMZXZlbC5OT05FOgogICAgICAgIHJldHVybiBmIntFX0dSRUVOfSBPRkYiCiAgICByZXR1cm4gZiJ7RV9SRUR9IHtsZXZlbC52YWx1ZS51cHBlcigpfSIKCgpfU1RBVFVTX1dPUkRTOiBGaW5hbFtkaWN0W3N0ciwgc3RyXV0gPSB7CiAgICAicGVuZGluZyI6ICJQZW5kaW5nIiwKICAgICJ3YWl0aW5nIjogIldhaXRpbmciLAogICAgInJ1bm5pbmciOiAiUnVubmluZyIsCiAgICAiY29tcGxldGVkIjogIkNvbXBsZXRlZCIsCiAgICAiZmFpbGVkIjogIkZhaWxlZCIsCiAgICAiY2FuY2VsZWQiOiAiQ2FuY2VsZWQiLAogICAgInNoYWRvdyI6ICJSdW5uaW5nIiwKICAgICJwYXNzZWQiOiAiV2FpdGluZyIsCiAgICAicHJvbW90ZWQiOiAiQ29tcGxldGVkIiwKICAgICJyZWplY3RlZCI6ICJDYW5jZWxlZCIsCiAgICAicm9sbGVkX2JhY2siOiAiQ2FuY2VsZWQiLAogICAgImZpbGxlZCI6ICJDb21wbGV0ZWQiLAogICAgInVuZmlsbGVkIjogIlBlbmRpbmciLAp9CgoKZGVmIF9zdGF0dXNfd29yZChzdGF0dXM6IHN0cikgLT4gc3RyOgogICAgIiIiVGhlIGZpeGVkIHN0YXR1cyB2b2NhYnVsYXJ5IChzeW5vbnltcyBhcmUgYmFubmVkKS4iIiIKICAgIHJldHVybiBfU1RBVFVTX1dPUkRTLmdldChzdGF0dXMsIHN0YXR1cy5jYXBpdGFsaXplKCkgaWYgc3RhdHVzIGVsc2UgIi0iKQo=
+"""Telegram message builder (Book IV Part 15 design system).
+
+Every outgoing text renders here - no hardcoded strings in handlers.
+The binding rules implemented: one concept per line with dot-leader
+alignment, the restricted emoji set (decorative emoji are banned),
+the fixed page template (title -> context -> summary -> metrics ->
+actions), the fixed status vocabulary, formatted numbers, and
+two-word button labels.
+"""
+
+from typing import Final
+
+from apex.core.serialization import JsonValue
+from apex.monitoring.records import KillSwitchLevel, OperationsStatus
+from apex.portfolio.store import PositionRecord
+from apex.research.store import PromotionRecord, ResearchJob
+
+# The allowed emoji set (Part 15 principle 7).
+E_CHART: Final[str] = "\U0001f4ca"      # bar chart
+E_UP: Final[str] = "\U0001f4c8"         # upwards trend
+E_WARN: Final[str] = "⚠"           # warning
+E_ERROR: Final[str] = "❌"          # cross mark
+E_OK: Final[str] = "✅"             # check mark
+E_MONEY: Final[str] = "\U0001f4b0"      # money bag
+E_BRAIN: Final[str] = "\U0001f9e0"      # brain
+E_GEAR: Final[str] = "⚙"           # gear
+E_FOLDER: Final[str] = "\U0001f4c1"     # folder
+E_ANTENNA: Final[str] = "\U0001f4e1"    # antenna
+E_HEART: Final[str] = "❤"          # heart
+E_GREEN: Final[str] = "\U0001f7e2"      # green circle
+E_YELLOW: Final[str] = "\U0001f7e1"     # yellow circle
+E_RED: Final[str] = "\U0001f534"        # red circle
+E_WHITE: Final[str] = "⚪"          # white circle
+
+_LEADER_WIDTH: Final[int] = 22
+
+_HEALTH_DOT: Final[dict[str, str]] = {
+    "healthy": E_GREEN,
+    "warning": E_YELLOW,
+    "critical": E_RED,
+    "offline": E_WHITE,
+}
+
+type Keyboard = dict[str, JsonValue]
+
+
+def leader(label: str, value: str) -> str:
+    """One dot-leader metric line (Part 15 principle 4)."""
+    dots = max(_LEADER_WIDTH - len(label), 3)
+    return f"{label} {'.' * dots} {value}"
+
+
+def keyboard(rows: list[list[tuple[str, str]]]) -> Keyboard:
+    """An inline keyboard from (label, callback_data) rows."""
+    return {
+        "inline_keyboard": [
+            [{"text": label, "callback_data": data} for label, data in row]
+            for row in rows
+        ]
+    }
+
+
+def _pager_row(prefix: str, page: int, pages: int) -> list[tuple[str, str]]:
+    """The Previous | n / m | Next pagination convention."""
+    row: list[tuple[str, str]] = []
+    if page > 0:
+        row.append(("Previous", f"{prefix}.page.{page - 1}"))
+    row.append((f"{page + 1} / {max(pages, 1)}", "noop"))
+    if page + 1 < pages:
+        row.append(("Next", f"{prefix}.page.{page + 1}"))
+    return row
+
+
+# --- Menus ---------------------------------------------------------------------------
+
+
+def main_menu(role: str) -> tuple[str, Keyboard]:
+    """The main menu (admin sees the full surface)."""
+    lines = [f"{E_CHART} APEX Console", "", "Select a section."]
+    rows: list[list[tuple[str, str]]] = [
+        [("Status", "menu.status"), ("Portfolio", "menu.portfolio")],
+        [("Positions", "menu.positions"), ("Reports", "menu.reports")],
+        [("Health", "menu.health"), ("Help", "menu.help")],
+    ]
+    if role == "admin":
+        lines.insert(1, "\U0001f6e1 ADMIN")
+        rows.insert(2, [("Optimization", "menu.optimization"), ("Emergency", "menu.emergency")])
+    return "\n".join(lines), keyboard(rows)
+
+
+def ops_status(status: OperationsStatus) -> tuple[str, Keyboard]:
+    """The unified operations center screen (Book II 26.29)."""
+    budget = status.error_budget
+    lines = [
+        f"{E_ANTENNA} Status",
+        "",
+        leader("Health", _dot(status.overall_health.value)),
+        leader("Kill Switch", _switch_label(status.kill_switch)),
+        leader("Open Incidents", str(status.incidents_open)),
+        leader("Equity", status.equity),
+        leader("Drawdown", f"{status.drawdown:.2%}"),
+        leader("Open Positions", str(status.open_positions)),
+        leader("Closed Trades", str(status.closed_trades)),
+        leader("Win Rate", f"{status.win_rate:.2%}"),
+        leader("Net R", f"{status.r_sum:.2f}"),
+        leader("Jobs Pending", str(status.jobs_pending)),
+        leader("Shadow", str(status.promotions_shadow)),
+        leader("Await Approval", str(status.promotions_pending_approval)),
+        leader("Error Rate", f"{budget.error_rate:.2%} / {budget.budget:.2%}"),
+        leader("Budget", "EXHAUSTED" if budget.exhausted else "OK"),
+    ]
+    if status.alerts_recent:
+        lines.extend(["", "Recent alerts:"])
+        lines.extend(
+            f"{E_WARN} [{alert.severity.value}] {alert.message} (x{alert.count})"
+            for alert in status.alerts_recent[:3]
+        )
+    rows = [
+        [("Refresh", "menu.status"), ("Health", "menu.health")],
+        [("Back", "menu.main")],
+    ]
+    return "\n".join(lines), keyboard(rows)
+
+
+def portfolio_view(status: OperationsStatus) -> tuple[str, Keyboard]:
+    """The portfolio dashboard headline figures."""
+    lines = [
+        f"{E_MONEY} Portfolio",
+        "",
+        leader("Equity", status.equity),
+        leader("Cash", status.cash),
+        leader("Drawdown", f"{status.drawdown:.2%}"),
+        leader("Open Positions", str(status.open_positions)),
+        leader("Closed Trades", str(status.closed_trades)),
+        leader("Win Rate", f"{status.win_rate:.2%}"),
+        leader("Net R", f"{status.r_sum:.2f}"),
+    ]
+    rows = [
+        [("Positions", "menu.positions"), ("Reports", "menu.reports")],
+        [("Back", "menu.main")],
+    ]
+    return "\n".join(lines), keyboard(rows)
+
+
+def positions_page(
+    records: list[PositionRecord], *, page: int, page_size: int
+) -> tuple[str, Keyboard]:
+    """One page of open positions."""
+    pages = max((len(records) + page_size - 1) // page_size, 1)
+    page = min(max(page, 0), pages - 1)
+    window = records[page * page_size : (page + 1) * page_size]
+    lines = [f"{E_UP} Open Positions ({len(records)})", ""]
+    if not window:
+        lines.append("No open positions.")
+    for record in window:
+        lines.extend(
+            [
+                f"{record.symbol} {record.timeframe.value} {record.direction.upper()}",
+                leader("  Entry", str(record.entry)),
+                leader("  Stop", str(record.stop)),
+                leader("  Target", str(record.target)),
+                leader("  Quantity", str(record.quantity)),
+                "",
+            ]
+        )
+    rows = [_pager_row("positions", page, pages), [("Back", "menu.main")]]
+    return "\n".join(lines).rstrip(), keyboard(rows)
+
+
+def optimization_home(
+    status: OperationsStatus, *, queue_paused: bool
+) -> tuple[str, Keyboard]:
+    """The Optimization Center (Book V part 7 Telegram menu)."""
+    lines = [
+        f"{E_BRAIN} Optimization",
+        "",
+        leader("Queue", "PAUSED" if queue_paused else "RUNNING"),
+        leader("Jobs Pending", str(status.jobs_pending)),
+        leader("Jobs Running", str(status.jobs_running)),
+        leader("Shadow", str(status.promotions_shadow)),
+        leader("Await Approval", str(status.promotions_pending_approval)),
+    ]
+    pause_label = ("Resume Queue", "optimization.resume") if queue_paused else (
+        "Pause Queue", "optimization.pause"
+    )
+    rows = [
+        [("Show Queue", "optimization.queue"), ("Promotions", "optimization.promotions")],
+        [pause_label, ("Rollback", "optimization.rollback")],
+        [("Back", "menu.main")],
+    ]
+    return "\n".join(lines), keyboard(rows)
+
+
+def queue_page(
+    jobs: list[ResearchJob], *, page: int, page_size: int
+) -> tuple[str, Keyboard]:
+    """One page of the optimization queue."""
+    pages = max((len(jobs) + page_size - 1) // page_size, 1)
+    page = min(max(page, 0), pages - 1)
+    window = jobs[page * page_size : (page + 1) * page_size]
+    lines = [f"{E_FOLDER} Queue ({len(jobs)})", ""]
+    if not window:
+        lines.append("Queue is empty.")
+    lines.extend(
+        f"#{job.job_id} {job.symbol} {job.timeframe.value} {job.kind} "
+        f"[{_status_word(job.status)}] attempts {job.attempts}"
+        for job in window
+    )
+    rows = [_pager_row("queue", page, pages), [("Back", "menu.optimization")]]
+    return "\n".join(lines), keyboard(rows)
+
+
+def promotions_page(
+    records: list[PromotionRecord], *, page: int, page_size: int, admin: bool
+) -> tuple[str, Keyboard]:
+    """One page of the promotion pipeline with approval actions."""
+    pages = max((len(records) + page_size - 1) // page_size, 1)
+    page = min(max(page, 0), pages - 1)
+    window = records[page * page_size : (page + 1) * page_size]
+    lines = [f"{E_BRAIN} Promotions ({len(records)})", ""]
+    if not window:
+        lines.append("No promotions registered.")
+    rows: list[list[tuple[str, str]]] = []
+    for record in window:
+        lines.append(
+            f"#{record.promotion_id} {record.symbol} {record.timeframe.value} "
+            f"{record.kind} [{_status_word(record.status)}]"
+        )
+        if admin and record.status == "passed":
+            rows.append(
+                [
+                    ("Approve", f"promotion.approve.{record.promotion_id}"),
+                    ("Reject", f"promotion.reject.{record.promotion_id}"),
+                ]
+            )
+    rows.append(_pager_row("promotions", page, pages))
+    rows.append([("Back", "menu.optimization")])
+    return "\n".join(lines), keyboard(rows)
+
+
+def rollback_menu(series: list[tuple[str, str]]) -> tuple[str, Keyboard]:
+    """Pick a series to roll back to its previous artifact."""
+    lines = [f"{E_GEAR} Rollback", "", "Select a series."]
+    rows = [
+        [(f"{symbol} {timeframe}", f"rollback.{symbol}.{timeframe}")]
+        for symbol, timeframe in series
+    ]
+    rows.append([("Back", "menu.optimization")])
+    return "\n".join(lines), keyboard(rows)
+
+
+def emergency_view(level: KillSwitchLevel, reason: str) -> tuple[str, Keyboard]:
+    """The Emergency Center (Book IV 7.9)."""
+    lines = [
+        f"{E_WARN} Emergency",
+        "",
+        leader("Kill Switch", _switch_label(level)),
+    ]
+    if reason:
+        lines.append(leader("Reason", reason))
+    rows = [
+        [("Pause Trading", "emergency.pause"), ("Resume Trading", "emergency.resume")],
+        [("Disable Entries", "emergency.disable_entries")],
+        [("Safe Mode", "emergency.safe_mode"), ("Cancel Orders", "emergency.cancel_orders")],
+        [("Back", "menu.main")],
+    ]
+    return "\n".join(lines), keyboard(rows)
+
+
+def confirm_view(action_label: str, nonce: str) -> tuple[str, Keyboard]:
+    """The two-step confirmation gate (Book IV principle 3)."""
+    lines = [
+        f"{E_WARN} Warning",
+        f"This will execute: {action_label}.",
+        "Please confirm.",
+    ]
+    rows = [[("Confirm", f"confirm.{nonce}"), ("Cancel", f"cancel.{nonce}")]]
+    return "\n".join(lines), keyboard(rows)
+
+
+def reports_view(status: OperationsStatus) -> tuple[str, Keyboard]:
+    """The performance report headline (closed-trade statistics)."""
+    lines = [
+        f"{E_FOLDER} Performance",
+        "",
+        leader("Closed Trades", str(status.closed_trades)),
+        leader("Win Rate", f"{status.win_rate:.2%}"),
+        leader("Net R", f"{status.r_sum:.2f}"),
+        leader("Equity", status.equity),
+        leader("Drawdown", f"{status.drawdown:.2%}"),
+        leader("Snapshots", str(status.snapshots_stored)),
+    ]
+    rows = [[("Back", "menu.main")]]
+    return "\n".join(lines), keyboard(rows)
+
+
+def health_view(status: OperationsStatus) -> tuple[str, Keyboard]:
+    """Per-module health and heartbeat freshness."""
+    lines = [f"{E_HEART} Health", ""]
+    lines.extend(
+        f"{_dot(component.state.value)} {component.component}"
+        for component in status.components
+    )
+    if status.heartbeats:
+        lines.extend(["", "Heartbeats:"])
+        lines.extend(
+            leader(beat.component, f"{beat.age_ms // 1000}s"
+                   + (" STALE" if beat.stale else ""))
+            for beat in status.heartbeats
+        )
+    rows = [[("Refresh", "menu.health")], [("Back", "menu.main")]]
+    return "\n".join(lines), keyboard(rows)
+
+
+def help_view(role: str) -> tuple[str, Keyboard]:
+    """Command reference."""
+    lines = [
+        f"{E_CHART} Help",
+        "",
+        "/menu - main menu",
+        "/status - operations status",
+        "/portfolio - portfolio dashboard",
+        "/reports - performance report",
+        "/health - module health",
+    ]
+    if role == "admin":
+        lines.extend(
+            [
+                "/optimizer - optimization center",
+                "/emergency - emergency center",
+            ]
+        )
+    rows = [[("Back", "menu.main")]]
+    return "\n".join(lines), keyboard(rows)
+
+
+def denied_view() -> str:
+    """The unauthorized reply."""
+    return f"{E_ERROR} Error\nReason: not authorized\nSuggested Action: contact the operator"
+
+
+def done_view(message: str) -> str:
+    """The standard success format."""
+    return f"{E_OK} Completed\n{message}"
+
+
+def failed_view(reason: str, suggestion: str) -> str:
+    """The standard error format."""
+    return (
+        f"{E_ERROR} Error\nReason: {reason}\n"
+        f"Suggested Action: {suggestion}"
+    )
+
+
+# --- Notifications --------------------------------------------------------------------
+
+
+def alert_notification(payload: dict[str, JsonValue]) -> str:
+    """Push text for one monitoring alert."""
+    severity = str(payload.get("severity", ""))
+    message = str(payload.get("message", ""))
+    return f"{E_WARN} Alert [{severity}]\n{message}"
+
+
+def kill_switch_notification(payload: dict[str, JsonValue]) -> str:
+    """Push text for one kill-switch transition."""
+    level = str(payload.get("level", ""))
+    reason = str(payload.get("reason", ""))
+    actor = str(payload.get("actor", ""))
+    return f"{E_WARN} Kill Switch\n{leader('Level', level)}\n" + "\n".join(
+        [leader("Reason", reason), leader("Actor", actor)]
+    )
+
+
+def fill_notification(payload: dict[str, JsonValue]) -> str:
+    """Push text for one execution outcome."""
+    status = str(payload.get("status", ""))
+    symbol = str(payload.get("symbol", ""))
+    mode = str(payload.get("mode", ""))
+    price = payload.get("fill_price")
+    body = [
+        f"{E_OK} Execution {_status_word(status)}",
+        leader("Symbol", symbol),
+        leader("Mode", mode),
+    ]
+    if price is not None:
+        body.append(leader("Fill", str(price)))
+    return "\n".join(body)
+
+
+def signal_notification(payload: dict[str, JsonValue]) -> str:
+    """Push text for one fired signal."""
+    symbol = str(payload.get("symbol", ""))
+    timeframe = str(payload.get("timeframe", ""))
+    direction = str(payload.get("direction", ""))
+    probability = payload.get("probability")
+    body = [
+        f"{E_UP} Signal",
+        leader("Symbol", symbol),
+        leader("Timeframe", timeframe),
+        leader("Direction", direction.upper()),
+    ]
+    if isinstance(probability, (int, float)):
+        body.append(leader("Probability", f"{float(probability):.2%}"))
+    return "\n".join(body)
+
+
+def promotion_notification(payload: dict[str, JsonValue]) -> str:
+    """Push text for one promotion pipeline transition."""
+    symbol = str(payload.get("symbol", ""))
+    timeframe = str(payload.get("timeframe", ""))
+    status = str(payload.get("status", payload.get("kind", "")))
+    return "\n".join(
+        [
+            f"{E_BRAIN} Promotion",
+            leader("Series", f"{symbol} {timeframe}"),
+            leader("Status", _status_word(status)),
+        ]
+    )
+
+
+# --- Vocabulary -----------------------------------------------------------------------
+
+
+def _dot(health: str) -> str:
+    return f"{_HEALTH_DOT.get(health, E_WHITE)} {health.upper()}"
+
+
+def _switch_label(level: KillSwitchLevel) -> str:
+    if level is KillSwitchLevel.NONE:
+        return f"{E_GREEN} OFF"
+    return f"{E_RED} {level.value.upper()}"
+
+
+_STATUS_WORDS: Final[dict[str, str]] = {
+    "pending": "Pending",
+    "waiting": "Waiting",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "canceled": "Canceled",
+    "shadow": "Running",
+    "passed": "Waiting",
+    "promoted": "Completed",
+    "rejected": "Canceled",
+    "rolled_back": "Canceled",
+    "filled": "Completed",
+    "unfilled": "Pending",
+}
+
+
+def _status_word(status: str) -> str:
+    """The fixed status vocabulary (synonyms are banned)."""
+    return _STATUS_WORDS.get(status, status.capitalize() if status else "-")
