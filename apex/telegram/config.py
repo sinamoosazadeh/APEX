@@ -1,1 +1,108 @@
-IiIiVGVsZWdyYW0gY29uc29sZSBjb25maWd1cmF0aW9uIChgYHRlbGVncmFtLnlhbWxgYCwgUGhhc2UgMTIpLgoKRGVlcC12YWxpZGF0ZXMgdGhlIGNvbnNvbGUncyBvcGVyYXRpbmcgcGFyYW1ldGVyczogbG9uZy1wb2xsIGNhZGVuY2UsCnRoZSAxMC1taW51dGUgc2Vzc2lvbiB0aW1lb3V0IChCb29rIElWIFBhcnQgNSdzIGF1dGhvcml0YXRpdmUgdmFsdWUpLApwYWdpbmF0aW9uLCB0aGUgZG91YmxlLWNvbmZpcm1hdGlvbiBUVEwgZm9yIGRhbmdlcm91cyBhY3Rpb25zLCBhbmQKdGhlIG5vdGlmaWNhdGlvbiBwb2xpY3kgKHdoaWNoIHNldmVyaXRpZXMgcHVzaCBwcm9hY3RpdmVseSkuCiIiIgoKZnJvbSBkYXRhY2xhc3NlcyBpbXBvcnQgZGF0YWNsYXNzCgpmcm9tIGFwZXguY29yZS5jb25maWcgaW1wb3J0IENvbmZpZ1NlY3Rpb24KZnJvbSBhcGV4LmNvcmUuZXhjZXB0aW9ucyBpbXBvcnQgQ29uZmlndXJhdGlvbkVycm9yCmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IEFsZXJ0U2V2ZXJpdHkKCl9DT0RFID0gIkNGRy0wNDEiCgoKQGRhdGFjbGFzcyhmcm96ZW49VHJ1ZSwgc2xvdHM9VHJ1ZSwga3dfb25seT1UcnVlKQpjbGFzcyBUZWxlZ3JhbVNldHRpbmdzOgogICAgIiIiVGhlIHZhbGlkYXRlZCBUZWxlZ3JhbSBjb25zb2xlIGNvbmZpZ3VyYXRpb24uIiIiCgogICAgZW5hYmxlZDogYm9vbCA9IFRydWUKICAgIHBvbGxfdGltZW91dF9zOiBpbnQgPSAyNQogICAgc2Vzc2lvbl90aW1lb3V0X21zOiBpbnQgPSA2MDBfMDAwCiAgICBwYWdlX3NpemU6IGludCA9IDUKICAgIGNvbmZpcm1fdHRsX21zOiBpbnQgPSA2MF8wMDAKICAgIG5vdGlmeV9taW5fc2V2ZXJpdHk6IEFsZXJ0U2V2ZXJpdHkgPSBBbGVydFNldmVyaXR5LkhJR0gKICAgIG5vdGlmeV9maWxsczogYm9vbCA9IFRydWUKICAgIG5vdGlmeV9zaWduYWxzOiBib29sID0gVHJ1ZQogICAgbm90aWZ5X3Byb21vdGlvbnM6IGJvb2wgPSBUcnVlCgogICAgZGVmIF9fcG9zdF9pbml0X18oc2VsZikgLT4gTm9uZToKICAgICAgICBfcmVxdWlyZSgxIDw9IHNlbGYucG9sbF90aW1lb3V0X3MgPD0gNTAsICJwb2xsX3RpbWVvdXRfcyBtdXN0IGJlIGluIFsxLCA1MF0iKQogICAgICAgIF9yZXF1aXJlKAogICAgICAgICAgICBzZWxmLnNlc3Npb25fdGltZW91dF9tcyA+PSA2MF8wMDAsICJzZXNzaW9uX3RpbWVvdXRfbXMgbXVzdCBiZSA+PSA2MDAwMCIKICAgICAgICApCiAgICAgICAgX3JlcXVpcmUoMSA8PSBzZWxmLnBhZ2Vfc2l6ZSA8PSAyMCwgInBhZ2Vfc2l6ZSBtdXN0IGJlIGluIFsxLCAyMF0iKQogICAgICAgIF9yZXF1aXJlKHNlbGYuY29uZmlybV90dGxfbXMgPj0gNV8wMDAsICJjb25maXJtX3R0bF9tcyBtdXN0IGJlID49IDUwMDAiKQoKCmRlZiBfcmVxdWlyZShjb25kaXRpb246IGJvb2wsIG1lc3NhZ2U6IHN0cikgLT4gTm9uZToKICAgIGlmIG5vdCBjb25kaXRpb246CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKG1lc3NhZ2UsIGNvZGU9X0NPREUsIGRldGFpbHM9e30pCgoKZGVmIF9ib29sZWFuKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBkZWZhdWx0OiBib29sKSAtPiBib29sOgogICAgdmFsdWUgPSBzZWN0aW9uLmdldChrZXksIGRlZmF1bHQpCiAgICBpZiBub3QgaXNpbnN0YW5jZSh2YWx1ZSwgYm9vbCk6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICBmInRlbGVncmFtIHZhbHVlIHtrZXl9IG11c3QgYmUgYSBib29sZWFuIiwKICAgICAgICAgICAgY29kZT1fQ09ERSwKICAgICAgICAgICAgZGV0YWlscz17ImZvdW5kIjogcmVwcih2YWx1ZSl9LAogICAgICAgICkKICAgIHJldHVybiB2YWx1ZQoKCmRlZiBfaW50ZWdlcihzZWN0aW9uOiBDb25maWdTZWN0aW9uLCBrZXk6IHN0ciwgZGVmYXVsdDogaW50KSAtPiBpbnQ6CiAgICB2YWx1ZSA9IHNlY3Rpb24uZ2V0KGtleSwgZGVmYXVsdCkKICAgIGlmIGlzaW5zdGFuY2UodmFsdWUsIGJvb2wpIG9yIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBpbnQpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgZiJ0ZWxlZ3JhbSB2YWx1ZSB7a2V5fSBtdXN0IGJlIGFuIGludGVnZXIiLAogICAgICAgICAgICBjb2RlPV9DT0RFLAogICAgICAgICAgICBkZXRhaWxzPXsiZm91bmQiOiByZXByKHZhbHVlKX0sCiAgICAgICAgKQogICAgcmV0dXJuIHZhbHVlCgoKZGVmIF9zZXZlcml0eShzZWN0aW9uOiBDb25maWdTZWN0aW9uLCBrZXk6IHN0ciwgZGVmYXVsdDogQWxlcnRTZXZlcml0eSkgLT4gQWxlcnRTZXZlcml0eToKICAgIHZhbHVlID0gc2VjdGlvbi5nZXQoa2V5LCBkZWZhdWx0LnZhbHVlKQogICAgdmFsdWVzID0ge3NldmVyaXR5LnZhbHVlOiBzZXZlcml0eSBmb3Igc2V2ZXJpdHkgaW4gQWxlcnRTZXZlcml0eX0KICAgIGlmIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBzdHIpIG9yIHZhbHVlIG5vdCBpbiB2YWx1ZXM6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICBmInRlbGVncmFtIHZhbHVlIHtrZXl9IG11c3QgYmUgb25lIG9mIHtzb3J0ZWQodmFsdWVzKX0iLAogICAgICAgICAgICBjb2RlPV9DT0RFLAogICAgICAgICAgICBkZXRhaWxzPXsiZm91bmQiOiByZXByKHZhbHVlKX0sCiAgICAgICAgKQogICAgcmV0dXJuIHZhbHVlc1t2YWx1ZV0KCgpkZWYgdGVsZWdyYW1fc2V0dGluZ3Moc2VjdGlvbjogQ29uZmlnU2VjdGlvbikgLT4gVGVsZWdyYW1TZXR0aW5nczoKICAgICIiIlBhcnNlIGFuZCB2YWxpZGF0ZSB0ZWxlZ3JhbS55YW1sJ3MgYGBjb25zb2xlYGAgc2VjdGlvbi4iIiIKICAgIGlmIG5vdCBpc2luc3RhbmNlKHNlY3Rpb24sIGRpY3QpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgInRlbGVncmFtIGNvbmZpZ3VyYXRpb24gbXVzdCBiZSBhIG1hcHBpbmciLCBjb2RlPV9DT0RFLCBkZXRhaWxzPXt9CiAgICAgICAgKQogICAgY29uc29sZSA9IHNlY3Rpb24uZ2V0KCJjb25zb2xlIiwge30pCiAgICBpZiBub3QgaXNpbnN0YW5jZShjb25zb2xlLCBkaWN0KToKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgICJ0ZWxlZ3JhbS5jb25zb2xlIG11c3QgYmUgYSBtYXBwaW5nIiwgY29kZT1fQ09ERSwgZGV0YWlscz17fQogICAgICAgICkKICAgIGRlZmF1bHRzID0gVGVsZWdyYW1TZXR0aW5ncygpCiAgICByZXR1cm4gVGVsZWdyYW1TZXR0aW5ncygKICAgICAgICBlbmFibGVkPV9ib29sZWFuKGNvbnNvbGUsICJlbmFibGVkIiwgZGVmYXVsdHMuZW5hYmxlZCksCiAgICAgICAgcG9sbF90aW1lb3V0X3M9X2ludGVnZXIoY29uc29sZSwgInBvbGxfdGltZW91dF9zIiwgZGVmYXVsdHMucG9sbF90aW1lb3V0X3MpLAogICAgICAgIHNlc3Npb25fdGltZW91dF9tcz1faW50ZWdlcigKICAgICAgICAgICAgY29uc29sZSwgInNlc3Npb25fdGltZW91dF9tcyIsIGRlZmF1bHRzLnNlc3Npb25fdGltZW91dF9tcwogICAgICAgICksCiAgICAgICAgcGFnZV9zaXplPV9pbnRlZ2VyKGNvbnNvbGUsICJwYWdlX3NpemUiLCBkZWZhdWx0cy5wYWdlX3NpemUpLAogICAgICAgIGNvbmZpcm1fdHRsX21zPV9pbnRlZ2VyKGNvbnNvbGUsICJjb25maXJtX3R0bF9tcyIsIGRlZmF1bHRzLmNvbmZpcm1fdHRsX21zKSwKICAgICAgICBub3RpZnlfbWluX3NldmVyaXR5PV9zZXZlcml0eSgKICAgICAgICAgICAgY29uc29sZSwgIm5vdGlmeV9taW5fc2V2ZXJpdHkiLCBkZWZhdWx0cy5ub3RpZnlfbWluX3NldmVyaXR5CiAgICAgICAgKSwKICAgICAgICBub3RpZnlfZmlsbHM9X2Jvb2xlYW4oY29uc29sZSwgIm5vdGlmeV9maWxscyIsIGRlZmF1bHRzLm5vdGlmeV9maWxscyksCiAgICAgICAgbm90aWZ5X3NpZ25hbHM9X2Jvb2xlYW4oY29uc29sZSwgIm5vdGlmeV9zaWduYWxzIiwgZGVmYXVsdHMubm90aWZ5X3NpZ25hbHMpLAogICAgICAgIG5vdGlmeV9wcm9tb3Rpb25zPV9ib29sZWFuKAogICAgICAgICAgICBjb25zb2xlLCAibm90aWZ5X3Byb21vdGlvbnMiLCBkZWZhdWx0cy5ub3RpZnlfcHJvbW90aW9ucwogICAgICAgICksCiAgICApCg==
+"""Telegram console configuration (``telegram.yaml``, Phase 12).
+
+Deep-validates the console's operating parameters: long-poll cadence,
+the 10-minute session timeout (Book IV Part 5's authoritative value),
+pagination, the double-confirmation TTL for dangerous actions, and
+the notification policy (which severities push proactively).
+"""
+
+from dataclasses import dataclass
+
+from apex.core.config import ConfigSection
+from apex.core.exceptions import ConfigurationError
+from apex.monitoring.records import AlertSeverity
+
+_CODE = "CFG-041"
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class TelegramSettings:
+    """The validated Telegram console configuration."""
+
+    enabled: bool = True
+    poll_timeout_s: int = 25
+    session_timeout_ms: int = 600_000
+    page_size: int = 5
+    confirm_ttl_ms: int = 60_000
+    notify_min_severity: AlertSeverity = AlertSeverity.HIGH
+    notify_fills: bool = True
+    notify_signals: bool = True
+    notify_promotions: bool = True
+
+    def __post_init__(self) -> None:
+        _require(1 <= self.poll_timeout_s <= 50, "poll_timeout_s must be in [1, 50]")
+        _require(
+            self.session_timeout_ms >= 60_000, "session_timeout_ms must be >= 60000"
+        )
+        _require(1 <= self.page_size <= 20, "page_size must be in [1, 20]")
+        _require(self.confirm_ttl_ms >= 5_000, "confirm_ttl_ms must be >= 5000")
+
+
+def _require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ConfigurationError(message, code=_CODE, details={})
+
+
+def _boolean(section: ConfigSection, key: str, default: bool) -> bool:
+    value = section.get(key, default)
+    if not isinstance(value, bool):
+        raise ConfigurationError(
+            f"telegram value {key} must be a boolean",
+            code=_CODE,
+            details={"found": repr(value)},
+        )
+    return value
+
+
+def _integer(section: ConfigSection, key: str, default: int) -> int:
+    value = section.get(key, default)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ConfigurationError(
+            f"telegram value {key} must be an integer",
+            code=_CODE,
+            details={"found": repr(value)},
+        )
+    return value
+
+
+def _severity(section: ConfigSection, key: str, default: AlertSeverity) -> AlertSeverity:
+    value = section.get(key, default.value)
+    values = {severity.value: severity for severity in AlertSeverity}
+    if not isinstance(value, str) or value not in values:
+        raise ConfigurationError(
+            f"telegram value {key} must be one of {sorted(values)}",
+            code=_CODE,
+            details={"found": repr(value)},
+        )
+    return values[value]
+
+
+def telegram_settings(section: ConfigSection) -> TelegramSettings:
+    """Parse and validate telegram.yaml's ``console`` section."""
+    if not isinstance(section, dict):
+        raise ConfigurationError(
+            "telegram configuration must be a mapping", code=_CODE, details={}
+        )
+    console = section.get("console", {})
+    if not isinstance(console, dict):
+        raise ConfigurationError(
+            "telegram.console must be a mapping", code=_CODE, details={}
+        )
+    defaults = TelegramSettings()
+    return TelegramSettings(
+        enabled=_boolean(console, "enabled", defaults.enabled),
+        poll_timeout_s=_integer(console, "poll_timeout_s", defaults.poll_timeout_s),
+        session_timeout_ms=_integer(
+            console, "session_timeout_ms", defaults.session_timeout_ms
+        ),
+        page_size=_integer(console, "page_size", defaults.page_size),
+        confirm_ttl_ms=_integer(console, "confirm_ttl_ms", defaults.confirm_ttl_ms),
+        notify_min_severity=_severity(
+            console, "notify_min_severity", defaults.notify_min_severity
+        ),
+        notify_fills=_boolean(console, "notify_fills", defaults.notify_fills),
+        notify_signals=_boolean(console, "notify_signals", defaults.notify_signals),
+        notify_promotions=_boolean(
+            console, "notify_promotions", defaults.notify_promotions
+        ),
+    )
