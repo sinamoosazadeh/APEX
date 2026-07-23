@@ -173,3 +173,77 @@ class TestErrorBudget:
             await store.close()
 
         asyncio.run(scenario())
+
+
+class TestFlattened:
+    def test_flattened_cancels_flattens_and_audits(self, tmp_path: Path) -> None:
+        calls: list[str] = []
+        audits: list[tuple[str, str, str]] = []
+
+        async def canceller() -> int:
+            calls.append("cancel")
+            return 2
+
+        async def flattener() -> int:
+            calls.append("flatten")
+            return 3
+
+        async def auditor(actor: str, level: str, reason: str) -> None:
+            audits.append((actor, level, reason))
+
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            store = store_at(tmp_path)
+            await store.open()
+            switch = KillSwitchEngine(
+                settings=settings(),
+                store=store,
+                bus=make_bus(clock),
+                clock=clock,
+                logger=logger(),
+                order_canceller=canceller,
+                position_flattener=flattener,
+                auditor=auditor,
+            )
+            record = await switch.engage(
+                KillSwitchLevel.FLATTENED, reason="drill", actor="operator"
+            )
+            assert record.level is KillSwitchLevel.FLATTENED
+            assert not await switch.allows_processing()
+            assert not await switch.allows_new_entries()
+            assert calls == ["cancel", "flatten"]
+            assert audits == [("operator", "flattened", "drill")]
+            await switch.release(reason="drill over", actor="operator")
+            assert audits[-1] == ("operator", "none", "drill over")
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_safe_mode_does_not_flatten(self, tmp_path: Path) -> None:
+        flattened: list[int] = []
+
+        async def flattener() -> int:
+            flattened.append(1)
+            return 1
+
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            store = store_at(tmp_path)
+            await store.open()
+            switch = KillSwitchEngine(
+                settings=settings(),
+                store=store,
+                bus=make_bus(clock),
+                clock=clock,
+                logger=logger(),
+                position_flattener=flattener,
+            )
+            await switch.engage(
+                KillSwitchLevel.SAFE_MODE, reason="drill", actor="operator"
+            )
+            assert flattened == []
+            assert await switch.flatten_open_positions() == 1
+            assert flattened == [1]
+            await store.close()
+
+        asyncio.run(scenario())
