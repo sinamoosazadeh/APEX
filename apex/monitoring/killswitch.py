@@ -1,1 +1,141 @@
-IiIiS2lsbC1zd2l0Y2ggZW5naW5lICh0aGUgUGhhc2UgMTIgbW9uaXRvcmluZy1kcml2ZW4gc3VyZmFjZXMpLgoKVGhlIG11bHRpLXRyaWdnZXIga2lsbCBzd2l0Y2ggb2YgQm9vayBJIDguMjcgLyBCb29rIElJIDEwLjI1LCBzY29wZWQKdG8gd2hhdCBtb25pdG9yaW5nIG93bnMgaW4gdGhpcyBwaGFzZTogYSBkdXJhYmxlLCBhdWRpdGFibGUgc3RhdGUKbGFkZGVyIChOT05FIC0+IEVOVFJJRVNfRElTQUJMRUQgLT4gUEFVU0VEIC0+IFNBRkVfTU9ERSkgdGhhdCB0aGUKb3JjaGVzdHJhdGlvbiBzdXJmYWNlcyBjb25zdWx0IGJlZm9yZSBkZWNpc2lvbnMgYW5kIGV4ZWN1dGlvbnMuClRyYW5zaXRpb25zIGNvbWUgZnJvbSBvcGVyYXRvcnMgKFRlbGVncmFtL0NMSSkgb3IgYXV0b21hdGljYWxseSBmcm9tCnRoZSBhbGVydCBlbmdpbmUncyBzZXZlcml0eSBwb2xpY3kuIFNBRkVfTU9ERSBhZGRpdGlvbmFsbHkgY2FuY2VscwpyZXN0aW5nIHZlbnVlIG9yZGVycyBiZXN0LWVmZm9ydCB0aHJvdWdoIGFuIGluamVjdGVkIGNhbmNlbGxlciAoMTAuMjUKIkNhbmNlbCBQZW5kaW5nIE9yZGVycyIpLiBQb3NpdGlvbiBmbGF0dGVuaW5nIGFuZCB0aGUgZml2ZS1zY29wZQpraWxsLXN3aXRjaCBtYXRyaXggYmVsb25nIHRvIHRoZSBQaGFzZSAxMyBzZWN1cml0eSBwbGF0Zm9ybSAoMjUuMjkpLgoiIiIKCmZyb20gY29sbGVjdGlvbnMuYWJjIGltcG9ydCBBd2FpdGFibGUsIENhbGxhYmxlCmZyb20gdHlwaW5nIGltcG9ydCBGaW5hbAoKZnJvbSBhcGV4LmNvcmUuY29udHJhY3RzLmludGVyZmFjZXMgaW1wb3J0IElFdmVudEJ1cwpmcm9tIGFwZXguY29yZS5leGNlcHRpb25zIGltcG9ydCBBcGV4RXJyb3IsIE1vbml0b3JpbmdFcnJvcgpmcm9tIGFwZXguY29yZS5sb2dnaW5nIGltcG9ydCBTdHJ1Y3R1cmVkTG9nZ2VyCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IENsb2NrCmZyb20gYXBleC5tb25pdG9yaW5nLmNvbmZpZyBpbXBvcnQgTW9uaXRvcmluZ1NldHRpbmdzCmZyb20gYXBleC5tb25pdG9yaW5nLmV2ZW50cyBpbXBvcnQgTW9uaXRvcmluZ0V2ZW50LCBtb25pdG9yaW5nX2V2ZW50CmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IEFsZXJ0U2V2ZXJpdHksIEtpbGxTd2l0Y2hMZXZlbCwgS2lsbFN3aXRjaFJlY29yZApmcm9tIGFwZXgubW9uaXRvcmluZy5zdG9yZSBpbXBvcnQgU3FsaXRlTW9uaXRvcmluZ1JlcG9zaXRvcnkKCl9TT1VSQ0U6IEZpbmFsW3N0cl0gPSAiYXBleC5tb25pdG9yaW5nLmtpbGxzd2l0Y2giCgp0eXBlIE9yZGVyQ2FuY2VsbGVyID0gQ2FsbGFibGVbW10sIEF3YWl0YWJsZVtpbnRdXQoKCmNsYXNzIEtpbGxTd2l0Y2hFbmdpbmU6CiAgICAiIiJEdXJhYmxlIHRyYWRpbmctcGVybWlzc2lvbiBsYWRkZXIgd2l0aCBhdXRvLWVuZ2FnZSBwb2xpY3kuIiIiCgogICAgZGVmIF9faW5pdF9fKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBzZXR0aW5nczogTW9uaXRvcmluZ1NldHRpbmdzLAogICAgICAgIHN0b3JlOiBTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeSwKICAgICAgICBidXM6IElFdmVudEJ1cywKICAgICAgICBjbG9jazogQ2xvY2ssCiAgICAgICAgbG9nZ2VyOiBTdHJ1Y3R1cmVkTG9nZ2VyLAogICAgICAgIG9yZGVyX2NhbmNlbGxlcjogT3JkZXJDYW5jZWxsZXIgfCBOb25lID0gTm9uZSwKICAgICkgLT4gTm9uZToKICAgICAgICBzZWxmLl9zZXR0aW5ncyA9IHNldHRpbmdzCiAgICAgICAgc2VsZi5fc3RvcmUgPSBzdG9yZQogICAgICAgIHNlbGYuX2J1cyA9IGJ1cwogICAgICAgIHNlbGYuX2Nsb2NrID0gY2xvY2sKICAgICAgICBzZWxmLl9sb2dnZXIgPSBsb2dnZXIKICAgICAgICBzZWxmLl9vcmRlcl9jYW5jZWxsZXIgPSBvcmRlcl9jYW5jZWxsZXIKCiAgICAjIC0tLSBTdGF0ZSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgY3VycmVudChzZWxmKSAtPiBLaWxsU3dpdGNoUmVjb3JkIHwgTm9uZToKICAgICAgICAiIiJUaGUgbGF0ZXN0IHRyYW5zaXRpb24gZW50cnk7IE5vbmUgYmVmb3JlIGFueSB0cmFuc2l0aW9uLiIiIgogICAgICAgIHJldHVybiBhd2FpdCBzZWxmLl9zdG9yZS5jdXJyZW50X2tpbGxfc3dpdGNoKCkKCiAgICBhc3luYyBkZWYgbGV2ZWwoc2VsZikgLT4gS2lsbFN3aXRjaExldmVsOgogICAgICAgICIiIlRoZSBlZmZlY3RpdmUgbGV2ZWwgKE5PTkUgYmVmb3JlIGFueSB0cmFuc2l0aW9uKS4iIiIKICAgICAgICByZWNvcmQgPSBhd2FpdCBzZWxmLmN1cnJlbnQoKQogICAgICAgIHJldHVybiByZWNvcmQubGV2ZWwgaWYgcmVjb3JkIGlzIG5vdCBOb25lIGVsc2UgS2lsbFN3aXRjaExldmVsLk5PTkUKCiAgICBhc3luYyBkZWYgYWxsb3dzX25ld19lbnRyaWVzKHNlbGYpIC0+IGJvb2w6CiAgICAgICAgIiIiV2hldGhlciBuZXcgcG9zaXRpb25zIG1heSBiZSBlbnRlcmVkLiIiIgogICAgICAgIHJldHVybiAoYXdhaXQgc2VsZi5sZXZlbCgpKSBpcyBLaWxsU3dpdGNoTGV2ZWwuTk9ORQoKICAgIGFzeW5jIGRlZiBhbGxvd3NfcHJvY2Vzc2luZyhzZWxmKSAtPiBib29sOgogICAgICAgICIiIldoZXRoZXIgZGVjaXNpb24vZXhlY3V0aW9uIHN0YWdlcyBtYXkgcnVuIGF0IGFsbC4iIiIKICAgICAgICByZXR1cm4gKGF3YWl0IHNlbGYubGV2ZWwoKSkucmFuayA8IEtpbGxTd2l0Y2hMZXZlbC5QQVVTRUQucmFuawoKICAgICMgLS0tIFRyYW5zaXRpb25zIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIGFzeW5jIGRlZiBlbmdhZ2UoCiAgICAgICAgc2VsZiwgbGV2ZWw6IEtpbGxTd2l0Y2hMZXZlbCwgKiwgcmVhc29uOiBzdHIsIGFjdG9yOiBzdHIKICAgICkgLT4gS2lsbFN3aXRjaFJlY29yZDoKICAgICAgICAiIiJNb3ZlIHRvIGEgcmVzdHJpY3RpdmUgbGV2ZWw7IFNBRkVfTU9ERSBjYW5jZWxzIHJlc3Rpbmcgb3JkZXJzLiIiIgogICAgICAgIGlmIGxldmVsIGlzIEtpbGxTd2l0Y2hMZXZlbC5OT05FOgogICAgICAgICAgICByYWlzZSBNb25pdG9yaW5nRXJyb3IoCiAgICAgICAgICAgICAgICAiZW5nYWdlIHJlcXVpcmVzIGEgcmVzdHJpY3RpdmUgbGV2ZWw7IHVzZSByZWxlYXNlIiwKICAgICAgICAgICAgICAgIGNvZGU9Ik1PTi0wMDEiLAogICAgICAgICAgICAgICAgZGV0YWlscz17ImxldmVsIjogbGV2ZWwudmFsdWV9LAogICAgICAgICAgICApCiAgICAgICAgcmVjb3JkID0gYXdhaXQgc2VsZi5fdHJhbnNpdGlvbihsZXZlbCwgcmVhc29uPXJlYXNvbiwgYWN0b3I9YWN0b3IpCiAgICAgICAgaWYgbGV2ZWwgaXMgS2lsbFN3aXRjaExldmVsLlNBRkVfTU9ERToKICAgICAgICAgICAgYXdhaXQgc2VsZi5jYW5jZWxfcmVzdGluZ19vcmRlcnMoKQogICAgICAgIHJldHVybiByZWNvcmQKCiAgICBhc3luYyBkZWYgcmVsZWFzZShzZWxmLCAqLCByZWFzb246IHN0ciwgYWN0b3I6IHN0cikgLT4gS2lsbFN3aXRjaFJlY29yZDoKICAgICAgICAiIiJSZXR1cm4gdG8gbm9ybWFsIHRyYWRpbmcgKGFuIGF1ZGl0ZWQgdHJhbnNpdGlvbiBsaWtlIGFueSkuIiIiCiAgICAgICAgcmV0dXJuIGF3YWl0IHNlbGYuX3RyYW5zaXRpb24oS2lsbFN3aXRjaExldmVsLk5PTkUsIHJlYXNvbj1yZWFzb24sIGFjdG9yPWFjdG9yKQoKICAgIGFzeW5jIGRlZiBhdXRvX2VuZ2FnZShzZWxmLCAqLCBzZXZlcml0eTogQWxlcnRTZXZlcml0eSwgcmVhc29uOiBzdHIpIC0+IGJvb2w6CiAgICAgICAgIiIiQWxlcnQtZHJpdmVuIGVuZ2FnZW1lbnQgcGVyIHRoZSBjb25maWd1cmVkIHBvbGljeS4iIiIKICAgICAgICBpZiBub3Qgc2VsZi5fc2V0dGluZ3Mua2lsbF9zd2l0Y2hfYXV0b19lbmdhZ2U6CiAgICAgICAgICAgIHJldHVybiBGYWxzZQogICAgICAgIGlmIHNldmVyaXR5LnJhbmsgPCBzZWxmLl9zZXR0aW5ncy5raWxsX3N3aXRjaF9lbmdhZ2Vfc2V2ZXJpdHkucmFuazoKICAgICAgICAgICAgcmV0dXJuIEZhbHNlCiAgICAgICAgdGFyZ2V0ID0gc2VsZi5fc2V0dGluZ3Mua2lsbF9zd2l0Y2hfZW5nYWdlX2xldmVsCiAgICAgICAgaWYgKGF3YWl0IHNlbGYubGV2ZWwoKSkucmFuayA+PSB0YXJnZXQucmFuazoKICAgICAgICAgICAgcmV0dXJuIEZhbHNlCiAgICAgICAgYXdhaXQgc2VsZi5lbmdhZ2UodGFyZ2V0LCByZWFzb249ZiJhdXRvOiB7cmVhc29ufSIsIGFjdG9yPSJtb25pdG9yaW5nIikKICAgICAgICByZXR1cm4gVHJ1ZQoKICAgIGFzeW5jIGRlZiBfdHJhbnNpdGlvbigKICAgICAgICBzZWxmLCBsZXZlbDogS2lsbFN3aXRjaExldmVsLCAqLCByZWFzb246IHN0ciwgYWN0b3I6IHN0cgogICAgKSAtPiBLaWxsU3dpdGNoUmVjb3JkOgogICAgICAgIG5vdyA9IHNlbGYuX2Nsb2NrLm5vdygpCiAgICAgICAgZW50cnlfaWQgPSBhd2FpdCBzZWxmLl9zdG9yZS5pbnNlcnRfa2lsbF9zd2l0Y2goCiAgICAgICAgICAgIGxldmVsPWxldmVsLCByZWFzb249cmVhc29uLCBhY3Rvcj1hY3RvciwgYXQ9bm93CiAgICAgICAgKQogICAgICAgIGF3YWl0IHNlbGYuX2J1cy5wdWJsaXNoKAogICAgICAgICAgICBtb25pdG9yaW5nX2V2ZW50KAogICAgICAgICAgICAgICAgTW9uaXRvcmluZ0V2ZW50LktJTExfU1dJVENIX0NIQU5HRUQsCiAgICAgICAgICAgICAgICBvY2N1cnJlZF9hdD1ub3csCiAgICAgICAgICAgICAgICBzb3VyY2U9X1NPVVJDRSwKICAgICAgICAgICAgICAgIHBheWxvYWQ9eyJsZXZlbCI6IGxldmVsLnZhbHVlLCAicmVhc29uIjogcmVhc29uLCAiYWN0b3IiOiBhY3Rvcn0sCiAgICAgICAgICAgICkKICAgICAgICApCiAgICAgICAgc2VsZi5fbG9nZ2VyLndhcm5pbmcoCiAgICAgICAgICAgICJraWxsX3N3aXRjaF9jaGFuZ2VkIiwgbGV2ZWw9bGV2ZWwudmFsdWUsIHJlYXNvbj1yZWFzb24sIGFjdG9yPWFjdG9yCiAgICAgICAgKQogICAgICAgIHJldHVybiBLaWxsU3dpdGNoUmVjb3JkKAogICAgICAgICAgICBlbnRyeV9pZD1lbnRyeV9pZCwgbGV2ZWw9bGV2ZWwsIHJlYXNvbj1yZWFzb24sIGFjdG9yPWFjdG9yLCBjaGFuZ2VkX2F0PW5vdwogICAgICAgICkKCiAgICBhc3luYyBkZWYgY2FuY2VsX3Jlc3Rpbmdfb3JkZXJzKHNlbGYpIC0+IGludDoKICAgICAgICAiIiJCZXN0LWVmZm9ydCB2ZW51ZSBvcmRlciBjYW5jZWxsYXRpb24gKDEwLjI1IHN0ZXAgdHdvKS4KCiAgICAgICAgUHVibGljOiBTQUZFX01PREUgY2FsbHMgaXQgb24gZW5nYWdlbWVudCBhbmQgdGhlIFRlbGVncmFtCiAgICAgICAgRW1lcmdlbmN5IENlbnRlciBleHBvc2VzIGl0IGFzIENhbmNlbCBBbGwgT3JkZXJzLiBSZXR1cm5zIGhvdwogICAgICAgIG1hbnkgb3JkZXJzIHdlcmUgY2FuY2VsZWQgKDAgd2l0aG91dCBhIGNhbmNlbGxlciBvciBvbiBlcnJvcikuCiAgICAgICAgIiIiCiAgICAgICAgaWYgc2VsZi5fb3JkZXJfY2FuY2VsbGVyIGlzIE5vbmU6CiAgICAgICAgICAgIHNlbGYuX2xvZ2dlci5pbmZvKCJraWxsX3N3aXRjaF9ub19jYW5jZWxsZXIiKQogICAgICAgICAgICByZXR1cm4gMAogICAgICAgIHRyeToKICAgICAgICAgICAgY2FuY2VsZWQgPSBhd2FpdCBzZWxmLl9vcmRlcl9jYW5jZWxsZXIoKQogICAgICAgIGV4Y2VwdCBBcGV4RXJyb3IgYXMgZXJyb3I6CiAgICAgICAgICAgIHNlbGYuX2xvZ2dlci5mYWlsdXJlKCJraWxsX3N3aXRjaF9jYW5jZWxfZmFpbGVkIiwgZXJyb3IpCiAgICAgICAgICAgIHJldHVybiAwCiAgICAgICAgc2VsZi5fbG9nZ2VyLmluZm8oImtpbGxfc3dpdGNoX29yZGVyc19jYW5jZWxlZCIsIGNhbmNlbGVkPWNhbmNlbGVkKQogICAgICAgIHJldHVybiBjYW5jZWxlZAo=
+"""Kill-switch engine (the Phase 12 monitoring-driven surfaces).
+
+The multi-trigger kill switch of Book I 8.27 / Book II 10.25, scoped
+to what monitoring owns in this phase: a durable, auditable state
+ladder (NONE -> ENTRIES_DISABLED -> PAUSED -> SAFE_MODE) that the
+orchestration surfaces consult before decisions and executions.
+Transitions come from operators (Telegram/CLI) or automatically from
+the alert engine's severity policy. SAFE_MODE additionally cancels
+resting venue orders best-effort through an injected canceller (10.25
+"Cancel Pending Orders"). Position flattening and the five-scope
+kill-switch matrix belong to the Phase 13 security platform (25.29).
+"""
+
+from collections.abc import Awaitable, Callable
+from typing import Final
+
+from apex.core.contracts.interfaces import IEventBus
+from apex.core.exceptions import ApexError, MonitoringError
+from apex.core.logging import StructuredLogger
+from apex.core.time.clock import Clock
+from apex.monitoring.config import MonitoringSettings
+from apex.monitoring.events import MonitoringEvent, monitoring_event
+from apex.monitoring.records import AlertSeverity, KillSwitchLevel, KillSwitchRecord
+from apex.monitoring.store import SqliteMonitoringRepository
+
+_SOURCE: Final[str] = "apex.monitoring.killswitch"
+
+type OrderCanceller = Callable[[], Awaitable[int]]
+
+
+class KillSwitchEngine:
+    """Durable trading-permission ladder with auto-engage policy."""
+
+    def __init__(
+        self,
+        *,
+        settings: MonitoringSettings,
+        store: SqliteMonitoringRepository,
+        bus: IEventBus,
+        clock: Clock,
+        logger: StructuredLogger,
+        order_canceller: OrderCanceller | None = None,
+    ) -> None:
+        self._settings = settings
+        self._store = store
+        self._bus = bus
+        self._clock = clock
+        self._logger = logger
+        self._order_canceller = order_canceller
+
+    # --- State ---------------------------------------------------------------------
+
+    async def current(self) -> KillSwitchRecord | None:
+        """The latest transition entry; None before any transition."""
+        return await self._store.current_kill_switch()
+
+    async def level(self) -> KillSwitchLevel:
+        """The effective level (NONE before any transition)."""
+        record = await self.current()
+        return record.level if record is not None else KillSwitchLevel.NONE
+
+    async def allows_new_entries(self) -> bool:
+        """Whether new positions may be entered."""
+        return (await self.level()) is KillSwitchLevel.NONE
+
+    async def allows_processing(self) -> bool:
+        """Whether decision/execution stages may run at all."""
+        return (await self.level()).rank < KillSwitchLevel.PAUSED.rank
+
+    # --- Transitions ---------------------------------------------------------------
+
+    async def engage(
+        self, level: KillSwitchLevel, *, reason: str, actor: str
+    ) -> KillSwitchRecord:
+        """Move to a restrictive level; SAFE_MODE cancels resting orders."""
+        if level is KillSwitchLevel.NONE:
+            raise MonitoringError(
+                "engage requires a restrictive level; use release",
+                code="MON-001",
+                details={"level": level.value},
+            )
+        record = await self._transition(level, reason=reason, actor=actor)
+        if level is KillSwitchLevel.SAFE_MODE:
+            await self.cancel_resting_orders()
+        return record
+
+    async def release(self, *, reason: str, actor: str) -> KillSwitchRecord:
+        """Return to normal trading (an audited transition like any)."""
+        return await self._transition(KillSwitchLevel.NONE, reason=reason, actor=actor)
+
+    async def auto_engage(self, *, severity: AlertSeverity, reason: str) -> bool:
+        """Alert-driven engagement per the configured policy."""
+        if not self._settings.kill_switch_auto_engage:
+            return False
+        if severity.rank < self._settings.kill_switch_engage_severity.rank:
+            return False
+        target = self._settings.kill_switch_engage_level
+        if (await self.level()).rank >= target.rank:
+            return False
+        await self.engage(target, reason=f"auto: {reason}", actor="monitoring")
+        return True
+
+    async def _transition(
+        self, level: KillSwitchLevel, *, reason: str, actor: str
+    ) -> KillSwitchRecord:
+        now = self._clock.now()
+        entry_id = await self._store.insert_kill_switch(
+            level=level, reason=reason, actor=actor, at=now
+        )
+        await self._bus.publish(
+            monitoring_event(
+                MonitoringEvent.KILL_SWITCH_CHANGED,
+                occurred_at=now,
+                source=_SOURCE,
+                payload={"level": level.value, "reason": reason, "actor": actor},
+            )
+        )
+        self._logger.warning(
+            "kill_switch_changed", level=level.value, reason=reason, actor=actor
+        )
+        return KillSwitchRecord(
+            entry_id=entry_id, level=level, reason=reason, actor=actor, changed_at=now
+        )
+
+    async def cancel_resting_orders(self) -> int:
+        """Best-effort venue order cancellation (10.25 step two).
+
+        Public: SAFE_MODE calls it on engagement and the Telegram
+        Emergency Center exposes it as Cancel All Orders. Returns how
+        many orders were canceled (0 without a canceller or on error).
+        """
+        if self._order_canceller is None:
+            self._logger.info("kill_switch_no_canceller")
+            return 0
+        try:
+            canceled = await self._order_canceller()
+        except ApexError as error:
+            self._logger.failure("kill_switch_cancel_failed", error)
+            return 0
+        self._logger.info("kill_switch_orders_canceled", canceled=canceled)
+        return canceled
