@@ -1,1 +1,16 @@
-IyBUZWxlZ3JhbSBjb25zb2xlIGNvbmZpZ3VyYXRpb24gLSBvd25lZCBieSBQaGFzZSAxMiAoQm9vayBJVikuCiMgQ3JlZGVudGlhbHMgTkVWRVIgbGl2ZSBoZXJlOiBURUxFR1JBTV9CT1RfVE9LRU4gYW5kCiMgVEVMRUdSQU1fQURNSU5fQ0hBVF9JRFMgLyBURUxFR1JBTV9WSUVXRVJfQ0hBVF9JRFMgY29tZSBmcm9tIHRoZQojIGVudmlyb25tZW50IHVudGlsIHRoZSBzZWNyZXRzIHBsYXRmb3JtIChQaGFzZSAxMykuCnNjaGVtYV92ZXJzaW9uOiAxCgpjb25zb2xlOgogIGVuYWJsZWQ6IHRydWUKICBwb2xsX3RpbWVvdXRfczogMjUgICAgICAgICAgICMgZ2V0VXBkYXRlcyBsb25nLXBvbGwgaG9sZAogIHNlc3Npb25fdGltZW91dF9tczogNjAwMDAwICAgIyBCb29rIElWIFBhcnQgNTogMTAgbWludXRlcwogIHBhZ2Vfc2l6ZTogNSAgICAgICAgICAgICAgICAgIyBwYWdpbmF0aW9uIHdpbmRvdyBmb3IgbGlzdHMKICBjb25maXJtX3R0bF9tczogNjAwMDAgICAgICAgICMgZG91YmxlLWNvbmZpcm1hdGlvbiBub25jZSBsaWZldGltZQogIG5vdGlmeV9taW5fc2V2ZXJpdHk6IGhpZ2ggICAgIyBhbGVydHMgYXQvYWJvdmUgdGhpcyBwdXNoIHByb2FjdGl2ZWx5CiAgbm90aWZ5X2ZpbGxzOiB0cnVlCiAgbm90aWZ5X3NpZ25hbHM6IHRydWUKICBub3RpZnlfcHJvbW90aW9uczogdHJ1ZQo=
+# Telegram console configuration - owned by Phase 12 (Book IV).
+# Credentials NEVER live here: TELEGRAM_BOT_TOKEN and
+# TELEGRAM_ADMIN_CHAT_IDS / TELEGRAM_VIEWER_CHAT_IDS come from the
+# environment until the secrets platform (Phase 13).
+schema_version: 1
+
+console:
+  enabled: true
+  poll_timeout_s: 25           # getUpdates long-poll hold
+  session_timeout_ms: 600000   # Book IV Part 5: 10 minutes
+  page_size: 5                 # pagination window for lists
+  confirm_ttl_ms: 60000        # double-confirmation nonce lifetime
+  notify_min_severity: high    # alerts at/above this push proactively
+  notify_fills: true
+  notify_signals: true
+  notify_promotions: true
