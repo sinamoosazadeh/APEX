@@ -7,6 +7,12 @@ Commands:
 - ``sync``           catch up every configured series to the present
 - ``stream``         sync, then consume the live WebSocket feed for a
                      bounded duration (bars close, ticks persist)
+- ``run``            the live operational loop: streamed bars ->
+                     features -> assessment -> decision -> execution ->
+                     portfolio -> research, monitored end to end
+- ``monitor``        the unified operations status (alerts, health,
+                     kill switch, error budget; ``--snapshot`` stores one)
+- ``telegram``       the Telegram console (long-polls the Bot API)
 - ``execute``        execute the latest fired signal (paper unless
                      ``--live`` with run_mode live + credentials)
 - ``research``       run a research study: attribution, learning fold,
@@ -28,14 +34,16 @@ The project stays runnable at the end of every phase (Constitution 4.6).
 
 import argparse
 import asyncio
+import signal as os_signal
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 from apex import __version__
 from apex.core.config import AppConfig
 from apex.core.contracts.interfaces import IClock
 from apex.core.enums import Timeframe
-from apex.core.exceptions import ApexError, ValidationError
+from apex.core.exceptions import ApexError, TelegramError, ValidationError
 from apex.data.catchup import CatchUpReport, CatchUpService
 from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
 from apex.data.streaming import MarketStreamService, StreamStats
@@ -43,11 +51,15 @@ from apex.decision.service import DecisionService, DecisionSummary
 from apex.execution.service import ExecutionService, ExecutionSummary
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
+from apex.monitoring.loop import LoopStats, OperationsLoopService
+from apex.monitoring.records import AlertRecord, OperationsStatus
+from apex.monitoring.service import MonitoringService
 from apex.optimization.risk.service import RiskOptimizationService
 from apex.optimization.signal.service import OptimizationSummary, SignalOptimizationService
 from apex.portfolio.service import PortfolioService, PortfolioSummary
 from apex.probability.service import ProbabilityService, ProbabilitySummary
 from apex.research.service import OrchestrationSummary, ResearchService, ResearchSummary
+from apex.telegram.service import ConsoleStats, TelegramConsoleService
 
 DEFAULT_CONFIG_DIR = Path("config")
 
@@ -104,6 +116,71 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=60,
         help="how long to stream before shutting down cleanly",
+    )
+    run_loop_parser = subcommands.add_parser(
+        "run",
+        help="the monitored live operational loop over streamed bars",
+    )
+    run_loop_parser.add_argument(
+        "--symbol",
+        action="append",
+        dest="symbols",
+        default=None,
+        help="instrument symbol (repeatable; default: configured set)",
+    )
+    run_loop_parser.add_argument(
+        "--timeframe",
+        action="append",
+        dest="timeframes",
+        choices=sorted(tf.value for tf in Timeframe),
+        default=None,
+        help="bar timeframe (repeatable; default: configured set)",
+    )
+    run_loop_parser.add_argument(
+        "--seconds",
+        type=int,
+        default=0,
+        help="bounded session length; 0 runs until SIGINT/SIGTERM",
+    )
+    run_loop_parser.add_argument(
+        "--live",
+        action="store_true",
+        help="execute signals at the venue (run_mode live + credentials)",
+    )
+    run_loop_parser.add_argument(
+        "--orchestrate",
+        action="store_true",
+        help="drain one queued optimization job between bars",
+    )
+    run_loop_parser.add_argument(
+        "--telegram",
+        action="store_true",
+        help="run the Telegram console beside the loop",
+    )
+    monitor = subcommands.add_parser(
+        "monitor",
+        help="render the unified operations status",
+    )
+    monitor.add_argument(
+        "--snapshot",
+        action="store_true",
+        help="store a state snapshot before rendering",
+    )
+    monitor.add_argument(
+        "--alerts",
+        type=int,
+        default=5,
+        help="how many recent alerts to list",
+    )
+    telegram = subcommands.add_parser(
+        "telegram",
+        help="run the Telegram console (long-polls the Bot API)",
+    )
+    telegram.add_argument(
+        "--seconds",
+        type=int,
+        default=0,
+        help="bounded session length; 0 runs until SIGINT/SIGTERM",
     )
     features = subcommands.add_parser(
         "features",
@@ -627,7 +704,179 @@ def render_orchestration(summary: OrchestrationSummary) -> str:
         f"  activated    : {len(summary.activated)} artifact(s)",
     ]
     lines.extend(f"    - {path}" for path in summary.activated)
+    lines.append(f"  shadowed     : {len(summary.shadowed)} artifact(s)")
+    lines.extend(f"    - {path}" for path in summary.shadowed)
     return "\n".join(lines)
+
+
+def _install_stop_handlers(*stoppers: Callable[[], None]) -> None:
+    """SIGINT/SIGTERM ask every long-running service to stop."""
+
+    def stop_all() -> None:
+        for stopper in stoppers:
+            stopper()
+
+    try:
+        loop = asyncio.get_running_loop()
+        for signum in (os_signal.SIGINT, os_signal.SIGTERM):
+            loop.add_signal_handler(signum, stop_all)
+    except (NotImplementedError, RuntimeError, ValueError):
+        sys.stderr.write("warning: signal-driven shutdown unavailable\n")
+
+
+def render_loop(stats: LoopStats) -> str:
+    """Human-readable operational-loop report."""
+    return "\n".join(
+        [
+            "operational loop complete",
+            f"  bars         : {stats.bars_processed} processed",
+            f"  signals      : {stats.signals_fired} fired",
+            f"  executions   : {stats.executions_filled} filled / "
+            f"{stats.executions_attempted} attempted",
+            f"  alerts       : {stats.alerts_raised} raised",
+            f"  jobs         : {stats.jobs_drained} drained",
+            f"  promotions   : {stats.promotions_evaluated} evaluated",
+            f"  rollbacks    : {stats.rollbacks}",
+            f"  snapshots    : {stats.snapshots_taken} taken",
+            f"  reconnects   : {stats.stream_reconnects}",
+        ]
+    )
+
+
+def render_console(stats: ConsoleStats) -> str:
+    """Human-readable Telegram console report."""
+    return "\n".join(
+        [
+            "telegram console session complete",
+            f"  updates      : {stats.updates}",
+            f"  commands     : {stats.commands}",
+            f"  callbacks    : {stats.callbacks}",
+            f"  notifications: {stats.notifications}",
+            f"  denied       : {stats.denied}",
+        ]
+    )
+
+
+def render_ops(status: OperationsStatus, alerts: list[AlertRecord]) -> str:
+    """Human-readable operations center report (Book II 26.29)."""
+    healthy = sum(
+        1 for component in status.components if component.state.value == "healthy"
+    )
+    budget = status.error_budget
+    lines = [
+        "operations status",
+        f"  health       : {status.overall_health.value} "
+        f"({healthy}/{len(status.components)} components healthy)",
+        f"  kill switch  : {status.kill_switch.value}"
+        + (f" ({status.kill_switch_reason})" if status.kill_switch_reason else ""),
+        f"  incidents    : {status.incidents_open} open",
+        f"  equity       : {status.equity} (cash {status.cash})",
+        f"  drawdown     : {status.drawdown:.4f}",
+        f"  positions    : {status.open_positions} open",
+        f"  trades       : {status.closed_trades} closed "
+        f"(win rate {status.win_rate:.2f}, net R {status.r_sum:.2f})",
+        f"  research     : {status.jobs_pending} pending / {status.jobs_running} "
+        f"running jobs; {status.promotions_shadow} shadow / "
+        f"{status.promotions_pending_approval} awaiting approval",
+        f"  error budget : {budget.errors}/{budget.operations} "
+        f"({budget.error_rate:.4f} vs {budget.budget:.4f}, "
+        f"{'EXHAUSTED' if budget.exhausted else 'ok'})",
+        f"  snapshots    : {status.snapshots_stored} stored",
+    ]
+    if status.heartbeats:
+        beats = ", ".join(
+            f"{beat.component}={beat.age_ms // 1000}s"
+            + ("!" if beat.stale else "")
+            for beat in status.heartbeats
+        )
+        lines.append(f"  heartbeats   : {beats}")
+    if alerts:
+        lines.append("  alerts:")
+        lines.extend(
+            f"    [{alert.severity.value}] {alert.message} (x{alert.count})"
+            for alert in alerts
+        )
+    return "\n".join(lines)
+
+
+async def run_loop(
+    config_dir: Path,
+    *,
+    symbols: tuple[str, ...],
+    timeframes: tuple[Timeframe, ...],
+    seconds: int,
+    live: bool,
+    orchestrate: bool,
+    telegram: bool,
+) -> tuple[LoopStats, ConsoleStats | None]:
+    """Boot, run the operational loop (and console), shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        loop_service = kernel.container.resolve(OperationsLoopService)
+        console: TelegramConsoleService | None = None
+        if telegram:
+            console = kernel.container.resolve(TelegramConsoleService)
+            if not console.available:
+                raise TelegramError(
+                    "telegram console unavailable: set TELEGRAM_BOT_TOKEN and "
+                    "TELEGRAM_ADMIN_CHAT_IDS and enable telegram.console",
+                    code="TGM-004",
+                )
+        stoppers: list[Callable[[], None]] = [loop_service.request_stop]
+        if console is not None:
+            stoppers.append(console.request_stop)
+        _install_stop_handlers(*stoppers)
+        if console is None:
+            stats = await loop_service.run(
+                seconds=seconds,
+                live=live,
+                orchestrate=orchestrate,
+                symbols=symbols,
+                timeframes=timeframes,
+            )
+            return stats, None
+        loop_run = loop_service.run(
+            seconds=seconds,
+            live=live,
+            orchestrate=orchestrate,
+            symbols=symbols,
+            timeframes=timeframes,
+        )
+        console_run = console.run(seconds=seconds)
+        loop_stats, console_stats = await asyncio.gather(loop_run, console_run)
+        return loop_stats, console_stats
+    finally:
+        await kernel.shutdown()
+
+
+async def run_monitor(
+    config_dir: Path, *, snapshot: bool, alerts: int
+) -> tuple[OperationsStatus, list[AlertRecord]]:
+    """Boot, read the operations status, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        service = kernel.container.resolve(MonitoringService)
+        if snapshot:
+            await service.capture_snapshot()
+        status = await service.ops_status()
+        recent = await service.recent_alerts(limit=alerts)
+        return status, recent
+    finally:
+        await kernel.shutdown()
+
+
+async def run_telegram(config_dir: Path, *, seconds: int) -> ConsoleStats:
+    """Boot, run the Telegram console, shut down."""
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        console = kernel.container.resolve(TelegramConsoleService)
+        _install_stop_handlers(console.request_stop)
+        return await console.run(seconds=seconds)
+    finally:
+        await kernel.shutdown()
 
 
 async def run_orchestrate(
@@ -904,6 +1153,51 @@ def _run_portfolio_command(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _run_loop_command(args: argparse.Namespace) -> int:
+    """Dispatch the operational loop command."""
+    if args.seconds < 0:
+        raise ValidationError("--seconds must be non-negative", code="VAL-133")
+    symbols = tuple(args.symbols) if args.symbols else ()
+    timeframes = (
+        tuple(Timeframe(raw) for raw in args.timeframes) if args.timeframes else ()
+    )
+    loop_stats, console_stats = asyncio.run(
+        run_loop(
+            args.config_dir,
+            symbols=symbols,
+            timeframes=timeframes,
+            seconds=args.seconds,
+            live=args.live,
+            orchestrate=args.orchestrate,
+            telegram=args.telegram,
+        )
+    )
+    sys.stdout.write(render_loop(loop_stats) + "\n")
+    if console_stats is not None:
+        sys.stdout.write(render_console(console_stats) + "\n")
+    return EXIT_OK
+
+
+def _run_monitor_command(args: argparse.Namespace) -> int:
+    """Dispatch the operations status command."""
+    if args.alerts < 0:
+        raise ValidationError("--alerts must be non-negative", code="VAL-134")
+    status, recent = asyncio.run(
+        run_monitor(args.config_dir, snapshot=args.snapshot, alerts=args.alerts)
+    )
+    sys.stdout.write(render_ops(status, recent) + "\n")
+    return EXIT_OK
+
+
+def _run_telegram_command(args: argparse.Namespace) -> int:
+    """Dispatch the Telegram console command."""
+    if args.seconds < 0:
+        raise ValidationError("--seconds must be non-negative", code="VAL-133")
+    stats = asyncio.run(run_telegram(args.config_dir, seconds=args.seconds))
+    sys.stdout.write(render_console(stats) + "\n")
+    return EXIT_OK
+
+
 def _run_optimizer_command(args: argparse.Namespace) -> int:
     """Dispatch the seeded optimizer commands."""
     runner = (
@@ -961,6 +1255,9 @@ def main(argv: list[str] | None = None) -> int:
             "execute": _run_execute_command,
             "research": _run_research_command,
             "orchestrate": _run_orchestrate_command,
+            "run": _run_loop_command,
+            "monitor": _run_monitor_command,
+            "telegram": _run_telegram_command,
         }
         handler = dispatchers.get(args.command or "")
         if handler is not None:

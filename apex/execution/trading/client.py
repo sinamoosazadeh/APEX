@@ -32,6 +32,7 @@ ORDER_PATH: Final[str] = "/api/v2/futures/order"
 OPEN_ORDERS_PATH: Final[str] = "/api/v2/futures/open-orders"
 USER_TRADES_PATH: Final[str] = "/api/v2/futures/user-trades"
 BALANCE_PATH: Final[str] = "/api/v1/futures/balance"
+LISTEN_KEY_PATH: Final[str] = "/api/v1/listenKey"
 
 _KEY_ENV: Final[str] = "TOOBIT_API_KEY"
 _SECRET_ENV: Final[str] = "TOOBIT_API_SECRET"
@@ -155,6 +156,18 @@ class ToobitTradingClient:
         """GET /api/v1/futures/balance."""
         return await self._signed("GET", BALANCE_PATH, {})
 
+    async def create_listen_key(self) -> JsonValue:
+        """Open (or refresh) the user-data stream (Book VII listenKey)."""
+        return await self._signed("POST", LISTEN_KEY_PATH, {})
+
+    async def keepalive_listen_key(self, listen_key: str) -> JsonValue:
+        """Extend the user-data stream's validity by 60 minutes."""
+        return await self._signed("PUT", LISTEN_KEY_PATH, {"listenKey": listen_key})
+
+    async def close_listen_key(self, listen_key: str) -> JsonValue:
+        """Close the user-data stream and invalidate its key."""
+        return await self._signed("DELETE", LISTEN_KEY_PATH, {"listenKey": listen_key})
+
     def _order_key(
         self, order_id: str | None, client_order_id: str | None
     ) -> dict[str, str]:
@@ -227,6 +240,8 @@ class ToobitTradingClient:
         headers = {_HEADER: credentials.api_key}
         if method == "POST":
             return await client.post(path, data=signed, headers=headers)
+        if method == "PUT":
+            return await client.put(path, params=signed, headers=headers)
         if method == "DELETE":
             return await client.delete(path, params=signed, headers=headers)
         return await client.get(path, params=signed, headers=headers)

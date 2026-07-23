@@ -1,0 +1,16 @@
+# Telegram console configuration - owned by Phase 12 (Book IV).
+# Credentials NEVER live here: TELEGRAM_BOT_TOKEN and
+# TELEGRAM_ADMIN_CHAT_IDS / TELEGRAM_VIEWER_CHAT_IDS come from the
+# environment until the secrets platform (Phase 13).
+schema_version: 1
+
+console:
+  enabled: true
+  poll_timeout_s: 25           # getUpdates long-poll hold
+  session_timeout_ms: 600000   # Book IV Part 5: 10 minutes
+  page_size: 5                 # pagination window for lists
+  confirm_ttl_ms: 60000        # double-confirmation nonce lifetime
+  notify_min_severity: high    # alerts at/above this push proactively
+  notify_fills: true
+  notify_signals: true
+  notify_promotions: true

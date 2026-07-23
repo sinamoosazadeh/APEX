@@ -36,6 +36,7 @@ PHASE_OWNED_FILES: Final[tuple[str, ...]] = (
     "portfolio",
     "research",
     "telemetry",
+    "telegram",
     "scheduler",
     "device",
 )

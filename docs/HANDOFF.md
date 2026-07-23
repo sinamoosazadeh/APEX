@@ -92,6 +92,15 @@ then targeted line ranges) - never whole books.
   content, and "sha" for UPDATES}`). Fetch SHAs beforehand from the
   public tree API:
   `curl https://api.github.com/repos/sinamoosazadeh/APEX/git/trees/main?recursive=1`.
+- **Content encoding (the Phase 12 corruption)**: `content` in the
+  paramsFile must be the RAW file text - never base64-encode it
+  yourself (the integration encodes internally; double-encoding lands
+  base64 garbage on the branch, which is exactly how the first
+  Phase 12 push corrupted all 42 files it delivered before dying at
+  [42/65]). The post-push `git hash-object` byte-integrity check is
+  MANDATORY before opening the PR - it catches this class of
+  corruption immediately. If you ever find base64 blobs on main,
+  decode them in place (`base64.b64decode`) - the content round-trips.
 - The API rejects empty files - give empty `__init__.py` files a
   docstring.
 - Workflow files (`.github/workflows/`) cannot be pushed via the
@@ -124,15 +133,8 @@ then targeted line ranges) - never whole books.
 
 ## Remaining phases (scope pointers; PHASES.md "Next up" is authoritative)
 
-- **Phase 12 - Monitoring + Telegram console**: Book I ch. 10, Book II
-  infrastructure/monitoring chapters, Book IV (full Telegram
-  blueprint), Book V part 7 Telegram menu section. Health/telemetry
-  surfaces over every platform, the live operational loop (streamed
-  bars -> features -> assessment -> decision -> execution -> portfolio
-  -> research), alerting, Telegram command menus (status, optimization
-  queue, rollback, reports), and the shadow-mode leg of the research
-  promotion pipeline deferred from Phase 11. Telegram credentials via
-  env (like TOOBIT_API_KEY/SECRET) until Phase 13.
+- **Phase 12 - Monitoring + Telegram console**: COMPLETE (see the
+  PHASES.md row).
 - **Phase 13 - Security platform**: secrets management (replacing the
   env-credential interim in execution/telegram), key handling, audit
   hardening - Book II security chapters.
@@ -145,9 +147,10 @@ then targeted line ranges) - never whole books.
 
 ## Deferral map (rewire when prerequisites land; also listed per-row in PHASES.md)
 
-- Phase 12: listenKey user-data WebSocket fills (replace REST polling),
-  shadow mode + full research promotion pipeline, Telegram
-  research/optimization menus, monitoring-driven kill-switch surfaces.
+- Phase 12: DONE - listenKey user-data fills, shadow mode + the full
+  promotion pipeline, Telegram menus and kill-switch surfaces all
+  landed. Kill-switch position FLATTENING joins Phase 13 (the security
+  response), alongside:
 - Phase 13: secrets platform replacing TOOBIT_API_KEY/SECRET env reads
   (`apex/execution/trading/client.py` `TradingCredentials`) and the
   Telegram token.
@@ -162,14 +165,15 @@ then targeted line ranges) - never whole books.
 
 - `uv` lives at `~/.local/bin/uv` after pip install; the venv Python
   reports 3.14.x (>=3.13 requirement satisfied).
-- pytest count at handoff: 451; boot: 9 plugins / 10 modules healthy.
+- pytest count at handoff: 536; boot: 11 plugins / 12 modules healthy.
 - `config.section(name)` exposes EVERY config file's raw mapping
   (deep-validated files included) since Phase 10.
 - Learned per-file push commits mean local and remote histories
   diverge after a push - always `git fetch && git reset --hard
   origin/main` after CI is green.
 - Error-code families in use: CFG, DAT, DEC, EVT, EXE, FEA, KRN, MKT,
-  OPT, PRT, RES, RSK, SER, SIG, STO, VAL - grep before allocating.
+  MON, OPT, PRT, RES, RSK, SER, SIG, STO, TGM, VAL - grep before
+  allocating.
 - Module versioning: bump only touched modules (semver), project
   version 0.1x.0 per phase.
 - The kernel/portfolio/execution/research CLIs and the runtime
@@ -178,13 +182,26 @@ then targeted line ranges) - never whole books.
 
 ## State at handoff (update this block at every phase close)
 
-- Version 0.13.0; phases 0-11 complete; Phase 12 is next.
-- 451 tests passing; ruff + mypy strict clean; 9 plugins / 10 modules
-  boot healthy; CI green on main and develop (PR #15 merged).
-- Trading: toobit `trading: true` (signed v2 client); paper execution
-  is the run-mode default; live requires run_mode live + env
-  credentials.
-- Learning loop validated on live prices (attribution -> AICE fold ->
-  calibration); orchestrator drains real optimizer jobs with honest
-  Book V rejections on thin history - deep-history acceptance belongs
-  to Phase 15.
+- Version 0.14.0; phases 0-12 complete; Phase 13 (Security) is next.
+- 536 tests passing; ruff + mypy strict clean (269 files); 11 plugins /
+  12 modules boot healthy.
+- Phase 12 recovery note: the original Phase 12 push (an earlier
+  account) base64-corrupted all 42 files it delivered and died at
+  [42/65]; this state decodes those 42 in place (byte-perfect
+  round-trip) and rebuilds the never-pushed seam (~15 files: the
+  research promotion store/service/events API, Monitoring/Telegram
+  error classes, the listenKey client trio + PUT transport, the
+  kernel's ModuleRegistry DI registration, telemetry/system config
+  wiring, plugin promotion settings, boot/config test expectations).
+- Trading: toobit `trading: true` (signed v2 client + listenKey user
+  stream); paper execution is the run-mode default; live requires
+  run_mode live + env credentials.
+- Live validation (Phase 12 close): fresh 520-bar ingests x 4 series;
+  full pipeline on today's market; `apex monitor` unified status +
+  snapshot (12/12 healthy); `apex run --seconds 15` held a live WS
+  loop session cleanly; `apex telegram` honest TGM-004 without
+  credentials; orchestrator drained 2 real jobs with honest rejections
+  (nothing shadow-registered on thin history). The promotion lifecycle
+  (shadow -> evaluate -> approve/reject -> guard rollback; durable
+  queue pause) is proven end-to-end through the booted platform in the
+  suite. Deep-history acceptance belongs to Phase 15.

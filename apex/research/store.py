@@ -10,6 +10,9 @@ One durable home for the research platform's records:
 - **experiments**: the registry (23.19 reproducibility stamps -
   seed, dataset window, versions - plus statistical results).
 - **learning_artifacts**: versioned learning states per series.
+- **promotions**: the shadow pipeline (14.24/19.28) - registered
+  candidates, evaluation reports, operator and guard decisions.
+- **research_flags**: durable operator switches (queue pause).
 """
 
 import asyncio
@@ -80,6 +83,28 @@ _SCHEMA: Final[tuple[str, ...]] = (
         PRIMARY KEY (symbol, timeframe, version)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS promotions (
+        promotion_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+        symbol            TEXT    NOT NULL,
+        timeframe         TEXT    NOT NULL,
+        kind              TEXT    NOT NULL,
+        artifact_path     TEXT    NOT NULL,
+        baseline_artifact TEXT,
+        status            TEXT    NOT NULL,
+        registered_at_ms  INTEGER NOT NULL,
+        evaluated_at_ms   INTEGER,
+        report            TEXT,
+        decided_at_ms     INTEGER,
+        decided_by        TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS research_flags (
+        name  TEXT PRIMARY KEY,
+        value TEXT NOT NULL
+    )
+    """,
 )
 
 JOB_PENDING: Final[str] = "pending"
@@ -89,6 +114,16 @@ JOB_FAILED: Final[str] = "failed"
 
 EXPERIMENT_VALIDATED: Final[str] = "validated"
 EXPERIMENT_REJECTED: Final[str] = "rejected"
+
+# Promotion lifecycle (Book II 14.24 -> 19.28): an accepted artifact
+# enters as SHADOW, a forward-window evaluation moves it to PASSED or
+# REJECTED, an operator decision moves PASSED to PROMOTED (activation)
+# or REJECTED, and the post-promotion guard may mark ROLLED_BACK.
+PROMOTION_SHADOW: Final[str] = "shadow"
+PROMOTION_PASSED: Final[str] = "passed"
+PROMOTION_PROMOTED: Final[str] = "promoted"
+PROMOTION_REJECTED: Final[str] = "rejected"
+PROMOTION_ROLLED_BACK: Final[str] = "rolled_back"
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -127,6 +162,24 @@ class ExperimentRecord:
     effect_size: float | None
     status: str
     created_at: Timestamp
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class PromotionRecord:
+    """One shadow-promotion lifecycle row (Book II 14.24/19.28)."""
+
+    promotion_id: int
+    symbol: str
+    timeframe: Timeframe
+    kind: str
+    artifact_path: str
+    baseline_artifact: str | None
+    status: str
+    registered_at: Timestamp
+    evaluated_at: Timestamp | None
+    report: str | None
+    decided_at: Timestamp | None
+    decided_by: str | None
 
 
 class SqliteResearchRepository:
@@ -313,6 +366,95 @@ class SqliteResearchRepository:
         )
         return str(rows[1][1])
 
+    # --- Promotions (shadow -> approval pipeline) ------------------------------------
+
+    async def register_promotion(
+        self,
+        *,
+        symbol: str,
+        timeframe: Timeframe,
+        kind: str,
+        artifact_path: str,
+        baseline_artifact: str | None,
+        registered_at: Timestamp,
+    ) -> int:
+        """Register one accepted artifact as a SHADOW candidate."""
+        return await self._execute(
+            "INSERT INTO promotions (symbol, timeframe, kind, artifact_path,"
+            " baseline_artifact, status, registered_at_ms) VALUES (?,?,?,?,?,?,?)",
+            (
+                symbol, timeframe.value, kind, artifact_path,
+                baseline_artifact, PROMOTION_SHADOW, registered_at.epoch_ms,
+            ),
+        )
+
+    async def promotions(self, *, status: str | None = None) -> list[PromotionRecord]:
+        """Registered promotions, oldest first, optionally by status."""
+        query = "SELECT * FROM promotions"
+        parameters: tuple[object, ...] = ()
+        if status is not None:
+            query += " WHERE status = ?"
+            parameters = (status,)
+        query += " ORDER BY registered_at_ms, promotion_id"
+        return [
+            self._to_promotion(row) for row in await self._fetch(query, parameters)
+        ]
+
+    async def promotion(self, promotion_id: int) -> PromotionRecord | None:
+        """One promotion by id, if present."""
+        rows = await self._fetch(
+            "SELECT * FROM promotions WHERE promotion_id = ?", (promotion_id,)
+        )
+        return self._to_promotion(rows[0]) if rows else None
+
+    async def latest_promotion(
+        self, symbol: str, timeframe: Timeframe, kind: str, *, status: str
+    ) -> PromotionRecord | None:
+        """The newest promotion of one series and kind in ``status``."""
+        rows = await self._fetch(
+            "SELECT * FROM promotions WHERE symbol = ? AND timeframe = ? AND"
+            " kind = ? AND status = ? ORDER BY promotion_id DESC LIMIT 1",
+            (symbol, timeframe.value, kind, status),
+        )
+        return self._to_promotion(rows[0]) if rows else None
+
+    async def mark_promotion_evaluated(
+        self, promotion_id: int, *, status: str, report: str, at: Timestamp
+    ) -> None:
+        """Record one shadow-evaluation verdict."""
+        await self._execute(
+            "UPDATE promotions SET status = ?, report = ?, evaluated_at_ms = ?"
+            " WHERE promotion_id = ?",
+            (status, report, at.epoch_ms, promotion_id),
+        )
+
+    async def mark_promotion_decided(
+        self, promotion_id: int, *, status: str, actor: str, at: Timestamp
+    ) -> None:
+        """Record the operator (or guard) decision."""
+        await self._execute(
+            "UPDATE promotions SET status = ?, decided_by = ?, decided_at_ms = ?"
+            " WHERE promotion_id = ?",
+            (status, actor, at.epoch_ms, promotion_id),
+        )
+
+    # --- Flags (durable operator switches) --------------------------------------------
+
+    async def get_flag(self, name: str) -> str | None:
+        """One durable flag value, if set."""
+        rows = await self._fetch(
+            "SELECT value FROM research_flags WHERE name = ?", (name,)
+        )
+        return str(rows[0][0]) if rows else None
+
+    async def set_flag(self, name: str, value: str) -> None:
+        """Set one durable flag (upsert)."""
+        await self._execute(
+            "INSERT INTO research_flags (name, value) VALUES (?, ?)"
+            " ON CONFLICT(name) DO UPDATE SET value = excluded.value",
+            (name, value),
+        )
+
     # --- Experiments ---------------------------------------------------------------
 
     async def register_experiment(
@@ -414,6 +556,37 @@ class SqliteResearchRepository:
                 else None
             ),
             result=str(result) if result is not None else None,
+        )
+
+    def _to_promotion(self, row: tuple[object, ...]) -> PromotionRecord:
+        (
+            promotion_id, symbol, timeframe, kind, artifact_path,
+            baseline_artifact, status, registered_at_ms, evaluated_at_ms,
+            report, decided_at_ms, decided_by,
+        ) = row
+        return PromotionRecord(
+            promotion_id=int(str(promotion_id)),
+            symbol=str(symbol),
+            timeframe=Timeframe(str(timeframe)),
+            kind=str(kind),
+            artifact_path=str(artifact_path),
+            baseline_artifact=(
+                str(baseline_artifact) if baseline_artifact is not None else None
+            ),
+            status=str(status),
+            registered_at=Timestamp(epoch_ms=int(str(registered_at_ms))),
+            evaluated_at=(
+                Timestamp(epoch_ms=int(str(evaluated_at_ms)))
+                if evaluated_at_ms is not None
+                else None
+            ),
+            report=str(report) if report is not None else None,
+            decided_at=(
+                Timestamp(epoch_ms=int(str(decided_at_ms)))
+                if decided_at_ms is not None
+                else None
+            ),
+            decided_by=str(decided_by) if decided_by is not None else None,
         )
 
     def _to_experiment(self, row: tuple[object, ...]) -> ExperimentRecord:

@@ -14,6 +14,10 @@ class ResearchEvent(Enum):
     STUDIED = "research.study.completed"
     JOB_COMPLETED = "research.job.completed"
     VERSION_ACTIVATED = "research.version.activated"
+    PROMOTION_EVALUATED = "research.promotion.evaluated"
+    PROMOTED = "research.promotion.promoted"
+    PROMOTION_REJECTED = "research.promotion.rejected"
+    ROLLED_BACK = "research.version.rolled_back"
     FAILED = "research.failed"
 
 
@@ -21,6 +25,10 @@ _PRIORITY: dict[ResearchEvent, EventPriority] = {
     ResearchEvent.STUDIED: EventPriority.MEDIUM,
     ResearchEvent.JOB_COMPLETED: EventPriority.MEDIUM,
     ResearchEvent.VERSION_ACTIVATED: EventPriority.HIGH,
+    ResearchEvent.PROMOTION_EVALUATED: EventPriority.MEDIUM,
+    ResearchEvent.PROMOTED: EventPriority.HIGH,
+    ResearchEvent.PROMOTION_REJECTED: EventPriority.HIGH,
+    ResearchEvent.ROLLED_BACK: EventPriority.CRITICAL,
     ResearchEvent.FAILED: EventPriority.CRITICAL,
 }
 
