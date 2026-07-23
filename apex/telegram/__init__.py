@@ -1,1 +1,11 @@
-IiIiVGVsZWdyYW0gQ29uc29sZSAoQm9vayBJVikgLSBQaGFzZSAxMi4KClRoZSBjb250cm9sIGxheWVyIG92ZXIgdGhlIHBsYXRmb3JtOiBjb21tYW5kIG1lbnVzIChzdGF0dXMsCnBvcnRmb2xpbywgcG9zaXRpb25zLCByZXBvcnRzLCBoZWFsdGgsIHRoZSBPcHRpbWl6YXRpb24gQ2VudGVyIHdpdGgKcXVldWUgY29udHJvbCwgcHJvbW90aW9ucyBhbmQgcm9sbGJhY2ssIHRoZSBFbWVyZ2VuY3kgQ2VudGVyIHdpdGgKdGhlIGtpbGwtc3dpdGNoIHN1cmZhY2VzKSwgbm9uY2UtZ3VhcmRlZCBkb3VibGUgY29uZmlybWF0aW9uIGZvcgpkYW5nZXJvdXMgYWN0aW9ucywgcm9sZS1nYXRlZCBhY2Nlc3MgKGFkbWluL3ZpZXdlciwgQm9vayBJViBQYXJ0IDEncwpjdXJyZW50LXZlcnNpb24gc2NoZW1lKSBhbmQgYnVzLWRyaXZlbiBwcm9hY3RpdmUgbm90aWZpY2F0aW9ucy4gTm8KdHJhZGluZyBsb2dpYyBsaXZlcyBoZXJlIC0gZXZlcnkgYWN0aW9uIGZvcndhcmRzIHRvIHRoZSBvd25pbmcKcGxhdGZvcm0gc2VydmljZSAodGhlIEJvb2sgSVYgR29sZGVuIFJ1bGUpLgoiIiIK
+"""Telegram Console (Book IV) - Phase 12.
+
+The control layer over the platform: command menus (status,
+portfolio, positions, reports, health, the Optimization Center with
+queue control, promotions and rollback, the Emergency Center with
+the kill-switch surfaces), nonce-guarded double confirmation for
+dangerous actions, role-gated access (admin/viewer, Book IV Part 1's
+current-version scheme) and bus-driven proactive notifications. No
+trading logic lives here - every action forwards to the owning
+platform service (the Book IV Golden Rule).
+"""
