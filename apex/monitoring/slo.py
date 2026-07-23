@@ -1,1 +1,56 @@
-IiIiU0xPIGVycm9yIGJ1ZGdldCAoQm9vayBJSSAyNi4yOCkuCgpPbmUgc2xpZGluZy13aW5kb3cgZXJyb3IgYnVkZ2V0IG92ZXIgdGhlIHBsYXRmb3JtJ3Mgb3BlcmF0aW9uczogdGhlCmVycm9yIHJhdGUgKGBgZXJyb3JzLnRvdGFsYGAgLyBgYG9wZXJhdGlvbnMudG90YWxgYCkgYWdhaW5zdCB0aGUKY29uZmlndXJlZCBidWRnZXQuIFRoZSBiaW5kaW5nIGNvbnNlcXVlbmNlIHdoZW4gdGhlIGJ1ZGdldCBpcwpjb25zdW1lZDogdGhlIG9wdGltaXplciBpcyBub3QgcGVybWl0dGVkIHRvIGRlcGxveSAtIHByb21vdGlvbgphcHByb3ZhbHMgY29uc3VsdCA6bWV0aDpgRXJyb3JCdWRnZXRUcmFja2VyLnByb21vdGlvbl9wZXJtaXR0ZWRgCmJlZm9yZSBhY3RpdmF0aW5nIGFueSBhcnRpZmFjdC4KIiIiCgpmcm9tIGFwZXguY29yZS50aW1lLmNsb2NrIGltcG9ydCBDbG9jawpmcm9tIGFwZXgubW9uaXRvcmluZy5jb2xsZWN0b3IgaW1wb3J0IE1FVFJJQ19FUlJPUlNfVE9UQUwsIE1FVFJJQ19PUEVSQVRJT05TX1RPVEFMCmZyb20gYXBleC5tb25pdG9yaW5nLmNvbmZpZyBpbXBvcnQgTW9uaXRvcmluZ1NldHRpbmdzCmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IFNsb1N0YXR1cwpmcm9tIGFwZXgubW9uaXRvcmluZy5zdG9yZSBpbXBvcnQgU3FsaXRlTW9uaXRvcmluZ1JlcG9zaXRvcnkKCgpjbGFzcyBFcnJvckJ1ZGdldFRyYWNrZXI6CiAgICAiIiJDb21wdXRlcyB0aGUgcGxhdGZvcm0gZXJyb3IgYnVkZ2V0IG92ZXIgdGhlIGNvbmZpZyB3aW5kb3cuIiIiCgogICAgZGVmIF9faW5pdF9fKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBzZXR0aW5nczogTW9uaXRvcmluZ1NldHRpbmdzLAogICAgICAgIHN0b3JlOiBTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeSwKICAgICAgICBjbG9jazogQ2xvY2ssCiAgICApIC0+IE5vbmU6CiAgICAgICAgc2VsZi5fc2V0dGluZ3MgPSBzZXR0aW5ncwogICAgICAgIHNlbGYuX3N0b3JlID0gc3RvcmUKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCgogICAgYXN5bmMgZGVmIHN0YXR1cyhzZWxmKSAtPiBTbG9TdGF0dXM6CiAgICAgICAgIiIiVGhlIGN1cnJlbnQgZXJyb3ItYnVkZ2V0IHZlcmRpY3QuIiIiCiAgICAgICAgc2luY2UgPSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcyAtIHNlbGYuX3NldHRpbmdzLnNsb193aW5kb3dfbXMKICAgICAgICBvcGVyYXRpb25zID0gYXdhaXQgc2VsZi5fc3RvcmUuY291bnRfbWV0cmljKAogICAgICAgICAgICBNRVRSSUNfT1BFUkFUSU9OU19UT1RBTCwgc2luY2VfbXM9c2luY2UKICAgICAgICApCiAgICAgICAgZXJyb3JzID0gYXdhaXQgc2VsZi5fc3RvcmUuY291bnRfbWV0cmljKE1FVFJJQ19FUlJPUlNfVE9UQUwsIHNpbmNlX21zPXNpbmNlKQogICAgICAgIGVycm9yX3JhdGUgPSBlcnJvcnMgLyBvcGVyYXRpb25zIGlmIG9wZXJhdGlvbnMgPiAwIGVsc2UgMC4wCiAgICAgICAgZXhoYXVzdGVkID0gKAogICAgICAgICAgICBvcGVyYXRpb25zID49IHNlbGYuX3NldHRpbmdzLnNsb19taW5fb3BlcmF0aW9ucwogICAgICAgICAgICBhbmQgZXJyb3JfcmF0ZSA+IHNlbGYuX3NldHRpbmdzLnNsb19tYXhfZXJyb3JfcmF0ZQogICAgICAgICkKICAgICAgICByZXR1cm4gU2xvU3RhdHVzKAogICAgICAgICAgICBuYW1lPSJwbGF0Zm9ybSIsCiAgICAgICAgICAgIHdpbmRvd19tcz1zZWxmLl9zZXR0aW5ncy5zbG9fd2luZG93X21zLAogICAgICAgICAgICBvcGVyYXRpb25zPW9wZXJhdGlvbnMsCiAgICAgICAgICAgIGVycm9ycz1lcnJvcnMsCiAgICAgICAgICAgIGVycm9yX3JhdGU9ZXJyb3JfcmF0ZSwKICAgICAgICAgICAgYnVkZ2V0PXNlbGYuX3NldHRpbmdzLnNsb19tYXhfZXJyb3JfcmF0ZSwKICAgICAgICAgICAgZXhoYXVzdGVkPWV4aGF1c3RlZCwKICAgICAgICApCgogICAgYXN5bmMgZGVmIHByb21vdGlvbl9wZXJtaXR0ZWQoc2VsZikgLT4gYm9vbDoKICAgICAgICAiIiIyNi4yODogYSBjb25zdW1lZCBlcnJvciBidWRnZXQgYmxvY2tzIG9wdGltaXplciBkZXBsb3lzLiIiIgogICAgICAgIHJldHVybiBub3QgKGF3YWl0IHNlbGYuc3RhdHVzKCkpLmV4aGF1c3RlZAo=
+"""SLO error budget (Book II 26.28).
+
+One sliding-window error budget over the platform's operations: the
+error rate (``errors.total`` / ``operations.total``) against the
+configured budget. The binding consequence when the budget is
+consumed: the optimizer is not permitted to deploy - promotion
+approvals consult :meth:`ErrorBudgetTracker.promotion_permitted`
+before activating any artifact.
+"""
+
+from apex.core.time.clock import Clock
+from apex.monitoring.collector import METRIC_ERRORS_TOTAL, METRIC_OPERATIONS_TOTAL
+from apex.monitoring.config import MonitoringSettings
+from apex.monitoring.records import SloStatus
+from apex.monitoring.store import SqliteMonitoringRepository
+
+
+class ErrorBudgetTracker:
+    """Computes the platform error budget over the config window."""
+
+    def __init__(
+        self,
+        *,
+        settings: MonitoringSettings,
+        store: SqliteMonitoringRepository,
+        clock: Clock,
+    ) -> None:
+        self._settings = settings
+        self._store = store
+        self._clock = clock
+
+    async def status(self) -> SloStatus:
+        """The current error-budget verdict."""
+        since = self._clock.now().epoch_ms - self._settings.slo_window_ms
+        operations = await self._store.count_metric(
+            METRIC_OPERATIONS_TOTAL, since_ms=since
+        )
+        errors = await self._store.count_metric(METRIC_ERRORS_TOTAL, since_ms=since)
+        error_rate = errors / operations if operations > 0 else 0.0
+        exhausted = (
+            operations >= self._settings.slo_min_operations
+            and error_rate > self._settings.slo_max_error_rate
+        )
+        return SloStatus(
+            name="platform",
+            window_ms=self._settings.slo_window_ms,
+            operations=operations,
+            errors=errors,
+            error_rate=error_rate,
+            budget=self._settings.slo_max_error_rate,
+            exhausted=exhausted,
+        )
+
+    async def promotion_permitted(self) -> bool:
+        """26.28: a consumed error budget blocks optimizer deploys."""
+        return not (await self.status()).exhausted
