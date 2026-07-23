@@ -1,4 +1,11 @@
-# Scheduler configuration - owned by Phase 11+ (optimization orchestrator).
+# Recurring-job schedule - owned by Phase 14 (Book V part 7 lifecycle).
+# Cadences are minutes between runs; stamps live durably in the
+# key/value store, so restarts never double-run a job.
 schema_version: 1
 
-jobs: {}
+jobs:
+  sync: { cadence_minutes: 60, enabled: true }        # bar catch-up
+  snapshot: { cadence_minutes: 360, enabled: true }   # monitoring snapshot
+  study: { cadence_minutes: 1440, enabled: true }     # research study
+  optimize: { cadence_minutes: 10080, enabled: true } # optimization cycle
+  backup: { cadence_minutes: 1440, enabled: true }    # durable-state backup

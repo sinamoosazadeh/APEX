@@ -53,6 +53,7 @@ from apex.data.catchup import CatchUpReport, CatchUpService
 from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
 from apex.data.streaming import MarketStreamService, StreamStats
 from apex.decision.service import DecisionService, DecisionSummary
+from apex.deployment.cli import run_backup, run_package, run_restore, run_schedule
 from apex.execution.service import ExecutionService, ExecutionSummary
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
@@ -192,6 +193,34 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=0,
         help="bounded session length; 0 runs until SIGINT/SIGTERM",
+    )
+    subcommands.add_parser(
+        "package",
+        help="build the signed, checksummed release package (29.25)",
+    )
+    subcommands.add_parser(
+        "backup",
+        help="back up the durable state consistently (13.19)",
+    )
+    restore = subcommands.add_parser(
+        "restore",
+        help="verified restore of a backup archive (13.20)",
+    )
+    restore.add_argument("--archive", required=True, help="backup archive path")
+    restore.add_argument(
+        "--force", action="store_true", help="overwrite existing state"
+    )
+    restore.add_argument(
+        "--into", default=None, help="alternate target directory"
+    )
+    schedule = subcommands.add_parser(
+        "schedule",
+        help="resource-aware recurring jobs (Book V part 7)",
+    )
+    schedule.add_argument(
+        "--run",
+        action="store_true",
+        help="execute due jobs (default: status only)",
     )
     secure_check = subcommands.add_parser(
         "secure-check",
@@ -1275,6 +1304,41 @@ def _run_telegram_command(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _run_package_command(args: argparse.Namespace) -> int:
+    """Dispatch release packaging."""
+    lines = asyncio.run(run_package(args.config_dir, root=Path.cwd()))
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
+def _run_backup_command(args: argparse.Namespace) -> int:
+    """Dispatch the durable-state backup."""
+    lines = asyncio.run(run_backup(args.config_dir))
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
+def _run_restore_command(args: argparse.Namespace) -> int:
+    """Dispatch the verified restore."""
+    lines = asyncio.run(
+        run_restore(
+            args.config_dir,
+            archive=Path(args.archive),
+            force=args.force,
+            into=Path(args.into) if args.into else None,
+        )
+    )
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
+def _run_schedule_command(args: argparse.Namespace) -> int:
+    """Dispatch the recurring-job planner."""
+    lines = asyncio.run(run_schedule(args.config_dir, execute=args.run))
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
 async def run_kill(
     config_dir: Path, *, engage: str | None, release: bool, reason: str
 ) -> list[str]:
@@ -1408,6 +1472,10 @@ def main(argv: list[str] | None = None) -> int:
             "secrets": _run_secrets_command,
             "audit": _run_audit_command,
             "kill": _run_kill_command,
+            "package": _run_package_command,
+            "backup": _run_backup_command,
+            "restore": _run_restore_command,
+            "schedule": _run_schedule_command,
         }
         handler = dispatchers.get(args.command or "")
         if handler is not None:

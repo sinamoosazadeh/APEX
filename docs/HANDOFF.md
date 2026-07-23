@@ -60,9 +60,9 @@ then targeted line ranges) - never whole books.
    files <=800 lines where practical, functions <=50 lines, downward-only
    dependencies (layer order: core < domain < contracts < storage <
    security < features < probability < decision < portfolio <
-   optimization < execution < research < monitoring < telegram; only
-   `apex/__main__.py` composes across layers), no bare asserts in
-   production code
+   optimization < execution < research < monitoring < telegram <
+   deployment; only `apex/__main__.py` and the CLI runner modules
+   compose across layers), no bare asserts in production code
    (type-narrowing asserts after explicit checks are established
    precedent).
 3. Per-phase ritual: extract spec surgically -> plan in the thread's
@@ -138,9 +138,8 @@ then targeted line ranges) - never whole books.
 - **Phase 12 - Monitoring + Telegram console**: COMPLETE (see the
   PHASES.md row).
 - **Phase 13 - Security platform**: COMPLETE (see the PHASES.md row).
-- **Phase 14 - Deployment**: packaging, runtime layout, service
-  lifecycle for the target device (Termux/mobile per Book V part 7
-  resource notes), backup/restore - Book II deployment chapters.
+- **Phase 14 - Deployment**: COMPLETE (see the PHASES.md row and
+  docs/DEPLOYMENT.md runbook).
 - **Phase 15 - Production Validation**: the full acceptance pass -
   deep-history optimizer acceptance runs, end-to-end paper operation,
   every quality gate, final documentation.
@@ -167,14 +166,14 @@ then targeted line ranges) - never whole books.
 
 - `uv` lives at `~/.local/bin/uv` after pip install; the venv Python
   reports 3.14.x (>=3.13 requirement satisfied).
-- pytest count at handoff: 561; boot: 12 plugins / 13 modules healthy.
+- pytest count at handoff: 574; boot: 12 plugins / 13 modules healthy.
 - `config.section(name)` exposes EVERY config file's raw mapping
   (deep-validated files included) since Phase 10.
 - Learned per-file push commits mean local and remote histories
   diverge after a push - always `git fetch && git reset --hard
   origin/main` after CI is green.
-- Error-code families in use: CFG, DAT, DEC, EVT, EXE, FEA, KRN, MKT,
-  MON, OPT, PRT, RES, RSK, SER, SIG, STO, TGM, VAL - grep before
+- Error-code families in use: CFG, DAT, DEC, DEP, EVT, EXE, FEA, KRN,
+  MKT, MON, OPT, PRT, RES, RSK, SER, SIG, STO, TGM, VAL - grep before
   allocating.
 - Module versioning: bump only touched modules (semver), project
   version 0.1x.0 per phase.
@@ -184,7 +183,26 @@ then targeted line ranges) - never whole books.
 
 ## State at handoff (update this block at every phase close)
 
-- Version 0.15.0; phases 0-13 complete; Phase 14 (Deployment) is next.
+- Version 0.16.0; phases 0-14 complete; Phase 15 (Production
+  Validation) is the LAST phase.
+- 574 tests passing; ruff + mypy strict clean (299 files); 12 plugins /
+  13 modules boot healthy.
+- Deployment layer live: signed deterministic release packaging
+  (`apex package`), consistent verified backup/restore
+  (`apex backup` / `apex restore`), the resource-aware recurring-job
+  scheduler with durable stamps (`apex schedule [--run]`), Termux
+  service scripts under deploy/ and the docs/DEPLOYMENT.md runbook.
+- Phase 14 close validation: signed release published; 13-file live
+  backup self-verified and round-trip restored; the full job lifecycle
+  ran live (sync 4/4, snapshot, study x2 series, optimize queued 4 /
+  drained 2, backup) with nothing due on the second pass.
+- Phase 15 scope (29.26): deep-history optimizer acceptance runs,
+  end-to-end paper operation on live data, every gate re-verified,
+  final documentation sweep.
+
+## Previous state (Phase 13 close)
+
+- Version 0.15.0; phases 0-13 complete.
 - 561 tests passing; ruff + mypy strict clean (288 files); 12 plugins /
   13 modules boot healthy.
 - Security platform live: vault (APEX_MASTER_KEY -> scrypt -> Fernet;

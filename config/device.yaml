@@ -1,4 +1,15 @@
 # Device/runtime environment configuration - owned by Phase 14 (Deployment).
+# Book V part 7 budgets: on Termux the platform targets <500MB RAM and
+# <50% background CPU; under pressure, scheduled jobs DEFER, never run
+# partially.
 schema_version: 1
 
-profile: default
+profile: default               # default | termux | server (documentation label)
+
+resources:                     # scheduler pressure guards
+  max_load_ratio: 0.8          # 1-minute load average per core
+  min_free_disk_mb: 512        # defer jobs below this free space
+
+backup:
+  dir: backups                 # archive directory (repo-relative)
+  retention: 14                # newest archives kept by pruning

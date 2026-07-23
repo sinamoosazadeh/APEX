@@ -21,6 +21,7 @@ htmlcov/
 *.log
 runtime/
 snapshots/
+backups/
 
 # OS / editor
 .DS_Store
