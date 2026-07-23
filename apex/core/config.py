@@ -1,1 +1,489 @@
-IiIiQ29uZmlndXJhdGlvbiBwbGF0Zm9ybS4KCkNvbnN0aXR1dGlvbiAzLjc6IG5vIG1hZ2ljIG51bWJlcnMgaW4gY29kZSAtIGV2ZXJ5IHR1bmFibGUgbGl2ZXMgaW4KY29uZmlndXJhdGlvbi4gQm9vayBJSSA1LjE4OiBldmVyeSBjb25maWcgZmlsZSBoYXMgYSBzY2hlbWEgYW5kIHRoZQpzeXN0ZW0gcmVmdXNlcyB0byBib290IHdoZW4gYSBmaWxlIGlzIG1pc3NpbmcsIG1hbGZvcm1lZCBvcgpzY2hlbWEtaW5jb21wYXRpYmxlLiBFbnZpcm9ubWVudCB2YXJpYWJsZXMgbWF5IG92ZXJyaWRlIHNjYWxhciBrZXlzCnVzaW5nIHRoZSBwYXR0ZXJuIGBgQVBFWF9fPEZJTEU+X188S0VZPltfXzxORVNURURfS0VZPi4uLl1gYC4KIiIiCgpmcm9tIGNvbGxlY3Rpb25zLmFiYyBpbXBvcnQgTWFwcGluZwpmcm9tIGRhdGFjbGFzc2VzIGltcG9ydCBkYXRhY2xhc3MKZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCmZyb20gdHlwaW5nIGltcG9ydCBGaW5hbAoKaW1wb3J0IHlhbWwKCmZyb20gYXBleC5jb3JlLmNvbnN0YW50cyBpbXBvcnQgQ09ORklHX1NDSEVNQV9WRVJTSU9OLCBFTlZfUFJFRklYLCBFTlZfU0VQQVJBVE9SCmZyb20gYXBleC5jb3JlLmVudW1zIGltcG9ydCBFbnZpcm9ubWVudCwgUnVuTW9kZSwgVGltZWZyYW1lCmZyb20gYXBleC5jb3JlLmV4Y2VwdGlvbnMgaW1wb3J0IENvbmZpZ3VyYXRpb25FcnJvciwgVmFsaWRhdGlvbkVycm9yCmZyb20gYXBleC5jb3JlLmxvZ2dpbmcgaW1wb3J0IExvZ0Zvcm1hdCwgTG9nTGV2ZWwKZnJvbSBhcGV4LmNvcmUuc2VyaWFsaXphdGlvbiBpbXBvcnQgY29udGVudF9oYXNoCmZyb20gYXBleC5jb3JlLnZhbGlkYXRpb24gaW1wb3J0IGVuc3VyZV9zeW1ib2wKCnR5cGUgQ29uZmlnVmFsdWUgPSBzdHIgfCBpbnQgfCBmbG9hdCB8IGJvb2wgfCBOb25lIHwgbGlzdFsiQ29uZmlnVmFsdWUiXSB8IENvbmZpZ1NlY3Rpb24KdHlwZSBDb25maWdTZWN0aW9uID0gZGljdFtzdHIsICJDb25maWdWYWx1ZSJdCgojIERlZXAtdmFsaWRhdGVkIGZpbGVzIChjb25zdW1lZCBieSBkZWxpdmVyZWQgcGhhc2VzKS4gVGhlIHJlbWFpbmluZwojIGZpbGVzIGFyZSBvd25lZCBieSBsYXRlciBwaGFzZXM7IHRoZWlyIGRlZXAgc2NoZW1hcyBzaGlwIHdpdGggdGhvc2UKIyBwaGFzZXMsIGJ1dCBwcmVzZW5jZSwgbWFwcGluZyBzaGFwZSBhbmQgc2NoZW1hX3ZlcnNpb24gYXJlIGVuZm9yY2VkCiMgZnJvbSBQaGFzZSAwIHNvIHRoZSBjb25maWcgY29udHJhY3QgaXMgbmV2ZXIgdmlvbGF0ZWQgc2lsZW50bHkuCkRFRVBfVkFMSURBVEVEX0ZJTEVTOiBGaW5hbFt0dXBsZVtzdHIsIC4uLl1dID0gKCJzeXN0ZW0iLCAibG9nZ2luZyIsICJtYXJrZXQiLCAiZXhjaGFuZ2UiKQpQSEFTRV9PV05FRF9GSUxFUzogRmluYWxbdHVwbGVbc3RyLCAuLi5dXSA9ICgKICAgICJzaWduYWwiLAogICAgInJpc2siLAogICAgIm9wdGltaXplciIsCiAgICAicG9ydGZvbGlvIiwKICAgICJyZXNlYXJjaCIsCiAgICAidGVsZW1ldHJ5IiwKICAgICJ0ZWxlZ3JhbSIsCiAgICAic2NoZWR1bGVyIiwKICAgICJkZXZpY2UiLAopCkFMTF9DT05GSUdfRklMRVM6IEZpbmFsW3R1cGxlW3N0ciwgLi4uXV0gPSBERUVQX1ZBTElEQVRFRF9GSUxFUyArIFBIQVNFX09XTkVEX0ZJTEVTCgoKQGRhdGFjbGFzcyhmcm96ZW49VHJ1ZSwgc2xvdHM9VHJ1ZSwga3dfb25seT1UcnVlKQpjbGFzcyBTeXN0ZW1Db25maWc6CiAgICAiIiJEZWVwLXZhbGlkYXRlZCBjb250ZW50cyBvZiBgYHN5c3RlbS55YW1sYGAuIiIiCgogICAgYXBwX25hbWU6IHN0cgogICAgZW52aXJvbm1lbnQ6IEVudmlyb25tZW50CiAgICBydW5fbW9kZTogUnVuTW9kZQogICAgZGV0ZXJtaW5pc3RpY19pZHM6IGJvb2wKICAgIGlkX3NlZWQ6IGludCB8IE5vbmUKICAgIGV2ZW50X2pvdXJuYWxfY2FwYWNpdHk6IGludAogICAgZXZlbnRfZmFpbF9mYXN0OiBib29sCiAgICBkYXRhX2Rpcjogc3RyCiAgICBwbHVnaW5fbW9kdWxlczogdHVwbGVbc3RyLCAuLi5dCgoKQGRhdGFjbGFzcyhmcm96ZW49VHJ1ZSwgc2xvdHM9VHJ1ZSwga3dfb25seT1UcnVlKQpjbGFzcyBNYXJrZXRDb25maWc6CiAgICAiIiJEZWVwLXZhbGlkYXRlZCBjb250ZW50cyBvZiBgYG1hcmtldC55YW1sYGAgKFBoYXNlIDMpLiIiIgoKICAgIHN5bWJvbHM6IHR1cGxlW3N0ciwgLi4uXQogICAgdGltZWZyYW1lczogdHVwbGVbVGltZWZyYW1lLCAuLi5dCiAgICBoaXN0b3J5X2JhcnM6IGludAogICAgZ2FwX3BlbmFsdHk6IGZsb2F0CiAgICBmb3JtaW5nX2Jhcl9xdWFsaXR5OiBmbG9hdAogICAgc3RyZWFtX2Zvcm1pbmdfZmx1c2hfbXM6IGludAogICAgc3RyZWFtX3JlY29ubmVjdF9iYWNrb2ZmX21zOiBpbnQKICAgIHN0cmVhbV9tYXhfcmVjb25uZWN0czogaW50CiAgICBmZWF0dXJlczogQ29uZmlnU2VjdGlvbgogICAgcHJvYmFiaWxpdHk6IENvbmZpZ1NlY3Rpb24KICAgIGRlY2lzaW9uOiBDb25maWdTZWN0aW9uCgoKQGRhdGFjbGFzcyhmcm96ZW49VHJ1ZSwgc2xvdHM9VHJ1ZSwga3dfb25seT1UcnVlKQpjbGFzcyBUb29iaXRDb25maWc6CiAgICAiIiJEZWVwLXZhbGlkYXRlZCBgYHRvb2JpdGBgIHNlY3Rpb24gb2YgYGBleGNoYW5nZS55YW1sYGAgKFBoYXNlIDMpLiIiIgoKICAgIGJhc2VfdXJsOiBzdHIKICAgIHdzX3VybDogc3RyCiAgICByZXF1ZXN0X3RpbWVvdXRfbXM6IGludAogICAgbWF4X3JldHJpZXM6IGludAogICAgcmV0cnlfYmFja29mZl9tczogaW50CiAgICBrbGluZV9wYWdlX2xpbWl0OiBpbnQKICAgIHdzX3BpbmdfaW50ZXJ2YWxfbXM6IGludAogICAgd3NfcmVjdl90aW1lb3V0X21zOiBpbnQKCgpAZGF0YWNsYXNzKGZyb3plbj1UcnVlLCBzbG90cz1UcnVlLCBrd19vbmx5PVRydWUpCmNsYXNzIExvZ2dpbmdDb25maWc6CiAgICAiIiJEZWVwLXZhbGlkYXRlZCBjb250ZW50cyBvZiBgYGxvZ2dpbmcueWFtbGBgLiIiIgoKICAgIGxldmVsOiBMb2dMZXZlbAogICAgb3V0cHV0X2Zvcm1hdDogTG9nRm9ybWF0CgoKQGRhdGFjbGFzcyhmcm96ZW49VHJ1ZSwgc2xvdHM9VHJ1ZSwga3dfb25seT1UcnVlKQpjbGFzcyBBcHBDb25maWc6CiAgICAiIiJUaGUgY29tcGxldGUgdmFsaWRhdGVkIGNvbmZpZ3VyYXRpb24gb2Ygb25lIHBsYXRmb3JtIHJ1bi4iIiIKCiAgICBzeXN0ZW06IFN5c3RlbUNvbmZpZwogICAgbG9nZ2luZzogTG9nZ2luZ0NvbmZpZwogICAgbWFya2V0OiBNYXJrZXRDb25maWcKICAgIHRvb2JpdDogVG9vYml0Q29uZmlnCiAgICBzZWN0aW9uczogTWFwcGluZ1tzdHIsIENvbmZpZ1NlY3Rpb25dCiAgICBjb25maWdfZGlyOiBzdHIKICAgIGNvbmZpZ19oYXNoOiBzdHIKCiAgICBkZWYgc2VjdGlvbihzZWxmLCBuYW1lOiBzdHIpIC0+IENvbmZpZ1NlY3Rpb246CiAgICAgICAgIiIiUmV0dXJuIGEgcGhhc2Utb3duZWQgcmF3IHNlY3Rpb24gYnkgZmlsZSBuYW1lLiIiIgogICAgICAgIGlmIG5hbWUgbm90IGluIHNlbGYuc2VjdGlvbnM6CiAgICAgICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgICAgICJ1bmtub3duIGNvbmZpZ3VyYXRpb24gc2VjdGlvbiIsCiAgICAgICAgICAgICAgICBjb2RlPSJDRkctMDEwIiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJzZWN0aW9uIjogbmFtZX0sCiAgICAgICAgICAgICkKICAgICAgICByZXR1cm4gc2VsZi5zZWN0aW9uc1tuYW1lXQoKCmRlZiBsb2FkX2NvbmZpZygKICAgIGNvbmZpZ19kaXI6IFBhdGgsCiAgICAqLAogICAgZW52OiBNYXBwaW5nW3N0ciwgc3RyXSB8IE5vbmUgPSBOb25lLAopIC0+IEFwcENvbmZpZzoKICAgICIiIkxvYWQsIG92ZXJyaWRlIGFuZCB2YWxpZGF0ZSB0aGUgZnVsbCBjb25maWd1cmF0aW9uIHNldC4KCiAgICBSYWlzZXMgOmNsYXNzOmBDb25maWd1cmF0aW9uRXJyb3JgIG9uIGFueSB2aW9sYXRpb24gLSB0aGUgcGxhdGZvcm0KICAgIG11c3Qgbm90IGJvb3Qgd2l0aCBpbnZhbGlkIGNvbmZpZ3VyYXRpb24gKEJvb2sgSUkgNS4xOCkuCiAgICAiIiIKICAgIGlmIG5vdCBjb25maWdfZGlyLmlzX2RpcigpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgImNvbmZpZ3VyYXRpb24gZGlyZWN0b3J5IG5vdCBmb3VuZCIsCiAgICAgICAgICAgIGNvZGU9IkNGRy0wMDEiLAogICAgICAgICAgICBkZXRhaWxzPXsiY29uZmlnX2RpciI6IHN0cihjb25maWdfZGlyKX0sCiAgICAgICAgKQogICAgcmF3X3NlY3Rpb25zOiBkaWN0W3N0ciwgQ29uZmlnU2VjdGlvbl0gPSB7fQogICAgZm9yIGZpbGVfbmFtZSBpbiBBTExfQ09ORklHX0ZJTEVTOgogICAgICAgIHNlY3Rpb24gPSBfcmVhZF9jb25maWdfZmlsZShjb25maWdfZGlyIC8gZiJ7ZmlsZV9uYW1lfS55YW1sIikKICAgICAgICBfYXBwbHlfZW52X292ZXJyaWRlcyhzZWN0aW9uLCBmaWxlX25hbWUsIGVudiBvciB7fSkKICAgICAgICBfY2hlY2tfc2NoZW1hX3ZlcnNpb24oc2VjdGlvbiwgZmlsZV9uYW1lKQogICAgICAgIHJhd19zZWN0aW9uc1tmaWxlX25hbWVdID0gc2VjdGlvbgoKICAgICMgUmF3IHNlY3Rpb25zIHN0YXkgcmVhY2hhYmxlIGZvciBldmVyeSBmaWxlOiBwaGFzZS1vd25lZCBmaWxlcyBhcmUKICAgICMgcGFyc2VkIGJ5IHRoZWlyIHBoYXNlcycgcGx1Z2lucywgYW5kIGRlZXAtdmFsaWRhdGVkIGZpbGVzIG1heSBjYXJyeQogICAgIyBhZGRpdGlvbmFsIHBoYXNlLW93bmVkIHNlY3Rpb25zIChlLmcuIGV4Y2hhbmdlLmV4ZWN1dGlvbiwgUGhhc2UgMTApLgogICAgcmV0dXJuIEFwcENvbmZpZygKICAgICAgICBzeXN0ZW09X3BhcnNlX3N5c3RlbShyYXdfc2VjdGlvbnNbInN5c3RlbSJdKSwKICAgICAgICBsb2dnaW5nPV9wYXJzZV9sb2dnaW5nKHJhd19zZWN0aW9uc1sibG9nZ2luZyJdKSwKICAgICAgICBtYXJrZXQ9X3BhcnNlX21hcmtldChyYXdfc2VjdGlvbnNbIm1hcmtldCJdKSwKICAgICAgICB0b29iaXQ9X3BhcnNlX2V4Y2hhbmdlKHJhd19zZWN0aW9uc1siZXhjaGFuZ2UiXSksCiAgICAgICAgc2VjdGlvbnM9ZGljdChyYXdfc2VjdGlvbnMpLAogICAgICAgIGNvbmZpZ19kaXI9c3RyKGNvbmZpZ19kaXIpLAogICAgICAgIGNvbmZpZ19oYXNoPWNvbnRlbnRfaGFzaChyYXdfc2VjdGlvbnMpLAogICAgKQoKCmRlZiBfcmVhZF9jb25maWdfZmlsZShwYXRoOiBQYXRoKSAtPiBDb25maWdTZWN0aW9uOgogICAgaWYgbm90IHBhdGguaXNfZmlsZSgpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgInJlcXVpcmVkIGNvbmZpZ3VyYXRpb24gZmlsZSBpcyBtaXNzaW5nIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAwMiIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogcGF0aC5uYW1lfSwKICAgICAgICApCiAgICB0cnk6CiAgICAgICAgbG9hZGVkID0geWFtbC5zYWZlX2xvYWQocGF0aC5yZWFkX3RleHQoZW5jb2Rpbmc9InV0Zi04IikpCiAgICBleGNlcHQgeWFtbC5ZQU1MRXJyb3IgYXMgZXhjOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgImNvbmZpZ3VyYXRpb24gZmlsZSBpcyBub3QgdmFsaWQgWUFNTCIsCiAgICAgICAgICAgIGNvZGU9IkNGRy0wMDMiLAogICAgICAgICAgICBkZXRhaWxzPXsiZmlsZSI6IHBhdGgubmFtZSwgInJlYXNvbiI6IHN0cihleGMpfSwKICAgICAgICApIGZyb20gZXhjCiAgICBpZiBub3QgaXNpbnN0YW5jZShsb2FkZWQsIGRpY3QpIG9yIG5vdCBhbGwoaXNpbnN0YW5jZShrLCBzdHIpIGZvciBrIGluIGxvYWRlZCk6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiY29uZmlndXJhdGlvbiBmaWxlIG11c3QgY29udGFpbiBhIHN0cmluZy1rZXllZCBtYXBwaW5nIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAwNCIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogcGF0aC5uYW1lfSwKICAgICAgICApCiAgICByZXR1cm4gbG9hZGVkCgoKZGVmIF9hcHBseV9lbnZfb3ZlcnJpZGVzKAogICAgc2VjdGlvbjogQ29uZmlnU2VjdGlvbiwKICAgIGZpbGVfbmFtZTogc3RyLAogICAgZW52OiBNYXBwaW5nW3N0ciwgc3RyXSwKKSAtPiBOb25lOgogICAgcHJlZml4ID0gZiJ7RU5WX1BSRUZJWH17RU5WX1NFUEFSQVRPUn17ZmlsZV9uYW1lLnVwcGVyKCl9e0VOVl9TRVBBUkFUT1J9IgogICAgZm9yIGVudl9rZXksIHJhd192YWx1ZSBpbiBlbnYuaXRlbXMoKToKICAgICAgICBpZiBub3QgZW52X2tleS5zdGFydHN3aXRoKHByZWZpeCk6CiAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgcGF0aF9wYXJ0cyA9IFtwLmxvd2VyKCkgZm9yIHAgaW4gZW52X2tleVtsZW4ocHJlZml4KSA6XS5zcGxpdChFTlZfU0VQQVJBVE9SKSBpZiBwXQogICAgICAgIGlmIG5vdCBwYXRoX3BhcnRzOgogICAgICAgICAgICBjb250aW51ZQogICAgICAgIF9zZXRfb3ZlcnJpZGUoc2VjdGlvbiwgcGF0aF9wYXJ0cywgX2NvZXJjZV9lbnZfdmFsdWUocmF3X3ZhbHVlKSwgZW52X2tleSkKCgpkZWYgX3NldF9vdmVycmlkZSgKICAgIHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sCiAgICBwYXRoX3BhcnRzOiBsaXN0W3N0cl0sCiAgICB2YWx1ZTogQ29uZmlnVmFsdWUsCiAgICBlbnZfa2V5OiBzdHIsCikgLT4gTm9uZToKICAgIGN1cnNvcjogQ29uZmlnU2VjdGlvbiA9IHNlY3Rpb24KICAgIGZvciBwYXJ0IGluIHBhdGhfcGFydHNbOi0xXToKICAgICAgICBuZXN0ZWQgPSBjdXJzb3IuZ2V0KHBhcnQpCiAgICAgICAgaWYgbm90IGlzaW5zdGFuY2UobmVzdGVkLCBkaWN0KToKICAgICAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAgICAgImVudmlyb25tZW50IG92ZXJyaWRlIHBhdGggZG9lcyBub3QgbWF0Y2ggY29uZmlnIHN0cnVjdHVyZSIsCiAgICAgICAgICAgICAgICBjb2RlPSJDRkctMDA1IiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJ2YXJpYWJsZSI6IGVudl9rZXl9LAogICAgICAgICAgICApCiAgICAgICAgY3Vyc29yID0gbmVzdGVkCiAgICBjdXJzb3JbcGF0aF9wYXJ0c1stMV1dID0gdmFsdWUKCgpkZWYgX2NvZXJjZV9lbnZfdmFsdWUocmF3OiBzdHIpIC0+IENvbmZpZ1ZhbHVlOgogICAgbG93ZXJlZCA9IHJhdy5zdHJpcCgpLmxvd2VyKCkKICAgIGlmIGxvd2VyZWQgaW4gKCJ0cnVlIiwgImZhbHNlIik6CiAgICAgICAgcmV0dXJuIGxvd2VyZWQgPT0gInRydWUiCiAgICBpZiBsb3dlcmVkIGluICgibnVsbCIsICJub25lIiwgIiIpOgogICAgICAgIHJldHVybiBOb25lCiAgICB0cnk6CiAgICAgICAgcmV0dXJuIGludChyYXcpCiAgICBleGNlcHQgVmFsdWVFcnJvcjoKICAgICAgICBwYXNzCiAgICB0cnk6CiAgICAgICAgcmV0dXJuIGZsb2F0KHJhdykKICAgIGV4Y2VwdCBWYWx1ZUVycm9yOgogICAgICAgIHJldHVybiByYXcKCgpkZWYgX2NoZWNrX3NjaGVtYV92ZXJzaW9uKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGZpbGVfbmFtZTogc3RyKSAtPiBOb25lOgogICAgdmVyc2lvbiA9IHNlY3Rpb24uZ2V0KCJzY2hlbWFfdmVyc2lvbiIpCiAgICBpZiBub3QgaXNpbnN0YW5jZSh2ZXJzaW9uLCBpbnQpIG9yIGlzaW5zdGFuY2UodmVyc2lvbiwgYm9vbCk6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiY29uZmlndXJhdGlvbiBmaWxlIG11c3QgZGVjbGFyZSBhbiBpbnRlZ2VyIHNjaGVtYV92ZXJzaW9uIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAwNiIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogZiJ7ZmlsZV9uYW1lfS55YW1sIn0sCiAgICAgICAgKQogICAgaWYgdmVyc2lvbiAhPSBDT05GSUdfU0NIRU1BX1ZFUlNJT046CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiY29uZmlndXJhdGlvbiBzY2hlbWFfdmVyc2lvbiBpcyBub3Qgc3VwcG9ydGVkIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAwNyIsCiAgICAgICAgICAgIGRldGFpbHM9ewogICAgICAgICAgICAgICAgImZpbGUiOiBmIntmaWxlX25hbWV9LnlhbWwiLAogICAgICAgICAgICAgICAgImZvdW5kIjogdmVyc2lvbiwKICAgICAgICAgICAgICAgICJleHBlY3RlZCI6IENPTkZJR19TQ0hFTUFfVkVSU0lPTiwKICAgICAgICAgICAgfSwKICAgICAgICApCgoKZGVmIF9yZXF1aXJlKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBmaWxlX25hbWU6IHN0cikgLT4gQ29uZmlnVmFsdWU6CiAgICBpZiBrZXkgbm90IGluIHNlY3Rpb246CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAicmVxdWlyZWQgY29uZmlndXJhdGlvbiBrZXkgaXMgbWlzc2luZyIsCiAgICAgICAgICAgIGNvZGU9IkNGRy0wMDgiLAogICAgICAgICAgICBkZXRhaWxzPXsiZmlsZSI6IGYie2ZpbGVfbmFtZX0ueWFtbCIsICJrZXkiOiBrZXl9LAogICAgICAgICkKICAgIHJldHVybiBzZWN0aW9uW2tleV0KCgpkZWYgX3JlcXVpcmVfc3RyKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBmaWxlX25hbWU6IHN0cikgLT4gc3RyOgogICAgdmFsdWUgPSBfcmVxdWlyZShzZWN0aW9uLCBrZXksIGZpbGVfbmFtZSkKICAgIGlmIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBzdHIpIG9yIG5vdCB2YWx1ZToKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgICJjb25maWd1cmF0aW9uIGtleSBtdXN0IGJlIGEgbm9uLWVtcHR5IHN0cmluZyIsCiAgICAgICAgICAgIGNvZGU9IkNGRy0wMDkiLAogICAgICAgICAgICBkZXRhaWxzPXsiZmlsZSI6IGYie2ZpbGVfbmFtZX0ueWFtbCIsICJrZXkiOiBrZXl9LAogICAgICAgICkKICAgIHJldHVybiB2YWx1ZQoKCmRlZiBfcmVxdWlyZV9ib29sKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBmaWxlX25hbWU6IHN0cikgLT4gYm9vbDoKICAgIHZhbHVlID0gX3JlcXVpcmUoc2VjdGlvbiwga2V5LCBmaWxlX25hbWUpCiAgICBpZiBub3QgaXNpbnN0YW5jZSh2YWx1ZSwgYm9vbCk6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiY29uZmlndXJhdGlvbiBrZXkgbXVzdCBiZSBhIGJvb2xlYW4iLAogICAgICAgICAgICBjb2RlPSJDRkctMDExIiwKICAgICAgICAgICAgZGV0YWlscz17ImZpbGUiOiBmIntmaWxlX25hbWV9LnlhbWwiLCAia2V5Ijoga2V5fSwKICAgICAgICApCiAgICByZXR1cm4gdmFsdWUKCgpkZWYgX3JlcXVpcmVfaW50KAogICAgc2VjdGlvbjogQ29uZmlnU2VjdGlvbiwKICAgIGtleTogc3RyLAogICAgZmlsZV9uYW1lOiBzdHIsCiAgICAqLAogICAgbWluaW11bTogaW50LAopIC0+IGludDoKICAgIHZhbHVlID0gX3JlcXVpcmUoc2VjdGlvbiwga2V5LCBmaWxlX25hbWUpCiAgICBpZiBub3QgaXNpbnN0YW5jZSh2YWx1ZSwgaW50KSBvciBpc2luc3RhbmNlKHZhbHVlLCBib29sKSBvciB2YWx1ZSA8IG1pbmltdW06CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICBmImNvbmZpZ3VyYXRpb24ga2V5IG11c3QgYmUgYW4gaW50ZWdlciA+PSB7bWluaW11bX0iLAogICAgICAgICAgICBjb2RlPSJDRkctMDEyIiwKICAgICAgICAgICAgZGV0YWlscz17ImZpbGUiOiBmIntmaWxlX25hbWV9LnlhbWwiLCAia2V5Ijoga2V5fSwKICAgICAgICApCiAgICByZXR1cm4gdmFsdWUKCgpkZWYgX3BhcnNlX2VudW1bRV0oCiAgICBzZWN0aW9uOiBDb25maWdTZWN0aW9uLAogICAga2V5OiBzdHIsCiAgICBmaWxlX25hbWU6IHN0ciwKICAgIHBhcnNlcjogZGljdFtzdHIsIEVdLAopIC0+IEU6CiAgICByYXcgPSBfcmVxdWlyZV9zdHIoc2VjdGlvbiwga2V5LCBmaWxlX25hbWUpCiAgICBpZiByYXcgbm90IGluIHBhcnNlcjoKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgICJjb25maWd1cmF0aW9uIGtleSBoYXMgYW4gdW5zdXBwb3J0ZWQgdmFsdWUiLAogICAgICAgICAgICBjb2RlPSJDRkctMDEzIiwKICAgICAgICAgICAgZGV0YWlscz17CiAgICAgICAgICAgICAgICAiZmlsZSI6IGYie2ZpbGVfbmFtZX0ueWFtbCIsCiAgICAgICAgICAgICAgICAia2V5Ijoga2V5LAogICAgICAgICAgICAgICAgInZhbHVlIjogcmF3LAogICAgICAgICAgICAgICAgImFsbG93ZWQiOiAiLCAiLmpvaW4oc29ydGVkKHBhcnNlcikpLAogICAgICAgICAgICB9LAogICAgICAgICkKICAgIHJldHVybiBwYXJzZXJbcmF3XQoKCmRlZiBfcmVxdWlyZV9tYXBwaW5nKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBmaWxlX25hbWU6IHN0cikgLT4gQ29uZmlnU2VjdGlvbjoKICAgIHZhbHVlID0gX3JlcXVpcmUoc2VjdGlvbiwga2V5LCBmaWxlX25hbWUpCiAgICBpZiBub3QgaXNpbnN0YW5jZSh2YWx1ZSwgZGljdCk6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICBmIntmaWxlX25hbWV9LntrZXl9IG11c3QgYmUgYSBtYXBwaW5nIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAxNCIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogZiJ7ZmlsZV9uYW1lfS55YW1sIiwgImtleSI6IGtleX0sCiAgICAgICAgKQogICAgcmV0dXJuIHZhbHVlCgoKZGVmIF9yZXF1aXJlX3N0cl9saXN0KHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBmaWxlX25hbWU6IHN0cikgLT4gdHVwbGVbc3RyLCAuLi5dOgogICAgdmFsdWUgPSBfcmVxdWlyZShzZWN0aW9uLCBrZXksIGZpbGVfbmFtZSkKICAgIGlmIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBsaXN0KToKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgICJjb25maWd1cmF0aW9uIGtleSBtdXN0IGJlIGEgbGlzdCBvZiBzdHJpbmdzIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAxNyIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogZiJ7ZmlsZV9uYW1lfS55YW1sIiwgImtleSI6IGtleX0sCiAgICAgICAgKQogICAgaXRlbXM6IGxpc3Rbc3RyXSA9IFtdCiAgICBmb3IgaXRlbSBpbiB2YWx1ZToKICAgICAgICBpZiBub3QgaXNpbnN0YW5jZShpdGVtLCBzdHIpOgogICAgICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgICAgICAiY29uZmlndXJhdGlvbiBrZXkgbXVzdCBiZSBhIGxpc3Qgb2Ygc3RyaW5ncyIsCiAgICAgICAgICAgICAgICBjb2RlPSJDRkctMDE3IiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogZiJ7ZmlsZV9uYW1lfS55YW1sIiwgImtleSI6IGtleX0sCiAgICAgICAgICAgICkKICAgICAgICBpdGVtcy5hcHBlbmQoaXRlbSkKICAgIHJldHVybiB0dXBsZShpdGVtcykKCgpkZWYgX3JlcXVpcmVfZnJhY3Rpb24oc2VjdGlvbjogQ29uZmlnU2VjdGlvbiwga2V5OiBzdHIsIGZpbGVfbmFtZTogc3RyKSAtPiBmbG9hdDoKICAgIHZhbHVlID0gX3JlcXVpcmUoc2VjdGlvbiwga2V5LCBmaWxlX25hbWUpCiAgICBpZiBpc2luc3RhbmNlKHZhbHVlLCBib29sKSBvciBub3QgaXNpbnN0YW5jZSh2YWx1ZSwgKGludCwgZmxvYXQpKToKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgICJjb25maWd1cmF0aW9uIGtleSBtdXN0IGJlIGEgbnVtYmVyIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAxOCIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogZiJ7ZmlsZV9uYW1lfS55YW1sIiwgImtleSI6IGtleX0sCiAgICAgICAgKQogICAgbnVtYmVyID0gZmxvYXQodmFsdWUpCiAgICBpZiBub3QgMC4wIDw9IG51bWJlciA8PSAxLjA6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiY29uZmlndXJhdGlvbiBrZXkgbXVzdCBiZSB3aXRoaW4gWzAsIDFdIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAxOSIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmaWxlIjogZiJ7ZmlsZV9uYW1lfS55YW1sIiwgImtleSI6IGtleSwgInZhbHVlIjogbnVtYmVyfSwKICAgICAgICApCiAgICByZXR1cm4gbnVtYmVyCgoKZGVmIF9wYXJzZV9zeXN0ZW0oc2VjdGlvbjogQ29uZmlnU2VjdGlvbikgLT4gU3lzdGVtQ29uZmlnOgogICAgZXZlbnRzID0gX3JlcXVpcmVfbWFwcGluZyhzZWN0aW9uLCAiZXZlbnRzIiwgInN5c3RlbSIpCiAgICBzdG9yYWdlID0gX3JlcXVpcmVfbWFwcGluZyhzZWN0aW9uLCAic3RvcmFnZSIsICJzeXN0ZW0iKQogICAgcGx1Z2lucyA9IF9yZXF1aXJlX21hcHBpbmcoc2VjdGlvbiwgInBsdWdpbnMiLCAic3lzdGVtIikKICAgIGlkX3NlZWRfcmF3ID0gc2VjdGlvbi5nZXQoImlkX3NlZWQiKQogICAgaWRfc2VlZDogaW50IHwgTm9uZQogICAgaWYgaWRfc2VlZF9yYXcgaXMgTm9uZToKICAgICAgICBpZF9zZWVkID0gTm9uZQogICAgZWxpZiBpc2luc3RhbmNlKGlkX3NlZWRfcmF3LCBpbnQpIGFuZCBub3QgaXNpbnN0YW5jZShpZF9zZWVkX3JhdywgYm9vbCk6CiAgICAgICAgaWRfc2VlZCA9IGlkX3NlZWRfcmF3CiAgICBlbHNlOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigic3lzdGVtLmlkX3NlZWQgbXVzdCBiZSBhbiBpbnRlZ2VyIG9yIG51bGwiLCBjb2RlPSJDRkctMDE1IikKICAgIGRldGVybWluaXN0aWMgPSBfcmVxdWlyZV9ib29sKHNlY3Rpb24sICJkZXRlcm1pbmlzdGljX2lkcyIsICJzeXN0ZW0iKQogICAgaWYgZGV0ZXJtaW5pc3RpYyBhbmQgaWRfc2VlZCBpcyBOb25lOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgImRldGVybWluaXN0aWNfaWRzIHJlcXVpcmVzIGFuIGV4cGxpY2l0IGlkX3NlZWQiLAogICAgICAgICAgICBjb2RlPSJDRkctMDE2IiwKICAgICAgICApCiAgICByZXR1cm4gU3lzdGVtQ29uZmlnKAogICAgICAgIGFwcF9uYW1lPV9yZXF1aXJlX3N0cihzZWN0aW9uLCAiYXBwX25hbWUiLCAic3lzdGVtIiksCiAgICAgICAgZW52aXJvbm1lbnQ9X3BhcnNlX2VudW0oCiAgICAgICAgICAgIHNlY3Rpb24sICJlbnZpcm9ubWVudCIsICJzeXN0ZW0iLCB7ZS52YWx1ZTogZSBmb3IgZSBpbiBFbnZpcm9ubWVudH0KICAgICAgICApLAogICAgICAgIHJ1bl9tb2RlPV9wYXJzZV9lbnVtKHNlY3Rpb24sICJydW5fbW9kZSIsICJzeXN0ZW0iLCB7bS52YWx1ZTogbSBmb3IgbSBpbiBSdW5Nb2RlfSksCiAgICAgICAgZGV0ZXJtaW5pc3RpY19pZHM9ZGV0ZXJtaW5pc3RpYywKICAgICAgICBpZF9zZWVkPWlkX3NlZWQsCiAgICAgICAgZXZlbnRfam91cm5hbF9jYXBhY2l0eT1fcmVxdWlyZV9pbnQoZXZlbnRzLCAiam91cm5hbF9jYXBhY2l0eSIsICJzeXN0ZW0iLCBtaW5pbXVtPTEpLAogICAgICAgIGV2ZW50X2ZhaWxfZmFzdD1fcmVxdWlyZV9ib29sKGV2ZW50cywgImZhaWxfZmFzdCIsICJzeXN0ZW0iKSwKICAgICAgICBkYXRhX2Rpcj1fcmVxdWlyZV9zdHIoc3RvcmFnZSwgImRhdGFfZGlyIiwgInN5c3RlbSIpLAogICAgICAgIHBsdWdpbl9tb2R1bGVzPV9yZXF1aXJlX3N0cl9saXN0KHBsdWdpbnMsICJlbmFibGVkIiwgInN5c3RlbSIpLAogICAgKQoKCmRlZiBfcGFyc2VfbWFya2V0KHNlY3Rpb246IENvbmZpZ1NlY3Rpb24pIC0+IE1hcmtldENvbmZpZzoKICAgIHN5bWJvbHMgPSBfcmVxdWlyZV9zdHJfbGlzdChzZWN0aW9uLCAic3ltYm9scyIsICJtYXJrZXQiKQogICAgZm9yIHN5bWJvbCBpbiBzeW1ib2xzOgogICAgICAgIHRyeToKICAgICAgICAgICAgZW5zdXJlX3N5bWJvbChzeW1ib2wpCiAgICAgICAgZXhjZXB0IFZhbGlkYXRpb25FcnJvciBhcyBlcnJvcjoKICAgICAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAgICAgIm1hcmtldC5zeW1ib2xzIGNvbnRhaW5zIGEgbm9uLWNhbm9uaWNhbCBzeW1ib2wiLAogICAgICAgICAgICAgICAgY29kZT0iQ0ZHLTAyMiIsCiAgICAgICAgICAgICAgICBkZXRhaWxzPXsic3ltYm9sIjogc3ltYm9sfSwKICAgICAgICAgICAgKSBmcm9tIGVycm9yCiAgICB0aW1lZnJhbWVfYnlfdmFsdWUgPSB7dGYudmFsdWU6IHRmIGZvciB0ZiBpbiBUaW1lZnJhbWV9CiAgICB0aW1lZnJhbWVzOiBsaXN0W1RpbWVmcmFtZV0gPSBbXQogICAgZm9yIHJhdyBpbiBfcmVxdWlyZV9zdHJfbGlzdChzZWN0aW9uLCAidGltZWZyYW1lcyIsICJtYXJrZXQiKToKICAgICAgICBpZiByYXcgbm90IGluIHRpbWVmcmFtZV9ieV92YWx1ZToKICAgICAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAgICAgInVuc3VwcG9ydGVkIHRpbWVmcmFtZSBpbiBtYXJrZXQudGltZWZyYW1lcyIsCiAgICAgICAgICAgICAgICBjb2RlPSJDRkctMDIwIiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJ2YWx1ZSI6IHJhdywgImFsbG93ZWQiOiAiLCAiLmpvaW4oc29ydGVkKHRpbWVmcmFtZV9ieV92YWx1ZSkpfSwKICAgICAgICAgICAgKQogICAgICAgIHRpbWVmcmFtZXMuYXBwZW5kKHRpbWVmcmFtZV9ieV92YWx1ZVtyYXddKQogICAgcXVhbGl0eSA9IF9yZXF1aXJlX21hcHBpbmcoc2VjdGlvbiwgInF1YWxpdHkiLCAibWFya2V0IikKICAgIHN0cmVhbWluZyA9IF9yZXF1aXJlX21hcHBpbmcoc2VjdGlvbiwgInN0cmVhbWluZyIsICJtYXJrZXQiKQogICAgcmV0dXJuIE1hcmtldENvbmZpZygKICAgICAgICBzeW1ib2xzPXN5bWJvbHMsCiAgICAgICAgdGltZWZyYW1lcz10dXBsZSh0aW1lZnJhbWVzKSwKICAgICAgICBoaXN0b3J5X2JhcnM9X3JlcXVpcmVfaW50KHNlY3Rpb24sICJoaXN0b3J5X2JhcnMiLCAibWFya2V0IiwgbWluaW11bT0xKSwKICAgICAgICBnYXBfcGVuYWx0eT1fcmVxdWlyZV9mcmFjdGlvbihxdWFsaXR5LCAiZ2FwX3BlbmFsdHkiLCAibWFya2V0IiksCiAgICAgICAgZm9ybWluZ19iYXJfcXVhbGl0eT1fcmVxdWlyZV9mcmFjdGlvbihxdWFsaXR5LCAiZm9ybWluZ19iYXJfcXVhbGl0eSIsICJtYXJrZXQiKSwKICAgICAgICBzdHJlYW1fZm9ybWluZ19mbHVzaF9tcz1fcmVxdWlyZV9pbnQoCiAgICAgICAgICAgIHN0cmVhbWluZywgImZvcm1pbmdfZmx1c2hfbXMiLCAibWFya2V0IiwgbWluaW11bT0xCiAgICAgICAgKSwKICAgICAgICBzdHJlYW1fcmVjb25uZWN0X2JhY2tvZmZfbXM9X3JlcXVpcmVfaW50KAogICAgICAgICAgICBzdHJlYW1pbmcsICJyZWNvbm5lY3RfYmFja29mZl9tcyIsICJtYXJrZXQiLCBtaW5pbXVtPTAKICAgICAgICApLAogICAgICAgIHN0cmVhbV9tYXhfcmVjb25uZWN0cz1fcmVxdWlyZV9pbnQoCiAgICAgICAgICAgIHN0cmVhbWluZywgIm1heF9yZWNvbm5lY3RzIiwgIm1hcmtldCIsIG1pbmltdW09MAogICAgICAgICksCiAgICAgICAgZmVhdHVyZXM9X3JlcXVpcmVfbWFwcGluZyhzZWN0aW9uLCAiZmVhdHVyZXMiLCAibWFya2V0IiksCiAgICAgICAgcHJvYmFiaWxpdHk9X3JlcXVpcmVfbWFwcGluZyhzZWN0aW9uLCAicHJvYmFiaWxpdHkiLCAibWFya2V0IiksCiAgICAgICAgZGVjaXNpb249X3JlcXVpcmVfbWFwcGluZyhzZWN0aW9uLCAiZGVjaXNpb24iLCAibWFya2V0IiksCiAgICApCgoKZGVmIF9wYXJzZV9leGNoYW5nZShzZWN0aW9uOiBDb25maWdTZWN0aW9uKSAtPiBUb29iaXRDb25maWc6CiAgICB0b29iaXQgPSBfcmVxdWlyZV9tYXBwaW5nKHNlY3Rpb24sICJ0b29iaXQiLCAiZXhjaGFuZ2UiKQogICAgYmFzZV91cmwgPSBfcmVxdWlyZV9zdHIodG9vYml0LCAiYmFzZV91cmwiLCAiZXhjaGFuZ2UiKQogICAgaWYgbm90IGJhc2VfdXJsLnN0YXJ0c3dpdGgoImh0dHBzOi8vIik6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiZXhjaGFuZ2UudG9vYml0LmJhc2VfdXJsIG11c3QgdXNlIGh0dHBzIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTAyMSIsCiAgICAgICAgICAgIGRldGFpbHM9eyJiYXNlX3VybCI6IGJhc2VfdXJsfSwKICAgICAgICApCiAgICB3c191cmwgPSBfcmVxdWlyZV9zdHIodG9vYml0LCAid3NfdXJsIiwgImV4Y2hhbmdlIikKICAgIGlmIG5vdCB3c191cmwuc3RhcnRzd2l0aCgid3NzOi8vIik6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICAiZXhjaGFuZ2UudG9vYml0LndzX3VybCBtdXN0IHVzZSB3c3MiLAogICAgICAgICAgICBjb2RlPSJDRkctMDIzIiwKICAgICAgICAgICAgZGV0YWlscz17IndzX3VybCI6IHdzX3VybH0sCiAgICAgICAgKQogICAgcGFnZV9saW1pdCA9IF9yZXF1aXJlX2ludCh0b29iaXQsICJrbGluZV9wYWdlX2xpbWl0IiwgImV4Y2hhbmdlIiwgbWluaW11bT0xKQogICAgcmV0dXJuIFRvb2JpdENvbmZpZygKICAgICAgICBiYXNlX3VybD1iYXNlX3VybCwKICAgICAgICB3c191cmw9d3NfdXJsLAogICAgICAgIHJlcXVlc3RfdGltZW91dF9tcz1fcmVxdWlyZV9pbnQodG9vYml0LCAicmVxdWVzdF90aW1lb3V0X21zIiwgImV4Y2hhbmdlIiwgbWluaW11bT0xKSwKICAgICAgICBtYXhfcmV0cmllcz1fcmVxdWlyZV9pbnQodG9vYml0LCAibWF4X3JldHJpZXMiLCAiZXhjaGFuZ2UiLCBtaW5pbXVtPTApLAogICAgICAgIHJldHJ5X2JhY2tvZmZfbXM9X3JlcXVpcmVfaW50KHRvb2JpdCwgInJldHJ5X2JhY2tvZmZfbXMiLCAiZXhjaGFuZ2UiLCBtaW5pbXVtPTApLAogICAgICAgIGtsaW5lX3BhZ2VfbGltaXQ9cGFnZV9saW1pdCwKICAgICAgICB3c19waW5nX2ludGVydmFsX21zPV9yZXF1aXJlX2ludCgKICAgICAgICAgICAgdG9vYml0LCAid3NfcGluZ19pbnRlcnZhbF9tcyIsICJleGNoYW5nZSIsIG1pbmltdW09MQogICAgICAgICksCiAgICAgICAgd3NfcmVjdl90aW1lb3V0X21zPV9yZXF1aXJlX2ludCgKICAgICAgICAgICAgdG9vYml0LCAid3NfcmVjdl90aW1lb3V0X21zIiwgImV4Y2hhbmdlIiwgbWluaW11bT0xCiAgICAgICAgKSwKICAgICkKCgpkZWYgX3BhcnNlX2xvZ2dpbmcoc2VjdGlvbjogQ29uZmlnU2VjdGlvbikgLT4gTG9nZ2luZ0NvbmZpZzoKICAgIHJldHVybiBMb2dnaW5nQ29uZmlnKAogICAgICAgIGxldmVsPV9wYXJzZV9lbnVtKHNlY3Rpb24sICJsZXZlbCIsICJsb2dnaW5nIiwge2x2LnZhbHVlOiBsdiBmb3IgbHYgaW4gTG9nTGV2ZWx9KSwKICAgICAgICBvdXRwdXRfZm9ybWF0PV9wYXJzZV9lbnVtKAogICAgICAgICAgICBzZWN0aW9uLCAiZm9ybWF0IiwgImxvZ2dpbmciLCB7Zi52YWx1ZTogZiBmb3IgZiBpbiBMb2dGb3JtYXR9CiAgICAgICAgKSwKICAgICkK
+"""Configuration platform.
+
+Constitution 3.7: no magic numbers in code - every tunable lives in
+configuration. Book II 5.18: every config file has a schema and the
+system refuses to boot when a file is missing, malformed or
+schema-incompatible. Environment variables may override scalar keys
+using the pattern ``APEX__<FILE>__<KEY>[__<NESTED_KEY>...]``.
+"""
+
+from collections.abc import Mapping
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Final
+
+import yaml
+
+from apex.core.constants import CONFIG_SCHEMA_VERSION, ENV_PREFIX, ENV_SEPARATOR
+from apex.core.enums import Environment, RunMode, Timeframe
+from apex.core.exceptions import ConfigurationError, ValidationError
+from apex.core.logging import LogFormat, LogLevel
+from apex.core.serialization import content_hash
+from apex.core.validation import ensure_symbol
+
+type ConfigValue = str | int | float | bool | None | list["ConfigValue"] | ConfigSection
+type ConfigSection = dict[str, "ConfigValue"]
+
+# Deep-validated files (consumed by delivered phases). The remaining
+# files are owned by later phases; their deep schemas ship with those
+# phases, but presence, mapping shape and schema_version are enforced
+# from Phase 0 so the config contract is never violated silently.
+DEEP_VALIDATED_FILES: Final[tuple[str, ...]] = ("system", "logging", "market", "exchange")
+PHASE_OWNED_FILES: Final[tuple[str, ...]] = (
+    "signal",
+    "risk",
+    "optimizer",
+    "portfolio",
+    "research",
+    "telemetry",
+    "telegram",
+    "scheduler",
+    "device",
+)
+ALL_CONFIG_FILES: Final[tuple[str, ...]] = DEEP_VALIDATED_FILES + PHASE_OWNED_FILES
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class SystemConfig:
+    """Deep-validated contents of ``system.yaml``."""
+
+    app_name: str
+    environment: Environment
+    run_mode: RunMode
+    deterministic_ids: bool
+    id_seed: int | None
+    event_journal_capacity: int
+    event_fail_fast: bool
+    data_dir: str
+    plugin_modules: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class MarketConfig:
+    """Deep-validated contents of ``market.yaml`` (Phase 3)."""
+
+    symbols: tuple[str, ...]
+    timeframes: tuple[Timeframe, ...]
+    history_bars: int
+    gap_penalty: float
+    forming_bar_quality: float
+    stream_forming_flush_ms: int
+    stream_reconnect_backoff_ms: int
+    stream_max_reconnects: int
+    features: ConfigSection
+    probability: ConfigSection
+    decision: ConfigSection
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class ToobitConfig:
+    """Deep-validated ``toobit`` section of ``exchange.yaml`` (Phase 3)."""
+
+    base_url: str
+    ws_url: str
+    request_timeout_ms: int
+    max_retries: int
+    retry_backoff_ms: int
+    kline_page_limit: int
+    ws_ping_interval_ms: int
+    ws_recv_timeout_ms: int
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class LoggingConfig:
+    """Deep-validated contents of ``logging.yaml``."""
+
+    level: LogLevel
+    output_format: LogFormat
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class AppConfig:
+    """The complete validated configuration of one platform run."""
+
+    system: SystemConfig
+    logging: LoggingConfig
+    market: MarketConfig
+    toobit: ToobitConfig
+    sections: Mapping[str, ConfigSection]
+    config_dir: str
+    config_hash: str
+
+    def section(self, name: str) -> ConfigSection:
+        """Return a phase-owned raw section by file name."""
+        if name not in self.sections:
+            raise ConfigurationError(
+                "unknown configuration section",
+                code="CFG-010",
+                details={"section": name},
+            )
+        return self.sections[name]
+
+
+def load_config(
+    config_dir: Path,
+    *,
+    env: Mapping[str, str] | None = None,
+) -> AppConfig:
+    """Load, override and validate the full configuration set.
+
+    Raises :class:`ConfigurationError` on any violation - the platform
+    must not boot with invalid configuration (Book II 5.18).
+    """
+    if not config_dir.is_dir():
+        raise ConfigurationError(
+            "configuration directory not found",
+            code="CFG-001",
+            details={"config_dir": str(config_dir)},
+        )
+    raw_sections: dict[str, ConfigSection] = {}
+    for file_name in ALL_CONFIG_FILES:
+        section = _read_config_file(config_dir / f"{file_name}.yaml")
+        _apply_env_overrides(section, file_name, env or {})
+        _check_schema_version(section, file_name)
+        raw_sections[file_name] = section
+
+    # Raw sections stay reachable for every file: phase-owned files are
+    # parsed by their phases' plugins, and deep-validated files may carry
+    # additional phase-owned sections (e.g. exchange.execution, Phase 10).
+    return AppConfig(
+        system=_parse_system(raw_sections["system"]),
+        logging=_parse_logging(raw_sections["logging"]),
+        market=_parse_market(raw_sections["market"]),
+        toobit=_parse_exchange(raw_sections["exchange"]),
+        sections=dict(raw_sections),
+        config_dir=str(config_dir),
+        config_hash=content_hash(raw_sections),
+    )
+
+
+def _read_config_file(path: Path) -> ConfigSection:
+    if not path.is_file():
+        raise ConfigurationError(
+            "required configuration file is missing",
+            code="CFG-002",
+            details={"file": path.name},
+        )
+    try:
+        loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as exc:
+        raise ConfigurationError(
+            "configuration file is not valid YAML",
+            code="CFG-003",
+            details={"file": path.name, "reason": str(exc)},
+        ) from exc
+    if not isinstance(loaded, dict) or not all(isinstance(k, str) for k in loaded):
+        raise ConfigurationError(
+            "configuration file must contain a string-keyed mapping",
+            code="CFG-004",
+            details={"file": path.name},
+        )
+    return loaded
+
+
+def _apply_env_overrides(
+    section: ConfigSection,
+    file_name: str,
+    env: Mapping[str, str],
+) -> None:
+    prefix = f"{ENV_PREFIX}{ENV_SEPARATOR}{file_name.upper()}{ENV_SEPARATOR}"
+    for env_key, raw_value in env.items():
+        if not env_key.startswith(prefix):
+            continue
+        path_parts = [p.lower() for p in env_key[len(prefix) :].split(ENV_SEPARATOR) if p]
+        if not path_parts:
+            continue
+        _set_override(section, path_parts, _coerce_env_value(raw_value), env_key)
+
+
+def _set_override(
+    section: ConfigSection,
+    path_parts: list[str],
+    value: ConfigValue,
+    env_key: str,
+) -> None:
+    cursor: ConfigSection = section
+    for part in path_parts[:-1]:
+        nested = cursor.get(part)
+        if not isinstance(nested, dict):
+            raise ConfigurationError(
+                "environment override path does not match config structure",
+                code="CFG-005",
+                details={"variable": env_key},
+            )
+        cursor = nested
+    cursor[path_parts[-1]] = value
+
+
+def _coerce_env_value(raw: str) -> ConfigValue:
+    lowered = raw.strip().lower()
+    if lowered in ("true", "false"):
+        return lowered == "true"
+    if lowered in ("null", "none", ""):
+        return None
+    try:
+        return int(raw)
+    except ValueError:
+        pass
+    try:
+        return float(raw)
+    except ValueError:
+        return raw
+
+
+def _check_schema_version(section: ConfigSection, file_name: str) -> None:
+    version = section.get("schema_version")
+    if not isinstance(version, int) or isinstance(version, bool):
+        raise ConfigurationError(
+            "configuration file must declare an integer schema_version",
+            code="CFG-006",
+            details={"file": f"{file_name}.yaml"},
+        )
+    if version != CONFIG_SCHEMA_VERSION:
+        raise ConfigurationError(
+            "configuration schema_version is not supported",
+            code="CFG-007",
+            details={
+                "file": f"{file_name}.yaml",
+                "found": version,
+                "expected": CONFIG_SCHEMA_VERSION,
+            },
+        )
+
+
+def _require(section: ConfigSection, key: str, file_name: str) -> ConfigValue:
+    if key not in section:
+        raise ConfigurationError(
+            "required configuration key is missing",
+            code="CFG-008",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    return section[key]
+
+
+def _require_str(section: ConfigSection, key: str, file_name: str) -> str:
+    value = _require(section, key, file_name)
+    if not isinstance(value, str) or not value:
+        raise ConfigurationError(
+            "configuration key must be a non-empty string",
+            code="CFG-009",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    return value
+
+
+def _require_bool(section: ConfigSection, key: str, file_name: str) -> bool:
+    value = _require(section, key, file_name)
+    if not isinstance(value, bool):
+        raise ConfigurationError(
+            "configuration key must be a boolean",
+            code="CFG-011",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    return value
+
+
+def _require_int(
+    section: ConfigSection,
+    key: str,
+    file_name: str,
+    *,
+    minimum: int,
+) -> int:
+    value = _require(section, key, file_name)
+    if not isinstance(value, int) or isinstance(value, bool) or value < minimum:
+        raise ConfigurationError(
+            f"configuration key must be an integer >= {minimum}",
+            code="CFG-012",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    return value
+
+
+def _parse_enum[E](
+    section: ConfigSection,
+    key: str,
+    file_name: str,
+    parser: dict[str, E],
+) -> E:
+    raw = _require_str(section, key, file_name)
+    if raw not in parser:
+        raise ConfigurationError(
+            "configuration key has an unsupported value",
+            code="CFG-013",
+            details={
+                "file": f"{file_name}.yaml",
+                "key": key,
+                "value": raw,
+                "allowed": ", ".join(sorted(parser)),
+            },
+        )
+    return parser[raw]
+
+
+def _require_mapping(section: ConfigSection, key: str, file_name: str) -> ConfigSection:
+    value = _require(section, key, file_name)
+    if not isinstance(value, dict):
+        raise ConfigurationError(
+            f"{file_name}.{key} must be a mapping",
+            code="CFG-014",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    return value
+
+
+def _require_str_list(section: ConfigSection, key: str, file_name: str) -> tuple[str, ...]:
+    value = _require(section, key, file_name)
+    if not isinstance(value, list):
+        raise ConfigurationError(
+            "configuration key must be a list of strings",
+            code="CFG-017",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    items: list[str] = []
+    for item in value:
+        if not isinstance(item, str):
+            raise ConfigurationError(
+                "configuration key must be a list of strings",
+                code="CFG-017",
+                details={"file": f"{file_name}.yaml", "key": key},
+            )
+        items.append(item)
+    return tuple(items)
+
+
+def _require_fraction(section: ConfigSection, key: str, file_name: str) -> float:
+    value = _require(section, key, file_name)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ConfigurationError(
+            "configuration key must be a number",
+            code="CFG-018",
+            details={"file": f"{file_name}.yaml", "key": key},
+        )
+    number = float(value)
+    if not 0.0 <= number <= 1.0:
+        raise ConfigurationError(
+            "configuration key must be within [0, 1]",
+            code="CFG-019",
+            details={"file": f"{file_name}.yaml", "key": key, "value": number},
+        )
+    return number
+
+
+def _parse_system(section: ConfigSection) -> SystemConfig:
+    events = _require_mapping(section, "events", "system")
+    storage = _require_mapping(section, "storage", "system")
+    plugins = _require_mapping(section, "plugins", "system")
+    id_seed_raw = section.get("id_seed")
+    id_seed: int | None
+    if id_seed_raw is None:
+        id_seed = None
+    elif isinstance(id_seed_raw, int) and not isinstance(id_seed_raw, bool):
+        id_seed = id_seed_raw
+    else:
+        raise ConfigurationError("system.id_seed must be an integer or null", code="CFG-015")
+    deterministic = _require_bool(section, "deterministic_ids", "system")
+    if deterministic and id_seed is None:
+        raise ConfigurationError(
+            "deterministic_ids requires an explicit id_seed",
+            code="CFG-016",
+        )
+    return SystemConfig(
+        app_name=_require_str(section, "app_name", "system"),
+        environment=_parse_enum(
+            section, "environment", "system", {e.value: e for e in Environment}
+        ),
+        run_mode=_parse_enum(section, "run_mode", "system", {m.value: m for m in RunMode}),
+        deterministic_ids=deterministic,
+        id_seed=id_seed,
+        event_journal_capacity=_require_int(events, "journal_capacity", "system", minimum=1),
+        event_fail_fast=_require_bool(events, "fail_fast", "system"),
+        data_dir=_require_str(storage, "data_dir", "system"),
+        plugin_modules=_require_str_list(plugins, "enabled", "system"),
+    )
+
+
+def _parse_market(section: ConfigSection) -> MarketConfig:
+    symbols = _require_str_list(section, "symbols", "market")
+    for symbol in symbols:
+        try:
+            ensure_symbol(symbol)
+        except ValidationError as error:
+            raise ConfigurationError(
+                "market.symbols contains a non-canonical symbol",
+                code="CFG-022",
+                details={"symbol": symbol},
+            ) from error
+    timeframe_by_value = {tf.value: tf for tf in Timeframe}
+    timeframes: list[Timeframe] = []
+    for raw in _require_str_list(section, "timeframes", "market"):
+        if raw not in timeframe_by_value:
+            raise ConfigurationError(
+                "unsupported timeframe in market.timeframes",
+                code="CFG-020",
+                details={"value": raw, "allowed": ", ".join(sorted(timeframe_by_value))},
+            )
+        timeframes.append(timeframe_by_value[raw])
+    quality = _require_mapping(section, "quality", "market")
+    streaming = _require_mapping(section, "streaming", "market")
+    return MarketConfig(
+        symbols=symbols,
+        timeframes=tuple(timeframes),
+        history_bars=_require_int(section, "history_bars", "market", minimum=1),
+        gap_penalty=_require_fraction(quality, "gap_penalty", "market"),
+        forming_bar_quality=_require_fraction(quality, "forming_bar_quality", "market"),
+        stream_forming_flush_ms=_require_int(
+            streaming, "forming_flush_ms", "market", minimum=1
+        ),
+        stream_reconnect_backoff_ms=_require_int(
+            streaming, "reconnect_backoff_ms", "market", minimum=0
+        ),
+        stream_max_reconnects=_require_int(
+            streaming, "max_reconnects", "market", minimum=0
+        ),
+        features=_require_mapping(section, "features", "market"),
+        probability=_require_mapping(section, "probability", "market"),
+        decision=_require_mapping(section, "decision", "market"),
+    )
+
+
+def _parse_exchange(section: ConfigSection) -> ToobitConfig:
+    toobit = _require_mapping(section, "toobit", "exchange")
+    base_url = _require_str(toobit, "base_url", "exchange")
+    if not base_url.startswith("https://"):
+        raise ConfigurationError(
+            "exchange.toobit.base_url must use https",
+            code="CFG-021",
+            details={"base_url": base_url},
+        )
+    ws_url = _require_str(toobit, "ws_url", "exchange")
+    if not ws_url.startswith("wss://"):
+        raise ConfigurationError(
+            "exchange.toobit.ws_url must use wss",
+            code="CFG-023",
+            details={"ws_url": ws_url},
+        )
+    page_limit = _require_int(toobit, "kline_page_limit", "exchange", minimum=1)
+    return ToobitConfig(
+        base_url=base_url,
+        ws_url=ws_url,
+        request_timeout_ms=_require_int(toobit, "request_timeout_ms", "exchange", minimum=1),
+        max_retries=_require_int(toobit, "max_retries", "exchange", minimum=0),
+        retry_backoff_ms=_require_int(toobit, "retry_backoff_ms", "exchange", minimum=0),
+        kline_page_limit=page_limit,
+        ws_ping_interval_ms=_require_int(
+            toobit, "ws_ping_interval_ms", "exchange", minimum=1
+        ),
+        ws_recv_timeout_ms=_require_int(
+            toobit, "ws_recv_timeout_ms", "exchange", minimum=1
+        ),
+    )
+
+
+def _parse_logging(section: ConfigSection) -> LoggingConfig:
+    return LoggingConfig(
+        level=_parse_enum(section, "level", "logging", {lv.value: lv for lv in LogLevel}),
+        output_format=_parse_enum(
+            section, "format", "logging", {f.value: f for f in LogFormat}
+        ),
+    )
