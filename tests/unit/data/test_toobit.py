@@ -227,16 +227,20 @@ class TestGateway:
         pages: list[tuple[str, str]] = []
 
         def handle(request: httpx.Request) -> httpx.Response:
-            start = int(request.url.params["startTime"])
+            # The REAL venue dialect (Phase 15 finding): ``startTime``
+            # is IGNORED; the newest ``limit`` bars at or before
+            # ``endTime`` come back, oldest first. The gateway must
+            # therefore page BACKWARD on endTime.
             end = int(request.url.params["endTime"])
             limit = int(request.url.params["limit"])
-            pages.append((request.url.params["startTime"], request.url.params["endTime"]))
-            rows: list[list[JsonValue]] = []
-            cursor = start
-            while cursor < end and len(rows) < limit:
-                rows.append(kline(cursor))
-                cursor += H1_MS
-            return httpx.Response(200, json=rows)
+            pages.append(
+                (request.url.params["startTime"], request.url.params["endTime"])
+            )
+            history = [T0.add_ms(i * H1_MS).epoch_ms for i in range(60)]
+            eligible = [open_ms for open_ms in history if open_ms <= end]
+            return httpx.Response(
+                200, json=[kline(open_ms) for open_ms in eligible[-limit:]]
+            )
 
         async def scenario() -> None:
             clock = ManualClock(
@@ -274,6 +278,9 @@ class TestGateway:
 
         asyncio.run(scenario())
         assert len(pages) >= 3  # 7 bars at page size 3
+        # Backward pagination: endTime strictly decreases page to page.
+        ends = [int(end) for _, end in pages]
+        assert ends == sorted(ends, reverse=True)
 
     def test_fetch_failure_becomes_result(self) -> None:
         def handle(request: httpx.Request) -> httpx.Response:
