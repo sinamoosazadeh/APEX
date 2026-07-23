@@ -1,1 +1,18 @@
-IiIiQVBFWCAtIEF1dG9ub21vdXMgUHJvYmFiaWxpc3RpYyBFeGVjdXRpb24gZVhjaGFuZ2UuCgpJbnN0aXR1dGlvbmFsLWdyYWRlLCBkZXRlcm1pbmlzdGljLCBub24tcmVwYWludGluZyBjcnlwdG8gdHJhZGluZwppbnRlbGxpZ2VuY2UgcGxhdGZvcm0uIFJlLWVuZ2luZWVyZWQgZnJvbSB0aGUgQUlDRSBQaW5lIFNjcmlwdCB2NgpyZWZlcmVuY2UgcGVyIHRoZSBBUEVYIHNwZWNpZmljYXRpb24gYm9va3MgKEJvb2tzIEktSUlJKS4KCkxheWVyIG1hcCAoZGVwZW5kZW5jaWVzIHBvaW50IGRvd253YXJkIG9ubHksIHNlZSBkb2NzL0FSQ0hJVEVDVFVSRS5tZCk6CgogICAgZGFzaGJvYXJkIC0+IGFwaSAtPiBzZXJ2aWNlcyAtPiBlbmdpbmVzIC0+IGZlYXR1cmVzIC0+IGRvbWFpbiAtPiBjb3JlCgpUaGlzIHBhY2thZ2Ugcm9vdCBleHBvc2VzIG9ubHkgdGhlIHByb2plY3QgdmVyc2lvbi4KIiIiCgpmcm9tIHR5cGluZyBpbXBvcnQgRmluYWwKCl9fdmVyc2lvbl9fOiBGaW5hbFtzdHJdID0gIjAuMTQuMCIKCl9fYWxsX18gPSBbIl9fdmVyc2lvbl9fIl0K
+"""APEX - Autonomous Probabilistic Execution eXchange.
+
+Institutional-grade, deterministic, non-repainting crypto trading
+intelligence platform. Re-engineered from the AICE Pine Script v6
+reference per the APEX specification books (Books I-III).
+
+Layer map (dependencies point downward only, see docs/ARCHITECTURE.md):
+
+    dashboard -> api -> services -> engines -> features -> domain -> core
+
+This package root exposes only the project version.
+"""
+
+from typing import Final
+
+__version__: Final[str] = "0.14.0"
+
+__all__ = ["__version__"]
