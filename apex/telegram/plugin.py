@@ -1,10 +1,11 @@
 """Telegram console plugin (Book IV).
 
-Wires the control layer: console settings (telegram.yaml) -> env
-credentials (absent credentials leave the console dormant - trading
-never depends on Telegram) -> Bot API client -> console service ->
-kernel module. Boot is network-free: the client session opens only
-when the console runs.
+Wires the control layer: console settings (telegram.yaml) ->
+vault-first credentials with an environment fallback (13.7; absent
+credentials leave the console dormant - trading never depends on
+Telegram) -> Bot API client -> console service -> kernel module.
+Boot is network-free: the client session opens only when the console
+runs.
 """
 
 from collections.abc import Sequence
@@ -20,10 +21,28 @@ from apex.plugins.contract import PluginManifest
 from apex.portfolio.config import portfolio_settings
 from apex.portfolio.store import SqlitePortfolioRepository
 from apex.research.service import ResearchService
+from apex.security.service import SecurityService
+from apex.security.vault import (
+    SECRET_TELEGRAM_ADMINS,
+    SECRET_TELEGRAM_TOKEN,
+    SECRET_TELEGRAM_VIEWERS,
+)
 from apex.telegram.client import TelegramBotClient
 from apex.telegram.config import telegram_settings
 from apex.telegram.credentials import TelegramCredentials
 from apex.telegram.service import TelegramConsoleService
+
+
+def _credentials(security: SecurityService) -> TelegramCredentials | None:
+    """Vault-first console credentials with environment fallback (13.7)."""
+    token = security.secret(SECRET_TELEGRAM_TOKEN)
+    if token:
+        return TelegramCredentials.from_sources(
+            token=token,
+            admins_raw=security.secret(SECRET_TELEGRAM_ADMINS) or "",
+            viewers_raw=security.secret(SECRET_TELEGRAM_VIEWERS) or "",
+        )
+    return TelegramCredentials.from_environment()
 
 
 class TelegramConsoleModule:
@@ -82,7 +101,7 @@ class TelegramConsolePlugin:
             api_version=SemanticVersion(1, 0, 0),
             description="Telegram control layer: menus, reports, emergency center",
             stability=StabilityLevel.BETA,
-            requires=("monitoring_platform",),
+            requires=("monitoring_platform", "security_platform"),
         )
 
     def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
@@ -92,7 +111,7 @@ class TelegramConsolePlugin:
         clock = container.resolve(IClock)  # type: ignore[type-abstract]
         bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
         settings = telegram_settings(config.section("telegram"))
-        credentials = TelegramCredentials.from_environment()
+        credentials = _credentials(container.resolve(SecurityService))
         client: TelegramBotClient | None = None
         if credentials is not None:
             client = TelegramBotClient(
