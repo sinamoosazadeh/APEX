@@ -5,16 +5,16 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.14.0
-  phase: 13           # Phase 12 complete (Monitoring Platform); Phase 13 next
-  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  version: 0.15.0
+  phase: 14           # Phase 13 complete (Security Platform); Phase 14 next
+  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 config_schema_version: 1
 contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.12.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.13.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.2.0, stability: beta,         owner: foundation }
   apex.contracts: { version: 0.12.0, stability: beta,         owner: foundation }
   apex.kernel:    { version: 0.11.0, stability: beta,         owner: foundation }
@@ -24,12 +24,13 @@ modules:
   apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
   apex.probability: { version: 0.2.0, stability: beta,       owner: probability-platform }
   apex.decision:  { version: 0.4.0, stability: beta,         owner: decision-platform }
-  apex.optimization: { version: 0.4.0, stability: beta,      owner: optimization-platform }
+  apex.optimization: { version: 0.5.0, stability: beta,      owner: optimization-platform }
   apex.portfolio: { version: 0.2.0, stability: beta,         owner: portfolio-platform }
-  apex.execution: { version: 0.2.0, stability: beta,         owner: execution-platform }
-  apex.research:  { version: 0.2.0, stability: beta,         owner: research-platform }
-  apex.monitoring: { version: 0.1.0, stability: beta,        owner: monitoring-platform }
-  apex.telegram:  { version: 0.1.0, stability: beta,         owner: telegram-console }
+  apex.execution: { version: 0.3.0, stability: beta,         owner: execution-platform }
+  apex.research:  { version: 0.3.0, stability: beta,         owner: research-platform }
+  apex.monitoring: { version: 0.2.0, stability: beta,        owner: monitoring-platform }
+  apex.telegram:  { version: 0.2.0, stability: beta,         owner: telegram-console }
+  apex.security:  { version: 0.1.0, stability: beta,         owner: security-platform }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
@@ -46,8 +47,9 @@ dependency_graph:
   apex.portfolio: [apex.core, apex.domain, apex.contracts, apex.decision, apex.features, apex.storage, apex.plugins]
   apex.execution: [apex.core, apex.domain, apex.contracts, apex.decision, apex.features, apex.portfolio, apex.storage, apex.plugins]
   apex.research: [apex.core, apex.domain, apex.contracts, apex.decision, apex.execution, apex.features, apex.optimization, apex.portfolio, apex.probability, apex.storage, apex.plugins]
-  apex.monitoring: [apex.core, apex.data, apex.decision, apex.execution, apex.features, apex.kernel, apex.plugins, apex.portfolio, apex.probability, apex.research]
-  apex.telegram: [apex.core, apex.decision, apex.execution, apex.kernel, apex.monitoring, apex.plugins, apex.portfolio, apex.research]
+  apex.security: [apex.core, apex.kernel, apex.plugins, apex.storage]
+  apex.monitoring: [apex.core, apex.data, apex.decision, apex.execution, apex.features, apex.kernel, apex.plugins, apex.portfolio, apex.probability, apex.research, apex.security, apex.storage]
+  apex.telegram: [apex.core, apex.decision, apex.execution, apex.kernel, apex.monitoring, apex.plugins, apex.portfolio, apex.research, apex.security]
 
 # Populated by their phases.
 plugin_registry:
@@ -62,6 +64,7 @@ plugin_registry:
   - { name: research_platform, kind: service, version: 0.1.0, module: apex.research.plugin }
   - { name: monitoring_platform, kind: service, version: 0.1.0, module: apex.monitoring.plugin }
   - { name: telegram_console, kind: service, version: 0.1.0, module: apex.telegram.plugin }
+  - { name: security_platform, kind: service, version: 0.1.0, module: apex.security.plugin }
 feature_registry:
   - { family: structure, features: 21, version: 1.1.0, source: AICE Book VI }
   - { family: liquidity, features: 16, version: 1.0.0, source: AICE Book VI }
@@ -76,6 +79,6 @@ exchange_registry:
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 536
+  tests_passed: 561
   boot_check: pass
-  live_smoke: fresh 520-bar live ingests per series through the production translator/store; full pipeline on today's market (56k features, 355 bars assessed, honest selectivity); apex monitor rendered the unified ops status live (12/12 healthy, promotion counters, SLO budget) and persisted a snapshot; apex run held a 15s live WebSocket loop session cleanly; apex telegram failed honestly (TGM-004) without credentials; orchestrator drained 2 real jobs with honest Book V rejections (nothing shadow-registered on thin history)
+  live_smoke: full security lifecycle live - secret stored via the env-value path, vault listed names only, config sealed (signed hash), paper preflight PASSED (seal verified, 12 stores integrity ok, audit chain valid, clock sane vs venue bars), live preflight REFUSED honestly (exit 1, no credentials), kill drill entries_disabled -> flattened -> release, audit chain VALID over the full 8-entry operator trail; monitor closed 13/13 healthy
