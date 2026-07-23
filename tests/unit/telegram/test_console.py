@@ -1,1 +1,228 @@
-IiIiQ29uc29sZSBlbmQgdG8gZW5kOiBjb21tYW5kcywgY2FsbGJhY2tzLCBjb25maXJtIGZsb3csIG5vdGlmaWNhdGlvbnMuCgpCb290cyB0aGUgcmVhbCBrZXJuZWwgKGFsbCBwbGF0Zm9ybSBzZXJ2aWNlcyBvdmVyIHRtcCBzdG9yZXMpIGFuZApkcml2ZXMgdGhlIGNvbnNvbGUgdGhyb3VnaCBhIHNjcmlwdGVkIEJvdCBBUEkgdHJhbnNwb3J0IC0gemVybwpuZXR3b3JrLCByZWFsIHJvdXRpbmcsIHJlYWwga2lsbC1zd2l0Y2ggZWZmZWN0cy4KIiIiCgppbXBvcnQgYXN5bmNpbwppbXBvcnQgaW8KaW1wb3J0IGpzb24KZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCgppbXBvcnQgaHR0cHgKZnJvbSBhcGV4LmNvcmUuY29uZmlnIGltcG9ydCBBcHBDb25maWcKZnJvbSBhcGV4LmNvcmUuY29udHJhY3RzLmludGVyZmFjZXMgaW1wb3J0IElFdmVudEJ1cwpmcm9tIGFwZXguY29yZS5sb2dnaW5nIGltcG9ydCBMb2dGb3JtYXQsIExvZ2dlckZhY3RvcnksIExvZ0xldmVsLCBTdHJ1Y3R1cmVkTG9nZ2VyCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IE1hbnVhbENsb2NrCmZyb20gYXBleC5rZXJuZWwua2VybmVsIGltcG9ydCBLZXJuZWwKZnJvbSBhcGV4Lm1vbml0b3JpbmcuZXZlbnRzIGltcG9ydCBNb25pdG9yaW5nRXZlbnQsIG1vbml0b3JpbmdfZXZlbnQKZnJvbSBhcGV4Lm1vbml0b3JpbmcucmVjb3JkcyBpbXBvcnQgS2lsbFN3aXRjaExldmVsCmZyb20gYXBleC5tb25pdG9yaW5nLnNlcnZpY2UgaW1wb3J0IE1vbml0b3JpbmdTZXJ2aWNlCmZyb20gYXBleC5wb3J0Zm9saW8uY29uZmlnIGltcG9ydCBwb3J0Zm9saW9fc2V0dGluZ3MKZnJvbSBhcGV4LnBvcnRmb2xpby5zdG9yZSBpbXBvcnQgU3FsaXRlUG9ydGZvbGlvUmVwb3NpdG9yeQpmcm9tIGFwZXgucmVzZWFyY2guc2VydmljZSBpbXBvcnQgUmVzZWFyY2hTZXJ2aWNlCmZyb20gYXBleC50ZWxlZ3JhbS5jbGllbnQgaW1wb3J0IFRlbGVncmFtQm90Q2xpZW50CmZyb20gYXBleC50ZWxlZ3JhbS5jb25maWcgaW1wb3J0IFRlbGVncmFtU2V0dGluZ3MKZnJvbSBhcGV4LnRlbGVncmFtLmNyZWRlbnRpYWxzIGltcG9ydCBUZWxlZ3JhbUNyZWRlbnRpYWxzCmZyb20gYXBleC50ZWxlZ3JhbS5zZXJ2aWNlIGltcG9ydCBUZWxlZ3JhbUNvbnNvbGVTZXJ2aWNlCgpmcm9tIHRlc3RzLmNvbmZ0ZXN0IGltcG9ydCBUMAoKX0FETUlOID0gMTAwMQpfU1RSQU5HRVIgPSA0MDA0CgoKZGVmIGxvZ2dlcigpIC0+IFN0cnVjdHVyZWRMb2dnZXI6CiAgICBmYWN0b3J5ID0gTG9nZ2VyRmFjdG9yeSgKICAgICAgICBjbG9jaz1NYW51YWxDbG9jayhUMCksCiAgICAgICAgbGV2ZWw9TG9nTGV2ZWwuQ1JJVElDQUwsCiAgICAgICAgbG9nX2Zvcm1hdD1Mb2dGb3JtYXQuSlNPTiwKICAgICAgICBzdHJlYW09aW8uU3RyaW5nSU8oKSwKICAgICkKICAgIHJldHVybiBmYWN0b3J5LmdldCgidGVzdC5jb25zb2xlIikKCgpjbGFzcyBfQm90QXBpOgogICAgIiIiQSBzY3JpcHRlZCBCb3QgQVBJOiBxdWV1ZWQgdXBkYXRlcywgcmVjb3JkZWQgb3V0Ym91bmQgY2FsbHMuIiIiCgogICAgZGVmIF9faW5pdF9fKHNlbGYsIGNsb2NrOiBNYW51YWxDbG9jaykgLT4gTm9uZToKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCiAgICAgICAgc2VsZi5wZW5kaW5nOiBsaXN0W2RpY3Rbc3RyLCBvYmplY3RdXSA9IFtdCiAgICAgICAgc2VsZi5zZW50OiBsaXN0W2RpY3Rbc3RyLCBvYmplY3RdXSA9IFtdCiAgICAgICAgc2VsZi5lZGl0ZWQ6IGxpc3RbZGljdFtzdHIsIG9iamVjdF1dID0gW10KICAgICAgICBzZWxmLl9uZXh0X3VwZGF0ZV9pZCA9IDEKCiAgICBkZWYgcXVldWVfbWVzc2FnZShzZWxmLCBjaGF0X2lkOiBpbnQsIHRleHQ6IHN0cikgLT4gTm9uZToKICAgICAgICBzZWxmLnBlbmRpbmcuYXBwZW5kKAogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAidXBkYXRlX2lkIjogc2VsZi5fbmV4dF91cGRhdGVfaWQsCiAgICAgICAgICAgICAgICAibWVzc2FnZSI6IHsiY2hhdCI6IHsiaWQiOiBjaGF0X2lkfSwgInRleHQiOiB0ZXh0fSwKICAgICAgICAgICAgfQogICAgICAgICkKICAgICAgICBzZWxmLl9uZXh0X3VwZGF0ZV9pZCArPSAxCgogICAgZGVmIHF1ZXVlX2NhbGxiYWNrKHNlbGYsIGNoYXRfaWQ6IGludCwgZGF0YTogc3RyKSAtPiBOb25lOgogICAgICAgIHNlbGYucGVuZGluZy5hcHBlbmQoCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICJ1cGRhdGVfaWQiOiBzZWxmLl9uZXh0X3VwZGF0ZV9pZCwKICAgICAgICAgICAgICAgICJjYWxsYmFja19xdWVyeSI6IHsKICAgICAgICAgICAgICAgICAgICAiaWQiOiBmImNiLXtzZWxmLl9uZXh0X3VwZGF0ZV9pZH0iLAogICAgICAgICAgICAgICAgICAgICJkYXRhIjogZGF0YSwKICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSI6IHsiY2hhdCI6IHsiaWQiOiBjaGF0X2lkfSwgIm1lc3NhZ2VfaWQiOiA1MDB9LAogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgfQogICAgICAgICkKICAgICAgICBzZWxmLl9uZXh0X3VwZGF0ZV9pZCArPSAxCgogICAgYXN5bmMgZGVmIGhhbmRsZXIoc2VsZiwgcmVxdWVzdDogaHR0cHguUmVxdWVzdCkgLT4gaHR0cHguUmVzcG9uc2U6CiAgICAgICAgbWV0aG9kID0gcmVxdWVzdC51cmwucGF0aC5yc3BsaXQoIi8iLCAxKVsxXQogICAgICAgIGlmIG1ldGhvZCA9PSAiZ2V0TWUiOgogICAgICAgICAgICByZXR1cm4gaHR0cHguUmVzcG9uc2UoCiAgICAgICAgICAgICAgICAyMDAsIGpzb249eyJvayI6IFRydWUsICJyZXN1bHQiOiB7InVzZXJuYW1lIjogImFwZXhfdGVzdF9ib3QifX0KICAgICAgICAgICAgKQogICAgICAgIGlmIG1ldGhvZCA9PSAiZ2V0VXBkYXRlcyI6CiAgICAgICAgICAgICMgQSByZWFsIGxvbmcgcG9sbCBzdXNwZW5kczsgdGhlIHNjcmlwdGVkIG9uZSBtdXN0IHRvbywgb3IKICAgICAgICAgICAgIyB0aGUgY29uc29sZSBsb29wIHN0YXJ2ZXMgZXZlcnkgb3RoZXIgdGFzay4gRWFjaCBwb2xsIGFsc28KICAgICAgICAgICAgIyBhZHZhbmNlcyB0aGUgZGV0ZXJtaW5pc3RpYyBjbG9jayBzbyBib3VuZGVkIHNlc3Npb25zIGVuZC4KICAgICAgICAgICAgYXdhaXQgYXN5bmNpby5zbGVlcCgwLjAwMSkKICAgICAgICAgICAgc2VsZi5fY2xvY2suYWR2YW5jZV9tcyg0MDApCiAgICAgICAgICAgIGJhdGNoLCBzZWxmLnBlbmRpbmcgPSBzZWxmLnBlbmRpbmcsIFtdCiAgICAgICAgICAgIHJldHVybiBodHRweC5SZXNwb25zZSgyMDAsIGpzb249eyJvayI6IFRydWUsICJyZXN1bHQiOiBiYXRjaH0pCiAgICAgICAgYm9keSA9IGpzb24ubG9hZHMocmVxdWVzdC5jb250ZW50LmRlY29kZSgpKQogICAgICAgIGlmIG1ldGhvZCA9PSAic2VuZE1lc3NhZ2UiOgogICAgICAgICAgICBzZWxmLnNlbnQuYXBwZW5kKGJvZHkpCiAgICAgICAgICAgIHJldHVybiBodHRweC5SZXNwb25zZSgKICAgICAgICAgICAgICAgIDIwMCwganNvbj17Im9rIjogVHJ1ZSwgInJlc3VsdCI6IHsibWVzc2FnZV9pZCI6IGxlbihzZWxmLnNlbnQpfX0KICAgICAgICAgICAgKQogICAgICAgIGlmIG1ldGhvZCA9PSAiZWRpdE1lc3NhZ2VUZXh0IjoKICAgICAgICAgICAgc2VsZi5lZGl0ZWQuYXBwZW5kKGJvZHkpCiAgICAgICAgICAgIHNlbGYuX21heWJlX2NvbmZpcm0oYm9keSkKICAgICAgICAgICAgcmV0dXJuIGh0dHB4LlJlc3BvbnNlKDIwMCwganNvbj17Im9rIjogVHJ1ZSwgInJlc3VsdCI6IFRydWV9KQogICAgICAgIHJldHVybiBodHRweC5SZXNwb25zZSgyMDAsIGpzb249eyJvayI6IFRydWUsICJyZXN1bHQiOiBUcnVlfSkKCiAgICBkZWYgX21heWJlX2NvbmZpcm0oc2VsZiwgYm9keTogZGljdFtzdHIsIG9iamVjdF0pIC0+IE5vbmU6CiAgICAgICAgIiIiQXV0by1wcmVzcyBDb25maXJtIHdoZW4gYSBjb25maXJtYXRpb24gZ2F0ZSByZW5kZXJzLiIiIgogICAgICAgIG1hcmt1cCA9IGJvZHkuZ2V0KCJyZXBseV9tYXJrdXAiKQogICAgICAgIGlmIG5vdCBpc2luc3RhbmNlKG1hcmt1cCwgc3RyKSBvciAiY29uZmlybS4iIG5vdCBpbiBtYXJrdXA6CiAgICAgICAgICAgIHJldHVybgogICAgICAgIGtleWJvYXJkID0ganNvbi5sb2FkcyhtYXJrdXApCiAgICAgICAgZm9yIHJvdyBpbiBrZXlib2FyZFsiaW5saW5lX2tleWJvYXJkIl06CiAgICAgICAgICAgIGZvciBidXR0b24gaW4gcm93OgogICAgICAgICAgICAgICAgZGF0YSA9IHN0cihidXR0b25bImNhbGxiYWNrX2RhdGEiXSkKICAgICAgICAgICAgICAgIGlmIGRhdGEuc3RhcnRzd2l0aCgiY29uZmlybS4iKToKICAgICAgICAgICAgICAgICAgICBjaGF0ID0gYm9keS5nZXQoImNoYXRfaWQiKQogICAgICAgICAgICAgICAgICAgIGFzc2VydCBpc2luc3RhbmNlKGNoYXQsIGludCkKICAgICAgICAgICAgICAgICAgICBzZWxmLnF1ZXVlX2NhbGxiYWNrKGNoYXQsIGRhdGEpCiAgICAgICAgICAgICAgICAgICAgcmV0dXJuCgoKZGVmIGNvbnNvbGVfb3ZlcigKICAgIGtlcm5lbDogS2VybmVsLCBhcGk6IF9Cb3RBcGksIGNsb2NrOiBNYW51YWxDbG9jawopIC0+IFRlbGVncmFtQ29uc29sZVNlcnZpY2U6CiAgICBjcmVkZW50aWFscyA9IFRlbGVncmFtQ3JlZGVudGlhbHMoCiAgICAgICAgdG9rZW49IjEyMzp0ZXN0IiwgYWRtaW5fY2hhdF9pZHM9ZnJvemVuc2V0KHtfQURNSU59KQogICAgKQogICAgY2xpZW50ID0gVGVsZWdyYW1Cb3RDbGllbnQoCiAgICAgICAgdG9rZW49IjEyMzp0ZXN0IiwKICAgICAgICBwb2xsX3RpbWVvdXRfcz0xLAogICAgICAgIGxvZ2dlcj1sb2dnZXIoKSwKICAgICAgICB0cmFuc3BvcnQ9aHR0cHguTW9ja1RyYW5zcG9ydChhcGkuaGFuZGxlciksCiAgICApCiAgICBjb25maWcgPSBrZXJuZWwuY29udGFpbmVyLnJlc29sdmUoQXBwQ29uZmlnKQogICAgcmV0dXJuIFRlbGVncmFtQ29uc29sZVNlcnZpY2UoCiAgICAgICAgc2V0dGluZ3M9VGVsZWdyYW1TZXR0aW5ncygpLAogICAgICAgIGNyZWRlbnRpYWxzPWNyZWRlbnRpYWxzLAogICAgICAgIGNsaWVudD1jbGllbnQsCiAgICAgICAgbW9uaXRvcmluZz1rZXJuZWwuY29udGFpbmVyLnJlc29sdmUoTW9uaXRvcmluZ1NlcnZpY2UpLAogICAgICAgIHJlc2VhcmNoPWtlcm5lbC5jb250YWluZXIucmVzb2x2ZShSZXNlYXJjaFNlcnZpY2UpLAogICAgICAgIHBvcnRmb2xpb19yZXBvc2l0b3J5PWtlcm5lbC5jb250YWluZXIucmVzb2x2ZShTcWxpdGVQb3J0Zm9saW9SZXBvc2l0b3J5KSwKICAgICAgICBwb3J0Zm9saW9faWQ9cG9ydGZvbGlvX3NldHRpbmdzKGNvbmZpZy5zZWN0aW9uKCJwb3J0Zm9saW8iKSkucG9ydGZvbGlvX2lkLAogICAgICAgIHNlcmllcz0oKCJCVENVU0RUIiwgY29uZmlnLm1hcmtldC50aW1lZnJhbWVzWzBdKSwpLAogICAgICAgIGJ1cz1rZXJuZWwuY29udGFpbmVyLnJlc29sdmUoSUV2ZW50QnVzKSwgICMgdHlwZTogaWdub3JlW3R5cGUtYWJzdHJhY3RdCiAgICAgICAgY2xvY2s9Y2xvY2ssCiAgICAgICAgbG9nZ2VyPWxvZ2dlcigpLAogICAgKQoKCmNsYXNzIFRlc3RDb25zb2xlOgogICAgZGVmIHRlc3RfY29tbWFuZHNfY2FsbGJhY2tzX2FuZF9jb25maXJtX2Zsb3coc2VsZiwgY29uZmlnX2RpcjogUGF0aCkgLT4gTm9uZToKICAgICAgICBhc3luYyBkZWYgc2NlbmFyaW8oKSAtPiBOb25lOgogICAgICAgICAgICBjbG9jayA9IE1hbnVhbENsb2NrKFQwKQogICAgICAgICAgICBrZXJuZWwgPSBLZXJuZWwoY29uZmlnX2Rpcj1jb25maWdfZGlyLCBjbG9jaz1jbG9jaykKICAgICAgICAgICAgYXdhaXQga2VybmVsLmJvb3QoKQogICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICBhcGkgPSBfQm90QXBpKGNsb2NrKQogICAgICAgICAgICAgICAgY29uc29sZSA9IGNvbnNvbGVfb3ZlcihrZXJuZWwsIGFwaSwgY2xvY2spCiAgICAgICAgICAgICAgICBhcGkucXVldWVfbWVzc2FnZShfQURNSU4sICIvc3RhdHVzIikKICAgICAgICAgICAgICAgIGFwaS5xdWV1ZV9tZXNzYWdlKF9TVFJBTkdFUiwgIi9zdGF0dXMiKQogICAgICAgICAgICAgICAgYXBpLnF1ZXVlX2NhbGxiYWNrKF9BRE1JTiwgIm1lbnUucG9ydGZvbGlvIikKICAgICAgICAgICAgICAgIGFwaS5xdWV1ZV9jYWxsYmFjayhfQURNSU4sICJlbWVyZ2VuY3kucGF1c2UiKQogICAgICAgICAgICAgICAgc3RhdHMgPSBhd2FpdCBjb25zb2xlLnJ1bihzZWNvbmRzPTUpCiAgICAgICAgICAgICAgICBhc3NlcnQgc3RhdHMuY29tbWFuZHMgPT0gMSAgIyBkZW5pZWQgY29tbWFuZHMgbmV2ZXIgY291bnQKICAgICAgICAgICAgICAgIGFzc2VydCBzdGF0cy5kZW5pZWQgPT0gMQogICAgICAgICAgICAgICAgYXNzZXJ0IHN0YXRzLmNhbGxiYWNrcyA+PSAzICAjIG1lbnUgKyBwYXVzZSArIGF1dG8tY29uZmlybQogICAgICAgICAgICAgICAgYXNzZXJ0IHN0YXRzLm5vdGlmaWNhdGlvbnMgPj0gMSAgIyBraWxsLXN3aXRjaCBjaGFuZ2UgcHVzaGVkCiAgICAgICAgICAgICAgICBzdGF0dXNfcmVwbHkgPSBhcGkuc2VudFswXQogICAgICAgICAgICAgICAgYXNzZXJ0ICJTdGF0dXMiIGluIHN0cihzdGF0dXNfcmVwbHlbInRleHQiXSkKICAgICAgICAgICAgICAgIGRlbmllZF9yZXBseSA9IGFwaS5zZW50WzFdCiAgICAgICAgICAgICAgICBhc3NlcnQgIm5vdCBhdXRob3JpemVkIiBpbiBzdHIoZGVuaWVkX3JlcGx5WyJ0ZXh0Il0pCiAgICAgICAgICAgICAgICBlZGl0cyA9IFtzdHIoZWRpdFsidGV4dCJdKSBmb3IgZWRpdCBpbiBhcGkuZWRpdGVkXQogICAgICAgICAgICAgICAgYXNzZXJ0IGFueSgiUG9ydGZvbGlvIiBpbiB0ZXh0IGZvciB0ZXh0IGluIGVkaXRzKQogICAgICAgICAgICAgICAgYXNzZXJ0IGFueSgiUGxlYXNlIGNvbmZpcm0uIiBpbiB0ZXh0IGZvciB0ZXh0IGluIGVkaXRzKQogICAgICAgICAgICAgICAgYXNzZXJ0IGFueSgiQ29tcGxldGVkIiBpbiB0ZXh0IGZvciB0ZXh0IGluIGVkaXRzKQogICAgICAgICAgICAgICAgbW9uaXRvcmluZyA9IGtlcm5lbC5jb250YWluZXIucmVzb2x2ZShNb25pdG9yaW5nU2VydmljZSkKICAgICAgICAgICAgICAgIGxldmVsID0gYXdhaXQgbW9uaXRvcmluZy5raWxsX3N3aXRjaC5sZXZlbCgpCiAgICAgICAgICAgICAgICBhc3NlcnQgbGV2ZWwgaXMgS2lsbFN3aXRjaExldmVsLlBBVVNFRAogICAgICAgICAgICBmaW5hbGx5OgogICAgICAgICAgICAgICAgYXdhaXQga2VybmVsLnNodXRkb3duKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCiAgICBkZWYgdGVzdF9hbGVydF9ldmVudHNfcHVzaF9ub3RpZmljYXRpb25zKHNlbGYsIGNvbmZpZ19kaXI6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgY2xvY2sgPSBNYW51YWxDbG9jayhUMCkKICAgICAgICAgICAga2VybmVsID0gS2VybmVsKGNvbmZpZ19kaXI9Y29uZmlnX2RpciwgY2xvY2s9Y2xvY2spCiAgICAgICAgICAgIGF3YWl0IGtlcm5lbC5ib290KCkKICAgICAgICAgICAgdHJ5OgogICAgICAgICAgICAgICAgYXBpID0gX0JvdEFwaShjbG9jaykKICAgICAgICAgICAgICAgIGNvbnNvbGUgPSBjb25zb2xlX292ZXIoa2VybmVsLCBhcGksIGNsb2NrKQogICAgICAgICAgICAgICAgYnVzID0ga2VybmVsLmNvbnRhaW5lci5yZXNvbHZlKElFdmVudEJ1cykgICMgdHlwZTogaWdub3JlW3R5cGUtYWJzdHJhY3RdCiAgICAgICAgICAgICAgICB0YXNrID0gYXN5bmNpby5jcmVhdGVfdGFzayhjb25zb2xlLnJ1bihzZWNvbmRzPTApKQogICAgICAgICAgICAgICAgYXdhaXQgYXN5bmNpby5zbGVlcCgwLjA1KQogICAgICAgICAgICAgICAgYXdhaXQgYnVzLnB1Ymxpc2goCiAgICAgICAgICAgICAgICAgICAgbW9uaXRvcmluZ19ldmVudCgKICAgICAgICAgICAgICAgICAgICAgICAgTW9uaXRvcmluZ0V2ZW50LkFMRVJUX1JBSVNFRCwKICAgICAgICAgICAgICAgICAgICAgICAgb2NjdXJyZWRfYXQ9Y2xvY2subm93KCksCiAgICAgICAgICAgICAgICAgICAgICAgIHNvdXJjZT0idGVzdHMiLAogICAgICAgICAgICAgICAgICAgICAgICBwYXlsb2FkPXsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJzZXZlcml0eSI6ICJlbWVyZ2VuY3kiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgImNhdGVnb3J5IjogInBvcnRmb2xpbyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSI6ICJkcmF3ZG93biBjcml0aWNhbCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiZGVkdXBfa2V5IjogInBvcnRmb2xpby5kcmF3ZG93bl9jcml0aWNhbCIsCiAgICAgICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXdhaXQgYnVzLnB1Ymxpc2goCiAgICAgICAgICAgICAgICAgICAgbW9uaXRvcmluZ19ldmVudCgKICAgICAgICAgICAgICAgICAgICAgICAgTW9uaXRvcmluZ0V2ZW50LkFMRVJUX1JBSVNFRCwKICAgICAgICAgICAgICAgICAgICAgICAgb2NjdXJyZWRfYXQ9Y2xvY2subm93KCksCiAgICAgICAgICAgICAgICAgICAgICAgIHNvdXJjZT0idGVzdHMiLAogICAgICAgICAgICAgICAgICAgICAgICBwYXlsb2FkPXsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJzZXZlcml0eSI6ICJsb3ciLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgImNhdGVnb3J5IjogInN5c3RlbSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAibWVzc2FnZSI6ICJxdWlldCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAiZGVkdXBfa2V5IjogInN5c3RlbS5xdWlldCIsCiAgICAgICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgY29uc29sZS5yZXF1ZXN0X3N0b3AoKQogICAgICAgICAgICAgICAgc3RhdHMgPSBhd2FpdCB0YXNrCiAgICAgICAgICAgICAgICBhc3NlcnQgc3RhdHMubm90aWZpY2F0aW9ucyA9PSAxICAjIGxvdyBzZXZlcml0eSBmaWx0ZXJlZAogICAgICAgICAgICAgICAgcHVzaGVkID0gW3N0cihtZXNzYWdlWyJ0ZXh0Il0pIGZvciBtZXNzYWdlIGluIGFwaS5zZW50XQogICAgICAgICAgICAgICAgYXNzZXJ0IGFueSgiZHJhd2Rvd24gY3JpdGljYWwiIGluIHRleHQgZm9yIHRleHQgaW4gcHVzaGVkKQogICAgICAgICAgICAgICAgYXNzZXJ0IG5vdCBhbnkoInF1aWV0IiBpbiB0ZXh0IGZvciB0ZXh0IGluIHB1c2hlZCkKICAgICAgICAgICAgZmluYWxseToKICAgICAgICAgICAgICAgIGF3YWl0IGtlcm5lbC5zaHV0ZG93bigpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCg==
+"""Console end to end: commands, callbacks, confirm flow, notifications.
+
+Boots the real kernel (all platform services over tmp stores) and
+drives the console through a scripted Bot API transport - zero
+network, real routing, real kill-switch effects.
+"""
+
+import asyncio
+import io
+import json
+from pathlib import Path
+
+import httpx
+from apex.core.config import AppConfig
+from apex.core.contracts.interfaces import IEventBus
+from apex.core.logging import LogFormat, LoggerFactory, LogLevel, StructuredLogger
+from apex.core.time.clock import ManualClock
+from apex.kernel.kernel import Kernel
+from apex.monitoring.events import MonitoringEvent, monitoring_event
+from apex.monitoring.records import KillSwitchLevel
+from apex.monitoring.service import MonitoringService
+from apex.portfolio.config import portfolio_settings
+from apex.portfolio.store import SqlitePortfolioRepository
+from apex.research.service import ResearchService
+from apex.telegram.client import TelegramBotClient
+from apex.telegram.config import TelegramSettings
+from apex.telegram.credentials import TelegramCredentials
+from apex.telegram.service import TelegramConsoleService
+
+from tests.conftest import T0
+
+_ADMIN = 1001
+_STRANGER = 4004
+
+
+def logger() -> StructuredLogger:
+    factory = LoggerFactory(
+        clock=ManualClock(T0),
+        level=LogLevel.CRITICAL,
+        log_format=LogFormat.JSON,
+        stream=io.StringIO(),
+    )
+    return factory.get("test.console")
+
+
+class _BotApi:
+    """A scripted Bot API: queued updates, recorded outbound calls."""
+
+    def __init__(self, clock: ManualClock) -> None:
+        self._clock = clock
+        self.pending: list[dict[str, object]] = []
+        self.sent: list[dict[str, object]] = []
+        self.edited: list[dict[str, object]] = []
+        self._next_update_id = 1
+
+    def queue_message(self, chat_id: int, text: str) -> None:
+        self.pending.append(
+            {
+                "update_id": self._next_update_id,
+                "message": {"chat": {"id": chat_id}, "text": text},
+            }
+        )
+        self._next_update_id += 1
+
+    def queue_callback(self, chat_id: int, data: str) -> None:
+        self.pending.append(
+            {
+                "update_id": self._next_update_id,
+                "callback_query": {
+                    "id": f"cb-{self._next_update_id}",
+                    "data": data,
+                    "message": {"chat": {"id": chat_id}, "message_id": 500},
+                },
+            }
+        )
+        self._next_update_id += 1
+
+    async def handler(self, request: httpx.Request) -> httpx.Response:
+        method = request.url.path.rsplit("/", 1)[1]
+        if method == "getMe":
+            return httpx.Response(
+                200, json={"ok": True, "result": {"username": "apex_test_bot"}}
+            )
+        if method == "getUpdates":
+            # A real long poll suspends; the scripted one must too, or
+            # the console loop starves every other task. Each poll also
+            # advances the deterministic clock so bounded sessions end.
+            await asyncio.sleep(0.001)
+            self._clock.advance_ms(400)
+            batch, self.pending = self.pending, []
+            return httpx.Response(200, json={"ok": True, "result": batch})
+        body = json.loads(request.content.decode())
+        if method == "sendMessage":
+            self.sent.append(body)
+            return httpx.Response(
+                200, json={"ok": True, "result": {"message_id": len(self.sent)}}
+            )
+        if method == "editMessageText":
+            self.edited.append(body)
+            self._maybe_confirm(body)
+            return httpx.Response(200, json={"ok": True, "result": True})
+        return httpx.Response(200, json={"ok": True, "result": True})
+
+    def _maybe_confirm(self, body: dict[str, object]) -> None:
+        """Auto-press Confirm when a confirmation gate renders."""
+        markup = body.get("reply_markup")
+        if not isinstance(markup, str) or "confirm." not in markup:
+            return
+        keyboard = json.loads(markup)
+        for row in keyboard["inline_keyboard"]:
+            for button in row:
+                data = str(button["callback_data"])
+                if data.startswith("confirm."):
+                    chat = body.get("chat_id")
+                    assert isinstance(chat, int)
+                    self.queue_callback(chat, data)
+                    return
+
+
+def console_over(
+    kernel: Kernel, api: _BotApi, clock: ManualClock
+) -> TelegramConsoleService:
+    credentials = TelegramCredentials(
+        token="123:test", admin_chat_ids=frozenset({_ADMIN})
+    )
+    client = TelegramBotClient(
+        token="123:test",
+        poll_timeout_s=1,
+        logger=logger(),
+        transport=httpx.MockTransport(api.handler),
+    )
+    config = kernel.container.resolve(AppConfig)
+    return TelegramConsoleService(
+        settings=TelegramSettings(),
+        credentials=credentials,
+        client=client,
+        monitoring=kernel.container.resolve(MonitoringService),
+        research=kernel.container.resolve(ResearchService),
+        portfolio_repository=kernel.container.resolve(SqlitePortfolioRepository),
+        portfolio_id=portfolio_settings(config.section("portfolio")).portfolio_id,
+        series=(("BTCUSDT", config.market.timeframes[0]),),
+        bus=kernel.container.resolve(IEventBus),  # type: ignore[type-abstract]
+        clock=clock,
+        logger=logger(),
+    )
+
+
+class TestConsole:
+    def test_commands_callbacks_and_confirm_flow(self, config_dir: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            kernel = Kernel(config_dir=config_dir, clock=clock)
+            await kernel.boot()
+            try:
+                api = _BotApi(clock)
+                console = console_over(kernel, api, clock)
+                api.queue_message(_ADMIN, "/status")
+                api.queue_message(_STRANGER, "/status")
+                api.queue_callback(_ADMIN, "menu.portfolio")
+                api.queue_callback(_ADMIN, "emergency.pause")
+                stats = await console.run(seconds=5)
+                assert stats.commands == 1  # denied commands never count
+                assert stats.denied == 1
+                assert stats.callbacks >= 3  # menu + pause + auto-confirm
+                assert stats.notifications >= 1  # kill-switch change pushed
+                status_reply = api.sent[0]
+                assert "Status" in str(status_reply["text"])
+                denied_reply = api.sent[1]
+                assert "not authorized" in str(denied_reply["text"])
+                edits = [str(edit["text"]) for edit in api.edited]
+                assert any("Portfolio" in text for text in edits)
+                assert any("Please confirm." in text for text in edits)
+                assert any("Completed" in text for text in edits)
+                monitoring = kernel.container.resolve(MonitoringService)
+                level = await monitoring.kill_switch.level()
+                assert level is KillSwitchLevel.PAUSED
+            finally:
+                await kernel.shutdown()
+
+        asyncio.run(scenario())
+
+    def test_alert_events_push_notifications(self, config_dir: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            kernel = Kernel(config_dir=config_dir, clock=clock)
+            await kernel.boot()
+            try:
+                api = _BotApi(clock)
+                console = console_over(kernel, api, clock)
+                bus = kernel.container.resolve(IEventBus)  # type: ignore[type-abstract]
+                task = asyncio.create_task(console.run(seconds=0))
+                await asyncio.sleep(0.05)
+                await bus.publish(
+                    monitoring_event(
+                        MonitoringEvent.ALERT_RAISED,
+                        occurred_at=clock.now(),
+                        source="tests",
+                        payload={
+                            "severity": "emergency",
+                            "category": "portfolio",
+                            "message": "drawdown critical",
+                            "dedup_key": "portfolio.drawdown_critical",
+                        },
+                    )
+                )
+                await bus.publish(
+                    monitoring_event(
+                        MonitoringEvent.ALERT_RAISED,
+                        occurred_at=clock.now(),
+                        source="tests",
+                        payload={
+                            "severity": "low",
+                            "category": "system",
+                            "message": "quiet",
+                            "dedup_key": "system.quiet",
+                        },
+                    )
+                )
+                console.request_stop()
+                stats = await task
+                assert stats.notifications == 1  # low severity filtered
+                pushed = [str(message["text"]) for message in api.sent]
+                assert any("drawdown critical" in text for text in pushed)
+                assert not any("quiet" in text for text in pushed)
+            finally:
+                await kernel.shutdown()
+
+        asyncio.run(scenario())
