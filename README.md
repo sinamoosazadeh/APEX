@@ -10,14 +10,23 @@ event-driven Python system, built strictly to the APEX specification books.
 
 ## Status
 
-**Phases 0-3 complete; Phase 4 (Feature Platform) in progress.**
-Kernel + plugins + durable storage + event archive; a fully operational
-data platform (REST catch-up, live WebSocket streaming, tick capture,
-quality scoring, replay) validated against the live Toobit exchange;
-and the AICE migration underway — the feature registry/store/pipeline
-plus the first migrated family (market structure: swings, BOS, CHoCH,
-dealing range, sweeps) computing real features from real bars.
-See [docs/PHASES.md](docs/PHASES.md).
+**v1.0.0 — all 16 phases (0–15) complete and acceptance-passed.**
+The full platform is live: data (REST catch-up + WebSocket streaming),
+the 133-feature AICE migration across 7 families, the confluence
+probability engine, the Central Decision Kernel with all 12 setups,
+Book V ten-stage signal/risk optimizers, portfolio governance,
+paper/live execution against Toobit, the research platform (learning
+loop, shadow promotions, orchestrator), monitoring + the Telegram
+console, the security platform (vault, audit chain, signing,
+preflight, kill-switch flattening) and the deployment layer
+(packaging, backup/restore, scheduler, Termux service).
+
+- Phase tracker: [docs/PHASES.md](docs/PHASES.md)
+- Acceptance report (29.26): [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md)
+- Operations runbook: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+
+Paper trading is the default; live trading requires `run_mode: live`,
+vault credentials and a passing `apex secure-check --live`.
 
 ## Requirements
 

@@ -5,9 +5,9 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.16.0
-  phase: 15           # Phase 14 complete (Deployment); Phase 15 next
-  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+  version: 1.0.0
+  phase: complete     # all 16 phases delivered; 29.26 acceptance passed
+  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
 config_schema_version: 1
 contract_schema_version: 1
@@ -21,7 +21,7 @@ modules:
   apex.storage:   { version: 0.2.0, stability: beta,         owner: data-platform }
   apex.plugins:   { version: 0.1.0, stability: beta,         owner: foundation }
   apex.features:  { version: 0.11.0, stability: beta,         owner: feature-platform }
-  apex.data:      { version: 0.2.1, stability: beta,         owner: data-platform }
+  apex.data:      { version: 0.3.0, stability: beta,         owner: data-platform }
   apex.probability: { version: 0.2.0, stability: beta,       owner: probability-platform }
   apex.decision:  { version: 0.4.0, stability: beta,         owner: decision-platform }
   apex.optimization: { version: 0.5.0, stability: beta,      owner: optimization-platform }
@@ -83,4 +83,4 @@ quality_gates:
   mypy_strict: clean
   tests_passed: 574
   boot_check: pass
-  live_smoke: signed v0.15.0 release published (deterministic archive + manifest); full live runtime backed up (13 files, checksums self-verified) and round-trip restored with pre-extraction verification; apex schedule --run executed the whole due lifecycle live (sync 4/4 series, snapshot, 2 series studied, optimize queued 4 drained 2, backup) and the second pass reported nothing due (durable stamps); audit chain VALID (11 entries) carrying the deployment actions
+  acceptance: Book II 29.26 PASSED (docs/ACCEPTANCE.md) - deep history unlocked by the endTime backward-pagination fix (3500x1h/146d + 2000x4h/333d per symbol, zero gaps); full pipeline 13s per 1h series; three ten-stage optimizer acceptance runs held the gate with honest out-of-sample rejections; one genuine 4h signal (FVG Continuation Short) paper-executed at its historical anchor and carried open->close->equity through the portfolio; secure preflight PASS after re-sealing detected config drift; audit chain VALID; released as v1.0.0
