@@ -1,0 +1,17 @@
+# Security platform configuration - owned by Phase 13 (Book II ch. 25).
+# The vault master key is NEVER configured here: it reaches the process
+# only through the APEX_MASTER_KEY environment variable (13.7).
+schema_version: 1
+
+vault:
+  filename: vault.enc            # encrypted secret store under storage.data_dir
+
+audit:
+  filename: audit.sqlite         # immutable hash-chained ledger (25.16)
+
+preflight:                       # secure boot (13.11)
+  require_sealed_config_live: true   # live refuses to start unsealed (13.10)
+  clock_skew_tolerance_ms: 120000    # venue-bar clock sanity window (13.23)
+
+policy: {}                       # per-action role overrides (Book II 25.9), e.g.
+                                 # kill.release: [administrator]
