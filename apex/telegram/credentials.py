@@ -1,1 +1,105 @@
-IiIiVGVsZWdyYW0gY29uc29sZSBjcmVkZW50aWFscyAoQm9vayBJVjsgZW52IHVudGlsIFBoYXNlIDEzKS4KClRoZSBib3QgdG9rZW4gYW5kIHRoZSBjaGF0IGFsbG93bGlzdHMgY29tZSBmcm9tIHRoZSBlbnZpcm9ubWVudCAtCmBgVEVMRUdSQU1fQk9UX1RPS0VOYGAsIGBgVEVMRUdSQU1fQURNSU5fQ0hBVF9JRFNgYCBhbmQKYGBURUxFR1JBTV9WSUVXRVJfQ0hBVF9JRFNgYCAoY29tbWEtc2VwYXJhdGVkIGludGVnZXJzKSAtIGV4YWN0bHkgdGhlCmludGVyaW0gcGF0dGVybiB0aGUgdHJhZGluZyBjcmVkZW50aWFscyB1c2UgdW50aWwgdGhlIHNlY3JldHMKcGxhdGZvcm0gbGFuZHMuIFRoZSB0b2tlbiBuZXZlciBsZWF2ZXMgdGhpcyBvYmplY3Q6IG5ldmVyIGxvZ2dlZCwKbmV2ZXIgcGVyc2lzdGVkLCBuZXZlciBzdXJmYWNlZCBpbiBlcnJvcnMuCgpSb2xlcyBpbXBsZW1lbnQgQm9vayBJViBQYXJ0IDEncyBjdXJyZW50LXZlcnNpb24gc2NoZW1lOiB0d28gdGllcnMuCmBgYWRtaW5gYCAoQm9vayBJViAiQWRtaW5pc3RyYXRvciIpIHJlYWNoZXMgZXZlcnkgc3VyZmFjZSBpbmNsdWRpbmcKdGhlIEVtZXJnZW5jeSBDZW50ZXIgYW5kIHRoZSBPcHRpbWl6YXRpb24gQ2VudGVyOyBgYHZpZXdlcmBgIChCb29rIElWCiJQdWJsaWMgVXNlciIpIHJlYWRzIHN0YXR1cywgcG9ydGZvbGlvLCByZXBvcnRzIGFuZCBoZWFsdGguIFRoZQpmb3VyLXRpZXIgc2NoZW1lcyBvZiBQYXJ0cyA5LzE0IGJlbG9uZyB0byB0aGUgUGhhc2UgMTMgc2VjdXJpdHkKcGxhdGZvcm0uCiIiIgoKaW1wb3J0IG9zCmZyb20gdHlwaW5nIGltcG9ydCBGaW5hbAoKZnJvbSBhcGV4LmNvcmUuZXhjZXB0aW9ucyBpbXBvcnQgVGVsZWdyYW1FcnJvcgoKX1RPS0VOX0VOVjogRmluYWxbc3RyXSA9ICJURUxFR1JBTV9CT1RfVE9LRU4iCl9BRE1JTlNfRU5WOiBGaW5hbFtzdHJdID0gIlRFTEVHUkFNX0FETUlOX0NIQVRfSURTIgpfVklFV0VSU19FTlY6IEZpbmFsW3N0cl0gPSAiVEVMRUdSQU1fVklFV0VSX0NIQVRfSURTIgoKUk9MRV9BRE1JTjogRmluYWxbc3RyXSA9ICJhZG1pbiIKUk9MRV9WSUVXRVI6IEZpbmFsW3N0cl0gPSAidmlld2VyIgoKCmRlZiBfcGFyc2VfY2hhdF9pZHMocmF3OiBzdHIsICosIHZhcmlhYmxlOiBzdHIpIC0+IGZyb3plbnNldFtpbnRdOgogICAgIiIiQ29tbWEtc2VwYXJhdGVkIGNoYXQgaWRzOyB3aGl0ZXNwYWNlIHRvbGVyYXRlZC4iIiIKICAgIGlkczogc2V0W2ludF0gPSBzZXQoKQogICAgZm9yIHBpZWNlIGluIHJhdy5zcGxpdCgiLCIpOgogICAgICAgIHRleHQgPSBwaWVjZS5zdHJpcCgpCiAgICAgICAgaWYgbm90IHRleHQ6CiAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgdHJ5OgogICAgICAgICAgICBpZHMuYWRkKGludCh0ZXh0KSkKICAgICAgICBleGNlcHQgVmFsdWVFcnJvciBhcyBlcnJvcjoKICAgICAgICAgICAgcmFpc2UgVGVsZWdyYW1FcnJvcigKICAgICAgICAgICAgICAgIGYie3ZhcmlhYmxlfSBtdXN0IGJlIGNvbW1hLXNlcGFyYXRlZCBpbnRlZ2VycyIsCiAgICAgICAgICAgICAgICBjb2RlPSJUR00tMDAxIiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJmcmFnbWVudCI6IHRleHR9LAogICAgICAgICAgICApIGZyb20gZXJyb3IKICAgIHJldHVybiBmcm96ZW5zZXQoaWRzKQoKCmNsYXNzIFRlbGVncmFtQ3JlZGVudGlhbHM6CiAgICAiIiJCb3QgdG9rZW4gYW5kIGNoYXQgYWxsb3dsaXN0czsgdGhlIHRva2VuIG5ldmVyIGxlYXZlcy4iIiIKCiAgICBfX3Nsb3RzX18gPSAoIl9hZG1pbl9jaGF0X2lkcyIsICJfdG9rZW4iLCAiX3ZpZXdlcl9jaGF0X2lkcyIpCgogICAgZGVmIF9faW5pdF9fKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICB0b2tlbjogc3RyLAogICAgICAgIGFkbWluX2NoYXRfaWRzOiBmcm96ZW5zZXRbaW50XSwKICAgICAgICB2aWV3ZXJfY2hhdF9pZHM6IGZyb3plbnNldFtpbnRdID0gZnJvemVuc2V0KCksCiAgICApIC0+IE5vbmU6CiAgICAgICAgaWYgbm90IHRva2VuOgogICAgICAgICAgICByYWlzZSBUZWxlZ3JhbUVycm9yKCJlbXB0eSBUZWxlZ3JhbSBib3QgdG9rZW4iLCBjb2RlPSJUR00tMDAyIikKICAgICAgICBpZiBub3QgYWRtaW5fY2hhdF9pZHM6CiAgICAgICAgICAgIHJhaXNlIFRlbGVncmFtRXJyb3IoCiAgICAgICAgICAgICAgICBmImF0IGxlYXN0IG9uZSBhZG1pbiBjaGF0IGlkIGlzIHJlcXVpcmVkICh7X0FETUlOU19FTlZ9KSIsCiAgICAgICAgICAgICAgICBjb2RlPSJUR00tMDAzIiwKICAgICAgICAgICAgKQogICAgICAgIHNlbGYuX3Rva2VuID0gdG9rZW4KICAgICAgICBzZWxmLl9hZG1pbl9jaGF0X2lkcyA9IGFkbWluX2NoYXRfaWRzCiAgICAgICAgc2VsZi5fdmlld2VyX2NoYXRfaWRzID0gdmlld2VyX2NoYXRfaWRzCgogICAgQGNsYXNzbWV0aG9kCiAgICBkZWYgZnJvbV9lbnZpcm9ubWVudChjbHMpIC0+ICJUZWxlZ3JhbUNyZWRlbnRpYWxzIHwgTm9uZSI6CiAgICAgICAgIiIiUmVhZCBlbnYgY3JlZGVudGlhbHM7IE5vbmUgd2hlbiB0aGUgY29uc29sZSBpcyB1bmF2YWlsYWJsZS4iIiIKICAgICAgICB0b2tlbiA9IG9zLmVudmlyb24uZ2V0KF9UT0tFTl9FTlYsICIiKQogICAgICAgIGlmIG5vdCB0b2tlbjoKICAgICAgICAgICAgcmV0dXJuIE5vbmUKICAgICAgICBhZG1pbnMgPSBfcGFyc2VfY2hhdF9pZHMoCiAgICAgICAgICAgIG9zLmVudmlyb24uZ2V0KF9BRE1JTlNfRU5WLCAiIiksIHZhcmlhYmxlPV9BRE1JTlNfRU5WCiAgICAgICAgKQogICAgICAgIHZpZXdlcnMgPSBfcGFyc2VfY2hhdF9pZHMoCiAgICAgICAgICAgIG9zLmVudmlyb24uZ2V0KF9WSUVXRVJTX0VOViwgIiIpLCB2YXJpYWJsZT1fVklFV0VSU19FTlYKICAgICAgICApCiAgICAgICAgcmV0dXJuIGNscyh0b2tlbj10b2tlbiwgYWRtaW5fY2hhdF9pZHM9YWRtaW5zLCB2aWV3ZXJfY2hhdF9pZHM9dmlld2VycykKCiAgICBAcHJvcGVydHkKICAgIGRlZiB0b2tlbihzZWxmKSAtPiBzdHI6CiAgICAgICAgIiIiVGhlIGJvdCB0b2tlbiAodHJhbnNwb3J0IHVzZSBvbmx5IC0gbmV2ZXIgbG9nIHRoaXMpLiIiIgogICAgICAgIHJldHVybiBzZWxmLl90b2tlbgoKICAgIEBwcm9wZXJ0eQogICAgZGVmIGFkbWluX2NoYXRfaWRzKHNlbGYpIC0+IGZyb3plbnNldFtpbnRdOgogICAgICAgICIiIkNoYXRzIGhvbGRpbmcgdGhlIGFkbWluIHJvbGUuIiIiCiAgICAgICAgcmV0dXJuIHNlbGYuX2FkbWluX2NoYXRfaWRzCgogICAgZGVmIHJvbGVfZm9yKHNlbGYsIGNoYXRfaWQ6IGludCkgLT4gc3RyIHwgTm9uZToKICAgICAgICAiIiJUaGUgY2hhdCdzIHJvbGU7IE5vbmUgd2hlbiB0aGUgY2hhdCBpcyBub3QgYWxsb3dsaXN0ZWQuIiIiCiAgICAgICAgaWYgY2hhdF9pZCBpbiBzZWxmLl9hZG1pbl9jaGF0X2lkczoKICAgICAgICAgICAgcmV0dXJuIFJPTEVfQURNSU4KICAgICAgICBpZiBjaGF0X2lkIGluIHNlbGYuX3ZpZXdlcl9jaGF0X2lkczoKICAgICAgICAgICAgcmV0dXJuIFJPTEVfVklFV0VSCiAgICAgICAgcmV0dXJuIE5vbmUKCiAgICBkZWYgX19yZXByX18oc2VsZikgLT4gc3RyOgogICAgICAgIHJldHVybiAiVGVsZWdyYW1DcmVkZW50aWFscyh0b2tlbj0qKiosIGFkbWluX2NoYXRfaWRzPSoqKikiCg==
+"""Telegram console credentials (Book IV; env until Phase 13).
+
+The bot token and the chat allowlists come from the environment -
+``TELEGRAM_BOT_TOKEN``, ``TELEGRAM_ADMIN_CHAT_IDS`` and
+``TELEGRAM_VIEWER_CHAT_IDS`` (comma-separated integers) - exactly the
+interim pattern the trading credentials use until the secrets
+platform lands. The token never leaves this object: never logged,
+never persisted, never surfaced in errors.
+
+Roles implement Book IV Part 1's current-version scheme: two tiers.
+``admin`` (Book IV "Administrator") reaches every surface including
+the Emergency Center and the Optimization Center; ``viewer`` (Book IV
+"Public User") reads status, portfolio, reports and health. The
+four-tier schemes of Parts 9/14 belong to the Phase 13 security
+platform.
+"""
+
+import os
+from typing import Final
+
+from apex.core.exceptions import TelegramError
+
+_TOKEN_ENV: Final[str] = "TELEGRAM_BOT_TOKEN"
+_ADMINS_ENV: Final[str] = "TELEGRAM_ADMIN_CHAT_IDS"
+_VIEWERS_ENV: Final[str] = "TELEGRAM_VIEWER_CHAT_IDS"
+
+ROLE_ADMIN: Final[str] = "admin"
+ROLE_VIEWER: Final[str] = "viewer"
+
+
+def _parse_chat_ids(raw: str, *, variable: str) -> frozenset[int]:
+    """Comma-separated chat ids; whitespace tolerated."""
+    ids: set[int] = set()
+    for piece in raw.split(","):
+        text = piece.strip()
+        if not text:
+            continue
+        try:
+            ids.add(int(text))
+        except ValueError as error:
+            raise TelegramError(
+                f"{variable} must be comma-separated integers",
+                code="TGM-001",
+                details={"fragment": text},
+            ) from error
+    return frozenset(ids)
+
+
+class TelegramCredentials:
+    """Bot token and chat allowlists; the token never leaves."""
+
+    __slots__ = ("_admin_chat_ids", "_token", "_viewer_chat_ids")
+
+    def __init__(
+        self,
+        *,
+        token: str,
+        admin_chat_ids: frozenset[int],
+        viewer_chat_ids: frozenset[int] = frozenset(),
+    ) -> None:
+        if not token:
+            raise TelegramError("empty Telegram bot token", code="TGM-002")
+        if not admin_chat_ids:
+            raise TelegramError(
+                f"at least one admin chat id is required ({_ADMINS_ENV})",
+                code="TGM-003",
+            )
+        self._token = token
+        self._admin_chat_ids = admin_chat_ids
+        self._viewer_chat_ids = viewer_chat_ids
+
+    @classmethod
+    def from_environment(cls) -> "TelegramCredentials | None":
+        """Read env credentials; None when the console is unavailable."""
+        token = os.environ.get(_TOKEN_ENV, "")
+        if not token:
+            return None
+        admins = _parse_chat_ids(
+            os.environ.get(_ADMINS_ENV, ""), variable=_ADMINS_ENV
+        )
+        viewers = _parse_chat_ids(
+            os.environ.get(_VIEWERS_ENV, ""), variable=_VIEWERS_ENV
+        )
+        return cls(token=token, admin_chat_ids=admins, viewer_chat_ids=viewers)
+
+    @property
+    def token(self) -> str:
+        """The bot token (transport use only - never log this)."""
+        return self._token
+
+    @property
+    def admin_chat_ids(self) -> frozenset[int]:
+        """Chats holding the admin role."""
+        return self._admin_chat_ids
+
+    def role_for(self, chat_id: int) -> str | None:
+        """The chat's role; None when the chat is not allowlisted."""
+        if chat_id in self._admin_chat_ids:
+            return ROLE_ADMIN
+        if chat_id in self._viewer_chat_ids:
+            return ROLE_VIEWER
+        return None
+
+    def __repr__(self) -> str:
+        return "TelegramCredentials(token=***, admin_chat_ids=***)"
