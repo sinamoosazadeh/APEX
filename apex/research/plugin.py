@@ -5,7 +5,8 @@ experiments, learning artifacts) -> the research service (study +
 orchestration + runtime injection) -> kernel module. Requires the
 portfolio and execution platforms: studies read their durable records.
 Learning parameters come from the ``learning`` section of
-research.yaml, falling back to the AICE input defaults.
+research.yaml, falling back to the AICE input defaults; the shadow
+promotion inputs (Book II 14.24) come from its ``promotion`` section.
 """
 
 from collections.abc import Sequence
@@ -62,6 +63,18 @@ def _learning_params(section: ConfigSection) -> LearningParams:
             "calibration_maximum_blend", defaults.calibration_maximum_blend
         ),
     )
+
+
+def _promotion_number(section: ConfigSection, key: str, default: float) -> float:
+    """One numeric shadow-promotion input with its default."""
+    value = section.get(key, default)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ConfigurationError(
+            f"research.promotion.{key} must be a number",
+            code="CFG-042",
+            details={"found": repr(value)},
+        )
+    return float(value)
 
 
 class ResearchPlatformModule:
@@ -133,6 +146,8 @@ class ResearchPlatformPlugin:
         learning = _learning_params(
             learning_raw if isinstance(learning_raw, dict) else {}
         )
+        promotion_raw = research_section.get("promotion", {})
+        promotion = promotion_raw if isinstance(promotion_raw, dict) else {}
         repository = SqliteResearchRepository(
             database_path=Path(config.system.data_dir) / RESEARCH_DATABASE_FILENAME,
         )
@@ -153,6 +168,11 @@ class ResearchPlatformPlugin:
             bar_repository=container.resolve(SqliteBarRepository),
             base_params=decision_params_from_config(config.market.decision),
             weights=ObjectiveWeights(),
+            shadow_min_bars=int(_promotion_number(promotion, "shadow_min_bars", 96)),
+            shadow_horizon_bars=int(
+                _promotion_number(promotion, "shadow_horizon_bars", 48)
+            ),
+            shadow_tolerance=_promotion_number(promotion, "shadow_tolerance", 0.05),
             bus=bus,
             clock=clock,
             logger=loggers.get("research.service"),
