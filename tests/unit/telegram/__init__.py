@@ -1,1 +1,1 @@
-IiIiVGVsZWdyYW0gY29uc29sZSB1bml0IHRlc3RzLiIiIgo=
+"""Telegram console unit tests."""
