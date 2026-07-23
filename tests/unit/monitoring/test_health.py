@@ -1,1 +1,105 @@
-IiIiSGVhbHRoIGVuZ2luZTogZGVwZW5kZW5jeSBwcm9wYWdhdGlvbiBhbmQgaGVhcnRiZWF0IGZyZXNobmVzcy4iIiIKCmZyb20gYXBleC5jb3JlLmVudW1zIGltcG9ydCBIZWFsdGhTdGF0ZQpmcm9tIGFwZXguY29yZS50aW1lLmNsb2NrIGltcG9ydCBNYW51YWxDbG9jawpmcm9tIGFwZXgua2VybmVsLmhlYWx0aCBpbXBvcnQgSGVhbHRoTW9uaXRvcgpmcm9tIGFwZXgua2VybmVsLm1vZHVsZXMgaW1wb3J0IE1vZHVsZVJlZ2lzdHJ5CmZyb20gYXBleC5tb25pdG9yaW5nLmhlYWx0aCBpbXBvcnQgSGVhbHRoRW5naW5lCmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IEhlYXJ0YmVhdFJlY29yZAoKZnJvbSB0ZXN0cy5jb25mdGVzdCBpbXBvcnQgVDAKCgpjbGFzcyBfTW9kdWxlOgogICAgIiIiQSByZWdpc3RyeSBtb2R1bGUgd2l0aCBhIGZpeGVkIGhlYWx0aCB2ZXJkaWN0LiIiIgoKICAgIGRlZiBfX2luaXRfXygKICAgICAgICBzZWxmLAogICAgICAgIG5hbWU6IHN0ciwKICAgICAgICBoZWFsdGg6IEhlYWx0aFN0YXRlLAogICAgICAgIGRlcGVuZGVuY2llczogdHVwbGVbc3RyLCAuLi5dID0gKCksCiAgICApIC0+IE5vbmU6CiAgICAgICAgc2VsZi5fbmFtZSA9IG5hbWUKICAgICAgICBzZWxmLl9oZWFsdGggPSBoZWFsdGgKICAgICAgICBzZWxmLl9kZXBlbmRlbmNpZXMgPSBkZXBlbmRlbmNpZXMKCiAgICBAcHJvcGVydHkKICAgIGRlZiBuYW1lKHNlbGYpIC0+IHN0cjoKICAgICAgICByZXR1cm4gc2VsZi5fbmFtZQoKICAgIEBwcm9wZXJ0eQogICAgZGVmIGRlcGVuZGVuY2llcyhzZWxmKSAtPiB0dXBsZVtzdHIsIC4uLl06CiAgICAgICAgcmV0dXJuIHNlbGYuX2RlcGVuZGVuY2llcwoKICAgIGFzeW5jIGRlZiBzdGFydChzZWxmKSAtPiBOb25lOiAgIyBwcmFnbWE6IG5vIGNvdmVyIC0gcmVnaXN0cnkgY29udHJhY3QKICAgICAgICByZXR1cm4KCiAgICBhc3luYyBkZWYgc3RvcChzZWxmKSAtPiBOb25lOiAgIyBwcmFnbWE6IG5vIGNvdmVyIC0gcmVnaXN0cnkgY29udHJhY3QKICAgICAgICByZXR1cm4KCiAgICBkZWYgaGVhbHRoKHNlbGYpIC0+IEhlYWx0aFN0YXRlOgogICAgICAgIHJldHVybiBzZWxmLl9oZWFsdGgKCgpkZWYgZW5naW5lKCptb2R1bGVzOiBfTW9kdWxlKSAtPiBIZWFsdGhFbmdpbmU6CiAgICByZWdpc3RyeSA9IE1vZHVsZVJlZ2lzdHJ5KCkKICAgIGZvciBtb2R1bGUgaW4gbW9kdWxlczoKICAgICAgICByZWdpc3RyeS5yZWdpc3Rlcihtb2R1bGUpCiAgICByZXR1cm4gSGVhbHRoRW5naW5lKAogICAgICAgIHJlZ2lzdHJ5PXJlZ2lzdHJ5LCBtb25pdG9yPUhlYWx0aE1vbml0b3IoY2xvY2s9TWFudWFsQ2xvY2soVDApKQogICAgKQoKCmNsYXNzIFRlc3REZXBlbmRlbmN5UHJvcGFnYXRpb246CiAgICBkZWYgdGVzdF9hbGxfaGVhbHRoeV9zdGF5c19oZWFsdGh5KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgcmVwb3J0cyA9IGVuZ2luZSgKICAgICAgICAgICAgX01vZHVsZSgiYmFzZSIsIEhlYWx0aFN0YXRlLkhFQUxUSFkpLAogICAgICAgICAgICBfTW9kdWxlKCJ1cHBlciIsIEhlYWx0aFN0YXRlLkhFQUxUSFksIGRlcGVuZGVuY2llcz0oImJhc2UiLCkpLAogICAgICAgICkuYXNzZXNzKCkKICAgICAgICBhc3NlcnQgYWxsKHJlcG9ydC5zdGF0ZSBpcyBIZWFsdGhTdGF0ZS5IRUFMVEhZIGZvciByZXBvcnQgaW4gcmVwb3J0cykKCiAgICBkZWYgdGVzdF9vZmZsaW5lX2RlcGVuZGVuY3lfZGVncmFkZXNfZGVwZW5kZW50X3RvX2NyaXRpY2FsKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgaGVhbHRoX2VuZ2luZSA9IGVuZ2luZSgKICAgICAgICAgICAgX01vZHVsZSgiYmFzZSIsIEhlYWx0aFN0YXRlLk9GRkxJTkUpLAogICAgICAgICAgICBfTW9kdWxlKCJ1cHBlciIsIEhlYWx0aFN0YXRlLkhFQUxUSFksIGRlcGVuZGVuY2llcz0oImJhc2UiLCkpLAogICAgICAgICkKICAgICAgICBieV9uYW1lID0ge3JlcG9ydC5jb21wb25lbnQ6IHJlcG9ydCBmb3IgcmVwb3J0IGluIGhlYWx0aF9lbmdpbmUuYXNzZXNzKCl9CiAgICAgICAgYXNzZXJ0IGJ5X25hbWVbImJhc2UiXS5zdGF0ZSBpcyBIZWFsdGhTdGF0ZS5PRkZMSU5FCiAgICAgICAgYXNzZXJ0IGJ5X25hbWVbInVwcGVyIl0uc3RhdGUgaXMgSGVhbHRoU3RhdGUuQ1JJVElDQUwKICAgICAgICBhc3NlcnQgYnlfbmFtZVsidXBwZXIiXS5kZXRhaWwgPT0gImRlZ3JhZGVkIHZpYSBkZXBlbmRlbmN5IgoKICAgIGRlZiB0ZXN0X3dhcm5pbmdfcHJvcGFnYXRlc19vbmVfbGV2ZWxfZG93bihzZWxmKSAtPiBOb25lOgogICAgICAgIGhlYWx0aF9lbmdpbmUgPSBlbmdpbmUoCiAgICAgICAgICAgIF9Nb2R1bGUoImJhc2UiLCBIZWFsdGhTdGF0ZS5XQVJOSU5HKSwKICAgICAgICAgICAgX01vZHVsZSgibWlkIiwgSGVhbHRoU3RhdGUuSEVBTFRIWSwgZGVwZW5kZW5jaWVzPSgiYmFzZSIsKSksCiAgICAgICAgICAgIF9Nb2R1bGUoInRvcCIsIEhlYWx0aFN0YXRlLkhFQUxUSFksIGRlcGVuZGVuY2llcz0oIm1pZCIsKSksCiAgICAgICAgKQogICAgICAgIGJ5X25hbWUgPSB7cmVwb3J0LmNvbXBvbmVudDogcmVwb3J0IGZvciByZXBvcnQgaW4gaGVhbHRoX2VuZ2luZS5hc3Nlc3MoKX0KICAgICAgICBhc3NlcnQgYnlfbmFtZVsibWlkIl0uc3RhdGUgaXMgSGVhbHRoU3RhdGUuV0FSTklORwogICAgICAgIGFzc2VydCBieV9uYW1lWyJ0b3AiXS5zdGF0ZSBpcyBIZWFsdGhTdGF0ZS5XQVJOSU5HCgogICAgZGVmIHRlc3Rfb3ZlcmFsbF9pc193b3JzdF9jb21wb25lbnQoc2VsZikgLT4gTm9uZToKICAgICAgICBoZWFsdGhfZW5naW5lID0gZW5naW5lKAogICAgICAgICAgICBfTW9kdWxlKCJiYXNlIiwgSGVhbHRoU3RhdGUuSEVBTFRIWSksCiAgICAgICAgICAgIF9Nb2R1bGUoInVwcGVyIiwgSGVhbHRoU3RhdGUuQ1JJVElDQUwsIGRlcGVuZGVuY2llcz0oImJhc2UiLCkpLAogICAgICAgICkKICAgICAgICByZXBvcnRzID0gaGVhbHRoX2VuZ2luZS5hc3Nlc3MoKQogICAgICAgIGFzc2VydCBoZWFsdGhfZW5naW5lLm92ZXJhbGwocmVwb3J0cykgaXMgSGVhbHRoU3RhdGUuQ1JJVElDQUwKCgpjbGFzcyBUZXN0SGVhcnRiZWF0QWdlczoKICAgIGRlZiB0ZXN0X3N0YWxlbmVzc190aHJlc2hvbGQoc2VsZikgLT4gTm9uZToKICAgICAgICBiZWF0cyA9IFsKICAgICAgICAgICAgSGVhcnRiZWF0UmVjb3JkKGNvbXBvbmVudD0iZnJlc2giLCBiZWF0X2F0PVQwKSwKICAgICAgICAgICAgSGVhcnRiZWF0UmVjb3JkKAogICAgICAgICAgICAgICAgY29tcG9uZW50PSJzdGFsZSIsIGJlYXRfYXQ9VDAuYWRkX21zKC0yMF8wMDApCiAgICAgICAgICAgICksCiAgICAgICAgXQogICAgICAgIGFnZXMgPSBIZWFsdGhFbmdpbmUuaGVhcnRiZWF0X2FnZXMoCiAgICAgICAgICAgIGJlYXRzLCBub3c9VDAuYWRkX21zKDFfMDAwKSwgc3RhbGVfbXM9MTBfMDAwCiAgICAgICAgKQogICAgICAgIGJ5X25hbWUgPSB7YWdlLmNvbXBvbmVudDogYWdlIGZvciBhZ2UgaW4gYWdlc30KICAgICAgICBhc3NlcnQgbm90IGJ5X25hbWVbImZyZXNoIl0uc3RhbGUKICAgICAgICBhc3NlcnQgYnlfbmFtZVsiZnJlc2giXS5hZ2VfbXMgPT0gMV8wMDAKICAgICAgICBhc3NlcnQgYnlfbmFtZVsic3RhbGUiXS5zdGFsZQogICAgICAgIGFzc2VydCBieV9uYW1lWyJzdGFsZSJdLmFnZV9tcyA9PSAyMV8wMDAK
+"""Health engine: dependency propagation and heartbeat freshness."""
+
+from apex.core.enums import HealthState
+from apex.core.time.clock import ManualClock
+from apex.kernel.health import HealthMonitor
+from apex.kernel.modules import ModuleRegistry
+from apex.monitoring.health import HealthEngine
+from apex.monitoring.records import HeartbeatRecord
+
+from tests.conftest import T0
+
+
+class _Module:
+    """A registry module with a fixed health verdict."""
+
+    def __init__(
+        self,
+        name: str,
+        health: HealthState,
+        dependencies: tuple[str, ...] = (),
+    ) -> None:
+        self._name = name
+        self._health = health
+        self._dependencies = dependencies
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @property
+    def dependencies(self) -> tuple[str, ...]:
+        return self._dependencies
+
+    async def start(self) -> None:  # pragma: no cover - registry contract
+        return
+
+    async def stop(self) -> None:  # pragma: no cover - registry contract
+        return
+
+    def health(self) -> HealthState:
+        return self._health
+
+
+def engine(*modules: _Module) -> HealthEngine:
+    registry = ModuleRegistry()
+    for module in modules:
+        registry.register(module)
+    return HealthEngine(
+        registry=registry, monitor=HealthMonitor(clock=ManualClock(T0))
+    )
+
+
+class TestDependencyPropagation:
+    def test_all_healthy_stays_healthy(self) -> None:
+        reports = engine(
+            _Module("base", HealthState.HEALTHY),
+            _Module("upper", HealthState.HEALTHY, dependencies=("base",)),
+        ).assess()
+        assert all(report.state is HealthState.HEALTHY for report in reports)
+
+    def test_offline_dependency_degrades_dependent_to_critical(self) -> None:
+        health_engine = engine(
+            _Module("base", HealthState.OFFLINE),
+            _Module("upper", HealthState.HEALTHY, dependencies=("base",)),
+        )
+        by_name = {report.component: report for report in health_engine.assess()}
+        assert by_name["base"].state is HealthState.OFFLINE
+        assert by_name["upper"].state is HealthState.CRITICAL
+        assert by_name["upper"].detail == "degraded via dependency"
+
+    def test_warning_propagates_one_level_down(self) -> None:
+        health_engine = engine(
+            _Module("base", HealthState.WARNING),
+            _Module("mid", HealthState.HEALTHY, dependencies=("base",)),
+            _Module("top", HealthState.HEALTHY, dependencies=("mid",)),
+        )
+        by_name = {report.component: report for report in health_engine.assess()}
+        assert by_name["mid"].state is HealthState.WARNING
+        assert by_name["top"].state is HealthState.WARNING
+
+    def test_overall_is_worst_component(self) -> None:
+        health_engine = engine(
+            _Module("base", HealthState.HEALTHY),
+            _Module("upper", HealthState.CRITICAL, dependencies=("base",)),
+        )
+        reports = health_engine.assess()
+        assert health_engine.overall(reports) is HealthState.CRITICAL
+
+
+class TestHeartbeatAges:
+    def test_staleness_threshold(self) -> None:
+        beats = [
+            HeartbeatRecord(component="fresh", beat_at=T0),
+            HeartbeatRecord(
+                component="stale", beat_at=T0.add_ms(-20_000)
+            ),
+        ]
+        ages = HealthEngine.heartbeat_ages(
+            beats, now=T0.add_ms(1_000), stale_ms=10_000
+        )
+        by_name = {age.component: age for age in ages}
+        assert not by_name["fresh"].stale
+        assert by_name["fresh"].age_ms == 1_000
+        assert by_name["stale"].stale
+        assert by_name["stale"].age_ms == 21_000
