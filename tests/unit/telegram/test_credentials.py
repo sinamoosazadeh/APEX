@@ -1,1 +1,53 @@
-IiIiVGVsZWdyYW0gY3JlZGVudGlhbHM6IGVudiBwYXJzaW5nLCByb2xlcywgbWFza2luZy4iIiIKCmltcG9ydCBweXRlc3QKZnJvbSBhcGV4LmNvcmUuZXhjZXB0aW9ucyBpbXBvcnQgVGVsZWdyYW1FcnJvcgpmcm9tIGFwZXgudGVsZWdyYW0uY3JlZGVudGlhbHMgaW1wb3J0IFJPTEVfQURNSU4sIFJPTEVfVklFV0VSLCBUZWxlZ3JhbUNyZWRlbnRpYWxzCgoKY2xhc3MgVGVzdEZyb21FbnZpcm9ubWVudDoKICAgIGRlZiB0ZXN0X21pc3NpbmdfdG9rZW5fZGlzYWJsZXNfY29uc29sZSgKICAgICAgICBzZWxmLCBtb25rZXlwYXRjaDogcHl0ZXN0Lk1vbmtleVBhdGNoCiAgICApIC0+IE5vbmU6CiAgICAgICAgbW9ua2V5cGF0Y2guZGVsZW52KCJURUxFR1JBTV9CT1RfVE9LRU4iLCByYWlzaW5nPUZhbHNlKQogICAgICAgIGFzc2VydCBUZWxlZ3JhbUNyZWRlbnRpYWxzLmZyb21fZW52aXJvbm1lbnQoKSBpcyBOb25lCgogICAgZGVmIHRlc3RfcGFyc2VzX3Rva2VuX2FuZF9jaGF0X2xpc3RzKAogICAgICAgIHNlbGYsIG1vbmtleXBhdGNoOiBweXRlc3QuTW9ua2V5UGF0Y2gKICAgICkgLT4gTm9uZToKICAgICAgICBtb25rZXlwYXRjaC5zZXRlbnYoIlRFTEVHUkFNX0JPVF9UT0tFTiIsICIxMjM6YWJjIikKICAgICAgICBtb25rZXlwYXRjaC5zZXRlbnYoIlRFTEVHUkFNX0FETUlOX0NIQVRfSURTIiwgIjExLCAyMiIpCiAgICAgICAgbW9ua2V5cGF0Y2guc2V0ZW52KCJURUxFR1JBTV9WSUVXRVJfQ0hBVF9JRFMiLCAiMzMiKQogICAgICAgIGNyZWRlbnRpYWxzID0gVGVsZWdyYW1DcmVkZW50aWFscy5mcm9tX2Vudmlyb25tZW50KCkKICAgICAgICBhc3NlcnQgY3JlZGVudGlhbHMgaXMgbm90IE5vbmUKICAgICAgICBhc3NlcnQgY3JlZGVudGlhbHMucm9sZV9mb3IoMTEpID09IFJPTEVfQURNSU4KICAgICAgICBhc3NlcnQgY3JlZGVudGlhbHMucm9sZV9mb3IoMjIpID09IFJPTEVfQURNSU4KICAgICAgICBhc3NlcnQgY3JlZGVudGlhbHMucm9sZV9mb3IoMzMpID09IFJPTEVfVklFV0VSCiAgICAgICAgYXNzZXJ0IGNyZWRlbnRpYWxzLnJvbGVfZm9yKDQ0KSBpcyBOb25lCgogICAgZGVmIHRlc3RfYmFkX2NoYXRfaWRfcmVqZWN0ZWQoc2VsZiwgbW9ua2V5cGF0Y2g6IHB5dGVzdC5Nb25rZXlQYXRjaCkgLT4gTm9uZToKICAgICAgICBtb25rZXlwYXRjaC5zZXRlbnYoIlRFTEVHUkFNX0JPVF9UT0tFTiIsICIxMjM6YWJjIikKICAgICAgICBtb25rZXlwYXRjaC5zZXRlbnYoIlRFTEVHUkFNX0FETUlOX0NIQVRfSURTIiwgImVsZXZlbiIpCiAgICAgICAgd2l0aCBweXRlc3QucmFpc2VzKFRlbGVncmFtRXJyb3IpIGFzIGV4Y2luZm86CiAgICAgICAgICAgIFRlbGVncmFtQ3JlZGVudGlhbHMuZnJvbV9lbnZpcm9ubWVudCgpCiAgICAgICAgYXNzZXJ0IGV4Y2luZm8udmFsdWUuY29kZSA9PSAiVEdNLTAwMSIKCgpjbGFzcyBUZXN0SW52YXJpYW50czoKICAgIGRlZiB0ZXN0X2VtcHR5X3Rva2VuX3JlamVjdGVkKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgd2l0aCBweXRlc3QucmFpc2VzKFRlbGVncmFtRXJyb3IpIGFzIGV4Y2luZm86CiAgICAgICAgICAgIFRlbGVncmFtQ3JlZGVudGlhbHModG9rZW49IiIsIGFkbWluX2NoYXRfaWRzPWZyb3plbnNldCh7MX0pKQogICAgICAgIGFzc2VydCBleGNpbmZvLnZhbHVlLmNvZGUgPT0gIlRHTS0wMDIiCgogICAgZGVmIHRlc3RfYWRtaW5zX3JlcXVpcmVkKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgd2l0aCBweXRlc3QucmFpc2VzKFRlbGVncmFtRXJyb3IpIGFzIGV4Y2luZm86CiAgICAgICAgICAgIFRlbGVncmFtQ3JlZGVudGlhbHModG9rZW49IjEyMzphYmMiLCBhZG1pbl9jaGF0X2lkcz1mcm96ZW5zZXQoKSkKICAgICAgICBhc3NlcnQgZXhjaW5mby52YWx1ZS5jb2RlID09ICJUR00tMDAzIgoKICAgIGRlZiB0ZXN0X3JlcHJfbWFza3Nfc2VjcmV0cyhzZWxmKSAtPiBOb25lOgogICAgICAgIGNyZWRlbnRpYWxzID0gVGVsZWdyYW1DcmVkZW50aWFscygKICAgICAgICAgICAgdG9rZW49IjEyMzpzZWNyZXQiLCBhZG1pbl9jaGF0X2lkcz1mcm96ZW5zZXQoezk4NzY1NH0pCiAgICAgICAgKQogICAgICAgIGFzc2VydCAic2VjcmV0IiBub3QgaW4gcmVwcihjcmVkZW50aWFscykKICAgICAgICBhc3NlcnQgIjk4NzY1NCIgbm90IGluIHJlcHIoY3JlZGVudGlhbHMpCiAgICAgICAgYXNzZXJ0ICJ0b2tlbj0qKioiIGluIHJlcHIoY3JlZGVudGlhbHMpCg==
+"""Telegram credentials: env parsing, roles, masking."""
+
+import pytest
+from apex.core.exceptions import TelegramError
+from apex.telegram.credentials import ROLE_ADMIN, ROLE_VIEWER, TelegramCredentials
+
+
+class TestFromEnvironment:
+    def test_missing_token_disables_console(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.delenv("TELEGRAM_BOT_TOKEN", raising=False)
+        assert TelegramCredentials.from_environment() is None
+
+    def test_parses_token_and_chat_lists(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "123:abc")
+        monkeypatch.setenv("TELEGRAM_ADMIN_CHAT_IDS", "11, 22")
+        monkeypatch.setenv("TELEGRAM_VIEWER_CHAT_IDS", "33")
+        credentials = TelegramCredentials.from_environment()
+        assert credentials is not None
+        assert credentials.role_for(11) == ROLE_ADMIN
+        assert credentials.role_for(22) == ROLE_ADMIN
+        assert credentials.role_for(33) == ROLE_VIEWER
+        assert credentials.role_for(44) is None
+
+    def test_bad_chat_id_rejected(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "123:abc")
+        monkeypatch.setenv("TELEGRAM_ADMIN_CHAT_IDS", "eleven")
+        with pytest.raises(TelegramError) as excinfo:
+            TelegramCredentials.from_environment()
+        assert excinfo.value.code == "TGM-001"
+
+
+class TestInvariants:
+    def test_empty_token_rejected(self) -> None:
+        with pytest.raises(TelegramError) as excinfo:
+            TelegramCredentials(token="", admin_chat_ids=frozenset({1}))
+        assert excinfo.value.code == "TGM-002"
+
+    def test_admins_required(self) -> None:
+        with pytest.raises(TelegramError) as excinfo:
+            TelegramCredentials(token="123:abc", admin_chat_ids=frozenset())
+        assert excinfo.value.code == "TGM-003"
+
+    def test_repr_masks_secrets(self) -> None:
+        credentials = TelegramCredentials(
+            token="123:secret", admin_chat_ids=frozenset({987654})
+        )
+        assert "secret" not in repr(credentials)
+        assert "987654" not in repr(credentials)
+        assert "token=***" in repr(credentials)
