@@ -141,3 +141,15 @@ class SecurityError(ApexError):
     """Security policy violation."""
 
     DEFAULT_CODE = "SEC-000"
+
+
+class MonitoringError(ApexError):
+    """Monitoring platform or operational-loop failure."""
+
+    DEFAULT_CODE = "MON-000"
+
+
+class TelegramError(ApexError):
+    """Telegram console transport or command failure."""
+
+    DEFAULT_CODE = "TGM-000"
