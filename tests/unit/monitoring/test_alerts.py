@@ -1,1 +1,247 @@
-IiIiQWxlcnQgZW5naW5lOiBkZWR1cCwgZXNjYWxhdGlvbiwgaW5jaWRlbnRzLCBydWxlcywgYXV0by1lbmdhZ2UuIiIiCgppbXBvcnQgYXN5bmNpbwpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IE1hbnVhbENsb2NrCmZyb20gYXBleC5tb25pdG9yaW5nLmFsZXJ0cyBpbXBvcnQgQWxlcnRFbmdpbmUsIFBvcnRmb2xpb1B1bHNlCmZyb20gYXBleC5tb25pdG9yaW5nLmNvbGxlY3RvciBpbXBvcnQgTUVUUklDX0VSUk9SU19UT1RBTCwgVGVsZW1ldHJ5Q29sbGVjdG9yCmZyb20gYXBleC5tb25pdG9yaW5nLmV2ZW50cyBpbXBvcnQgTW9uaXRvcmluZ0V2ZW50CmZyb20gYXBleC5tb25pdG9yaW5nLmtpbGxzd2l0Y2ggaW1wb3J0IEtpbGxTd2l0Y2hFbmdpbmUKZnJvbSBhcGV4Lm1vbml0b3JpbmcucmVjb3JkcyBpbXBvcnQgQWxlcnRTZXZlcml0eSwgSGVhcnRiZWF0QWdlLCBLaWxsU3dpdGNoTGV2ZWwKZnJvbSBhcGV4Lm1vbml0b3Jpbmcuc3RvcmUgaW1wb3J0IFNxbGl0ZU1vbml0b3JpbmdSZXBvc2l0b3J5Cgpmcm9tIHRlc3RzLmNvbmZ0ZXN0IGltcG9ydCBUMApmcm9tIHRlc3RzLnVuaXQubW9uaXRvcmluZy5zdXBwb3J0IGltcG9ydCBsb2dnZXIsIG1ha2VfYnVzLCBzZXR0aW5ncywgc3RvcmVfYXQKCgpkZWYgYnVpbGQoCiAgICB0bXBfcGF0aDogUGF0aCwgY2xvY2s6IE1hbnVhbENsb2NrCikgLT4gdHVwbGVbQWxlcnRFbmdpbmUsIFNxbGl0ZU1vbml0b3JpbmdSZXBvc2l0b3J5LCBLaWxsU3dpdGNoRW5naW5lLCBvYmplY3RdOgogICAgc3RvcmUgPSBzdG9yZV9hdCh0bXBfcGF0aCkKICAgIGJ1cyA9IG1ha2VfYnVzKGNsb2NrKQogICAgY29uZmlnID0gc2V0dGluZ3MoKQogICAga2lsbF9zd2l0Y2ggPSBLaWxsU3dpdGNoRW5naW5lKAogICAgICAgIHNldHRpbmdzPWNvbmZpZywgc3RvcmU9c3RvcmUsIGJ1cz1idXMsIGNsb2NrPWNsb2NrLCBsb2dnZXI9bG9nZ2VyKCkKICAgICkKICAgIGVuZ2luZSA9IEFsZXJ0RW5naW5lKAogICAgICAgIHNldHRpbmdzPWNvbmZpZywKICAgICAgICBzdG9yZT1zdG9yZSwKICAgICAgICBraWxsX3N3aXRjaD1raWxsX3N3aXRjaCwKICAgICAgICBidXM9YnVzLAogICAgICAgIGNsb2NrPWNsb2NrLAogICAgICAgIGxvZ2dlcj1sb2dnZXIoKSwKICAgICkKICAgIHJldHVybiBlbmdpbmUsIHN0b3JlLCBraWxsX3N3aXRjaCwgYnVzCgoKZGVmIGNhbG0oKSAtPiBQb3J0Zm9saW9QdWxzZToKICAgIHJldHVybiBQb3J0Zm9saW9QdWxzZShkcmF3ZG93bj0wLjAsIGNvbnNlY3V0aXZlX2xvc3Nlcz0wKQoKCmNsYXNzIFRlc3REZWR1cGxpY2F0aW9uOgogICAgZGVmIHRlc3RfcmVjdXJyZW5jZV9idW1wc19pbnN0ZWFkX29mX25ld19hbGVydChzZWxmLCB0bXBfcGF0aDogUGF0aCkgLT4gTm9uZToKICAgICAgICBhc3luYyBkZWYgc2NlbmFyaW8oKSAtPiBOb25lOgogICAgICAgICAgICBjbG9jayA9IE1hbnVhbENsb2NrKFQwKQogICAgICAgICAgICBlbmdpbmUsIHN0b3JlLCBfLCBfID0gYnVpbGQodG1wX3BhdGgsIGNsb2NrKQogICAgICAgICAgICBhd2FpdCBzdG9yZS5vcGVuKCkKICAgICAgICAgICAgZmlyc3QgPSBhd2FpdCBlbmdpbmUucmFpc2VfYWxlcnQoCiAgICAgICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5LkhJR0gsCiAgICAgICAgICAgICAgICBjYXRlZ29yeT0icG9ydGZvbGlvIiwKICAgICAgICAgICAgICAgIG1lc3NhZ2U9ImRyYXdkb3duIiwKICAgICAgICAgICAgICAgIGRlZHVwX2tleT0icG9ydGZvbGlvLmRyYXdkb3duX3dhcm5pbmciLAogICAgICAgICAgICApCiAgICAgICAgICAgIGNsb2NrLmFkdmFuY2VfbXMoMV8wMDApCiAgICAgICAgICAgIHNlY29uZCA9IGF3YWl0IGVuZ2luZS5yYWlzZV9hbGVydCgKICAgICAgICAgICAgICAgIHNldmVyaXR5PUFsZXJ0U2V2ZXJpdHkuSElHSCwKICAgICAgICAgICAgICAgIGNhdGVnb3J5PSJwb3J0Zm9saW8iLAogICAgICAgICAgICAgICAgbWVzc2FnZT0iZHJhd2Rvd24iLAogICAgICAgICAgICAgICAgZGVkdXBfa2V5PSJwb3J0Zm9saW8uZHJhd2Rvd25fd2FybmluZyIsCiAgICAgICAgICAgICkKICAgICAgICAgICAgYXNzZXJ0IGZpcnN0IGlzIFRydWUgYW5kIHNlY29uZCBpcyBGYWxzZQogICAgICAgICAgICBhbGVydHMgPSBhd2FpdCBzdG9yZS5hbGVydHMoKQogICAgICAgICAgICBhc3NlcnQgbGVuKGFsZXJ0cykgPT0gMQogICAgICAgICAgICBhc3NlcnQgYWxlcnRzWzBdLmNvdW50ID09IDIKICAgICAgICAgICAgYXdhaXQgc3RvcmUuY2xvc2UoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X2VzY2FsYXRpb25fcmVfYW5ub3VuY2VzKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIGVuZ2luZSwgc3RvcmUsIF8sIF8gPSBidWlsZCh0bXBfcGF0aCwgY2xvY2spCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICBhd2FpdCBlbmdpbmUucmFpc2VfYWxlcnQoCiAgICAgICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5Lk1FRElVTSwKICAgICAgICAgICAgICAgIGNhdGVnb3J5PSJzeXN0ZW0iLAogICAgICAgICAgICAgICAgbWVzc2FnZT0ibGF0ZW5jeSIsCiAgICAgICAgICAgICAgICBkZWR1cF9rZXk9ImluZnJhLmxhdGVuY3kiLAogICAgICAgICAgICApCiAgICAgICAgICAgIGNsb2NrLmFkdmFuY2VfbXMoMV8wMDApCiAgICAgICAgICAgIGVzY2FsYXRlZCA9IGF3YWl0IGVuZ2luZS5yYWlzZV9hbGVydCgKICAgICAgICAgICAgICAgIHNldmVyaXR5PUFsZXJ0U2V2ZXJpdHkuSElHSCwKICAgICAgICAgICAgICAgIGNhdGVnb3J5PSJzeXN0ZW0iLAogICAgICAgICAgICAgICAgbWVzc2FnZT0ibGF0ZW5jeSIsCiAgICAgICAgICAgICAgICBkZWR1cF9rZXk9ImluZnJhLmxhdGVuY3kiLAogICAgICAgICAgICApCiAgICAgICAgICAgIGFzc2VydCBlc2NhbGF0ZWQgaXMgVHJ1ZQogICAgICAgICAgICBhbGVydHMgPSBhd2FpdCBzdG9yZS5hbGVydHMoKQogICAgICAgICAgICBhc3NlcnQgYWxlcnRzWzBdLnNldmVyaXR5IGlzIEFsZXJ0U2V2ZXJpdHkuSElHSAogICAgICAgICAgICBhd2FpdCBzdG9yZS5jbG9zZSgpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgogICAgZGVmIHRlc3RfbmV3X2FsZXJ0X2FmdGVyX3dpbmRvd19lbGFwc2VzKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIGVuZ2luZSwgc3RvcmUsIF8sIF8gPSBidWlsZCh0bXBfcGF0aCwgY2xvY2spCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICBhd2FpdCBlbmdpbmUucmFpc2VfYWxlcnQoCiAgICAgICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5LkxPVywKICAgICAgICAgICAgICAgIGNhdGVnb3J5PSJzeXN0ZW0iLAogICAgICAgICAgICAgICAgbWVzc2FnZT0ieCIsCiAgICAgICAgICAgICAgICBkZWR1cF9rZXk9ImsiLAogICAgICAgICAgICApCiAgICAgICAgICAgIGNsb2NrLmFkdmFuY2VfbXMoMTIwXzAwMCkgICMgYmV5b25kIHRoZSA2MHMgZGVkdXAgd2luZG93CiAgICAgICAgICAgIGZyZXNoID0gYXdhaXQgZW5naW5lLnJhaXNlX2FsZXJ0KAogICAgICAgICAgICAgICAgc2V2ZXJpdHk9QWxlcnRTZXZlcml0eS5MT1csCiAgICAgICAgICAgICAgICBjYXRlZ29yeT0ic3lzdGVtIiwKICAgICAgICAgICAgICAgIG1lc3NhZ2U9IngiLAogICAgICAgICAgICAgICAgZGVkdXBfa2V5PSJrIiwKICAgICAgICAgICAgKQogICAgICAgICAgICBhc3NlcnQgZnJlc2ggaXMgVHJ1ZQogICAgICAgICAgICBhc3NlcnQgbGVuKGF3YWl0IHN0b3JlLmFsZXJ0cygpKSA9PSAyCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLmNsb3NlKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCgpjbGFzcyBUZXN0SW5jaWRlbnRzQW5kQXV0b0VuZ2FnZToKICAgIGRlZiB0ZXN0X2NyaXRpY2FsX29wZW5zX2luY2lkZW50X29uY2Uoc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgY2xvY2sgPSBNYW51YWxDbG9jayhUMCkKICAgICAgICAgICAgZW5naW5lLCBzdG9yZSwgXywgXyA9IGJ1aWxkKHRtcF9wYXRoLCBjbG9jaykKICAgICAgICAgICAgYXdhaXQgc3RvcmUub3BlbigpCiAgICAgICAgICAgIGF3YWl0IGVuZ2luZS5yYWlzZV9hbGVydCgKICAgICAgICAgICAgICAgIHNldmVyaXR5PUFsZXJ0U2V2ZXJpdHkuQ1JJVElDQUwsCiAgICAgICAgICAgICAgICBjYXRlZ29yeT0ic3lzdGVtIiwKICAgICAgICAgICAgICAgIG1lc3NhZ2U9ImJ1cnN0IiwKICAgICAgICAgICAgICAgIGRlZHVwX2tleT0ic3lzdGVtLmVycm9yX2J1cnN0IiwKICAgICAgICAgICAgKQogICAgICAgICAgICBjbG9jay5hZHZhbmNlX21zKDEyMF8wMDApCiAgICAgICAgICAgIGF3YWl0IGVuZ2luZS5yYWlzZV9hbGVydCgKICAgICAgICAgICAgICAgIHNldmVyaXR5PUFsZXJ0U2V2ZXJpdHkuQ1JJVElDQUwsCiAgICAgICAgICAgICAgICBjYXRlZ29yeT0ic3lzdGVtIiwKICAgICAgICAgICAgICAgIG1lc3NhZ2U9ImJ1cnN0IiwKICAgICAgICAgICAgICAgIGRlZHVwX2tleT0ic3lzdGVtLmVycm9yX2J1cnN0IiwKICAgICAgICAgICAgKQogICAgICAgICAgICBhc3NlcnQgbGVuKGF3YWl0IHN0b3JlLm9wZW5faW5jaWRlbnRzKCkpID09IDEKICAgICAgICAgICAgYXdhaXQgc3RvcmUuY2xvc2UoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X2VtZXJnZW5jeV9hdXRvX2VuZ2FnZXNfa2lsbF9zd2l0Y2goc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgY2xvY2sgPSBNYW51YWxDbG9jayhUMCkKICAgICAgICAgICAgZW5naW5lLCBzdG9yZSwga2lsbF9zd2l0Y2gsIGJ1cyA9IGJ1aWxkKHRtcF9wYXRoLCBjbG9jaykKICAgICAgICAgICAgYXdhaXQgc3RvcmUub3BlbigpCiAgICAgICAgICAgIGF3YWl0IGVuZ2luZS5yYWlzZV9hbGVydCgKICAgICAgICAgICAgICAgIHNldmVyaXR5PUFsZXJ0U2V2ZXJpdHkuRU1FUkdFTkNZLAogICAgICAgICAgICAgICAgY2F0ZWdvcnk9InBvcnRmb2xpbyIsCiAgICAgICAgICAgICAgICBtZXNzYWdlPSJkcmF3ZG93biBjcml0aWNhbCIsCiAgICAgICAgICAgICAgICBkZWR1cF9rZXk9InBvcnRmb2xpby5kcmF3ZG93bl9jcml0aWNhbCIsCiAgICAgICAgICAgICkKICAgICAgICAgICAgYXNzZXJ0IChhd2FpdCBraWxsX3N3aXRjaC5sZXZlbCgpKSBpcyBLaWxsU3dpdGNoTGV2ZWwuRU5UUklFU19ESVNBQkxFRAogICAgICAgICAgICBqb3VybmFsX3R5cGVzID0gWwogICAgICAgICAgICAgICAgZXZlbnQuZXZlbnRfdHlwZQogICAgICAgICAgICAgICAgZm9yIGV2ZW50IGluIGJ1cy5qb3VybmFsLnJlcGxheSgpICAjIHR5cGU6IGlnbm9yZVthdHRyLWRlZmluZWRdCiAgICAgICAgICAgIF0KICAgICAgICAgICAgYXNzZXJ0IE1vbml0b3JpbmdFdmVudC5LSUxMX1NXSVRDSF9DSEFOR0VELnZhbHVlIGluIGpvdXJuYWxfdHlwZXMKICAgICAgICAgICAgYXdhaXQgc3RvcmUuY2xvc2UoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKCmNsYXNzIFRlc3RSdWxlczoKICAgIGRlZiB0ZXN0X2Vycm9yX2J1cnN0X3J1bGVfZmlyZXNfY3JpdGljYWwoc2VsZiwgdG1wX3BhdGg6IFBhdGgpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgY2xvY2sgPSBNYW51YWxDbG9jayhUMCkKICAgICAgICAgICAgZW5naW5lLCBzdG9yZSwgXywgXyA9IGJ1aWxkKHRtcF9wYXRoLCBjbG9jaykKICAgICAgICAgICAgYXdhaXQgc3RvcmUub3BlbigpCiAgICAgICAgICAgIGNvbGxlY3RvciA9IFRlbGVtZXRyeUNvbGxlY3RvcihzdG9yZT1zdG9yZSwgY2xvY2s9Y2xvY2ssIGxvZ2dlcj1sb2dnZXIoKSkKICAgICAgICAgICAgZm9yIF8gaW4gcmFuZ2UoMyk6CiAgICAgICAgICAgICAgICBjb2xsZWN0b3IuZXJyb3IoKQogICAgICAgICAgICBhd2FpdCBjb2xsZWN0b3IuZmx1c2goKQogICAgICAgICAgICBhc3NlcnQgYXdhaXQgc3RvcmUuY291bnRfbWV0cmljKE1FVFJJQ19FUlJPUlNfVE9UQUwsIHNpbmNlX21zPTApID09IDMKICAgICAgICAgICAgcmFpc2VkID0gYXdhaXQgZW5naW5lLmV2YWx1YXRlKHBvcnRmb2xpbz1jYWxtKCksIGhlYXJ0YmVhdHM9KCkpCiAgICAgICAgICAgIGFzc2VydCByYWlzZWQgPj0gMQogICAgICAgICAgICBhbGVydHMgPSBhd2FpdCBzdG9yZS5hbGVydHMoKQogICAgICAgICAgICBhc3NlcnQgYW55KGFsZXJ0LmRlZHVwX2tleSA9PSAic3lzdGVtLmVycm9yX2J1cnN0IiBmb3IgYWxlcnQgaW4gYWxlcnRzKQogICAgICAgICAgICBhd2FpdCBzdG9yZS5jbG9zZSgpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgogICAgZGVmIHRlc3RfZHJhd2Rvd25fcnVsZXNfdGllcihzZWxmLCB0bXBfcGF0aDogUGF0aCkgLT4gTm9uZToKICAgICAgICBhc3luYyBkZWYgc2NlbmFyaW8oKSAtPiBOb25lOgogICAgICAgICAgICBjbG9jayA9IE1hbnVhbENsb2NrKFQwKQogICAgICAgICAgICBlbmdpbmUsIHN0b3JlLCBfLCBfID0gYnVpbGQodG1wX3BhdGgsIGNsb2NrKQogICAgICAgICAgICBhd2FpdCBzdG9yZS5vcGVuKCkKICAgICAgICAgICAgYXdhaXQgZW5naW5lLmV2YWx1YXRlKAogICAgICAgICAgICAgICAgcG9ydGZvbGlvPVBvcnRmb2xpb1B1bHNlKGRyYXdkb3duPTAuMDYsIGNvbnNlY3V0aXZlX2xvc3Nlcz0wKSwKICAgICAgICAgICAgICAgIGhlYXJ0YmVhdHM9KCksCiAgICAgICAgICAgICkKICAgICAgICAgICAgd2FybmluZyA9IGF3YWl0IHN0b3JlLnJlY2VudF9hbGVydCgKICAgICAgICAgICAgICAgICJwb3J0Zm9saW8uZHJhd2Rvd25fd2FybmluZyIsIHNpbmNlX21zPTAKICAgICAgICAgICAgKQogICAgICAgICAgICBhc3NlcnQgd2FybmluZyBpcyBub3QgTm9uZQogICAgICAgICAgICBhc3NlcnQgd2FybmluZy5zZXZlcml0eSBpcyBBbGVydFNldmVyaXR5LkhJR0gKICAgICAgICAgICAgYXdhaXQgZW5naW5lLmV2YWx1YXRlKAogICAgICAgICAgICAgICAgcG9ydGZvbGlvPVBvcnRmb2xpb1B1bHNlKGRyYXdkb3duPTAuMTIsIGNvbnNlY3V0aXZlX2xvc3Nlcz0wKSwKICAgICAgICAgICAgICAgIGhlYXJ0YmVhdHM9KCksCiAgICAgICAgICAgICkKICAgICAgICAgICAgY3JpdGljYWwgPSBhd2FpdCBzdG9yZS5yZWNlbnRfYWxlcnQoCiAgICAgICAgICAgICAgICAicG9ydGZvbGlvLmRyYXdkb3duX2NyaXRpY2FsIiwgc2luY2VfbXM9MAogICAgICAgICAgICApCiAgICAgICAgICAgIGFzc2VydCBjcml0aWNhbCBpcyBub3QgTm9uZQogICAgICAgICAgICBhc3NlcnQgY3JpdGljYWwuc2V2ZXJpdHkgaXMgQWxlcnRTZXZlcml0eS5FTUVSR0VOQ1kKICAgICAgICAgICAgYXdhaXQgc3RvcmUuY2xvc2UoKQoKICAgICAgICBhc3luY2lvLnJ1bihzY2VuYXJpbygpKQoKICAgIGRlZiB0ZXN0X2xhdGVuY3lfdHJlbmRfcGF0dGVybl9ydWxlKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIGVuZ2luZSwgc3RvcmUsIF8sIF8gPSBidWlsZCh0bXBfcGF0aCwgY2xvY2spCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICBjb2xsZWN0b3IgPSBUZWxlbWV0cnlDb2xsZWN0b3Ioc3RvcmU9c3RvcmUsIGNsb2NrPWNsb2NrLCBsb2dnZXI9bG9nZ2VyKCkpCiAgICAgICAgICAgIGZvciB2YWx1ZSBpbiAoMTAuMCwgMjAuMCwgMzAuMCwgNDAuMCwgNTAuMCk6CiAgICAgICAgICAgICAgICBjb2xsZWN0b3IubWV0cmljKCJsb29wLmJhci50b3RhbF9tcyIsIHZhbHVlKQogICAgICAgICAgICAgICAgY2xvY2suYWR2YW5jZV9tcygxXzAwMCkKICAgICAgICAgICAgYXdhaXQgY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICAgICAgYXdhaXQgZW5naW5lLmV2YWx1YXRlKHBvcnRmb2xpbz1jYWxtKCksIGhlYXJ0YmVhdHM9KCkpCiAgICAgICAgICAgIHRyZW5kID0gYXdhaXQgc3RvcmUucmVjZW50X2FsZXJ0KAogICAgICAgICAgICAgICAgImluZnJhc3RydWN0dXJlLmxhdGVuY3lfdHJlbmQiLCBzaW5jZV9tcz0wCiAgICAgICAgICAgICkKICAgICAgICAgICAgYXNzZXJ0IHRyZW5kIGlzIG5vdCBOb25lCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLmNsb3NlKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCiAgICBkZWYgdGVzdF9zdGFsZV9oZWFydGJlYXRfYWxlcnRzKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIGVuZ2luZSwgc3RvcmUsIF8sIF8gPSBidWlsZCh0bXBfcGF0aCwgY2xvY2spCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICBiZWF0cyA9ICgKICAgICAgICAgICAgICAgIEhlYXJ0YmVhdEFnZShjb21wb25lbnQ9Im9wZXJhdGlvbnNfbG9vcCIsIGFnZV9tcz02MF8wMDAsIHN0YWxlPVRydWUpLAogICAgICAgICAgICAgICAgSGVhcnRiZWF0QWdlKGNvbXBvbmVudD0iZnJlc2giLCBhZ2VfbXM9MV8wMDAsIHN0YWxlPUZhbHNlKSwKICAgICAgICAgICAgKQogICAgICAgICAgICByYWlzZWQgPSBhd2FpdCBlbmdpbmUuZXZhbHVhdGUocG9ydGZvbGlvPWNhbG0oKSwgaGVhcnRiZWF0cz1iZWF0cykKICAgICAgICAgICAgYXNzZXJ0IHJhaXNlZCA9PSAxCiAgICAgICAgICAgIGFsZXJ0ID0gYXdhaXQgc3RvcmUucmVjZW50X2FsZXJ0KAogICAgICAgICAgICAgICAgImhlYWx0aC5oZWFydGJlYXQub3BlcmF0aW9uc19sb29wIiwgc2luY2VfbXM9MAogICAgICAgICAgICApCiAgICAgICAgICAgIGFzc2VydCBhbGVydCBpcyBub3QgTm9uZQogICAgICAgICAgICBhd2FpdCBzdG9yZS5jbG9zZSgpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCg==
+"""Alert engine: dedup, escalation, incidents, rules, auto-engage."""
+
+import asyncio
+from pathlib import Path
+
+from apex.core.time.clock import ManualClock
+from apex.monitoring.alerts import AlertEngine, PortfolioPulse
+from apex.monitoring.collector import METRIC_ERRORS_TOTAL, TelemetryCollector
+from apex.monitoring.events import MonitoringEvent
+from apex.monitoring.killswitch import KillSwitchEngine
+from apex.monitoring.records import AlertSeverity, HeartbeatAge, KillSwitchLevel
+from apex.monitoring.store import SqliteMonitoringRepository
+
+from tests.conftest import T0
+from tests.unit.monitoring.support import logger, make_bus, settings, store_at
+
+
+def build(
+    tmp_path: Path, clock: ManualClock
+) -> tuple[AlertEngine, SqliteMonitoringRepository, KillSwitchEngine, object]:
+    store = store_at(tmp_path)
+    bus = make_bus(clock)
+    config = settings()
+    kill_switch = KillSwitchEngine(
+        settings=config, store=store, bus=bus, clock=clock, logger=logger()
+    )
+    engine = AlertEngine(
+        settings=config,
+        store=store,
+        kill_switch=kill_switch,
+        bus=bus,
+        clock=clock,
+        logger=logger(),
+    )
+    return engine, store, kill_switch, bus
+
+
+def calm() -> PortfolioPulse:
+    return PortfolioPulse(drawdown=0.0, consecutive_losses=0)
+
+
+class TestDeduplication:
+    def test_recurrence_bumps_instead_of_new_alert(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            first = await engine.raise_alert(
+                severity=AlertSeverity.HIGH,
+                category="portfolio",
+                message="drawdown",
+                dedup_key="portfolio.drawdown_warning",
+            )
+            clock.advance_ms(1_000)
+            second = await engine.raise_alert(
+                severity=AlertSeverity.HIGH,
+                category="portfolio",
+                message="drawdown",
+                dedup_key="portfolio.drawdown_warning",
+            )
+            assert first is True and second is False
+            alerts = await store.alerts()
+            assert len(alerts) == 1
+            assert alerts[0].count == 2
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_escalation_re_announces(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            await engine.raise_alert(
+                severity=AlertSeverity.MEDIUM,
+                category="system",
+                message="latency",
+                dedup_key="infra.latency",
+            )
+            clock.advance_ms(1_000)
+            escalated = await engine.raise_alert(
+                severity=AlertSeverity.HIGH,
+                category="system",
+                message="latency",
+                dedup_key="infra.latency",
+            )
+            assert escalated is True
+            alerts = await store.alerts()
+            assert alerts[0].severity is AlertSeverity.HIGH
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_new_alert_after_window_elapses(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            await engine.raise_alert(
+                severity=AlertSeverity.LOW,
+                category="system",
+                message="x",
+                dedup_key="k",
+            )
+            clock.advance_ms(120_000)  # beyond the 60s dedup window
+            fresh = await engine.raise_alert(
+                severity=AlertSeverity.LOW,
+                category="system",
+                message="x",
+                dedup_key="k",
+            )
+            assert fresh is True
+            assert len(await store.alerts()) == 2
+            await store.close()
+
+        asyncio.run(scenario())
+
+
+class TestIncidentsAndAutoEngage:
+    def test_critical_opens_incident_once(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            await engine.raise_alert(
+                severity=AlertSeverity.CRITICAL,
+                category="system",
+                message="burst",
+                dedup_key="system.error_burst",
+            )
+            clock.advance_ms(120_000)
+            await engine.raise_alert(
+                severity=AlertSeverity.CRITICAL,
+                category="system",
+                message="burst",
+                dedup_key="system.error_burst",
+            )
+            assert len(await store.open_incidents()) == 1
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_emergency_auto_engages_kill_switch(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, kill_switch, bus = build(tmp_path, clock)
+            await store.open()
+            await engine.raise_alert(
+                severity=AlertSeverity.EMERGENCY,
+                category="portfolio",
+                message="drawdown critical",
+                dedup_key="portfolio.drawdown_critical",
+            )
+            assert (await kill_switch.level()) is KillSwitchLevel.ENTRIES_DISABLED
+            journal_types = [
+                event.event_type
+                for event in bus.journal.replay()  # type: ignore[attr-defined]
+            ]
+            assert MonitoringEvent.KILL_SWITCH_CHANGED.value in journal_types
+            await store.close()
+
+        asyncio.run(scenario())
+
+
+class TestRules:
+    def test_error_burst_rule_fires_critical(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            collector = TelemetryCollector(store=store, clock=clock, logger=logger())
+            for _ in range(3):
+                collector.error()
+            await collector.flush()
+            assert await store.count_metric(METRIC_ERRORS_TOTAL, since_ms=0) == 3
+            raised = await engine.evaluate(portfolio=calm(), heartbeats=())
+            assert raised >= 1
+            alerts = await store.alerts()
+            assert any(alert.dedup_key == "system.error_burst" for alert in alerts)
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_drawdown_rules_tier(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            await engine.evaluate(
+                portfolio=PortfolioPulse(drawdown=0.06, consecutive_losses=0),
+                heartbeats=(),
+            )
+            warning = await store.recent_alert(
+                "portfolio.drawdown_warning", since_ms=0
+            )
+            assert warning is not None
+            assert warning.severity is AlertSeverity.HIGH
+            await engine.evaluate(
+                portfolio=PortfolioPulse(drawdown=0.12, consecutive_losses=0),
+                heartbeats=(),
+            )
+            critical = await store.recent_alert(
+                "portfolio.drawdown_critical", since_ms=0
+            )
+            assert critical is not None
+            assert critical.severity is AlertSeverity.EMERGENCY
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_latency_trend_pattern_rule(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            collector = TelemetryCollector(store=store, clock=clock, logger=logger())
+            for value in (10.0, 20.0, 30.0, 40.0, 50.0):
+                collector.metric("loop.bar.total_ms", value)
+                clock.advance_ms(1_000)
+            await collector.flush()
+            await engine.evaluate(portfolio=calm(), heartbeats=())
+            trend = await store.recent_alert(
+                "infrastructure.latency_trend", since_ms=0
+            )
+            assert trend is not None
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_stale_heartbeat_alerts(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            engine, store, _, _ = build(tmp_path, clock)
+            await store.open()
+            beats = (
+                HeartbeatAge(component="operations_loop", age_ms=60_000, stale=True),
+                HeartbeatAge(component="fresh", age_ms=1_000, stale=False),
+            )
+            raised = await engine.evaluate(portfolio=calm(), heartbeats=beats)
+            assert raised == 1
+            alert = await store.recent_alert(
+                "health.heartbeat.operations_loop", since_ms=0
+            )
+            assert alert is not None
+            await store.close()
+
+        asyncio.run(scenario())
