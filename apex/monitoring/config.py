@@ -1,1 +1,220 @@
-IiIiTW9uaXRvcmluZyBwbGF0Zm9ybSBjb25maWd1cmF0aW9uIChgYHRlbGVtZXRyeS55YW1sYGAsIFBoYXNlIDEyKS4KCkRlZXAtdmFsaWRhdGVzIHRoZSBtb25pdG9yaW5nIHNlY3Rpb25zOiBtZXRyaWMgcmV0ZW50aW9uLCBoZWFydGJlYXQKc3RhbGVuZXNzLCBhbGVydCB0aHJlc2hvbGRzIGFuZCBkZWR1cGxpY2F0aW9uLCB0aGUga2lsbC1zd2l0Y2gKYXV0by1lbmdhZ2UgcG9saWN5LCB0aGUgU0xPIGVycm9yIGJ1ZGdldCAoQm9vayBJSSAyNi4yOCksIHNuYXBzaG90CmNhZGVuY2UgYW5kIHRoZSBvcGVyYXRpb25hbCBsb29wJ3MgZ3VhcmRzLiBFdmVyeXRoaW5nLWlzLWNvbmZpZwooQ29uc3RpdHV0aW9uIDMuNyk6IHRoZSBlbmdpbmVzIGhhcmRjb2RlIG5vIHRocmVzaG9sZCwgd2luZG93IG9yCmNhZGVuY2UuIFRoZSBzcGVjIHN0YXRlcyB0aGUgcmVxdWlyZW1lbnRzIGJ1dCBub3QgdGhlIG51bWJlcnMKKDI2LjIyLzEwLjE3IHNpbGVuY2VzKSAtIHRoZSBkZWZhdWx0cyBoZXJlIGFyZSB0aGUgcGxhdGZvcm0ncwpkb2N1bWVudGVkIGNob2ljZXMuCiIiIgoKZnJvbSBkYXRhY2xhc3NlcyBpbXBvcnQgZGF0YWNsYXNzCgpmcm9tIGFwZXguY29yZS5jb25maWcgaW1wb3J0IENvbmZpZ1NlY3Rpb24KZnJvbSBhcGV4LmNvcmUuZXhjZXB0aW9ucyBpbXBvcnQgQ29uZmlndXJhdGlvbkVycm9yCmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IEFsZXJ0U2V2ZXJpdHksIEtpbGxTd2l0Y2hMZXZlbAoKX0NPREUgPSAiQ0ZHLTA0MCIKCgpAZGF0YWNsYXNzKGZyb3plbj1UcnVlLCBzbG90cz1UcnVlLCBrd19vbmx5PVRydWUpCmNsYXNzIE1vbml0b3JpbmdTZXR0aW5nczoKICAgICIiIlRoZSB2YWxpZGF0ZWQgbW9uaXRvcmluZyBwbGF0Zm9ybSBjb25maWd1cmF0aW9uLiIiIgoKICAgIG1ldHJpY19yZXRlbnRpb25fZGF5czogaW50ID0gMTQKICAgIGhlYXJ0YmVhdF9zdGFsZV9tczogaW50ID0gOTAwXzAwMAogICAgZGVkdXBfd2luZG93X21zOiBpbnQgPSAzMDBfMDAwCiAgICBlcnJvcl9idXJzdF9jb3VudDogaW50ID0gNQogICAgZXJyb3JfYnVyc3Rfd2luZG93X21zOiBpbnQgPSA2MDBfMDAwCiAgICBkaXNjb25uZWN0X2J1cnN0X2NvdW50OiBpbnQgPSAzCiAgICBkcmF3ZG93bl93YXJuaW5nOiBmbG9hdCA9IDAuMDUKICAgIGRyYXdkb3duX2NyaXRpY2FsOiBmbG9hdCA9IDAuMTAKICAgIGxvc3Nfc3RyZWFrX2hpZ2g6IGludCA9IDQKICAgIHN0YWdlX2xhdGVuY3lfd2FybmluZ19tczogZmxvYXQgPSAxNV8wMDAuMAogICAgc3RhZ2VfbGF0ZW5jeV9jcml0aWNhbF9tczogZmxvYXQgPSA2MF8wMDAuMAogICAgdHJlbmRfd2luZG93OiBpbnQgPSA1CiAgICBraWxsX3N3aXRjaF9hdXRvX2VuZ2FnZTogYm9vbCA9IFRydWUKICAgIGtpbGxfc3dpdGNoX2VuZ2FnZV9zZXZlcml0eTogQWxlcnRTZXZlcml0eSA9IEFsZXJ0U2V2ZXJpdHkuRU1FUkdFTkNZCiAgICBraWxsX3N3aXRjaF9lbmdhZ2VfbGV2ZWw6IEtpbGxTd2l0Y2hMZXZlbCA9IEtpbGxTd2l0Y2hMZXZlbC5FTlRSSUVTX0RJU0FCTEVECiAgICBzbG9fd2luZG93X21zOiBpbnQgPSA4Nl80MDBfMDAwCiAgICBzbG9fbWF4X2Vycm9yX3JhdGU6IGZsb2F0ID0gMC4wNQogICAgc2xvX21pbl9vcGVyYXRpb25zOiBpbnQgPSAyMAogICAgc25hcHNob3RfaW50ZXJ2YWxfbXM6IGludCA9IDMwMF8wMDAKICAgIHByb21vdGlvbl9ndWFyZF90cmFkZXM6IGludCA9IDEwCiAgICBwcm9tb3Rpb25fZ3VhcmRfZmxvb3JfcjogZmxvYXQgPSAtNS4wCgogICAgZGVmIF9fcG9zdF9pbml0X18oc2VsZikgLT4gTm9uZToKICAgICAgICBfcmVxdWlyZShzZWxmLm1ldHJpY19yZXRlbnRpb25fZGF5cyA+PSAxLCAibWV0cmljX3JldGVudGlvbl9kYXlzIG11c3QgYmUgPj0gMSIpCiAgICAgICAgX3JlcXVpcmUoc2VsZi5oZWFydGJlYXRfc3RhbGVfbXMgPj0gMV8wMDAsICJoZWFydGJlYXRfc3RhbGVfbXMgbXVzdCBiZSA+PSAxMDAwIikKICAgICAgICBfcmVxdWlyZShzZWxmLmRlZHVwX3dpbmRvd19tcyA+PSAxXzAwMCwgImRlZHVwX3dpbmRvd19tcyBtdXN0IGJlID49IDEwMDAiKQogICAgICAgIF9yZXF1aXJlKHNlbGYuZXJyb3JfYnVyc3RfY291bnQgPj0gMSwgImVycm9yX2J1cnN0X2NvdW50IG11c3QgYmUgPj0gMSIpCiAgICAgICAgX3JlcXVpcmUoCiAgICAgICAgICAgIHNlbGYuZXJyb3JfYnVyc3Rfd2luZG93X21zID49IDFfMDAwLCAiZXJyb3JfYnVyc3Rfd2luZG93X21zIG11c3QgYmUgPj0gMTAwMCIKICAgICAgICApCiAgICAgICAgX3JlcXVpcmUoc2VsZi5kaXNjb25uZWN0X2J1cnN0X2NvdW50ID49IDEsICJkaXNjb25uZWN0X2J1cnN0X2NvdW50IG11c3QgYmUgPj0gMSIpCiAgICAgICAgX3JlcXVpcmUoCiAgICAgICAgICAgIDAuMCA8IHNlbGYuZHJhd2Rvd25fd2FybmluZyA8IHNlbGYuZHJhd2Rvd25fY3JpdGljYWwgPD0gMS4wLAogICAgICAgICAgICAiZHJhd2Rvd24gdGhyZXNob2xkcyBtdXN0IHNhdGlzZnkgMCA8IHdhcm5pbmcgPCBjcml0aWNhbCA8PSAxIiwKICAgICAgICApCiAgICAgICAgX3JlcXVpcmUoc2VsZi5sb3NzX3N0cmVha19oaWdoID49IDEsICJsb3NzX3N0cmVha19oaWdoIG11c3QgYmUgPj0gMSIpCiAgICAgICAgX3JlcXVpcmUoCiAgICAgICAgICAgIDAuMCA8IHNlbGYuc3RhZ2VfbGF0ZW5jeV93YXJuaW5nX21zIDwgc2VsZi5zdGFnZV9sYXRlbmN5X2NyaXRpY2FsX21zLAogICAgICAgICAgICAic3RhZ2UgbGF0ZW5jeSB0aHJlc2hvbGRzIG11c3Qgc2F0aXNmeSAwIDwgd2FybmluZyA8IGNyaXRpY2FsIiwKICAgICAgICApCiAgICAgICAgX3JlcXVpcmUoc2VsZi50cmVuZF93aW5kb3cgPj0gMywgInRyZW5kX3dpbmRvdyBtdXN0IGJlID49IDMiKQogICAgICAgIF9yZXF1aXJlKHNlbGYuc2xvX3dpbmRvd19tcyA+PSA2MF8wMDAsICJzbG9fd2luZG93X21zIG11c3QgYmUgPj0gNjAwMDAiKQogICAgICAgIF9yZXF1aXJlKAogICAgICAgICAgICAwLjAgPCBzZWxmLnNsb19tYXhfZXJyb3JfcmF0ZSA8IDEuMCwgInNsb19tYXhfZXJyb3JfcmF0ZSBtdXN0IGJlIGluICgwLCAxKSIKICAgICAgICApCiAgICAgICAgX3JlcXVpcmUoc2VsZi5zbG9fbWluX29wZXJhdGlvbnMgPj0gMSwgInNsb19taW5fb3BlcmF0aW9ucyBtdXN0IGJlID49IDEiKQogICAgICAgIF9yZXF1aXJlKAogICAgICAgICAgICBzZWxmLnNuYXBzaG90X2ludGVydmFsX21zID49IDEwXzAwMCwgInNuYXBzaG90X2ludGVydmFsX21zIG11c3QgYmUgPj0gMTAwMDAiCiAgICAgICAgKQogICAgICAgIF9yZXF1aXJlKHNlbGYucHJvbW90aW9uX2d1YXJkX3RyYWRlcyA+PSAxLCAicHJvbW90aW9uX2d1YXJkX3RyYWRlcyBtdXN0IGJlID49IDEiKQogICAgICAgIF9yZXF1aXJlKAogICAgICAgICAgICBzZWxmLnByb21vdGlvbl9ndWFyZF9mbG9vcl9yIDwgMC4wLCAicHJvbW90aW9uX2d1YXJkX2Zsb29yX3IgbXVzdCBiZSA8IDAiCiAgICAgICAgKQoKCmRlZiBfcmVxdWlyZShjb25kaXRpb246IGJvb2wsIG1lc3NhZ2U6IHN0cikgLT4gTm9uZToKICAgIGlmIG5vdCBjb25kaXRpb246CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKG1lc3NhZ2UsIGNvZGU9X0NPREUsIGRldGFpbHM9e30pCgoKZGVmIF9tYXBwaW5nKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyKSAtPiBDb25maWdTZWN0aW9uOgogICAgdmFsdWUgPSBzZWN0aW9uLmdldChrZXksIHt9KQogICAgaWYgbm90IGlzaW5zdGFuY2UodmFsdWUsIGRpY3QpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgZiJ0ZWxlbWV0cnkue2tleX0gbXVzdCBiZSBhIG1hcHBpbmciLAogICAgICAgICAgICBjb2RlPSJDRkctMDQwIiwKICAgICAgICAgICAgZGV0YWlscz17ImZvdW5kIjogcmVwcih2YWx1ZSl9LAogICAgICAgICkKICAgIHJldHVybiB2YWx1ZQoKCmRlZiBfbnVtYmVyKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBkZWZhdWx0OiBmbG9hdCkgLT4gZmxvYXQ6CiAgICB2YWx1ZSA9IHNlY3Rpb24uZ2V0KGtleSwgZGVmYXVsdCkKICAgIGlmIGlzaW5zdGFuY2UodmFsdWUsIGJvb2wpIG9yIG5vdCBpc2luc3RhbmNlKHZhbHVlLCAoaW50LCBmbG9hdCkpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgZiJ0ZWxlbWV0cnkgdmFsdWUge2tleX0gbXVzdCBiZSBhIG51bWJlciIsCiAgICAgICAgICAgIGNvZGU9IkNGRy0wNDAiLAogICAgICAgICAgICBkZXRhaWxzPXsiZm91bmQiOiByZXByKHZhbHVlKX0sCiAgICAgICAgKQogICAgcmV0dXJuIGZsb2F0KHZhbHVlKQoKCmRlZiBfaW50ZWdlcihzZWN0aW9uOiBDb25maWdTZWN0aW9uLCBrZXk6IHN0ciwgZGVmYXVsdDogaW50KSAtPiBpbnQ6CiAgICB2YWx1ZSA9IHNlY3Rpb24uZ2V0KGtleSwgZGVmYXVsdCkKICAgIGlmIGlzaW5zdGFuY2UodmFsdWUsIGJvb2wpIG9yIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBpbnQpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgZiJ0ZWxlbWV0cnkgdmFsdWUge2tleX0gbXVzdCBiZSBhbiBpbnRlZ2VyIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTA0MCIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmb3VuZCI6IHJlcHIodmFsdWUpfSwKICAgICAgICApCiAgICByZXR1cm4gdmFsdWUKCgpkZWYgX2Jvb2xlYW4oc2VjdGlvbjogQ29uZmlnU2VjdGlvbiwga2V5OiBzdHIsIGRlZmF1bHQ6IGJvb2wpIC0+IGJvb2w6CiAgICB2YWx1ZSA9IHNlY3Rpb24uZ2V0KGtleSwgZGVmYXVsdCkKICAgIGlmIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBib29sKToKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgIGYidGVsZW1ldHJ5IHZhbHVlIHtrZXl9IG11c3QgYmUgYSBib29sZWFuIiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTA0MCIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmb3VuZCI6IHJlcHIodmFsdWUpfSwKICAgICAgICApCiAgICByZXR1cm4gdmFsdWUKCgpkZWYgX3NldmVyaXR5KHNlY3Rpb246IENvbmZpZ1NlY3Rpb24sIGtleTogc3RyLCBkZWZhdWx0OiBBbGVydFNldmVyaXR5KSAtPiBBbGVydFNldmVyaXR5OgogICAgdmFsdWUgPSBzZWN0aW9uLmdldChrZXksIGRlZmF1bHQudmFsdWUpCiAgICB2YWx1ZXMgPSB7c2V2ZXJpdHkudmFsdWU6IHNldmVyaXR5IGZvciBzZXZlcml0eSBpbiBBbGVydFNldmVyaXR5fQogICAgaWYgbm90IGlzaW5zdGFuY2UodmFsdWUsIHN0cikgb3IgdmFsdWUgbm90IGluIHZhbHVlczoKICAgICAgICByYWlzZSBDb25maWd1cmF0aW9uRXJyb3IoCiAgICAgICAgICAgIGYidGVsZW1ldHJ5IHZhbHVlIHtrZXl9IG11c3QgYmUgb25lIG9mIHtzb3J0ZWQodmFsdWVzKX0iLAogICAgICAgICAgICBjb2RlPSJDRkctMDQwIiwKICAgICAgICAgICAgZGV0YWlscz17ImZvdW5kIjogcmVwcih2YWx1ZSl9LAogICAgICAgICkKICAgIHJldHVybiB2YWx1ZXNbdmFsdWVdCgoKZGVmIF9sZXZlbChzZWN0aW9uOiBDb25maWdTZWN0aW9uLCBrZXk6IHN0ciwgZGVmYXVsdDogS2lsbFN3aXRjaExldmVsKSAtPiBLaWxsU3dpdGNoTGV2ZWw6CiAgICB2YWx1ZSA9IHNlY3Rpb24uZ2V0KGtleSwgZGVmYXVsdC52YWx1ZSkKICAgIHZhbHVlcyA9IHtsZXZlbC52YWx1ZTogbGV2ZWwgZm9yIGxldmVsIGluIEtpbGxTd2l0Y2hMZXZlbH0KICAgIGlmIG5vdCBpc2luc3RhbmNlKHZhbHVlLCBzdHIpIG9yIHZhbHVlIG5vdCBpbiB2YWx1ZXM6CiAgICAgICAgcmFpc2UgQ29uZmlndXJhdGlvbkVycm9yKAogICAgICAgICAgICBmInRlbGVtZXRyeSB2YWx1ZSB7a2V5fSBtdXN0IGJlIG9uZSBvZiB7c29ydGVkKHZhbHVlcyl9IiwKICAgICAgICAgICAgY29kZT0iQ0ZHLTA0MCIsCiAgICAgICAgICAgIGRldGFpbHM9eyJmb3VuZCI6IHJlcHIodmFsdWUpfSwKICAgICAgICApCiAgICByZXR1cm4gdmFsdWVzW3ZhbHVlXQoKCmRlZiBtb25pdG9yaW5nX3NldHRpbmdzKHNlY3Rpb246IENvbmZpZ1NlY3Rpb24pIC0+IE1vbml0b3JpbmdTZXR0aW5nczoKICAgICIiIlBhcnNlIGFuZCB2YWxpZGF0ZSB0aGUgbW9uaXRvcmluZyBzZWN0aW9ucyBvZiB0ZWxlbWV0cnkueWFtbC4iIiIKICAgIGlmIG5vdCBpc2luc3RhbmNlKHNlY3Rpb24sIGRpY3QpOgogICAgICAgIHJhaXNlIENvbmZpZ3VyYXRpb25FcnJvcigKICAgICAgICAgICAgInRlbGVtZXRyeSBjb25maWd1cmF0aW9uIG11c3QgYmUgYSBtYXBwaW5nIiwgY29kZT0iQ0ZHLTA0MCIsIGRldGFpbHM9e30KICAgICAgICApCiAgICBkZWZhdWx0cyA9IE1vbml0b3JpbmdTZXR0aW5ncygpCiAgICBtZXRyaWNzID0gX21hcHBpbmcoc2VjdGlvbiwgIm1ldHJpY3MiKQogICAgaGVhcnRiZWF0ID0gX21hcHBpbmcoc2VjdGlvbiwgImhlYXJ0YmVhdCIpCiAgICBhbGVydHMgPSBfbWFwcGluZyhzZWN0aW9uLCAiYWxlcnRzIikKICAgIGtpbGxfc3dpdGNoID0gX21hcHBpbmcoc2VjdGlvbiwgImtpbGxfc3dpdGNoIikKICAgIHNsbyA9IF9tYXBwaW5nKHNlY3Rpb24sICJzbG8iKQogICAgc25hcHNob3RzID0gX21hcHBpbmcoc2VjdGlvbiwgInNuYXBzaG90cyIpCiAgICBsb29wID0gX21hcHBpbmcoc2VjdGlvbiwgImxvb3AiKQogICAgcmV0dXJuIE1vbml0b3JpbmdTZXR0aW5ncygKICAgICAgICBtZXRyaWNfcmV0ZW50aW9uX2RheXM9X2ludGVnZXIoCiAgICAgICAgICAgIG1ldHJpY3MsICJyZXRlbnRpb25fZGF5cyIsIGRlZmF1bHRzLm1ldHJpY19yZXRlbnRpb25fZGF5cwogICAgICAgICksCiAgICAgICAgaGVhcnRiZWF0X3N0YWxlX21zPV9pbnRlZ2VyKGhlYXJ0YmVhdCwgInN0YWxlX21zIiwgZGVmYXVsdHMuaGVhcnRiZWF0X3N0YWxlX21zKSwKICAgICAgICBkZWR1cF93aW5kb3dfbXM9X2ludGVnZXIoYWxlcnRzLCAiZGVkdXBfd2luZG93X21zIiwgZGVmYXVsdHMuZGVkdXBfd2luZG93X21zKSwKICAgICAgICBlcnJvcl9idXJzdF9jb3VudD1faW50ZWdlcigKICAgICAgICAgICAgYWxlcnRzLCAiZXJyb3JfYnVyc3RfY291bnQiLCBkZWZhdWx0cy5lcnJvcl9idXJzdF9jb3VudAogICAgICAgICksCiAgICAgICAgZXJyb3JfYnVyc3Rfd2luZG93X21zPV9pbnRlZ2VyKAogICAgICAgICAgICBhbGVydHMsICJlcnJvcl9idXJzdF93aW5kb3dfbXMiLCBkZWZhdWx0cy5lcnJvcl9idXJzdF93aW5kb3dfbXMKICAgICAgICApLAogICAgICAgIGRpc2Nvbm5lY3RfYnVyc3RfY291bnQ9X2ludGVnZXIoCiAgICAgICAgICAgIGFsZXJ0cywgImRpc2Nvbm5lY3RfYnVyc3RfY291bnQiLCBkZWZhdWx0cy5kaXNjb25uZWN0X2J1cnN0X2NvdW50CiAgICAgICAgKSwKICAgICAgICBkcmF3ZG93bl93YXJuaW5nPV9udW1iZXIoYWxlcnRzLCAiZHJhd2Rvd25fd2FybmluZyIsIGRlZmF1bHRzLmRyYXdkb3duX3dhcm5pbmcpLAogICAgICAgIGRyYXdkb3duX2NyaXRpY2FsPV9udW1iZXIoCiAgICAgICAgICAgIGFsZXJ0cywgImRyYXdkb3duX2NyaXRpY2FsIiwgZGVmYXVsdHMuZHJhd2Rvd25fY3JpdGljYWwKICAgICAgICApLAogICAgICAgIGxvc3Nfc3RyZWFrX2hpZ2g9X2ludGVnZXIoYWxlcnRzLCAibG9zc19zdHJlYWtfaGlnaCIsIGRlZmF1bHRzLmxvc3Nfc3RyZWFrX2hpZ2gpLAogICAgICAgIHN0YWdlX2xhdGVuY3lfd2FybmluZ19tcz1fbnVtYmVyKAogICAgICAgICAgICBhbGVydHMsICJzdGFnZV9sYXRlbmN5X3dhcm5pbmdfbXMiLCBkZWZhdWx0cy5zdGFnZV9sYXRlbmN5X3dhcm5pbmdfbXMKICAgICAgICApLAogICAgICAgIHN0YWdlX2xhdGVuY3lfY3JpdGljYWxfbXM9X251bWJlcigKICAgICAgICAgICAgYWxlcnRzLCAic3RhZ2VfbGF0ZW5jeV9jcml0aWNhbF9tcyIsIGRlZmF1bHRzLnN0YWdlX2xhdGVuY3lfY3JpdGljYWxfbXMKICAgICAgICApLAogICAgICAgIHRyZW5kX3dpbmRvdz1faW50ZWdlcihhbGVydHMsICJ0cmVuZF93aW5kb3ciLCBkZWZhdWx0cy50cmVuZF93aW5kb3cpLAogICAgICAgIGtpbGxfc3dpdGNoX2F1dG9fZW5nYWdlPV9ib29sZWFuKAogICAgICAgICAgICBraWxsX3N3aXRjaCwgImF1dG9fZW5nYWdlIiwgZGVmYXVsdHMua2lsbF9zd2l0Y2hfYXV0b19lbmdhZ2UKICAgICAgICApLAogICAgICAgIGtpbGxfc3dpdGNoX2VuZ2FnZV9zZXZlcml0eT1fc2V2ZXJpdHkoCiAgICAgICAgICAgIGtpbGxfc3dpdGNoLCAiZW5nYWdlX3NldmVyaXR5IiwgZGVmYXVsdHMua2lsbF9zd2l0Y2hfZW5nYWdlX3NldmVyaXR5CiAgICAgICAgKSwKICAgICAgICBraWxsX3N3aXRjaF9lbmdhZ2VfbGV2ZWw9X2xldmVsKAogICAgICAgICAgICBraWxsX3N3aXRjaCwgImVuZ2FnZV9sZXZlbCIsIGRlZmF1bHRzLmtpbGxfc3dpdGNoX2VuZ2FnZV9sZXZlbAogICAgICAgICksCiAgICAgICAgc2xvX3dpbmRvd19tcz1faW50ZWdlcihzbG8sICJ3aW5kb3dfbXMiLCBkZWZhdWx0cy5zbG9fd2luZG93X21zKSwKICAgICAgICBzbG9fbWF4X2Vycm9yX3JhdGU9X251bWJlcigKICAgICAgICAgICAgc2xvLCAibWF4X2Vycm9yX3JhdGUiLCBkZWZhdWx0cy5zbG9fbWF4X2Vycm9yX3JhdGUKICAgICAgICApLAogICAgICAgIHNsb19taW5fb3BlcmF0aW9ucz1faW50ZWdlcigKICAgICAgICAgICAgc2xvLCAibWluX29wZXJhdGlvbnMiLCBkZWZhdWx0cy5zbG9fbWluX29wZXJhdGlvbnMKICAgICAgICApLAogICAgICAgIHNuYXBzaG90X2ludGVydmFsX21zPV9pbnRlZ2VyKAogICAgICAgICAgICBzbmFwc2hvdHMsICJpbnRlcnZhbF9tcyIsIGRlZmF1bHRzLnNuYXBzaG90X2ludGVydmFsX21zCiAgICAgICAgKSwKICAgICAgICBwcm9tb3Rpb25fZ3VhcmRfdHJhZGVzPV9pbnRlZ2VyKAogICAgICAgICAgICBsb29wLCAicHJvbW90aW9uX2d1YXJkX3RyYWRlcyIsIGRlZmF1bHRzLnByb21vdGlvbl9ndWFyZF90cmFkZXMKICAgICAgICApLAogICAgICAgIHByb21vdGlvbl9ndWFyZF9mbG9vcl9yPV9udW1iZXIoCiAgICAgICAgICAgIGxvb3AsICJwcm9tb3Rpb25fZ3VhcmRfZmxvb3JfciIsIGRlZmF1bHRzLnByb21vdGlvbl9ndWFyZF9mbG9vcl9yCiAgICAgICAgKSwKICAgICkK
+"""Monitoring platform configuration (``telemetry.yaml``, Phase 12).
+
+Deep-validates the monitoring sections: metric retention, heartbeat
+staleness, alert thresholds and deduplication, the kill-switch
+auto-engage policy, the SLO error budget (Book II 26.28), snapshot
+cadence and the operational loop's guards. Everything-is-config
+(Constitution 3.7): the engines hardcode no threshold, window or
+cadence. The spec states the requirements but not the numbers
+(26.22/10.17 silences) - the defaults here are the platform's
+documented choices.
+"""
+
+from dataclasses import dataclass
+
+from apex.core.config import ConfigSection
+from apex.core.exceptions import ConfigurationError
+from apex.monitoring.records import AlertSeverity, KillSwitchLevel
+
+_CODE = "CFG-040"
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class MonitoringSettings:
+    """The validated monitoring platform configuration."""
+
+    metric_retention_days: int = 14
+    heartbeat_stale_ms: int = 900_000
+    dedup_window_ms: int = 300_000
+    error_burst_count: int = 5
+    error_burst_window_ms: int = 600_000
+    disconnect_burst_count: int = 3
+    drawdown_warning: float = 0.05
+    drawdown_critical: float = 0.10
+    loss_streak_high: int = 4
+    stage_latency_warning_ms: float = 15_000.0
+    stage_latency_critical_ms: float = 60_000.0
+    trend_window: int = 5
+    kill_switch_auto_engage: bool = True
+    kill_switch_engage_severity: AlertSeverity = AlertSeverity.EMERGENCY
+    kill_switch_engage_level: KillSwitchLevel = KillSwitchLevel.ENTRIES_DISABLED
+    slo_window_ms: int = 86_400_000
+    slo_max_error_rate: float = 0.05
+    slo_min_operations: int = 20
+    snapshot_interval_ms: int = 300_000
+    promotion_guard_trades: int = 10
+    promotion_guard_floor_r: float = -5.0
+
+    def __post_init__(self) -> None:
+        _require(self.metric_retention_days >= 1, "metric_retention_days must be >= 1")
+        _require(self.heartbeat_stale_ms >= 1_000, "heartbeat_stale_ms must be >= 1000")
+        _require(self.dedup_window_ms >= 1_000, "dedup_window_ms must be >= 1000")
+        _require(self.error_burst_count >= 1, "error_burst_count must be >= 1")
+        _require(
+            self.error_burst_window_ms >= 1_000, "error_burst_window_ms must be >= 1000"
+        )
+        _require(self.disconnect_burst_count >= 1, "disconnect_burst_count must be >= 1")
+        _require(
+            0.0 < self.drawdown_warning < self.drawdown_critical <= 1.0,
+            "drawdown thresholds must satisfy 0 < warning < critical <= 1",
+        )
+        _require(self.loss_streak_high >= 1, "loss_streak_high must be >= 1")
+        _require(
+            0.0 < self.stage_latency_warning_ms < self.stage_latency_critical_ms,
+            "stage latency thresholds must satisfy 0 < warning < critical",
+        )
+        _require(self.trend_window >= 3, "trend_window must be >= 3")
+        _require(self.slo_window_ms >= 60_000, "slo_window_ms must be >= 60000")
+        _require(
+            0.0 < self.slo_max_error_rate < 1.0, "slo_max_error_rate must be in (0, 1)"
+        )
+        _require(self.slo_min_operations >= 1, "slo_min_operations must be >= 1")
+        _require(
+            self.snapshot_interval_ms >= 10_000, "snapshot_interval_ms must be >= 10000"
+        )
+        _require(self.promotion_guard_trades >= 1, "promotion_guard_trades must be >= 1")
+        _require(
+            self.promotion_guard_floor_r < 0.0, "promotion_guard_floor_r must be < 0"
+        )
+
+
+def _require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ConfigurationError(message, code=_CODE, details={})
+
+
+def _mapping(section: ConfigSection, key: str) -> ConfigSection:
+    value = section.get(key, {})
+    if not isinstance(value, dict):
+        raise ConfigurationError(
+            f"telemetry.{key} must be a mapping",
+            code="CFG-040",
+            details={"found": repr(value)},
+        )
+    return value
+
+
+def _number(section: ConfigSection, key: str, default: float) -> float:
+    value = section.get(key, default)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ConfigurationError(
+            f"telemetry value {key} must be a number",
+            code="CFG-040",
+            details={"found": repr(value)},
+        )
+    return float(value)
+
+
+def _integer(section: ConfigSection, key: str, default: int) -> int:
+    value = section.get(key, default)
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ConfigurationError(
+            f"telemetry value {key} must be an integer",
+            code="CFG-040",
+            details={"found": repr(value)},
+        )
+    return value
+
+
+def _boolean(section: ConfigSection, key: str, default: bool) -> bool:
+    value = section.get(key, default)
+    if not isinstance(value, bool):
+        raise ConfigurationError(
+            f"telemetry value {key} must be a boolean",
+            code="CFG-040",
+            details={"found": repr(value)},
+        )
+    return value
+
+
+def _severity(section: ConfigSection, key: str, default: AlertSeverity) -> AlertSeverity:
+    value = section.get(key, default.value)
+    values = {severity.value: severity for severity in AlertSeverity}
+    if not isinstance(value, str) or value not in values:
+        raise ConfigurationError(
+            f"telemetry value {key} must be one of {sorted(values)}",
+            code="CFG-040",
+            details={"found": repr(value)},
+        )
+    return values[value]
+
+
+def _level(section: ConfigSection, key: str, default: KillSwitchLevel) -> KillSwitchLevel:
+    value = section.get(key, default.value)
+    values = {level.value: level for level in KillSwitchLevel}
+    if not isinstance(value, str) or value not in values:
+        raise ConfigurationError(
+            f"telemetry value {key} must be one of {sorted(values)}",
+            code="CFG-040",
+            details={"found": repr(value)},
+        )
+    return values[value]
+
+
+def monitoring_settings(section: ConfigSection) -> MonitoringSettings:
+    """Parse and validate the monitoring sections of telemetry.yaml."""
+    if not isinstance(section, dict):
+        raise ConfigurationError(
+            "telemetry configuration must be a mapping", code="CFG-040", details={}
+        )
+    defaults = MonitoringSettings()
+    metrics = _mapping(section, "metrics")
+    heartbeat = _mapping(section, "heartbeat")
+    alerts = _mapping(section, "alerts")
+    kill_switch = _mapping(section, "kill_switch")
+    slo = _mapping(section, "slo")
+    snapshots = _mapping(section, "snapshots")
+    loop = _mapping(section, "loop")
+    return MonitoringSettings(
+        metric_retention_days=_integer(
+            metrics, "retention_days", defaults.metric_retention_days
+        ),
+        heartbeat_stale_ms=_integer(heartbeat, "stale_ms", defaults.heartbeat_stale_ms),
+        dedup_window_ms=_integer(alerts, "dedup_window_ms", defaults.dedup_window_ms),
+        error_burst_count=_integer(
+            alerts, "error_burst_count", defaults.error_burst_count
+        ),
+        error_burst_window_ms=_integer(
+            alerts, "error_burst_window_ms", defaults.error_burst_window_ms
+        ),
+        disconnect_burst_count=_integer(
+            alerts, "disconnect_burst_count", defaults.disconnect_burst_count
+        ),
+        drawdown_warning=_number(alerts, "drawdown_warning", defaults.drawdown_warning),
+        drawdown_critical=_number(
+            alerts, "drawdown_critical", defaults.drawdown_critical
+        ),
+        loss_streak_high=_integer(alerts, "loss_streak_high", defaults.loss_streak_high),
+        stage_latency_warning_ms=_number(
+            alerts, "stage_latency_warning_ms", defaults.stage_latency_warning_ms
+        ),
+        stage_latency_critical_ms=_number(
+            alerts, "stage_latency_critical_ms", defaults.stage_latency_critical_ms
+        ),
+        trend_window=_integer(alerts, "trend_window", defaults.trend_window),
+        kill_switch_auto_engage=_boolean(
+            kill_switch, "auto_engage", defaults.kill_switch_auto_engage
+        ),
+        kill_switch_engage_severity=_severity(
+            kill_switch, "engage_severity", defaults.kill_switch_engage_severity
+        ),
+        kill_switch_engage_level=_level(
+            kill_switch, "engage_level", defaults.kill_switch_engage_level
+        ),
+        slo_window_ms=_integer(slo, "window_ms", defaults.slo_window_ms),
+        slo_max_error_rate=_number(
+            slo, "max_error_rate", defaults.slo_max_error_rate
+        ),
+        slo_min_operations=_integer(
+            slo, "min_operations", defaults.slo_min_operations
+        ),
+        snapshot_interval_ms=_integer(
+            snapshots, "interval_ms", defaults.snapshot_interval_ms
+        ),
+        promotion_guard_trades=_integer(
+            loop, "promotion_guard_trades", defaults.promotion_guard_trades
+        ),
+        promotion_guard_floor_r=_number(
+            loop, "promotion_guard_floor_r", defaults.promotion_guard_floor_r
+        ),
+    )
