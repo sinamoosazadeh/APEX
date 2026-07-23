@@ -3,7 +3,7 @@ schema_version: 1
 
 app_name: apex
 environment: development   # development | testing | staging | production
-run_mode: backtest         # backtest | paper | live | research
+run_mode: paper
 
 # Identity determinism (Constitution 3.24/3.27): with deterministic_ids
 # enabled, all generated ids derive from id_seed and a run is replayable.

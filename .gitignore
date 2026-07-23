@@ -32,3 +32,6 @@ backups/
 .env
 secrets/
 *.key
+
+# Local secrets
+.env.exchange
