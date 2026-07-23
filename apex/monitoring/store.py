@@ -1,1 +1,448 @@
-IiIiTW9uaXRvcmluZyBzdG9yZSAoQm9vayBJSSAyNi4zIHRpbWUtc2VyaWVzIHBlcnNpc3RlbmNlOyBCb29rIEkgMTAuMTYvMTAuMTcpLgoKT25lIGR1cmFibGUgaG9tZSBmb3IgdGhlIG9ic2VydmFiaWxpdHkgbGF5ZXIncyByZWNvcmRzOiBtZXRyaWMKc2FtcGxlcywgaGVhcnRiZWF0cywgZGVkdXBsaWNhdGVkIGFsZXJ0cywgaW5jaWRlbnRzLCBzdGF0ZSBzbmFwc2hvdHMKYW5kIHRoZSBraWxsLXN3aXRjaCBoaXN0b3J5LiBSZXRlbnRpb24gaXMgY29uZmlnLWRyaXZlbiBwcnVuaW5nICh0aGUKc3BlYyBtYW5kYXRlcyBhIHRpbWUtc2VyaWVzIHN0b3JlIGJ1dCBpcyBzaWxlbnQgb24gcmV0ZW50aW9uIC0gdGhlCnBsYXRmb3JtIG1ha2VzIGl0IGV4cGxpY2l0KS4gS2lsbC1zd2l0Y2ggc3RhdGUgaXMgZHVyYWJsZSBhbmQKYXVkaXRhYmxlOiB0cmFuc2l0aW9ucyBhcHBlbmQsIG5ldmVyIG92ZXJ3cml0ZS4KIiIiCgppbXBvcnQgYXN5bmNpbwppbXBvcnQganNvbgppbXBvcnQgc3FsaXRlMwpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKZnJvbSB0eXBpbmcgaW1wb3J0IEZpbmFsCgpmcm9tIGFwZXguY29yZS5leGNlcHRpb25zIGltcG9ydCBTdG9yYWdlRXJyb3IKZnJvbSBhcGV4LmNvcmUudGltZS50aW1lc3RhbXAgaW1wb3J0IFRpbWVzdGFtcApmcm9tIGFwZXgubW9uaXRvcmluZy5yZWNvcmRzIGltcG9ydCAoCiAgICBJTkNJREVOVF9PUEVOLAogICAgSU5DSURFTlRfUkVTT0xWRUQsCiAgICBBbGVydFJlY29yZCwKICAgIEFsZXJ0U2V2ZXJpdHksCiAgICBIZWFydGJlYXRSZWNvcmQsCiAgICBJbmNpZGVudFJlY29yZCwKICAgIEtpbGxTd2l0Y2hMZXZlbCwKICAgIEtpbGxTd2l0Y2hSZWNvcmQsCiAgICBNZXRyaWNTYW1wbGUsCiAgICBTdGF0ZVNuYXBzaG90UmVjb3JkLAopCgpfU0NIRU1BOiBGaW5hbFt0dXBsZVtzdHIsIC4uLl1dID0gKAogICAgIiIiCiAgICBDUkVBVEUgVEFCTEUgSUYgTk9UIEVYSVNUUyBtb25pdG9yaW5nX21ldHJpY3MgKAogICAgICAgIG1ldHJpY19pZCAgICAgIElOVEVHRVIgUFJJTUFSWSBLRVkgQVVUT0lOQ1JFTUVOVCwKICAgICAgICBuYW1lICAgICAgICAgICBURVhUICAgIE5PVCBOVUxMLAogICAgICAgIHZhbHVlICAgICAgICAgIFJFQUwgICAgTk9UIE5VTEwsCiAgICAgICAgdGFncyAgICAgICAgICAgVEVYVCAgICBOT1QgTlVMTCwKICAgICAgICByZWNvcmRlZF9hdF9tcyBJTlRFR0VSIE5PVCBOVUxMCiAgICApCiAgICAiIiIsCiAgICAiIiIKICAgIENSRUFURSBJTkRFWCBJRiBOT1QgRVhJU1RTIGlkeF9tb25pdG9yaW5nX21ldHJpY3NfbmFtZV90aW1lCiAgICBPTiBtb25pdG9yaW5nX21ldHJpY3MgKG5hbWUsIHJlY29yZGVkX2F0X21zKQogICAgIiIiLAogICAgIiIiCiAgICBDUkVBVEUgVEFCTEUgSUYgTk9UIEVYSVNUUyBtb25pdG9yaW5nX2hlYXJ0YmVhdHMgKAogICAgICAgIGNvbXBvbmVudCAgICAgIFRFWFQgICAgUFJJTUFSWSBLRVksCiAgICAgICAgYmVhdF9hdF9tcyAgICAgSU5URUdFUiBOT1QgTlVMTAogICAgKQogICAgIiIiLAogICAgIiIiCiAgICBDUkVBVEUgVEFCTEUgSUYgTk9UIEVYSVNUUyBtb25pdG9yaW5nX2FsZXJ0cyAoCiAgICAgICAgYWxlcnRfaWQgICAgICAgSU5URUdFUiBQUklNQVJZIEtFWSBBVVRPSU5DUkVNRU5ULAogICAgICAgIHNldmVyaXR5ICAgICAgIFRFWFQgICAgTk9UIE5VTEwsCiAgICAgICAgY2F0ZWdvcnkgICAgICAgVEVYVCAgICBOT1QgTlVMTCwKICAgICAgICBtZXNzYWdlICAgICAgICBURVhUICAgIE5PVCBOVUxMLAogICAgICAgIGRlZHVwX2tleSAgICAgIFRFWFQgICAgTk9UIE5VTEwsCiAgICAgICAgY291bnQgICAgICAgICAgSU5URUdFUiBOT1QgTlVMTCwKICAgICAgICBmaXJzdF9hdF9tcyAgICBJTlRFR0VSIE5PVCBOVUxMLAogICAgICAgIGxhc3RfYXRfbXMgICAgIElOVEVHRVIgTk9UIE5VTEwsCiAgICAgICAgaW5jaWRlbnRfaWQgICAgSU5URUdFUgogICAgKQogICAgIiIiLAogICAgIiIiCiAgICBDUkVBVEUgSU5ERVggSUYgTk9UIEVYSVNUUyBpZHhfbW9uaXRvcmluZ19hbGVydHNfZGVkdXAKICAgIE9OIG1vbml0b3JpbmdfYWxlcnRzIChkZWR1cF9rZXksIGxhc3RfYXRfbXMpCiAgICAiIiIsCiAgICAiIiIKICAgIENSRUFURSBUQUJMRSBJRiBOT1QgRVhJU1RTIG1vbml0b3JpbmdfaW5jaWRlbnRzICgKICAgICAgICBpbmNpZGVudF9pZCAgICBJTlRFR0VSIFBSSU1BUlkgS0VZIEFVVE9JTkNSRU1FTlQsCiAgICAgICAgb3BlbmVkX2F0X21zICAgSU5URUdFUiBOT1QgTlVMTCwKICAgICAgICBzZXZlcml0eSAgICAgICBURVhUICAgIE5PVCBOVUxMLAogICAgICAgIHN1bW1hcnkgICAgICAgIFRFWFQgICAgTk9UIE5VTEwsCiAgICAgICAgZGVkdXBfa2V5ICAgICAgVEVYVCAgICBOT1QgTlVMTCwKICAgICAgICBzdGF0dXMgICAgICAgICBURVhUICAgIE5PVCBOVUxMLAogICAgICAgIHJlc29sdmVkX2F0X21zIElOVEVHRVIKICAgICkKICAgICIiIiwKICAgICIiIgogICAgQ1JFQVRFIFRBQkxFIElGIE5PVCBFWElTVFMgbW9uaXRvcmluZ19zbmFwc2hvdHMgKAogICAgICAgIHNuYXBzaG90X2lkICAgIElOVEVHRVIgUFJJTUFSWSBLRVkgQVVUT0lOQ1JFTUVOVCwKICAgICAgICB0YWtlbl9hdF9tcyAgICBJTlRFR0VSIE5PVCBOVUxMLAogICAgICAgIHBheWxvYWQgICAgICAgIFRFWFQgICAgTk9UIE5VTEwKICAgICkKICAgICIiIiwKICAgICIiIgogICAgQ1JFQVRFIFRBQkxFIElGIE5PVCBFWElTVFMgbW9uaXRvcmluZ19raWxsc3dpdGNoICgKICAgICAgICBlbnRyeV9pZCAgICAgICBJTlRFR0VSIFBSSU1BUlkgS0VZIEFVVE9JTkNSRU1FTlQsCiAgICAgICAgbGV2ZWwgICAgICAgICAgVEVYVCAgICBOT1QgTlVMTCwKICAgICAgICByZWFzb24gICAgICAgICBURVhUICAgIE5PVCBOVUxMLAogICAgICAgIGFjdG9yICAgICAgICAgIFRFWFQgICAgTk9UIE5VTEwsCiAgICAgICAgY2hhbmdlZF9hdF9tcyAgSU5URUdFUiBOT1QgTlVMTAogICAgKQogICAgIiIiLAopCgoKY2xhc3MgU3FsaXRlTW9uaXRvcmluZ1JlcG9zaXRvcnk6CiAgICAiIiJEdXJhYmxlIG9ic2VydmFiaWxpdHkgbWVtb3J5IGJlaGluZCB0aGUgdGVsZW1ldHJ5IHN1cmZhY2VzLiIiIgoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCAqLCBkYXRhYmFzZV9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIHNlbGYuX3BhdGggPSBkYXRhYmFzZV9wYXRoCiAgICAgICAgc2VsZi5fbG9jayA9IGFzeW5jaW8uTG9jaygpCiAgICAgICAgc2VsZi5fY29ubmVjdGlvbjogc3FsaXRlMy5Db25uZWN0aW9uIHwgTm9uZSA9IE5vbmUKCiAgICBhc3luYyBkZWYgb3BlbihzZWxmKSAtPiBOb25lOgogICAgICAgICIiIk9wZW4gdGhlIGRhdGFiYXNlIGFuZCBlbnN1cmUgdGhlIHNjaGVtYSBleGlzdHMuIiIiCiAgICAgICAgaWYgc2VsZi5fY29ubmVjdGlvbiBpcyBub3QgTm9uZToKICAgICAgICAgICAgcmFpc2UgU3RvcmFnZUVycm9yKCJtb25pdG9yaW5nIHJlcG9zaXRvcnkgaXMgYWxyZWFkeSBvcGVuIiwgY29kZT0iU1RPLTEwMCIpCiAgICAgICAgc2VsZi5fY29ubmVjdGlvbiA9IGF3YWl0IGFzeW5jaW8udG9fdGhyZWFkKHNlbGYuX29wZW5fYmxvY2tpbmcpCgogICAgZGVmIF9vcGVuX2Jsb2NraW5nKHNlbGYpIC0+IHNxbGl0ZTMuQ29ubmVjdGlvbjoKICAgICAgICBzZWxmLl9wYXRoLnBhcmVudC5ta2RpcihwYXJlbnRzPVRydWUsIGV4aXN0X29rPVRydWUpCiAgICAgICAgY29ubmVjdGlvbiA9IHNxbGl0ZTMuY29ubmVjdChzZWxmLl9wYXRoLCBjaGVja19zYW1lX3RocmVhZD1GYWxzZSkKICAgICAgICBjb25uZWN0aW9uLmV4ZWN1dGUoIlBSQUdNQSBqb3VybmFsX21vZGU9V0FMIikKICAgICAgICBjb25uZWN0aW9uLmV4ZWN1dGUoIlBSQUdNQSBzeW5jaHJvbm91cz1OT1JNQUwiKQogICAgICAgIGZvciBzdGF0ZW1lbnQgaW4gX1NDSEVNQToKICAgICAgICAgICAgY29ubmVjdGlvbi5leGVjdXRlKHN0YXRlbWVudCkKICAgICAgICBjb25uZWN0aW9uLmNvbW1pdCgpCiAgICAgICAgcmV0dXJuIGNvbm5lY3Rpb24KCiAgICBhc3luYyBkZWYgY2xvc2Uoc2VsZikgLT4gTm9uZToKICAgICAgICAiIiJDbG9zZSB0aGUgZGF0YWJhc2U7IGlkZW1wb3RlbnQuIiIiCiAgICAgICAgYXN5bmMgd2l0aCBzZWxmLl9sb2NrOgogICAgICAgICAgICBpZiBzZWxmLl9jb25uZWN0aW9uIGlzIG5vdCBOb25lOgogICAgICAgICAgICAgICAgYXdhaXQgYXN5bmNpby50b190aHJlYWQoc2VsZi5fY29ubmVjdGlvbi5jbG9zZSkKICAgICAgICAgICAgICAgIHNlbGYuX2Nvbm5lY3Rpb24gPSBOb25lCgogICAgZGVmIF9yZXF1aXJlKHNlbGYpIC0+IHNxbGl0ZTMuQ29ubmVjdGlvbjoKICAgICAgICBpZiBzZWxmLl9jb25uZWN0aW9uIGlzIE5vbmU6CiAgICAgICAgICAgIHJhaXNlIFN0b3JhZ2VFcnJvcigibW9uaXRvcmluZyByZXBvc2l0b3J5IGlzIG5vdCBvcGVuIiwgY29kZT0iU1RPLTEwMSIpCiAgICAgICAgcmV0dXJuIHNlbGYuX2Nvbm5lY3Rpb24KCiAgICBhc3luYyBkZWYgX2V4ZWN1dGUoc2VsZiwgcXVlcnk6IHN0ciwgcGFyYW1ldGVyczogdHVwbGVbb2JqZWN0LCAuLi5dKSAtPiBpbnQ6CiAgICAgICAgY29ubmVjdGlvbiA9IHNlbGYuX3JlcXVpcmUoKQoKICAgICAgICBkZWYgd3JpdGUoKSAtPiBpbnQ6CiAgICAgICAgICAgIHdpdGggY29ubmVjdGlvbjoKICAgICAgICAgICAgICAgIGN1cnNvciA9IGNvbm5lY3Rpb24uZXhlY3V0ZShxdWVyeSwgcGFyYW1ldGVycykKICAgICAgICAgICAgcmV0dXJuIGludChjdXJzb3IubGFzdHJvd2lkIG9yIDApCgogICAgICAgIGFzeW5jIHdpdGggc2VsZi5fbG9jazoKICAgICAgICAgICAgcmV0dXJuIGF3YWl0IGFzeW5jaW8udG9fdGhyZWFkKHdyaXRlKQoKICAgIGFzeW5jIGRlZiBfZmV0Y2goCiAgICAgICAgc2VsZiwgcXVlcnk6IHN0ciwgcGFyYW1ldGVyczogdHVwbGVbb2JqZWN0LCAuLi5dCiAgICApIC0+IGxpc3RbdHVwbGVbb2JqZWN0LCAuLi5dXToKICAgICAgICBjb25uZWN0aW9uID0gc2VsZi5fcmVxdWlyZSgpCiAgICAgICAgYXN5bmMgd2l0aCBzZWxmLl9sb2NrOgogICAgICAgICAgICByZXR1cm4gYXdhaXQgYXN5bmNpby50b190aHJlYWQoCiAgICAgICAgICAgICAgICBsYW1iZGE6IGNvbm5lY3Rpb24uZXhlY3V0ZShxdWVyeSwgcGFyYW1ldGVycykuZmV0Y2hhbGwoKQogICAgICAgICAgICApCgogICAgIyAtLS0gTWV0cmljcyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgaW5zZXJ0X21ldHJpY3Moc2VsZiwgc2FtcGxlczogbGlzdFtNZXRyaWNTYW1wbGVdKSAtPiBpbnQ6CiAgICAgICAgIiIiQXBwZW5kIGEgYmF0Y2ggb2YgbWV0cmljIHNhbXBsZXM7IHJldHVybnMgdGhlIGNvdW50IHN0b3JlZC4iIiIKICAgICAgICBpZiBub3Qgc2FtcGxlczoKICAgICAgICAgICAgcmV0dXJuIDAKICAgICAgICBjb25uZWN0aW9uID0gc2VsZi5fcmVxdWlyZSgpCiAgICAgICAgcm93cyA9IFsKICAgICAgICAgICAgKAogICAgICAgICAgICAgICAgc2FtcGxlLm5hbWUsCiAgICAgICAgICAgICAgICBzYW1wbGUudmFsdWUsCiAgICAgICAgICAgICAgICBqc29uLmR1bXBzKHNhbXBsZS50YWdzLCBzb3J0X2tleXM9VHJ1ZSksCiAgICAgICAgICAgICAgICBzYW1wbGUucmVjb3JkZWRfYXQuZXBvY2hfbXMsCiAgICAgICAgICAgICkKICAgICAgICAgICAgZm9yIHNhbXBsZSBpbiBzYW1wbGVzCiAgICAgICAgXQoKICAgICAgICBkZWYgd3JpdGUoKSAtPiBpbnQ6CiAgICAgICAgICAgIHdpdGggY29ubmVjdGlvbjoKICAgICAgICAgICAgICAgIGNvbm5lY3Rpb24uZXhlY3V0ZW1hbnkoCiAgICAgICAgICAgICAgICAgICAgIklOU0VSVCBJTlRPIG1vbml0b3JpbmdfbWV0cmljcyAobmFtZSwgdmFsdWUsIHRhZ3MsIgogICAgICAgICAgICAgICAgICAgICIgcmVjb3JkZWRfYXRfbXMpIFZBTFVFUyAoPyw/LD8sPykiLAogICAgICAgICAgICAgICAgICAgIHJvd3MsCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgIHJldHVybiBsZW4ocm93cykKCiAgICAgICAgYXN5bmMgd2l0aCBzZWxmLl9sb2NrOgogICAgICAgICAgICByZXR1cm4gYXdhaXQgYXN5bmNpby50b190aHJlYWQod3JpdGUpCgogICAgYXN5bmMgZGVmIG1ldHJpY192YWx1ZXMoCiAgICAgICAgc2VsZiwgbmFtZTogc3RyLCAqLCBzaW5jZV9tczogaW50LCBsaW1pdDogaW50ID0gMV8wMDAKICAgICkgLT4gbGlzdFt0dXBsZVtpbnQsIGZsb2F0XV06CiAgICAgICAgIiIiKHJlY29yZGVkX2F0X21zLCB2YWx1ZSkgcGFpcnMgZm9yIG9uZSBtZXRyaWMsIG9sZGVzdCBmaXJzdC4iIiIKICAgICAgICByb3dzID0gYXdhaXQgc2VsZi5fZmV0Y2goCiAgICAgICAgICAgICJTRUxFQ1QgcmVjb3JkZWRfYXRfbXMsIHZhbHVlIEZST00gbW9uaXRvcmluZ19tZXRyaWNzICIKICAgICAgICAgICAgIldIRVJFIG5hbWUgPSA/IEFORCByZWNvcmRlZF9hdF9tcyA+PSA/ICIKICAgICAgICAgICAgIk9SREVSIEJZIHJlY29yZGVkX2F0X21zLCBtZXRyaWNfaWQgTElNSVQgPyIsCiAgICAgICAgICAgIChuYW1lLCBzaW5jZV9tcywgbGltaXQpLAogICAgICAgICkKICAgICAgICByZXR1cm4gWyhpbnQoc3RyKGF0KSksIGZsb2F0KHN0cih2YWx1ZSkpKSBmb3IgYXQsIHZhbHVlIGluIHJvd3NdCgogICAgYXN5bmMgZGVmIGNvdW50X21ldHJpYyhzZWxmLCBuYW1lOiBzdHIsICosIHNpbmNlX21zOiBpbnQpIC0+IGludDoKICAgICAgICAiIiJIb3cgbWFueSBzYW1wbGVzIG9mIG9uZSBtZXRyaWMgbGFuZGVkIHNpbmNlIHRoZSBjdXRvZmYuIiIiCiAgICAgICAgcm93cyA9IGF3YWl0IHNlbGYuX2ZldGNoKAogICAgICAgICAgICAiU0VMRUNUIENPVU5UKCopIEZST00gbW9uaXRvcmluZ19tZXRyaWNzICIKICAgICAgICAgICAgIldIRVJFIG5hbWUgPSA/IEFORCByZWNvcmRlZF9hdF9tcyA+PSA/IiwKICAgICAgICAgICAgKG5hbWUsIHNpbmNlX21zKSwKICAgICAgICApCiAgICAgICAgcmV0dXJuIGludChzdHIocm93c1swXVswXSkpCgogICAgIyAtLS0gSGVhcnRiZWF0cyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgYmVhdChzZWxmLCBjb21wb25lbnQ6IHN0ciwgYXQ6IFRpbWVzdGFtcCkgLT4gTm9uZToKICAgICAgICAiIiJSZWNvcmQgb25lIGNvbXBvbmVudCdzIGxpdmVuZXNzIGJlYXQgKHVwc2VydCkuIiIiCiAgICAgICAgYXdhaXQgc2VsZi5fZXhlY3V0ZSgKICAgICAgICAgICAgIklOU0VSVCBJTlRPIG1vbml0b3JpbmdfaGVhcnRiZWF0cyAoY29tcG9uZW50LCBiZWF0X2F0X21zKSBWQUxVRVMgKD8sPykgIgogICAgICAgICAgICAiT04gQ09ORkxJQ1QoY29tcG9uZW50KSBETyBVUERBVEUgU0VUIGJlYXRfYXRfbXMgPSBleGNsdWRlZC5iZWF0X2F0X21zIiwKICAgICAgICAgICAgKGNvbXBvbmVudCwgYXQuZXBvY2hfbXMpLAogICAgICAgICkKCiAgICBhc3luYyBkZWYgaGVhcnRiZWF0cyhzZWxmKSAtPiBsaXN0W0hlYXJ0YmVhdFJlY29yZF06CiAgICAgICAgIiIiRXZlcnkgY29tcG9uZW50J3MgbGF0ZXN0IGJlYXQsIGJ5IGNvbXBvbmVudCBuYW1lLiIiIgogICAgICAgIHJvd3MgPSBhd2FpdCBzZWxmLl9mZXRjaCgKICAgICAgICAgICAgIlNFTEVDVCBjb21wb25lbnQsIGJlYXRfYXRfbXMgRlJPTSBtb25pdG9yaW5nX2hlYXJ0YmVhdHMgIgogICAgICAgICAgICAiT1JERVIgQlkgY29tcG9uZW50IiwKICAgICAgICAgICAgKCksCiAgICAgICAgKQogICAgICAgIHJldHVybiBbCiAgICAgICAgICAgIEhlYXJ0YmVhdFJlY29yZCgKICAgICAgICAgICAgICAgIGNvbXBvbmVudD1zdHIoY29tcG9uZW50KSwKICAgICAgICAgICAgICAgIGJlYXRfYXQ9VGltZXN0YW1wKGVwb2NoX21zPWludChzdHIoYmVhdF9hdF9tcykpKSwKICAgICAgICAgICAgKQogICAgICAgICAgICBmb3IgY29tcG9uZW50LCBiZWF0X2F0X21zIGluIHJvd3MKICAgICAgICBdCgogICAgIyAtLS0gQWxlcnRzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIGFzeW5jIGRlZiByZWNlbnRfYWxlcnQoc2VsZiwgZGVkdXBfa2V5OiBzdHIsICosIHNpbmNlX21zOiBpbnQpIC0+IEFsZXJ0UmVjb3JkIHwgTm9uZToKICAgICAgICAiIiJUaGUgbmV3ZXN0IGFsZXJ0IHdpdGggdGhpcyBkZWR1cCBrZXkgc2luY2UgdGhlIGN1dG9mZiwgaWYgYW55LiIiIgogICAgICAgIHJvd3MgPSBhd2FpdCBzZWxmLl9mZXRjaCgKICAgICAgICAgICAgIlNFTEVDVCAqIEZST00gbW9uaXRvcmluZ19hbGVydHMgV0hFUkUgZGVkdXBfa2V5ID0gPyBBTkQgbGFzdF9hdF9tcyA+PSA/ICIKICAgICAgICAgICAgIk9SREVSIEJZIGxhc3RfYXRfbXMgREVTQywgYWxlcnRfaWQgREVTQyBMSU1JVCAxIiwKICAgICAgICAgICAgKGRlZHVwX2tleSwgc2luY2VfbXMpLAogICAgICAgICkKICAgICAgICByZXR1cm4gc2VsZi5fdG9fYWxlcnQocm93c1swXSkgaWYgcm93cyBlbHNlIE5vbmUKCiAgICBhc3luYyBkZWYgaW5zZXJ0X2FsZXJ0KAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBzZXZlcml0eTogQWxlcnRTZXZlcml0eSwKICAgICAgICBjYXRlZ29yeTogc3RyLAogICAgICAgIG1lc3NhZ2U6IHN0ciwKICAgICAgICBkZWR1cF9rZXk6IHN0ciwKICAgICAgICBhdDogVGltZXN0YW1wLAogICAgICAgIGluY2lkZW50X2lkOiBpbnQgfCBOb25lID0gTm9uZSwKICAgICkgLT4gaW50OgogICAgICAgICIiIkFwcGVuZCBhIG5ldyBhbGVydDsgcmV0dXJucyBpdHMgaWQuIiIiCiAgICAgICAgcmV0dXJuIGF3YWl0IHNlbGYuX2V4ZWN1dGUoCiAgICAgICAgICAgICJJTlNFUlQgSU5UTyBtb25pdG9yaW5nX2FsZXJ0cyAoc2V2ZXJpdHksIGNhdGVnb3J5LCBtZXNzYWdlLCBkZWR1cF9rZXksIgogICAgICAgICAgICAiIGNvdW50LCBmaXJzdF9hdF9tcywgbGFzdF9hdF9tcywgaW5jaWRlbnRfaWQpIFZBTFVFUyAoPyw/LD8sPywxLD8sPyw/KSIsCiAgICAgICAgICAgICgKICAgICAgICAgICAgICAgIHNldmVyaXR5LnZhbHVlLCBjYXRlZ29yeSwgbWVzc2FnZSwgZGVkdXBfa2V5LAogICAgICAgICAgICAgICAgYXQuZXBvY2hfbXMsIGF0LmVwb2NoX21zLCBpbmNpZGVudF9pZCwKICAgICAgICAgICAgKSwKICAgICAgICApCgogICAgYXN5bmMgZGVmIGJ1bXBfYWxlcnQoCiAgICAgICAgc2VsZiwgYWxlcnRfaWQ6IGludCwgKiwgYXQ6IFRpbWVzdGFtcCwgc2V2ZXJpdHk6IEFsZXJ0U2V2ZXJpdHkKICAgICkgLT4gTm9uZToKICAgICAgICAiIiJGb2xkIGEgcmVjdXJyZW5jZSBpbnRvIGFuIGV4aXN0aW5nIGFsZXJ0ICgyNi4yMiBkZWR1cCkuIiIiCiAgICAgICAgYXdhaXQgc2VsZi5fZXhlY3V0ZSgKICAgICAgICAgICAgIlVQREFURSBtb25pdG9yaW5nX2FsZXJ0cyBTRVQgY291bnQgPSBjb3VudCArIDEsIGxhc3RfYXRfbXMgPSA/LCAiCiAgICAgICAgICAgICJzZXZlcml0eSA9ID8gV0hFUkUgYWxlcnRfaWQgPSA/IiwKICAgICAgICAgICAgKGF0LmVwb2NoX21zLCBzZXZlcml0eS52YWx1ZSwgYWxlcnRfaWQpLAogICAgICAgICkKCiAgICBhc3luYyBkZWYgYWxlcnRzKHNlbGYsICosIGxpbWl0OiBpbnQgPSAyMCkgLT4gbGlzdFtBbGVydFJlY29yZF06CiAgICAgICAgIiIiTW9zdCByZWNlbnQgYWxlcnRzLCBuZXdlc3QgZmlyc3QuIiIiCiAgICAgICAgcm93cyA9IGF3YWl0IHNlbGYuX2ZldGNoKAogICAgICAgICAgICAiU0VMRUNUICogRlJPTSBtb25pdG9yaW5nX2FsZXJ0cyBPUkRFUiBCWSBsYXN0X2F0X21zIERFU0MsIgogICAgICAgICAgICAiIGFsZXJ0X2lkIERFU0MgTElNSVQgPyIsCiAgICAgICAgICAgIChsaW1pdCwpLAogICAgICAgICkKICAgICAgICByZXR1cm4gW3NlbGYuX3RvX2FsZXJ0KHJvdykgZm9yIHJvdyBpbiByb3dzXQoKICAgICMgLS0tIEluY2lkZW50cyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIG9wZW5faW5jaWRlbnRfZm9yKHNlbGYsIGRlZHVwX2tleTogc3RyKSAtPiBJbmNpZGVudFJlY29yZCB8IE5vbmU6CiAgICAgICAgIiIiVGhlIG9wZW4gaW5jaWRlbnQgY2FycnlpbmcgdGhpcyBkZWR1cCBrZXksIGlmIGFueS4iIiIKICAgICAgICByb3dzID0gYXdhaXQgc2VsZi5fZmV0Y2goCiAgICAgICAgICAgICJTRUxFQ1QgKiBGUk9NIG1vbml0b3JpbmdfaW5jaWRlbnRzIFdIRVJFIGRlZHVwX2tleSA9ID8gQU5EIHN0YXR1cyA9ID8gIgogICAgICAgICAgICAiT1JERVIgQlkgaW5jaWRlbnRfaWQgREVTQyBMSU1JVCAxIiwKICAgICAgICAgICAgKGRlZHVwX2tleSwgSU5DSURFTlRfT1BFTiksCiAgICAgICAgKQogICAgICAgIHJldHVybiBzZWxmLl90b19pbmNpZGVudChyb3dzWzBdKSBpZiByb3dzIGVsc2UgTm9uZQoKICAgIGFzeW5jIGRlZiBpbnNlcnRfaW5jaWRlbnQoCiAgICAgICAgc2VsZiwKICAgICAgICAqLAogICAgICAgIG9wZW5lZF9hdDogVGltZXN0YW1wLAogICAgICAgIHNldmVyaXR5OiBBbGVydFNldmVyaXR5LAogICAgICAgIHN1bW1hcnk6IHN0ciwKICAgICAgICBkZWR1cF9rZXk6IHN0ciwKICAgICkgLT4gaW50OgogICAgICAgICIiIk9wZW4gYSBuZXcgaW5jaWRlbnQ7IHJldHVybnMgaXRzIGlkLiIiIgogICAgICAgIHJldHVybiBhd2FpdCBzZWxmLl9leGVjdXRlKAogICAgICAgICAgICAiSU5TRVJUIElOVE8gbW9uaXRvcmluZ19pbmNpZGVudHMgKG9wZW5lZF9hdF9tcywgc2V2ZXJpdHksIHN1bW1hcnksIgogICAgICAgICAgICAiIGRlZHVwX2tleSwgc3RhdHVzLCByZXNvbHZlZF9hdF9tcykgVkFMVUVTICg/LD8sPyw/LD8sTlVMTCkiLAogICAgICAgICAgICAob3BlbmVkX2F0LmVwb2NoX21zLCBzZXZlcml0eS52YWx1ZSwgc3VtbWFyeSwgZGVkdXBfa2V5LCBJTkNJREVOVF9PUEVOKSwKICAgICAgICApCgogICAgYXN5bmMgZGVmIHJlc29sdmVfaW5jaWRlbnQoc2VsZiwgaW5jaWRlbnRfaWQ6IGludCwgKiwgYXQ6IFRpbWVzdGFtcCkgLT4gTm9uZToKICAgICAgICAiIiJNYXJrIG9uZSBpbmNpZGVudCByZXNvbHZlZC4iIiIKICAgICAgICBhd2FpdCBzZWxmLl9leGVjdXRlKAogICAgICAgICAgICAiVVBEQVRFIG1vbml0b3JpbmdfaW5jaWRlbnRzIFNFVCBzdGF0dXMgPSA/LCByZXNvbHZlZF9hdF9tcyA9ID8gIgogICAgICAgICAgICAiV0hFUkUgaW5jaWRlbnRfaWQgPSA/IiwKICAgICAgICAgICAgKElOQ0lERU5UX1JFU09MVkVELCBhdC5lcG9jaF9tcywgaW5jaWRlbnRfaWQpLAogICAgICAgICkKCiAgICBhc3luYyBkZWYgb3Blbl9pbmNpZGVudHMoc2VsZikgLT4gbGlzdFtJbmNpZGVudFJlY29yZF06CiAgICAgICAgIiIiRXZlcnkgb3BlbiBpbmNpZGVudCwgb2xkZXN0IGZpcnN0LiIiIgogICAgICAgIHJvd3MgPSBhd2FpdCBzZWxmLl9mZXRjaCgKICAgICAgICAgICAgIlNFTEVDVCAqIEZST00gbW9uaXRvcmluZ19pbmNpZGVudHMgV0hFUkUgc3RhdHVzID0gPyAiCiAgICAgICAgICAgICJPUkRFUiBCWSBpbmNpZGVudF9pZCIsCiAgICAgICAgICAgIChJTkNJREVOVF9PUEVOLCksCiAgICAgICAgKQogICAgICAgIHJldHVybiBbc2VsZi5fdG9faW5jaWRlbnQocm93KSBmb3Igcm93IGluIHJvd3NdCgogICAgIyAtLS0gU25hcHNob3RzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgaW5zZXJ0X3NuYXBzaG90KHNlbGYsICosIHRha2VuX2F0OiBUaW1lc3RhbXAsIHBheWxvYWQ6IHN0cikgLT4gaW50OgogICAgICAgICIiIkFwcGVuZCBvbmUgc3RhdGUgc25hcHNob3Q7IHJldHVybnMgaXRzIGlkLiIiIgogICAgICAgIHJldHVybiBhd2FpdCBzZWxmLl9leGVjdXRlKAogICAgICAgICAgICAiSU5TRVJUIElOVE8gbW9uaXRvcmluZ19zbmFwc2hvdHMgKHRha2VuX2F0X21zLCBwYXlsb2FkKSBWQUxVRVMgKD8sPykiLAogICAgICAgICAgICAodGFrZW5fYXQuZXBvY2hfbXMsIHBheWxvYWQpLAogICAgICAgICkKCiAgICBhc3luYyBkZWYgc25hcHNob3RzKHNlbGYsICosIGxpbWl0OiBpbnQgPSAxMCkgLT4gbGlzdFtTdGF0ZVNuYXBzaG90UmVjb3JkXToKICAgICAgICAiIiJNb3N0IHJlY2VudCBzbmFwc2hvdHMsIG5ld2VzdCBmaXJzdC4iIiIKICAgICAgICByb3dzID0gYXdhaXQgc2VsZi5fZmV0Y2goCiAgICAgICAgICAgICJTRUxFQ1QgKiBGUk9NIG1vbml0b3Jpbmdfc25hcHNob3RzIE9SREVSIEJZIHNuYXBzaG90X2lkIERFU0MgTElNSVQgPyIsCiAgICAgICAgICAgIChsaW1pdCwpLAogICAgICAgICkKICAgICAgICByZXR1cm4gWwogICAgICAgICAgICBTdGF0ZVNuYXBzaG90UmVjb3JkKAogICAgICAgICAgICAgICAgc25hcHNob3RfaWQ9aW50KHN0cihzbmFwc2hvdF9pZCkpLAogICAgICAgICAgICAgICAgdGFrZW5fYXQ9VGltZXN0YW1wKGVwb2NoX21zPWludChzdHIodGFrZW5fYXRfbXMpKSksCiAgICAgICAgICAgICAgICBwYXlsb2FkPXN0cihwYXlsb2FkKSwKICAgICAgICAgICAgKQogICAgICAgICAgICBmb3Igc25hcHNob3RfaWQsIHRha2VuX2F0X21zLCBwYXlsb2FkIGluIHJvd3MKICAgICAgICBdCgogICAgYXN5bmMgZGVmIHNuYXBzaG90X2NvdW50KHNlbGYpIC0+IGludDoKICAgICAgICAiIiJIb3cgbWFueSBzbmFwc2hvdHMgYXJlIHN0b3JlZC4iIiIKICAgICAgICByb3dzID0gYXdhaXQgc2VsZi5fZmV0Y2goIlNFTEVDVCBDT1VOVCgqKSBGUk9NIG1vbml0b3Jpbmdfc25hcHNob3RzIiwgKCkpCiAgICAgICAgcmV0dXJuIGludChzdHIocm93c1swXVswXSkpCgogICAgIyAtLS0gS2lsbCBzd2l0Y2ggLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgaW5zZXJ0X2tpbGxfc3dpdGNoKAogICAgICAgIHNlbGYsICosIGxldmVsOiBLaWxsU3dpdGNoTGV2ZWwsIHJlYXNvbjogc3RyLCBhY3Rvcjogc3RyLCBhdDogVGltZXN0YW1wCiAgICApIC0+IGludDoKICAgICAgICAiIiJBcHBlbmQgb25lIGtpbGwtc3dpdGNoIHRyYW5zaXRpb247IHJldHVybnMgaXRzIGVudHJ5IGlkLiIiIgogICAgICAgIHJldHVybiBhd2FpdCBzZWxmLl9leGVjdXRlKAogICAgICAgICAgICAiSU5TRVJUIElOVE8gbW9uaXRvcmluZ19raWxsc3dpdGNoIChsZXZlbCwgcmVhc29uLCBhY3RvciwgY2hhbmdlZF9hdF9tcykiCiAgICAgICAgICAgICIgVkFMVUVTICg/LD8sPyw/KSIsCiAgICAgICAgICAgIChsZXZlbC52YWx1ZSwgcmVhc29uLCBhY3RvciwgYXQuZXBvY2hfbXMpLAogICAgICAgICkKCiAgICBhc3luYyBkZWYgY3VycmVudF9raWxsX3N3aXRjaChzZWxmKSAtPiBLaWxsU3dpdGNoUmVjb3JkIHwgTm9uZToKICAgICAgICAiIiJUaGUgbGF0ZXN0IGtpbGwtc3dpdGNoIHN0YXRlIGVudHJ5LCBpZiBhbnkgdHJhbnNpdGlvbiBleGlzdHMuIiIiCiAgICAgICAgcm93cyA9IGF3YWl0IHNlbGYuX2ZldGNoKAogICAgICAgICAgICAiU0VMRUNUICogRlJPTSBtb25pdG9yaW5nX2tpbGxzd2l0Y2ggT1JERVIgQlkgZW50cnlfaWQgREVTQyBMSU1JVCAxIiwgKCkKICAgICAgICApCiAgICAgICAgcmV0dXJuIHNlbGYuX3RvX2tpbGxfc3dpdGNoKHJvd3NbMF0pIGlmIHJvd3MgZWxzZSBOb25lCgogICAgYXN5bmMgZGVmIGtpbGxfc3dpdGNoX2hpc3Rvcnkoc2VsZiwgKiwgbGltaXQ6IGludCA9IDIwKSAtPiBsaXN0W0tpbGxTd2l0Y2hSZWNvcmRdOgogICAgICAgICIiIlJlY2VudCBraWxsLXN3aXRjaCB0cmFuc2l0aW9ucywgbmV3ZXN0IGZpcnN0LiIiIgogICAgICAgIHJvd3MgPSBhd2FpdCBzZWxmLl9mZXRjaCgKICAgICAgICAgICAgIlNFTEVDVCAqIEZST00gbW9uaXRvcmluZ19raWxsc3dpdGNoIE9SREVSIEJZIGVudHJ5X2lkIERFU0MgTElNSVQgPyIsCiAgICAgICAgICAgIChsaW1pdCwpLAogICAgICAgICkKICAgICAgICByZXR1cm4gW3NlbGYuX3RvX2tpbGxfc3dpdGNoKHJvdykgZm9yIHJvdyBpbiByb3dzXQoKICAgICMgLS0tIFJldGVudGlvbiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgcHJ1bmUoc2VsZiwgKiwgb2xkZXJfdGhhbl9tczogaW50KSAtPiBpbnQ6CiAgICAgICAgIiIiRGVsZXRlIGFnZWQgbWV0cmljIHNhbXBsZXMgYW5kIHNuYXBzaG90czsgcmV0dXJucyByb3dzIHJlbW92ZWQuIiIiCiAgICAgICAgcmVtb3ZlZCA9IDAKICAgICAgICBjb25uZWN0aW9uID0gc2VsZi5fcmVxdWlyZSgpCgogICAgICAgIGRlZiB3cml0ZSgpIC0+IGludDoKICAgICAgICAgICAgd2l0aCBjb25uZWN0aW9uOgogICAgICAgICAgICAgICAgbWV0cmljcyA9IGNvbm5lY3Rpb24uZXhlY3V0ZSgKICAgICAgICAgICAgICAgICAgICAiREVMRVRFIEZST00gbW9uaXRvcmluZ19tZXRyaWNzIFdIRVJFIHJlY29yZGVkX2F0X21zIDwgPyIsCiAgICAgICAgICAgICAgICAgICAgKG9sZGVyX3RoYW5fbXMsKSwKICAgICAgICAgICAgICAgICkucm93Y291bnQKICAgICAgICAgICAgICAgIHNuYXBzaG90cyA9IGNvbm5lY3Rpb24uZXhlY3V0ZSgKICAgICAgICAgICAgICAgICAgICAiREVMRVRFIEZST00gbW9uaXRvcmluZ19zbmFwc2hvdHMgV0hFUkUgdGFrZW5fYXRfbXMgPCA/IiwKICAgICAgICAgICAgICAgICAgICAob2xkZXJfdGhhbl9tcywpLAogICAgICAgICAgICAgICAgKS5yb3djb3VudAogICAgICAgICAgICByZXR1cm4gaW50KG1ldHJpY3MpICsgaW50KHNuYXBzaG90cykKCiAgICAgICAgYXN5bmMgd2l0aCBzZWxmLl9sb2NrOgogICAgICAgICAgICByZW1vdmVkID0gYXdhaXQgYXN5bmNpby50b190aHJlYWQod3JpdGUpCiAgICAgICAgcmV0dXJuIHJlbW92ZWQKCiAgICAjIC0tLSBSb3cgbWFwcGluZyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIGRlZiBfdG9fYWxlcnQoc2VsZiwgcm93OiB0dXBsZVtvYmplY3QsIC4uLl0pIC0+IEFsZXJ0UmVjb3JkOgogICAgICAgICgKICAgICAgICAgICAgYWxlcnRfaWQsIHNldmVyaXR5LCBjYXRlZ29yeSwgbWVzc2FnZSwgZGVkdXBfa2V5LAogICAgICAgICAgICBjb3VudCwgZmlyc3RfYXRfbXMsIGxhc3RfYXRfbXMsIGluY2lkZW50X2lkLAogICAgICAgICkgPSByb3cKICAgICAgICByZXR1cm4gQWxlcnRSZWNvcmQoCiAgICAgICAgICAgIGFsZXJ0X2lkPWludChzdHIoYWxlcnRfaWQpKSwKICAgICAgICAgICAgc2V2ZXJpdHk9QWxlcnRTZXZlcml0eShzdHIoc2V2ZXJpdHkpKSwKICAgICAgICAgICAgY2F0ZWdvcnk9c3RyKGNhdGVnb3J5KSwKICAgICAgICAgICAgbWVzc2FnZT1zdHIobWVzc2FnZSksCiAgICAgICAgICAgIGRlZHVwX2tleT1zdHIoZGVkdXBfa2V5KSwKICAgICAgICAgICAgY291bnQ9aW50KHN0cihjb3VudCkpLAogICAgICAgICAgICBmaXJzdF9hdD1UaW1lc3RhbXAoZXBvY2hfbXM9aW50KHN0cihmaXJzdF9hdF9tcykpKSwKICAgICAgICAgICAgbGFzdF9hdD1UaW1lc3RhbXAoZXBvY2hfbXM9aW50KHN0cihsYXN0X2F0X21zKSkpLAogICAgICAgICAgICBpbmNpZGVudF9pZD1pbnQoc3RyKGluY2lkZW50X2lkKSkgaWYgaW5jaWRlbnRfaWQgaXMgbm90IE5vbmUgZWxzZSBOb25lLAogICAgICAgICkKCiAgICBkZWYgX3RvX2luY2lkZW50KHNlbGYsIHJvdzogdHVwbGVbb2JqZWN0LCAuLi5dKSAtPiBJbmNpZGVudFJlY29yZDoKICAgICAgICAoCiAgICAgICAgICAgIGluY2lkZW50X2lkLCBvcGVuZWRfYXRfbXMsIHNldmVyaXR5LCBzdW1tYXJ5LAogICAgICAgICAgICBkZWR1cF9rZXksIHN0YXR1cywgcmVzb2x2ZWRfYXRfbXMsCiAgICAgICAgKSA9IHJvdwogICAgICAgIHJldHVybiBJbmNpZGVudFJlY29yZCgKICAgICAgICAgICAgaW5jaWRlbnRfaWQ9aW50KHN0cihpbmNpZGVudF9pZCkpLAogICAgICAgICAgICBvcGVuZWRfYXQ9VGltZXN0YW1wKGVwb2NoX21zPWludChzdHIob3BlbmVkX2F0X21zKSkpLAogICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5KHN0cihzZXZlcml0eSkpLAogICAgICAgICAgICBzdW1tYXJ5PXN0cihzdW1tYXJ5KSwKICAgICAgICAgICAgZGVkdXBfa2V5PXN0cihkZWR1cF9rZXkpLAogICAgICAgICAgICBzdGF0dXM9c3RyKHN0YXR1cyksCiAgICAgICAgICAgIHJlc29sdmVkX2F0PSgKICAgICAgICAgICAgICAgIFRpbWVzdGFtcChlcG9jaF9tcz1pbnQoc3RyKHJlc29sdmVkX2F0X21zKSkpCiAgICAgICAgICAgICAgICBpZiByZXNvbHZlZF9hdF9tcyBpcyBub3QgTm9uZQogICAgICAgICAgICAgICAgZWxzZSBOb25lCiAgICAgICAgICAgICksCiAgICAgICAgKQoKICAgIGRlZiBfdG9fa2lsbF9zd2l0Y2goc2VsZiwgcm93OiB0dXBsZVtvYmplY3QsIC4uLl0pIC0+IEtpbGxTd2l0Y2hSZWNvcmQ6CiAgICAgICAgZW50cnlfaWQsIGxldmVsLCByZWFzb24sIGFjdG9yLCBjaGFuZ2VkX2F0X21zID0gcm93CiAgICAgICAgcmV0dXJuIEtpbGxTd2l0Y2hSZWNvcmQoCiAgICAgICAgICAgIGVudHJ5X2lkPWludChzdHIoZW50cnlfaWQpKSwKICAgICAgICAgICAgbGV2ZWw9S2lsbFN3aXRjaExldmVsKHN0cihsZXZlbCkpLAogICAgICAgICAgICByZWFzb249c3RyKHJlYXNvbiksCiAgICAgICAgICAgIGFjdG9yPXN0cihhY3RvciksCiAgICAgICAgICAgIGNoYW5nZWRfYXQ9VGltZXN0YW1wKGVwb2NoX21zPWludChzdHIoY2hhbmdlZF9hdF9tcykpKSwKICAgICAgICApCg==
+"""Monitoring store (Book II 26.3 time-series persistence; Book I 10.16/10.17).
+
+One durable home for the observability layer's records: metric
+samples, heartbeats, deduplicated alerts, incidents, state snapshots
+and the kill-switch history. Retention is config-driven pruning (the
+spec mandates a time-series store but is silent on retention - the
+platform makes it explicit). Kill-switch state is durable and
+auditable: transitions append, never overwrite.
+"""
+
+import asyncio
+import json
+import sqlite3
+from pathlib import Path
+from typing import Final
+
+from apex.core.exceptions import StorageError
+from apex.core.time.timestamp import Timestamp
+from apex.monitoring.records import (
+    INCIDENT_OPEN,
+    INCIDENT_RESOLVED,
+    AlertRecord,
+    AlertSeverity,
+    HeartbeatRecord,
+    IncidentRecord,
+    KillSwitchLevel,
+    KillSwitchRecord,
+    MetricSample,
+    StateSnapshotRecord,
+)
+
+_SCHEMA: Final[tuple[str, ...]] = (
+    """
+    CREATE TABLE IF NOT EXISTS monitoring_metrics (
+        metric_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+        name           TEXT    NOT NULL,
+        value          REAL    NOT NULL,
+        tags           TEXT    NOT NULL,
+        recorded_at_ms INTEGER NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_monitoring_metrics_name_time
+    ON monitoring_metrics (name, recorded_at_ms)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS monitoring_heartbeats (
+        component      TEXT    PRIMARY KEY,
+        beat_at_ms     INTEGER NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS monitoring_alerts (
+        alert_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+        severity       TEXT    NOT NULL,
+        category       TEXT    NOT NULL,
+        message        TEXT    NOT NULL,
+        dedup_key      TEXT    NOT NULL,
+        count          INTEGER NOT NULL,
+        first_at_ms    INTEGER NOT NULL,
+        last_at_ms     INTEGER NOT NULL,
+        incident_id    INTEGER
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS idx_monitoring_alerts_dedup
+    ON monitoring_alerts (dedup_key, last_at_ms)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS monitoring_incidents (
+        incident_id    INTEGER PRIMARY KEY AUTOINCREMENT,
+        opened_at_ms   INTEGER NOT NULL,
+        severity       TEXT    NOT NULL,
+        summary        TEXT    NOT NULL,
+        dedup_key      TEXT    NOT NULL,
+        status         TEXT    NOT NULL,
+        resolved_at_ms INTEGER
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS monitoring_snapshots (
+        snapshot_id    INTEGER PRIMARY KEY AUTOINCREMENT,
+        taken_at_ms    INTEGER NOT NULL,
+        payload        TEXT    NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS monitoring_killswitch (
+        entry_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+        level          TEXT    NOT NULL,
+        reason         TEXT    NOT NULL,
+        actor          TEXT    NOT NULL,
+        changed_at_ms  INTEGER NOT NULL
+    )
+    """,
+)
+
+
+class SqliteMonitoringRepository:
+    """Durable observability memory behind the telemetry surfaces."""
+
+    def __init__(self, *, database_path: Path) -> None:
+        self._path = database_path
+        self._lock = asyncio.Lock()
+        self._connection: sqlite3.Connection | None = None
+
+    async def open(self) -> None:
+        """Open the database and ensure the schema exists."""
+        if self._connection is not None:
+            raise StorageError("monitoring repository is already open", code="STO-100")
+        self._connection = await asyncio.to_thread(self._open_blocking)
+
+    def _open_blocking(self) -> sqlite3.Connection:
+        self._path.parent.mkdir(parents=True, exist_ok=True)
+        connection = sqlite3.connect(self._path, check_same_thread=False)
+        connection.execute("PRAGMA journal_mode=WAL")
+        connection.execute("PRAGMA synchronous=NORMAL")
+        for statement in _SCHEMA:
+            connection.execute(statement)
+        connection.commit()
+        return connection
+
+    async def close(self) -> None:
+        """Close the database; idempotent."""
+        async with self._lock:
+            if self._connection is not None:
+                await asyncio.to_thread(self._connection.close)
+                self._connection = None
+
+    def _require(self) -> sqlite3.Connection:
+        if self._connection is None:
+            raise StorageError("monitoring repository is not open", code="STO-101")
+        return self._connection
+
+    async def _execute(self, query: str, parameters: tuple[object, ...]) -> int:
+        connection = self._require()
+
+        def write() -> int:
+            with connection:
+                cursor = connection.execute(query, parameters)
+            return int(cursor.lastrowid or 0)
+
+        async with self._lock:
+            return await asyncio.to_thread(write)
+
+    async def _fetch(
+        self, query: str, parameters: tuple[object, ...]
+    ) -> list[tuple[object, ...]]:
+        connection = self._require()
+        async with self._lock:
+            return await asyncio.to_thread(
+                lambda: connection.execute(query, parameters).fetchall()
+            )
+
+    # --- Metrics ---------------------------------------------------------------
+
+    async def insert_metrics(self, samples: list[MetricSample]) -> int:
+        """Append a batch of metric samples; returns the count stored."""
+        if not samples:
+            return 0
+        connection = self._require()
+        rows = [
+            (
+                sample.name,
+                sample.value,
+                json.dumps(sample.tags, sort_keys=True),
+                sample.recorded_at.epoch_ms,
+            )
+            for sample in samples
+        ]
+
+        def write() -> int:
+            with connection:
+                connection.executemany(
+                    "INSERT INTO monitoring_metrics (name, value, tags,"
+                    " recorded_at_ms) VALUES (?,?,?,?)",
+                    rows,
+                )
+            return len(rows)
+
+        async with self._lock:
+            return await asyncio.to_thread(write)
+
+    async def metric_values(
+        self, name: str, *, since_ms: int, limit: int = 1_000
+    ) -> list[tuple[int, float]]:
+        """(recorded_at_ms, value) pairs for one metric, oldest first."""
+        rows = await self._fetch(
+            "SELECT recorded_at_ms, value FROM monitoring_metrics "
+            "WHERE name = ? AND recorded_at_ms >= ? "
+            "ORDER BY recorded_at_ms, metric_id LIMIT ?",
+            (name, since_ms, limit),
+        )
+        return [(int(str(at)), float(str(value))) for at, value in rows]
+
+    async def count_metric(self, name: str, *, since_ms: int) -> int:
+        """How many samples of one metric landed since the cutoff."""
+        rows = await self._fetch(
+            "SELECT COUNT(*) FROM monitoring_metrics "
+            "WHERE name = ? AND recorded_at_ms >= ?",
+            (name, since_ms),
+        )
+        return int(str(rows[0][0]))
+
+    # --- Heartbeats ------------------------------------------------------------
+
+    async def beat(self, component: str, at: Timestamp) -> None:
+        """Record one component's liveness beat (upsert)."""
+        await self._execute(
+            "INSERT INTO monitoring_heartbeats (component, beat_at_ms) VALUES (?,?) "
+            "ON CONFLICT(component) DO UPDATE SET beat_at_ms = excluded.beat_at_ms",
+            (component, at.epoch_ms),
+        )
+
+    async def heartbeats(self) -> list[HeartbeatRecord]:
+        """Every component's latest beat, by component name."""
+        rows = await self._fetch(
+            "SELECT component, beat_at_ms FROM monitoring_heartbeats "
+            "ORDER BY component",
+            (),
+        )
+        return [
+            HeartbeatRecord(
+                component=str(component),
+                beat_at=Timestamp(epoch_ms=int(str(beat_at_ms))),
+            )
+            for component, beat_at_ms in rows
+        ]
+
+    # --- Alerts ------------------------------------------------------------------
+
+    async def recent_alert(self, dedup_key: str, *, since_ms: int) -> AlertRecord | None:
+        """The newest alert with this dedup key since the cutoff, if any."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_alerts WHERE dedup_key = ? AND last_at_ms >= ? "
+            "ORDER BY last_at_ms DESC, alert_id DESC LIMIT 1",
+            (dedup_key, since_ms),
+        )
+        return self._to_alert(rows[0]) if rows else None
+
+    async def insert_alert(
+        self,
+        *,
+        severity: AlertSeverity,
+        category: str,
+        message: str,
+        dedup_key: str,
+        at: Timestamp,
+        incident_id: int | None = None,
+    ) -> int:
+        """Append a new alert; returns its id."""
+        return await self._execute(
+            "INSERT INTO monitoring_alerts (severity, category, message, dedup_key,"
+            " count, first_at_ms, last_at_ms, incident_id) VALUES (?,?,?,?,1,?,?,?)",
+            (
+                severity.value, category, message, dedup_key,
+                at.epoch_ms, at.epoch_ms, incident_id,
+            ),
+        )
+
+    async def bump_alert(
+        self, alert_id: int, *, at: Timestamp, severity: AlertSeverity
+    ) -> None:
+        """Fold a recurrence into an existing alert (26.22 dedup)."""
+        await self._execute(
+            "UPDATE monitoring_alerts SET count = count + 1, last_at_ms = ?, "
+            "severity = ? WHERE alert_id = ?",
+            (at.epoch_ms, severity.value, alert_id),
+        )
+
+    async def alerts(self, *, limit: int = 20) -> list[AlertRecord]:
+        """Most recent alerts, newest first."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_alerts ORDER BY last_at_ms DESC,"
+            " alert_id DESC LIMIT ?",
+            (limit,),
+        )
+        return [self._to_alert(row) for row in rows]
+
+    # --- Incidents -------------------------------------------------------------------
+
+    async def open_incident_for(self, dedup_key: str) -> IncidentRecord | None:
+        """The open incident carrying this dedup key, if any."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_incidents WHERE dedup_key = ? AND status = ? "
+            "ORDER BY incident_id DESC LIMIT 1",
+            (dedup_key, INCIDENT_OPEN),
+        )
+        return self._to_incident(rows[0]) if rows else None
+
+    async def insert_incident(
+        self,
+        *,
+        opened_at: Timestamp,
+        severity: AlertSeverity,
+        summary: str,
+        dedup_key: str,
+    ) -> int:
+        """Open a new incident; returns its id."""
+        return await self._execute(
+            "INSERT INTO monitoring_incidents (opened_at_ms, severity, summary,"
+            " dedup_key, status, resolved_at_ms) VALUES (?,?,?,?,?,NULL)",
+            (opened_at.epoch_ms, severity.value, summary, dedup_key, INCIDENT_OPEN),
+        )
+
+    async def resolve_incident(self, incident_id: int, *, at: Timestamp) -> None:
+        """Mark one incident resolved."""
+        await self._execute(
+            "UPDATE monitoring_incidents SET status = ?, resolved_at_ms = ? "
+            "WHERE incident_id = ?",
+            (INCIDENT_RESOLVED, at.epoch_ms, incident_id),
+        )
+
+    async def open_incidents(self) -> list[IncidentRecord]:
+        """Every open incident, oldest first."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_incidents WHERE status = ? "
+            "ORDER BY incident_id",
+            (INCIDENT_OPEN,),
+        )
+        return [self._to_incident(row) for row in rows]
+
+    # --- Snapshots -------------------------------------------------------------------
+
+    async def insert_snapshot(self, *, taken_at: Timestamp, payload: str) -> int:
+        """Append one state snapshot; returns its id."""
+        return await self._execute(
+            "INSERT INTO monitoring_snapshots (taken_at_ms, payload) VALUES (?,?)",
+            (taken_at.epoch_ms, payload),
+        )
+
+    async def snapshots(self, *, limit: int = 10) -> list[StateSnapshotRecord]:
+        """Most recent snapshots, newest first."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_snapshots ORDER BY snapshot_id DESC LIMIT ?",
+            (limit,),
+        )
+        return [
+            StateSnapshotRecord(
+                snapshot_id=int(str(snapshot_id)),
+                taken_at=Timestamp(epoch_ms=int(str(taken_at_ms))),
+                payload=str(payload),
+            )
+            for snapshot_id, taken_at_ms, payload in rows
+        ]
+
+    async def snapshot_count(self) -> int:
+        """How many snapshots are stored."""
+        rows = await self._fetch("SELECT COUNT(*) FROM monitoring_snapshots", ())
+        return int(str(rows[0][0]))
+
+    # --- Kill switch --------------------------------------------------------------------
+
+    async def insert_kill_switch(
+        self, *, level: KillSwitchLevel, reason: str, actor: str, at: Timestamp
+    ) -> int:
+        """Append one kill-switch transition; returns its entry id."""
+        return await self._execute(
+            "INSERT INTO monitoring_killswitch (level, reason, actor, changed_at_ms)"
+            " VALUES (?,?,?,?)",
+            (level.value, reason, actor, at.epoch_ms),
+        )
+
+    async def current_kill_switch(self) -> KillSwitchRecord | None:
+        """The latest kill-switch state entry, if any transition exists."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_killswitch ORDER BY entry_id DESC LIMIT 1", ()
+        )
+        return self._to_kill_switch(rows[0]) if rows else None
+
+    async def kill_switch_history(self, *, limit: int = 20) -> list[KillSwitchRecord]:
+        """Recent kill-switch transitions, newest first."""
+        rows = await self._fetch(
+            "SELECT * FROM monitoring_killswitch ORDER BY entry_id DESC LIMIT ?",
+            (limit,),
+        )
+        return [self._to_kill_switch(row) for row in rows]
+
+    # --- Retention ---------------------------------------------------------------------
+
+    async def prune(self, *, older_than_ms: int) -> int:
+        """Delete aged metric samples and snapshots; returns rows removed."""
+        removed = 0
+        connection = self._require()
+
+        def write() -> int:
+            with connection:
+                metrics = connection.execute(
+                    "DELETE FROM monitoring_metrics WHERE recorded_at_ms < ?",
+                    (older_than_ms,),
+                ).rowcount
+                snapshots = connection.execute(
+                    "DELETE FROM monitoring_snapshots WHERE taken_at_ms < ?",
+                    (older_than_ms,),
+                ).rowcount
+            return int(metrics) + int(snapshots)
+
+        async with self._lock:
+            removed = await asyncio.to_thread(write)
+        return removed
+
+    # --- Row mapping -----------------------------------------------------------------
+
+    def _to_alert(self, row: tuple[object, ...]) -> AlertRecord:
+        (
+            alert_id, severity, category, message, dedup_key,
+            count, first_at_ms, last_at_ms, incident_id,
+        ) = row
+        return AlertRecord(
+            alert_id=int(str(alert_id)),
+            severity=AlertSeverity(str(severity)),
+            category=str(category),
+            message=str(message),
+            dedup_key=str(dedup_key),
+            count=int(str(count)),
+            first_at=Timestamp(epoch_ms=int(str(first_at_ms))),
+            last_at=Timestamp(epoch_ms=int(str(last_at_ms))),
+            incident_id=int(str(incident_id)) if incident_id is not None else None,
+        )
+
+    def _to_incident(self, row: tuple[object, ...]) -> IncidentRecord:
+        (
+            incident_id, opened_at_ms, severity, summary,
+            dedup_key, status, resolved_at_ms,
+        ) = row
+        return IncidentRecord(
+            incident_id=int(str(incident_id)),
+            opened_at=Timestamp(epoch_ms=int(str(opened_at_ms))),
+            severity=AlertSeverity(str(severity)),
+            summary=str(summary),
+            dedup_key=str(dedup_key),
+            status=str(status),
+            resolved_at=(
+                Timestamp(epoch_ms=int(str(resolved_at_ms)))
+                if resolved_at_ms is not None
+                else None
+            ),
+        )
+
+    def _to_kill_switch(self, row: tuple[object, ...]) -> KillSwitchRecord:
+        entry_id, level, reason, actor, changed_at_ms = row
+        return KillSwitchRecord(
+            entry_id=int(str(entry_id)),
+            level=KillSwitchLevel(str(level)),
+            reason=str(reason),
+            actor=str(actor),
+            changed_at=Timestamp(epoch_ms=int(str(changed_at_ms))),
+        )
