@@ -1,1 +1,183 @@
-IiIiTWVzc2FnZSBidWlsZGVyOiBkb3QgbGVhZGVycywgcGFnaW5hdGlvbiwgdm9jYWJ1bGFyeSwga2V5Ym9hcmRzLiIiIgoKZnJvbSBhcGV4LmNvcmUuZW51bXMgaW1wb3J0IEhlYWx0aFN0YXRlLCBUaW1lZnJhbWUKZnJvbSBhcGV4LmNvcmUudGltZS50aW1lc3RhbXAgaW1wb3J0IFRpbWVzdGFtcApmcm9tIGFwZXgubW9uaXRvcmluZy5yZWNvcmRzIGltcG9ydCAoCiAgICBBbGVydFJlY29yZCwKICAgIEFsZXJ0U2V2ZXJpdHksCiAgICBLaWxsU3dpdGNoTGV2ZWwsCiAgICBPcGVyYXRpb25zU3RhdHVzLAogICAgU2xvU3RhdHVzLAopCmZyb20gYXBleC5yZXNlYXJjaC5zdG9yZSBpbXBvcnQgUHJvbW90aW9uUmVjb3JkLCBSZXNlYXJjaEpvYgpmcm9tIGFwZXgudGVsZWdyYW0gaW1wb3J0IGZvcm1hdCBhcyB2aWV3cwoKZnJvbSB0ZXN0cy5jb25mdGVzdCBpbXBvcnQgVDAKCgpkZWYgb3BzKCoqb3ZlcnJpZGVzOiBvYmplY3QpIC0+IE9wZXJhdGlvbnNTdGF0dXM6CiAgICBiYXNlOiBkaWN0W3N0ciwgb2JqZWN0XSA9IHsKICAgICAgICAiYXNfb2YiOiBUMCwKICAgICAgICAib3ZlcmFsbF9oZWFsdGgiOiBIZWFsdGhTdGF0ZS5IRUFMVEhZLAogICAgICAgICJjb21wb25lbnRzIjogKCksCiAgICAgICAgImhlYXJ0YmVhdHMiOiAoKSwKICAgICAgICAia2lsbF9zd2l0Y2giOiBLaWxsU3dpdGNoTGV2ZWwuTk9ORSwKICAgICAgICAia2lsbF9zd2l0Y2hfcmVhc29uIjogIiIsCiAgICAgICAgImFsZXJ0c19yZWNlbnQiOiAoKSwKICAgICAgICAiaW5jaWRlbnRzX29wZW4iOiAwLAogICAgICAgICJlcnJvcl9idWRnZXQiOiBTbG9TdGF0dXMoCiAgICAgICAgICAgIG5hbWU9InBsYXRmb3JtIiwKICAgICAgICAgICAgd2luZG93X21zPTFfMDAwLAogICAgICAgICAgICBvcGVyYXRpb25zPTEwLAogICAgICAgICAgICBlcnJvcnM9MCwKICAgICAgICAgICAgZXJyb3JfcmF0ZT0wLjAsCiAgICAgICAgICAgIGJ1ZGdldD0wLjA1LAogICAgICAgICAgICBleGhhdXN0ZWQ9RmFsc2UsCiAgICAgICAgKSwKICAgICAgICAiZXF1aXR5IjogIjEwMDAwIiwKICAgICAgICAiY2FzaCI6ICIxMDAwMCIsCiAgICAgICAgImRyYXdkb3duIjogMC4wMSwKICAgICAgICAib3Blbl9wb3NpdGlvbnMiOiAxLAogICAgICAgICJjbG9zZWRfdHJhZGVzIjogNCwKICAgICAgICAid2luX3JhdGUiOiAwLjUsCiAgICAgICAgInJfc3VtIjogMS41LAogICAgICAgICJqb2JzX3BlbmRpbmciOiAyLAogICAgICAgICJqb2JzX3J1bm5pbmciOiAwLAogICAgICAgICJwcm9tb3Rpb25zX3NoYWRvdyI6IDEsCiAgICAgICAgInByb21vdGlvbnNfcGVuZGluZ19hcHByb3ZhbCI6IDEsCiAgICAgICAgInNuYXBzaG90c19zdG9yZWQiOiAzLAogICAgfQogICAgYmFzZS51cGRhdGUob3ZlcnJpZGVzKQogICAgcmV0dXJuIE9wZXJhdGlvbnNTdGF0dXMoKipiYXNlKSAgIyB0eXBlOiBpZ25vcmVbYXJnLXR5cGVdCgoKZGVmIF9idXR0b25zKGtleWJvYXJkOiB2aWV3cy5LZXlib2FyZCkgLT4gbGlzdFtkaWN0W3N0ciwgc3RyXV06CiAgICAiIiJGbGF0dGVuIGFuIGlubGluZSBrZXlib2FyZCBpbnRvIGl0cyBidXR0b24gZGljdHMgKHR5cGVkKS4iIiIKICAgIHJvd3MgPSBrZXlib2FyZFsiaW5saW5lX2tleWJvYXJkIl0KICAgIGFzc2VydCBpc2luc3RhbmNlKHJvd3MsIGxpc3QpCiAgICBidXR0b25zOiBsaXN0W2RpY3Rbc3RyLCBzdHJdXSA9IFtdCiAgICBmb3Igcm93IGluIHJvd3M6CiAgICAgICAgYXNzZXJ0IGlzaW5zdGFuY2Uocm93LCBsaXN0KQogICAgICAgIGZvciBidXR0b24gaW4gcm93OgogICAgICAgICAgICBhc3NlcnQgaXNpbnN0YW5jZShidXR0b24sIGRpY3QpCiAgICAgICAgICAgIGJ1dHRvbnMuYXBwZW5kKHtzdHIoayk6IHN0cih2KSBmb3IgaywgdiBpbiBidXR0b24uaXRlbXMoKX0pCiAgICByZXR1cm4gYnV0dG9ucwoKCmRlZiBfY2FsbGJhY2tzKGtleWJvYXJkOiB2aWV3cy5LZXlib2FyZCkgLT4gc2V0W3N0cl06CiAgICByZXR1cm4ge2J1dHRvblsiY2FsbGJhY2tfZGF0YSJdIGZvciBidXR0b24gaW4gX2J1dHRvbnMoa2V5Ym9hcmQpfQoKCmRlZiBfbGFiZWxzKGtleWJvYXJkOiB2aWV3cy5LZXlib2FyZCkgLT4gc2V0W3N0cl06CiAgICByZXR1cm4ge2J1dHRvblsidGV4dCJdIGZvciBidXR0b24gaW4gX2J1dHRvbnMoa2V5Ym9hcmQpfQoKCmNsYXNzIFRlc3RMZWFkZXJzOgogICAgZGVmIHRlc3RfZG90X2xlYWRlcl9hbGlnbm1lbnQoc2VsZikgLT4gTm9uZToKICAgICAgICBsaW5lID0gdmlld3MubGVhZGVyKCJFcXVpdHkiLCAiMTAwMDAiKQogICAgICAgIGFzc2VydCBsaW5lLnN0YXJ0c3dpdGgoIkVxdWl0eSAiKQogICAgICAgIGFzc2VydCAiLi4uIiBpbiBsaW5lCiAgICAgICAgYXNzZXJ0IGxpbmUuZW5kc3dpdGgoIiAxMDAwMCIpCgogICAgZGVmIHRlc3Rfa2V5Ym9hcmRfc2hhcGUoc2VsZikgLT4gTm9uZToKICAgICAgICBidWlsdCA9IHZpZXdzLmtleWJvYXJkKFtbKCJCYWNrIiwgIm1lbnUubWFpbiIpXV0pCiAgICAgICAgYXNzZXJ0IGJ1aWx0ID09IHsKICAgICAgICAgICAgImlubGluZV9rZXlib2FyZCI6IFtbeyJ0ZXh0IjogIkJhY2siLCAiY2FsbGJhY2tfZGF0YSI6ICJtZW51Lm1haW4ifV1dCiAgICAgICAgfQoKCmNsYXNzIFRlc3RTY3JlZW5zOgogICAgZGVmIHRlc3Rfc3RhdHVzX3NjcmVlbl9jYXJyaWVzX2hlYWRsaW5lX2ZpZ3VyZXMoc2VsZikgLT4gTm9uZToKICAgICAgICBhbGVydCA9IEFsZXJ0UmVjb3JkKAogICAgICAgICAgICBhbGVydF9pZD0xLAogICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5LkhJR0gsCiAgICAgICAgICAgIGNhdGVnb3J5PSJwb3J0Zm9saW8iLAogICAgICAgICAgICBtZXNzYWdlPSJkcmF3ZG93biIsCiAgICAgICAgICAgIGRlZHVwX2tleT0iayIsCiAgICAgICAgICAgIGNvdW50PTMsCiAgICAgICAgICAgIGZpcnN0X2F0PVQwLAogICAgICAgICAgICBsYXN0X2F0PVQwLAogICAgICAgICAgICBpbmNpZGVudF9pZD1Ob25lLAogICAgICAgICkKICAgICAgICB0ZXh0LCBrZXlib2FyZCA9IHZpZXdzLm9wc19zdGF0dXMob3BzKGFsZXJ0c19yZWNlbnQ9KGFsZXJ0LCkpKQogICAgICAgIGFzc2VydCAiU3RhdHVzIiBpbiB0ZXh0CiAgICAgICAgYXNzZXJ0ICIxMDAwMCIgaW4gdGV4dAogICAgICAgIGFzc2VydCAiKHgzKSIgaW4gdGV4dCAgIyBkZWR1cCBjb3VudCBzdXJmYWNlcwogICAgICAgIGFzc2VydCBfYnV0dG9ucyhrZXlib2FyZCkKCiAgICBkZWYgdGVzdF9tYWluX21lbnVfZ2F0ZXNfYWRtaW5fcm93cyhzZWxmKSAtPiBOb25lOgogICAgICAgIGFkbWluX3RleHQsIGFkbWluX2tiID0gdmlld3MubWFpbl9tZW51KCJhZG1pbiIpCiAgICAgICAgdmlld2VyX3RleHQsIHZpZXdlcl9rYiA9IHZpZXdzLm1haW5fbWVudSgidmlld2VyIikKICAgICAgICBhc3NlcnQgIkFETUlOIiBpbiBhZG1pbl90ZXh0CiAgICAgICAgYXNzZXJ0ICJBRE1JTiIgbm90IGluIHZpZXdlcl90ZXh0CiAgICAgICAgYWRtaW5fbGFiZWxzID0gX2xhYmVscyhhZG1pbl9rYikKICAgICAgICB2aWV3ZXJfbGFiZWxzID0gX2xhYmVscyh2aWV3ZXJfa2IpCiAgICAgICAgYXNzZXJ0ICJFbWVyZ2VuY3kiIGluIGFkbWluX2xhYmVscwogICAgICAgIGFzc2VydCAiRW1lcmdlbmN5IiBub3QgaW4gdmlld2VyX2xhYmVscwoKICAgIGRlZiB0ZXN0X3F1ZXVlX3BhZ2VfdXNlc19maXhlZF92b2NhYnVsYXJ5KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgam9iID0gUmVzZWFyY2hKb2IoCiAgICAgICAgICAgIGpvYl9pZD0xLAogICAgICAgICAgICBzeW1ib2w9IkJUQ1VTRFQiLAogICAgICAgICAgICB0aW1lZnJhbWU9VGltZWZyYW1lLkgxLAogICAgICAgICAgICBraW5kPSJzaWduYWwiLAogICAgICAgICAgICBwcmlvcml0eT0wLAogICAgICAgICAgICBzdGF0dXM9InBlbmRpbmciLAogICAgICAgICAgICBhdHRlbXB0cz0wLAogICAgICAgICAgICBzZWVkPTcsCiAgICAgICAgICAgIHdpbmRvd19iYXJzPTQ4MCwKICAgICAgICAgICAgY3JlYXRlZF9hdD1UMCwKICAgICAgICAgICAgY29tcGxldGVkX2F0PU5vbmUsCiAgICAgICAgICAgIHJlc3VsdD1Ob25lLAogICAgICAgICkKICAgICAgICB0ZXh0LCBfID0gdmlld3MucXVldWVfcGFnZShbam9iXSwgcGFnZT0wLCBwYWdlX3NpemU9NSkKICAgICAgICBhc3NlcnQgIltQZW5kaW5nXSIgaW4gdGV4dAoKICAgIGRlZiB0ZXN0X3Byb21vdGlvbnNfcGFnZV9hcHByb3ZlX2J1dHRvbnNfYWRtaW5fYW5kX3Bhc3NlZF9vbmx5KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgcGFzc2VkID0gX3Byb21vdGlvbigxLCAicGFzc2VkIikKICAgICAgICBzaGFkb3cgPSBfcHJvbW90aW9uKDIsICJzaGFkb3ciKQogICAgICAgIHRleHQsIGFkbWluX2tiID0gdmlld3MucHJvbW90aW9uc19wYWdlKAogICAgICAgICAgICBbcGFzc2VkLCBzaGFkb3ddLCBwYWdlPTAsIHBhZ2Vfc2l6ZT01LCBhZG1pbj1UcnVlCiAgICAgICAgKQogICAgICAgIGFzc2VydCAiIzEiIGluIHRleHQgYW5kICIjMiIgaW4gdGV4dAogICAgICAgIGNhbGxiYWNrcyA9IF9jYWxsYmFja3MoYWRtaW5fa2IpCiAgICAgICAgYXNzZXJ0ICJwcm9tb3Rpb24uYXBwcm92ZS4xIiBpbiBjYWxsYmFja3MKICAgICAgICBhc3NlcnQgInByb21vdGlvbi5hcHByb3ZlLjIiIG5vdCBpbiBjYWxsYmFja3MKICAgICAgICBfLCB2aWV3ZXJfa2IgPSB2aWV3cy5wcm9tb3Rpb25zX3BhZ2UoCiAgICAgICAgICAgIFtwYXNzZWRdLCBwYWdlPTAsIHBhZ2Vfc2l6ZT01LCBhZG1pbj1GYWxzZQogICAgICAgICkKICAgICAgICB2aWV3ZXJfY2FsbGJhY2tzID0gX2NhbGxiYWNrcyh2aWV3ZXJfa2IpCiAgICAgICAgYXNzZXJ0ICJwcm9tb3Rpb24uYXBwcm92ZS4xIiBub3QgaW4gdmlld2VyX2NhbGxiYWNrcwoKICAgIGRlZiB0ZXN0X3BhZ2luYXRpb25fcm93KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgcmVjb3JkcyA9IFtfcHJvbW90aW9uKGluZGV4LCAic2hhZG93IikgZm9yIGluZGV4IGluIHJhbmdlKDcpXQogICAgICAgIF8sIGtleWJvYXJkID0gdmlld3MucHJvbW90aW9uc19wYWdlKAogICAgICAgICAgICByZWNvcmRzLCBwYWdlPTAsIHBhZ2Vfc2l6ZT01LCBhZG1pbj1GYWxzZQogICAgICAgICkKICAgICAgICBjYWxsYmFja3MgPSBfY2FsbGJhY2tzKGtleWJvYXJkKQogICAgICAgIGFzc2VydCAicHJvbW90aW9ucy5wYWdlLjEiIGluIGNhbGxiYWNrcwoKICAgIGRlZiB0ZXN0X2VtZXJnZW5jeV9hbmRfY29uZmlybV92aWV3cyhzZWxmKSAtPiBOb25lOgogICAgICAgIHRleHQsIGVtZXJnZW5jeV9rYiA9IHZpZXdzLmVtZXJnZW5jeV92aWV3KEtpbGxTd2l0Y2hMZXZlbC5TQUZFX01PREUsICJvcGVyYXRvciIpCiAgICAgICAgYXNzZXJ0ICJTQUZFX01PREUiIGluIHRleHQKICAgICAgICBhc3NlcnQgImVtZXJnZW5jeS5zYWZlX21vZGUiIGluIF9jYWxsYmFja3MoZW1lcmdlbmN5X2tiKQogICAgICAgIGNvbmZpcm1fdGV4dCwgY29uZmlybV9rYiA9IHZpZXdzLmNvbmZpcm1fdmlldygiUGF1c2UgVHJhZGluZyIsICJhYmMxMjMiKQogICAgICAgIGFzc2VydCAiUGxlYXNlIGNvbmZpcm0uIiBpbiBjb25maXJtX3RleHQKICAgICAgICBhc3NlcnQgX2NhbGxiYWNrcyhjb25maXJtX2tiKSA9PSB7ImNvbmZpcm0uYWJjMTIzIiwgImNhbmNlbC5hYmMxMjMifQoKCmRlZiBfcHJvbW90aW9uKHByb21vdGlvbl9pZDogaW50LCBzdGF0dXM6IHN0cikgLT4gUHJvbW90aW9uUmVjb3JkOgogICAgcmV0dXJuIFByb21vdGlvblJlY29yZCgKICAgICAgICBwcm9tb3Rpb25faWQ9cHJvbW90aW9uX2lkLAogICAgICAgIHN5bWJvbD0iQlRDVVNEVCIsCiAgICAgICAgdGltZWZyYW1lPVRpbWVmcmFtZS5IMSwKICAgICAgICBraW5kPSJzaWduYWwiLAogICAgICAgIGFydGlmYWN0X3BhdGg9Ii90bXAvYS5qc29uIiwKICAgICAgICBiYXNlbGluZV9hcnRpZmFjdD1Ob25lLAogICAgICAgIHN0YXR1cz1zdGF0dXMsCiAgICAgICAgcmVnaXN0ZXJlZF9hdD1UaW1lc3RhbXAoZXBvY2hfbXM9VDAuZXBvY2hfbXMpLAogICAgICAgIGV2YWx1YXRlZF9hdD1Ob25lLAogICAgICAgIGRlY2lkZWRfYXQ9Tm9uZSwKICAgICAgICBkZWNpZGVkX2J5PU5vbmUsCiAgICAgICAgcmVwb3J0PU5vbmUsCiAgICApCg==
+"""Message builder: dot leaders, pagination, vocabulary, keyboards."""
+
+from apex.core.enums import HealthState, Timeframe
+from apex.core.time.timestamp import Timestamp
+from apex.monitoring.records import (
+    AlertRecord,
+    AlertSeverity,
+    KillSwitchLevel,
+    OperationsStatus,
+    SloStatus,
+)
+from apex.research.store import PromotionRecord, ResearchJob
+from apex.telegram import format as views
+
+from tests.conftest import T0
+
+
+def ops(**overrides: object) -> OperationsStatus:
+    base: dict[str, object] = {
+        "as_of": T0,
+        "overall_health": HealthState.HEALTHY,
+        "components": (),
+        "heartbeats": (),
+        "kill_switch": KillSwitchLevel.NONE,
+        "kill_switch_reason": "",
+        "alerts_recent": (),
+        "incidents_open": 0,
+        "error_budget": SloStatus(
+            name="platform",
+            window_ms=1_000,
+            operations=10,
+            errors=0,
+            error_rate=0.0,
+            budget=0.05,
+            exhausted=False,
+        ),
+        "equity": "10000",
+        "cash": "10000",
+        "drawdown": 0.01,
+        "open_positions": 1,
+        "closed_trades": 4,
+        "win_rate": 0.5,
+        "r_sum": 1.5,
+        "jobs_pending": 2,
+        "jobs_running": 0,
+        "promotions_shadow": 1,
+        "promotions_pending_approval": 1,
+        "snapshots_stored": 3,
+    }
+    base.update(overrides)
+    return OperationsStatus(**base)  # type: ignore[arg-type]
+
+
+def _buttons(keyboard: views.Keyboard) -> list[dict[str, str]]:
+    """Flatten an inline keyboard into its button dicts (typed)."""
+    rows = keyboard["inline_keyboard"]
+    assert isinstance(rows, list)
+    buttons: list[dict[str, str]] = []
+    for row in rows:
+        assert isinstance(row, list)
+        for button in row:
+            assert isinstance(button, dict)
+            buttons.append({str(k): str(v) for k, v in button.items()})
+    return buttons
+
+
+def _callbacks(keyboard: views.Keyboard) -> set[str]:
+    return {button["callback_data"] for button in _buttons(keyboard)}
+
+
+def _labels(keyboard: views.Keyboard) -> set[str]:
+    return {button["text"] for button in _buttons(keyboard)}
+
+
+class TestLeaders:
+    def test_dot_leader_alignment(self) -> None:
+        line = views.leader("Equity", "10000")
+        assert line.startswith("Equity ")
+        assert "..." in line
+        assert line.endswith(" 10000")
+
+    def test_keyboard_shape(self) -> None:
+        built = views.keyboard([[("Back", "menu.main")]])
+        assert built == {
+            "inline_keyboard": [[{"text": "Back", "callback_data": "menu.main"}]]
+        }
+
+
+class TestScreens:
+    def test_status_screen_carries_headline_figures(self) -> None:
+        alert = AlertRecord(
+            alert_id=1,
+            severity=AlertSeverity.HIGH,
+            category="portfolio",
+            message="drawdown",
+            dedup_key="k",
+            count=3,
+            first_at=T0,
+            last_at=T0,
+            incident_id=None,
+        )
+        text, keyboard = views.ops_status(ops(alerts_recent=(alert,)))
+        assert "Status" in text
+        assert "10000" in text
+        assert "(x3)" in text  # dedup count surfaces
+        assert _buttons(keyboard)
+
+    def test_main_menu_gates_admin_rows(self) -> None:
+        admin_text, admin_kb = views.main_menu("admin")
+        viewer_text, viewer_kb = views.main_menu("viewer")
+        assert "ADMIN" in admin_text
+        assert "ADMIN" not in viewer_text
+        admin_labels = _labels(admin_kb)
+        viewer_labels = _labels(viewer_kb)
+        assert "Emergency" in admin_labels
+        assert "Emergency" not in viewer_labels
+
+    def test_queue_page_uses_fixed_vocabulary(self) -> None:
+        job = ResearchJob(
+            job_id=1,
+            symbol="BTCUSDT",
+            timeframe=Timeframe.H1,
+            kind="signal",
+            priority=0,
+            status="pending",
+            attempts=0,
+            seed=7,
+            window_bars=480,
+            created_at=T0,
+            completed_at=None,
+            result=None,
+        )
+        text, _ = views.queue_page([job], page=0, page_size=5)
+        assert "[Pending]" in text
+
+    def test_promotions_page_approve_buttons_admin_and_passed_only(self) -> None:
+        passed = _promotion(1, "passed")
+        shadow = _promotion(2, "shadow")
+        text, admin_kb = views.promotions_page(
+            [passed, shadow], page=0, page_size=5, admin=True
+        )
+        assert "#1" in text and "#2" in text
+        callbacks = _callbacks(admin_kb)
+        assert "promotion.approve.1" in callbacks
+        assert "promotion.approve.2" not in callbacks
+        _, viewer_kb = views.promotions_page(
+            [passed], page=0, page_size=5, admin=False
+        )
+        viewer_callbacks = _callbacks(viewer_kb)
+        assert "promotion.approve.1" not in viewer_callbacks
+
+    def test_pagination_row(self) -> None:
+        records = [_promotion(index, "shadow") for index in range(7)]
+        _, keyboard = views.promotions_page(
+            records, page=0, page_size=5, admin=False
+        )
+        callbacks = _callbacks(keyboard)
+        assert "promotions.page.1" in callbacks
+
+    def test_emergency_and_confirm_views(self) -> None:
+        text, emergency_kb = views.emergency_view(KillSwitchLevel.SAFE_MODE, "operator")
+        assert "SAFE_MODE" in text
+        assert "emergency.safe_mode" in _callbacks(emergency_kb)
+        confirm_text, confirm_kb = views.confirm_view("Pause Trading", "abc123")
+        assert "Please confirm." in confirm_text
+        assert _callbacks(confirm_kb) == {"confirm.abc123", "cancel.abc123"}
+
+
+def _promotion(promotion_id: int, status: str) -> PromotionRecord:
+    return PromotionRecord(
+        promotion_id=promotion_id,
+        symbol="BTCUSDT",
+        timeframe=Timeframe.H1,
+        kind="signal",
+        artifact_path="/tmp/a.json",
+        baseline_artifact=None,
+        status=status,
+        registered_at=Timestamp(epoch_ms=T0.epoch_ms),
+        evaluated_at=None,
+        decided_at=None,
+        decided_by=None,
+        report=None,
+    )
