@@ -164,6 +164,7 @@ class Kernel:
         self._container.register_instance(AppConfig, config)
         self._container.register_instance(IdProvider, id_provider)
         self._container.register_instance(HealthMonitor, HealthMonitor(clock=self._clock))
+        self._container.register_instance(ModuleRegistry, self._registry)
         self._register_protocol(IClock, self._clock)
         self._register_protocol(ILogger, logger)
         self._container.register_instance(
