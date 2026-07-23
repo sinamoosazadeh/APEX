@@ -44,19 +44,20 @@ _SEVERITY_RANK: dict[AlertSeverity, int] = {
 
 @unique
 class KillSwitchLevel(Enum):
-    """Kill-switch escalation ladder (Book II 10.25 response order).
+    """Kill-switch escalation ladder (Book II 10.25/25.29 response order).
 
     ``NONE`` trades normally; ``ENTRIES_DISABLED`` blocks new entries
     while everything else runs; ``PAUSED`` stands the decision and
     execution stages aside; ``SAFE_MODE`` pauses AND cancels resting
-    venue orders. Position flattening belongs to the Phase 13 security
-    platform (Book II 25.29 kill-switch levels).
+    venue orders; ``FLATTENED`` (the Phase 13 security response)
+    additionally closes every open position best-effort.
     """
 
     NONE = "none"
     ENTRIES_DISABLED = "entries_disabled"
     PAUSED = "paused"
     SAFE_MODE = "safe_mode"
+    FLATTENED = "flattened"
 
     @property
     def rank(self) -> int:
@@ -69,6 +70,7 @@ _KILL_RANK: dict[KillSwitchLevel, int] = {
     KillSwitchLevel.ENTRIES_DISABLED: 1,
     KillSwitchLevel.PAUSED: 2,
     KillSwitchLevel.SAFE_MODE: 3,
+    KillSwitchLevel.FLATTENED: 4,
 }
 
 
