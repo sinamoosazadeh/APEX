@@ -1,14 +1,16 @@
-"""Kill-switch engine (the Phase 12 monitoring-driven surfaces).
+"""Kill-switch engine (Phase 12 monitoring; Phase 13 flattening).
 
-The multi-trigger kill switch of Book I 8.27 / Book II 10.25, scoped
-to what monitoring owns in this phase: a durable, auditable state
-ladder (NONE -> ENTRIES_DISABLED -> PAUSED -> SAFE_MODE) that the
-orchestration surfaces consult before decisions and executions.
-Transitions come from operators (Telegram/CLI) or automatically from
-the alert engine's severity policy. SAFE_MODE additionally cancels
-resting venue orders best-effort through an injected canceller (10.25
-"Cancel Pending Orders"). Position flattening and the five-scope
-kill-switch matrix belong to the Phase 13 security platform (25.29).
+The multi-trigger kill switch of Book I 8.27 / Book II 10.25/25.29:
+a durable, auditable state ladder (NONE -> ENTRIES_DISABLED ->
+PAUSED -> SAFE_MODE -> FLATTENED) that the orchestration surfaces
+consult before decisions and executions. Transitions come from
+operators (Telegram/CLI) or automatically from the alert engine's
+severity policy. SAFE_MODE and above cancel resting venue orders
+best-effort through an injected canceller (10.25 "Cancel Pending
+Orders"); FLATTENED additionally closes every open position through
+an injected flattener (25.29 - the Phase 13 security response).
+Every transition also lands on the immutable audit ledger through an
+injected auditor sink (25.16).
 """
 
 from collections.abc import Awaitable, Callable
@@ -26,6 +28,9 @@ from apex.monitoring.store import SqliteMonitoringRepository
 _SOURCE: Final[str] = "apex.monitoring.killswitch"
 
 type OrderCanceller = Callable[[], Awaitable[int]]
+type PositionFlattener = Callable[[], Awaitable[int]]
+# (actor, level value, reason) -> awaits the audit append.
+type TransitionAuditor = Callable[[str, str, str], Awaitable[None]]
 
 
 class KillSwitchEngine:
@@ -40,6 +45,8 @@ class KillSwitchEngine:
         clock: Clock,
         logger: StructuredLogger,
         order_canceller: OrderCanceller | None = None,
+        position_flattener: PositionFlattener | None = None,
+        auditor: TransitionAuditor | None = None,
     ) -> None:
         self._settings = settings
         self._store = store
@@ -47,6 +54,8 @@ class KillSwitchEngine:
         self._clock = clock
         self._logger = logger
         self._order_canceller = order_canceller
+        self._position_flattener = position_flattener
+        self._auditor = auditor
 
     # --- State ---------------------------------------------------------------------
 
@@ -72,7 +81,11 @@ class KillSwitchEngine:
     async def engage(
         self, level: KillSwitchLevel, *, reason: str, actor: str
     ) -> KillSwitchRecord:
-        """Move to a restrictive level; SAFE_MODE cancels resting orders."""
+        """Move to a restrictive level.
+
+        SAFE_MODE and above cancel resting venue orders; FLATTENED
+        additionally closes every open position (25.29).
+        """
         if level is KillSwitchLevel.NONE:
             raise MonitoringError(
                 "engage requires a restrictive level; use release",
@@ -80,8 +93,10 @@ class KillSwitchEngine:
                 details={"level": level.value},
             )
         record = await self._transition(level, reason=reason, actor=actor)
-        if level is KillSwitchLevel.SAFE_MODE:
+        if level.rank >= KillSwitchLevel.SAFE_MODE.rank:
             await self.cancel_resting_orders()
+        if level is KillSwitchLevel.FLATTENED:
+            await self.flatten_open_positions()
         return record
 
     async def release(self, *, reason: str, actor: str) -> KillSwitchRecord:
@@ -118,6 +133,8 @@ class KillSwitchEngine:
         self._logger.warning(
             "kill_switch_changed", level=level.value, reason=reason, actor=actor
         )
+        if self._auditor is not None:
+            await self._auditor(actor, level.value, reason)
         return KillSwitchRecord(
             entry_id=entry_id, level=level, reason=reason, actor=actor, changed_at=now
         )
@@ -139,3 +156,21 @@ class KillSwitchEngine:
             return 0
         self._logger.info("kill_switch_orders_canceled", canceled=canceled)
         return canceled
+
+    async def flatten_open_positions(self) -> int:
+        """Best-effort closing of every open position (25.29).
+
+        Public: FLATTENED calls it on engagement and the Telegram
+        Emergency Center exposes it as Flatten All. Returns how many
+        positions were closed (0 without a flattener or on error).
+        """
+        if self._position_flattener is None:
+            self._logger.info("kill_switch_no_flattener")
+            return 0
+        try:
+            flattened = await self._position_flattener()
+        except ApexError as error:
+            self._logger.failure("kill_switch_flatten_failed", error)
+            return 0
+        self._logger.warning("kill_switch_positions_flattened", flattened=flattened)
+        return flattened
