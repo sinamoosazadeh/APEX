@@ -9,13 +9,17 @@ Two responsibilities behind one service:
   without the injection path below.
 - **Orchestrate**: the Book V part 7 lifecycle - drain queued
   optimization jobs sequentially (priority policy, bounded retries),
-  activate accepted artifacts as the series' active version, roll
-  back on demand, and answer the runtime injector: active kernel
-  overrides and the latest learning state per series.
+  register accepted artifacts as SHADOW promotion candidates (14.24),
+  shadow-evaluate them on genuinely unseen forward bars, gate
+  activation behind the operator's approval (19.28), guard promoted
+  artifacts against live degradation (22.19), roll back on demand,
+  and answer the runtime injector: active kernel overrides and the
+  latest learning state per series.
 """
 
 import json
 from dataclasses import dataclass
+from dataclasses import fields as dataclass_fields
 from pathlib import Path
 from typing import Final
 
@@ -50,10 +54,17 @@ from apex.research.analysis import (
 from apex.research.attribution import AttributionResult, join_outcomes
 from apex.research.events import ResearchEvent, research_event
 from apex.research.experiments import walk_forward_reoptimize
+from apex.research.promotion import evaluate_shadow
 from apex.research.store import (
     JOB_COMPLETED,
     JOB_FAILED,
     JOB_RUNNING,
+    PROMOTION_PASSED,
+    PROMOTION_PROMOTED,
+    PROMOTION_REJECTED,
+    PROMOTION_ROLLED_BACK,
+    PROMOTION_SHADOW,
+    PromotionRecord,
     ResearchJob,
     SqliteResearchRepository,
 )
@@ -74,6 +85,9 @@ _WALK_FORWARD_FOLDS: Final[int] = 3
 
 _PRIORITY: Final[dict[str, int]] = {"BTCUSDT": 0, "ETHUSDT": 1}
 _DEFAULT_PRIORITY: Final[int] = 2
+
+_FLAG_QUEUE_PAUSED: Final[str] = "queue_paused"
+_GUARD_ACTOR: Final[str] = "promotion_guard"
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -105,6 +119,7 @@ class OrchestrationSummary:
     completed: int
     failed: int
     activated: tuple[str, ...]
+    shadowed: tuple[str, ...]
 
 
 class ResearchService:
@@ -130,6 +145,9 @@ class ResearchService:
         bus: IEventBus,
         clock: Clock,
         logger: StructuredLogger,
+        shadow_min_bars: int = 96,
+        shadow_horizon_bars: int = 48,
+        shadow_tolerance: float = 0.05,
     ) -> None:
         self._decision_service = decision_service
         self._bars = bar_repository
@@ -148,6 +166,9 @@ class ResearchService:
         self._bus = bus
         self._clock = clock
         self._logger = logger
+        self._shadow_min_bars = shadow_min_bars
+        self._shadow_horizon_bars = shadow_horizon_bars
+        self._shadow_tolerance = shadow_tolerance
 
     # --- Study -----------------------------------------------------------------
 
@@ -288,8 +309,12 @@ class ResearchService:
     async def _orchestrate(
         self, limit: int, default_window_bars: int
     ) -> OrchestrationSummary:
+        if await self.queue_paused():
+            return OrchestrationSummary(
+                drained=0, completed=0, failed=0, activated=(), shadowed=()
+            )
         drained = completed = failed = 0
-        activated: list[str] = []
+        shadowed: list[str] = []
         while drained < limit:
             job = await self._store.next_pending_job()
             if job is None:
@@ -318,16 +343,18 @@ class ResearchService:
                 result=artifact or "rejected",
             )
             if artifact:
-                activated.append(artifact)
+                shadowed.append(artifact)
         return OrchestrationSummary(
             drained=drained,
             completed=completed,
             failed=failed,
-            activated=tuple(activated),
+            activated=(),
+            shadowed=tuple(shadowed),
         )
 
     async def _run_job(self, job: ResearchJob, default_window_bars: int) -> str | None:
-        """Run one optimizer job; returns the activated artifact path."""
+        """Run one optimizer job; an accepted artifact registers as a
+        SHADOW promotion candidate (14.24) and its path is returned."""
         bars = job.window_bars if job.window_bars > 0 else default_window_bars
         now = self._clock.now()
         end = now.floor(job.timeframe.duration_ms).add_ms(job.timeframe.duration_ms)
@@ -351,12 +378,23 @@ class ResearchService:
         summary = outcome.unwrap()
         if not summary.accepted or not summary.artifact_path:
             return None
-        await self._store.activate_version(
+        baseline = await self._store.active_artifact(
+            job.symbol, job.timeframe, job.kind
+        )
+        promotion_id = await self._store.register_promotion(
             symbol=job.symbol,
             timeframe=job.timeframe,
             kind=job.kind,
             artifact_path=summary.artifact_path,
-            activated_at=self._clock.now(),
+            baseline_artifact=baseline,
+            registered_at=self._clock.now(),
+        )
+        self._logger.info(
+            "promotion_registered",
+            promotion_id=promotion_id,
+            symbol=job.symbol,
+            timeframe=job.timeframe.value,
+            kind=job.kind,
         )
         return summary.artifact_path
 
@@ -420,6 +458,218 @@ class ResearchService:
         return None
 
 
+    # --- Promotion pipeline (Book II 14.24/19.28/22.19) -------------------------------
+
+    async def jobs(self) -> list[ResearchJob]:
+        """The full optimization queue, oldest first."""
+        return await self._store.jobs()
+
+    async def promotions(self, *, status: str | None = None) -> list[PromotionRecord]:
+        """Registered promotions, oldest first, optionally by status."""
+        return await self._store.promotions(status=status)
+
+    async def queue_paused(self) -> bool:
+        """Whether the operator paused the optimization queue."""
+        return await self._store.get_flag(_FLAG_QUEUE_PAUSED) == "1"
+
+    async def pause_queue(self) -> None:
+        """Stop the orchestrator from draining jobs (durable switch)."""
+        await self._store.set_flag(_FLAG_QUEUE_PAUSED, "1")
+
+    async def resume_queue(self) -> None:
+        """Let the orchestrator drain jobs again."""
+        await self._store.set_flag(_FLAG_QUEUE_PAUSED, "0")
+
+    async def evaluate_promotions(self, symbol: str, timeframe: Timeframe) -> int:
+        """Shadow-evaluate this series' pending candidates (14.24).
+
+        Each SHADOW candidate is folded against the incumbent over the
+        bars that closed after its registration - decisions only, no
+        order is ever sent. Nothing is judged before
+        ``shadow_min_bars`` forward bars exist. Returns how many
+        candidates received a verdict in this pass.
+        """
+        pending = [
+            record
+            for record in await self._store.promotions(status=PROMOTION_SHADOW)
+            if record.symbol == symbol and record.timeframe is timeframe
+        ]
+        if not pending:
+            return 0
+        now = self._clock.now()
+        end = now.floor(timeframe.duration_ms).add_ms(timeframe.duration_ms)
+        evaluated = 0
+        for record in pending:
+            if await self._evaluate_candidate(record, now, end):
+                evaluated += 1
+        return evaluated
+
+    async def _evaluate_candidate(
+        self, record: PromotionRecord, now: Timestamp, end: Timestamp
+    ) -> bool:
+        """One candidate's forward-window verdict; False while waiting."""
+        chart_bars = await self._bars.get_range(
+            self._exchange_id, record.symbol, record.timeframe,
+            start=record.registered_at, end=end, closed_only=True,
+        )
+        if len(chart_bars) < self._shadow_min_bars:
+            return False
+        snapshots = await self._decision_service.build_snapshots(
+            chart_bars, record.symbol, record.timeframe, end
+        )
+        report = evaluate_shadow(
+            snapshots=snapshots,
+            base_params=self._base_params,
+            candidate_overrides=self._kernel_overrides(record.artifact_path),
+            baseline_overrides=(
+                self._kernel_overrides(record.baseline_artifact)
+                if record.baseline_artifact is not None
+                else None
+            ),
+            context=MarketContext(
+                symbol=record.symbol, timeframe=record.timeframe, as_of=now
+            ),
+            clock=self._clock,
+            weights=self._weights,
+            horizon_bars=self._shadow_horizon_bars,
+            min_bars=self._shadow_min_bars,
+            tolerance=self._shadow_tolerance,
+        )
+        status = PROMOTION_PASSED if report.passed else PROMOTION_REJECTED
+        await self._store.mark_promotion_evaluated(
+            record.promotion_id, status=status, report=report.to_json(), at=now
+        )
+        await self._announce_promotion(
+            ResearchEvent.PROMOTION_EVALUATED, record, status
+        )
+        return True
+
+    async def promote(self, promotion_id: int, *, actor: str) -> Result[str]:
+        """Operator approval: activate one PASSED candidate (19.28)."""
+        record = await self._store.promotion(promotion_id)
+        if record is None:
+            return Result.failure(self._missing_promotion(promotion_id))
+        if record.status != PROMOTION_PASSED:
+            return Result.failure(
+                ResearchError(
+                    "only a passed shadow candidate can be promoted",
+                    code="RES-008",
+                    details={"promotion_id": promotion_id, "status": record.status},
+                )
+            )
+        now = self._clock.now()
+        await self._store.activate_version(
+            symbol=record.symbol,
+            timeframe=record.timeframe,
+            kind=record.kind,
+            artifact_path=record.artifact_path,
+            activated_at=now,
+        )
+        await self._store.mark_promotion_decided(
+            promotion_id, status=PROMOTION_PROMOTED, actor=actor, at=now
+        )
+        await self._announce_promotion(
+            ResearchEvent.PROMOTED, record, PROMOTION_PROMOTED
+        )
+        return Result.success(record.artifact_path)
+
+    async def reject_promotion(self, promotion_id: int, *, actor: str) -> Result[str]:
+        """Operator rejection of an undecided (shadow or passed) candidate."""
+        record = await self._store.promotion(promotion_id)
+        if record is None:
+            return Result.failure(self._missing_promotion(promotion_id))
+        if record.status not in (PROMOTION_SHADOW, PROMOTION_PASSED):
+            return Result.failure(
+                ResearchError(
+                    "promotion is already decided",
+                    code="RES-009",
+                    details={"promotion_id": promotion_id, "status": record.status},
+                )
+            )
+        await self._store.mark_promotion_decided(
+            promotion_id, status=PROMOTION_REJECTED, actor=actor, at=self._clock.now()
+        )
+        await self._announce_promotion(
+            ResearchEvent.PROMOTION_REJECTED, record, PROMOTION_REJECTED
+        )
+        return Result.success(record.artifact_path)
+
+    async def apply_promotion_guard(
+        self, symbol: str, timeframe: Timeframe, *, min_trades: int, floor_r: float
+    ) -> str | None:
+        """Roll back a promoted artifact that degrades live (22.19).
+
+        Each kind's newest PROMOTED artifact is judged on the closed
+        trades opened after its approval: once ``min_trades`` closed
+        and their summed R sits at or below ``floor_r``, the series
+        repoints to its previous version and the promotion is marked
+        ROLLED_BACK - at most once per promotion. Returns the restored
+        artifact path when the guard fired.
+        """
+        for kind in (KIND_SIGNAL, KIND_RISK):
+            record = await self._store.latest_promotion(
+                symbol, timeframe, kind, status=PROMOTION_PROMOTED
+            )
+            if record is None or record.decided_at is None:
+                continue
+            decided_ms = record.decided_at.epoch_ms
+            realized = [
+                position.realized_r
+                for position in await self._portfolio.get_positions(self._portfolio_id)
+                if position.symbol == symbol
+                and position.timeframe is timeframe
+                and position.status == "closed"
+                and position.opened_at.epoch_ms > decided_ms
+                and position.realized_r is not None
+            ]
+            if len(realized) < min_trades or sum(realized) > floor_r:
+                continue
+            restored = await self._store.rollback_version(symbol, timeframe, kind)
+            await self._store.mark_promotion_decided(
+                record.promotion_id,
+                status=PROMOTION_ROLLED_BACK,
+                actor=_GUARD_ACTOR,
+                at=self._clock.now(),
+            )
+            await self._announce_promotion(
+                ResearchEvent.ROLLED_BACK, record, PROMOTION_ROLLED_BACK
+            )
+            self._logger.warning(
+                "promotion_guard_rolled_back",
+                symbol=symbol,
+                timeframe=timeframe.value,
+                kind=kind,
+                trades=len(realized),
+                total_r=f"{sum(realized):.2f}",
+            )
+            return restored
+        return None
+
+    def _missing_promotion(self, promotion_id: int) -> ResearchError:
+        return ResearchError(
+            "promotion does not exist",
+            code="RES-007",
+            details={"promotion_id": promotion_id},
+        )
+
+    async def _announce_promotion(
+        self, kind: ResearchEvent, record: PromotionRecord, status: str
+    ) -> None:
+        await self._bus.publish(
+            research_event(
+                kind,
+                occurred_at=self._clock.now(),
+                source=_SOURCE,
+                payload={
+                    "promotion_id": record.promotion_id,
+                    "symbol": record.symbol,
+                    "timeframe": record.timeframe.value,
+                    "kind": record.kind,
+                    "status": status,
+                },
+            )
+        )
+
     # --- Runtime injection (Book V part 7) --------------------------------------------
 
     async def active_overrides(
@@ -429,22 +679,40 @@ class ResearchService:
         path = await self._store.active_artifact(symbol, timeframe, kind)
         if path is None:
             return None
+        return self._artifact_parameters(path)
+
+    def _artifact_parameters(self, path: str) -> dict[str, float]:
+        """One artifact's ``optimized_parameters`` mapping."""
         try:
             payload = json.loads(Path(path).read_text(encoding="utf-8"))
         except (OSError, ValueError) as error:
             raise ResearchError(
-                "active artifact is unreadable",
+                "optimization artifact is unreadable",
                 code="RES-002",
                 details={"path": path, "reason": str(error)},
             ) from error
         parameters = payload.get("optimized_parameters", {})
         if not isinstance(parameters, dict):
             raise ResearchError(
-                "active artifact carries no parameter mapping",
+                "optimization artifact carries no parameter mapping",
                 code="RES-003",
                 details={"path": path},
             )
         return {str(name): float(value) for name, value in parameters.items()}
+
+    def _kernel_overrides(self, path: str) -> dict[str, float]:
+        """Artifact parameters filtered to decision-kernel fields.
+
+        Risk artifacts carry non-kernel parameters; the shadow fold
+        drives the decision kernel only, so foreign names are dropped
+        (they cannot change a decision) rather than rejected.
+        """
+        known = {field.name for field in dataclass_fields(DecisionParams)}
+        return {
+            name: value
+            for name, value in self._artifact_parameters(path).items()
+            if name in known
+        }
 
     async def learning_state(
         self, symbol: str, timeframe: Timeframe
