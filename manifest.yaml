@@ -5,16 +5,16 @@
 manifest_version: 1
 project:
   name: apex
-  version: 0.15.0
-  phase: 14           # Phase 13 complete (Security Platform); Phase 14 next
-  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  version: 0.16.0
+  phase: 15           # Phase 14 complete (Deployment); Phase 15 next
+  phases_complete: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 config_schema_version: 1
 contract_schema_version: 1
 database_schema_version: 1      # bars + kv_store + event archive (SQLite)
 
 modules:
-  apex.core:      { version: 0.13.0, stability: beta,         owner: foundation }
+  apex.core:      { version: 0.14.0, stability: beta,         owner: foundation }
   apex.domain:    { version: 0.2.0, stability: beta,         owner: foundation }
   apex.contracts: { version: 0.12.0, stability: beta,         owner: foundation }
   apex.kernel:    { version: 0.11.0, stability: beta,         owner: foundation }
@@ -31,6 +31,7 @@ modules:
   apex.monitoring: { version: 0.2.0, stability: beta,        owner: monitoring-platform }
   apex.telegram:  { version: 0.2.0, stability: beta,         owner: telegram-console }
   apex.security:  { version: 0.1.0, stability: beta,         owner: security-platform }
+  apex.deployment: { version: 0.1.0, stability: beta,        owner: deployment }
 
 # Downward-only dependency edges between built packages (Book II 3.25).
 dependency_graph:
@@ -50,6 +51,7 @@ dependency_graph:
   apex.security: [apex.core, apex.kernel, apex.plugins, apex.storage]
   apex.monitoring: [apex.core, apex.data, apex.decision, apex.execution, apex.features, apex.kernel, apex.plugins, apex.portfolio, apex.probability, apex.research, apex.security, apex.storage]
   apex.telegram: [apex.core, apex.decision, apex.execution, apex.kernel, apex.monitoring, apex.plugins, apex.portfolio, apex.research, apex.security]
+  apex.deployment: [apex.core, apex.data, apex.kernel, apex.monitoring, apex.research, apex.security, apex.storage]
 
 # Populated by their phases.
 plugin_registry:
@@ -79,6 +81,6 @@ exchange_registry:
 quality_gates:
   ruff: clean
   mypy_strict: clean
-  tests_passed: 561
+  tests_passed: 574
   boot_check: pass
-  live_smoke: full security lifecycle live - secret stored via the env-value path, vault listed names only, config sealed (signed hash), paper preflight PASSED (seal verified, 12 stores integrity ok, audit chain valid, clock sane vs venue bars), live preflight REFUSED honestly (exit 1, no credentials), kill drill entries_disabled -> flattened -> release, audit chain VALID over the full 8-entry operator trail; monitor closed 13/13 healthy
+  live_smoke: signed v0.15.0 release published (deterministic archive + manifest); full live runtime backed up (13 files, checksums self-verified) and round-trip restored with pre-extraction verification; apex schedule --run executed the whole due lifecycle live (sync 4/4 series, snapshot, 2 series studied, optimize queued 4 drained 2, backup) and the second pass reported nothing due (durable stamps); audit chain VALID (11 entries) carrying the deployment actions
