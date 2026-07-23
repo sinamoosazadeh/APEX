@@ -368,4 +368,8 @@ class TestPlugin:
 
         manifest = APEX_PLUGIN.manifest
         assert manifest.name == "research_platform"
-        assert set(manifest.requires) == {"portfolio_platform", "execution_platform"}
+        assert set(manifest.requires) == {
+            "portfolio_platform",
+            "execution_platform",
+            "security_platform",
+        }
