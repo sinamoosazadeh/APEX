@@ -1,1 +1,132 @@
-IiIiVGVsZWdyYW0gY29uc29sZSBwbHVnaW4gKEJvb2sgSVYpLgoKV2lyZXMgdGhlIGNvbnRyb2wgbGF5ZXI6IGNvbnNvbGUgc2V0dGluZ3MgKHRlbGVncmFtLnlhbWwpIC0+IGVudgpjcmVkZW50aWFscyAoYWJzZW50IGNyZWRlbnRpYWxzIGxlYXZlIHRoZSBjb25zb2xlIGRvcm1hbnQgLSB0cmFkaW5nCm5ldmVyIGRlcGVuZHMgb24gVGVsZWdyYW0pIC0+IEJvdCBBUEkgY2xpZW50IC0+IGNvbnNvbGUgc2VydmljZSAtPgprZXJuZWwgbW9kdWxlLiBCb290IGlzIG5ldHdvcmstZnJlZTogdGhlIGNsaWVudCBzZXNzaW9uIG9wZW5zIG9ubHkKd2hlbiB0aGUgY29uc29sZSBydW5zLgoiIiIKCmZyb20gY29sbGVjdGlvbnMuYWJjIGltcG9ydCBTZXF1ZW5jZQoKZnJvbSBhcGV4LmNvcmUuY29uZmlnIGltcG9ydCBBcHBDb25maWcKZnJvbSBhcGV4LmNvcmUuY29udHJhY3RzLmludGVyZmFjZXMgaW1wb3J0IElDbG9jaywgSUV2ZW50QnVzLCBJTW9kdWxlCmZyb20gYXBleC5jb3JlLmVudW1zIGltcG9ydCBIZWFsdGhTdGF0ZSwgUGx1Z2luS2luZCwgU3RhYmlsaXR5TGV2ZWwKZnJvbSBhcGV4LmNvcmUubG9nZ2luZyBpbXBvcnQgTG9nZ2VyRmFjdG9yeSwgU3RydWN0dXJlZExvZ2dlcgpmcm9tIGFwZXguY29yZS52ZXJzaW9uaW5nIGltcG9ydCBTZW1hbnRpY1ZlcnNpb24KZnJvbSBhcGV4Lmtlcm5lbC5jb250YWluZXIgaW1wb3J0IFNlcnZpY2VDb250YWluZXIKZnJvbSBhcGV4Lm1vbml0b3Jpbmcuc2VydmljZSBpbXBvcnQgTW9uaXRvcmluZ1NlcnZpY2UKZnJvbSBhcGV4LnBsdWdpbnMuY29udHJhY3QgaW1wb3J0IFBsdWdpbk1hbmlmZXN0CmZyb20gYXBleC5wb3J0Zm9saW8uY29uZmlnIGltcG9ydCBwb3J0Zm9saW9fc2V0dGluZ3MKZnJvbSBhcGV4LnBvcnRmb2xpby5zdG9yZSBpbXBvcnQgU3FsaXRlUG9ydGZvbGlvUmVwb3NpdG9yeQpmcm9tIGFwZXgucmVzZWFyY2guc2VydmljZSBpbXBvcnQgUmVzZWFyY2hTZXJ2aWNlCmZyb20gYXBleC50ZWxlZ3JhbS5jbGllbnQgaW1wb3J0IFRlbGVncmFtQm90Q2xpZW50CmZyb20gYXBleC50ZWxlZ3JhbS5jb25maWcgaW1wb3J0IHRlbGVncmFtX3NldHRpbmdzCmZyb20gYXBleC50ZWxlZ3JhbS5jcmVkZW50aWFscyBpbXBvcnQgVGVsZWdyYW1DcmVkZW50aWFscwpmcm9tIGFwZXgudGVsZWdyYW0uc2VydmljZSBpbXBvcnQgVGVsZWdyYW1Db25zb2xlU2VydmljZQoKCmNsYXNzIFRlbGVncmFtQ29uc29sZU1vZHVsZToKICAgICIiIktlcm5lbCBtb2R1bGUgcmVwcmVzZW50aW5nIHRoZSBjb25zb2xlJ3MgcHJlc2VuY2UuIiIiCgogICAgTU9EVUxFX05BTUUgPSAidGVsZWdyYW1fY29uc29sZSIKCiAgICBkZWYgX19pbml0X18oCiAgICAgICAgc2VsZiwKICAgICAgICAqLAogICAgICAgIHNlcnZpY2U6IFRlbGVncmFtQ29uc29sZVNlcnZpY2UsCiAgICAgICAgbG9nZ2VyOiBTdHJ1Y3R1cmVkTG9nZ2VyLAogICAgKSAtPiBOb25lOgogICAgICAgIHNlbGYuX3NlcnZpY2UgPSBzZXJ2aWNlCiAgICAgICAgc2VsZi5fbG9nZ2VyID0gbG9nZ2VyCiAgICAgICAgc2VsZi5fcnVubmluZyA9IEZhbHNlCgogICAgQHByb3BlcnR5CiAgICBkZWYgbmFtZShzZWxmKSAtPiBzdHI6CiAgICAgICAgIiIiVW5pcXVlIG1vZHVsZSBuYW1lLiIiIgogICAgICAgIHJldHVybiBzZWxmLk1PRFVMRV9OQU1FCgogICAgQHByb3BlcnR5CiAgICBkZWYgZGVwZW5kZW5jaWVzKHNlbGYpIC0+IHR1cGxlW3N0ciwgLi4uXToKICAgICAgICAiIiJSZW5kZXJzIHRoZSBtb25pdG9yaW5nIGZlZWQ7IHN0YXJ0cyBhZnRlciBpdC4iIiIKICAgICAgICByZXR1cm4gKCJtb25pdG9yaW5nX3BsYXRmb3JtIiwpCgogICAgYXN5bmMgZGVmIHN0YXJ0KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgIiIiTWFyayB0aGUgY29uc29sZSBwcmVzZW50IChuZXR3b3JrIGNvbnRhY3Qgb25seSBvbiBkZW1hbmQpLiIiIgogICAgICAgIHNlbGYuX3J1bm5pbmcgPSBUcnVlCiAgICAgICAgc2VsZi5fbG9nZ2VyLmluZm8oCiAgICAgICAgICAgICJ0ZWxlZ3JhbV9jb25zb2xlX3JlYWR5IiwgYXZhaWxhYmxlPXNlbGYuX3NlcnZpY2UuYXZhaWxhYmxlCiAgICAgICAgKQoKICAgIGFzeW5jIGRlZiBzdG9wKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgIiIiU3RvcCB0aGUgY29uc29sZSBpZiBhIHNlc3Npb24gaXMgcnVubmluZy4iIiIKICAgICAgICBzZWxmLl9ydW5uaW5nID0gRmFsc2UKICAgICAgICBzZWxmLl9zZXJ2aWNlLnJlcXVlc3Rfc3RvcCgpCiAgICAgICAgc2VsZi5fbG9nZ2VyLmluZm8oInRlbGVncmFtX2NvbnNvbGVfc3RvcHBlZCIpCgogICAgZGVmIGhlYWx0aChzZWxmKSAtPiBIZWFsdGhTdGF0ZToKICAgICAgICAiIiJIZWFsdGh5IHdoaWxlIHJlZ2lzdGVyZWQ7IHRoZSBjb25zb2xlIGl0c2VsZiBydW5zIG9uIGRlbWFuZC4iIiIKICAgICAgICByZXR1cm4gSGVhbHRoU3RhdGUuSEVBTFRIWSBpZiBzZWxmLl9ydW5uaW5nIGVsc2UgSGVhbHRoU3RhdGUuT0ZGTElORQoKCmNsYXNzIFRlbGVncmFtQ29uc29sZVBsdWdpbjoKICAgICIiIkJ1aWxkcyB0aGUgVGVsZWdyYW0gY29uc29sZSBhcyBhIGtlcm5lbCBwbHVnaW4uIiIiCgogICAgQHByb3BlcnR5CiAgICBkZWYgbWFuaWZlc3Qoc2VsZikgLT4gUGx1Z2luTWFuaWZlc3Q6CiAgICAgICAgIiIiUGx1Z2luIHNlbGYtZGVzY3JpcHRpb24uIiIiCiAgICAgICAgcmV0dXJuIFBsdWdpbk1hbmlmZXN0KAogICAgICAgICAgICBuYW1lPSJ0ZWxlZ3JhbV9jb25zb2xlIiwKICAgICAgICAgICAgdmVyc2lvbj1TZW1hbnRpY1ZlcnNpb24oMCwgMSwgMCksCiAgICAgICAgICAgIGtpbmQ9UGx1Z2luS2luZC5TRVJWSUNFLAogICAgICAgICAgICBhcGlfdmVyc2lvbj1TZW1hbnRpY1ZlcnNpb24oMSwgMCwgMCksCiAgICAgICAgICAgIGRlc2NyaXB0aW9uPSJUZWxlZ3JhbSBjb250cm9sIGxheWVyOiBtZW51cywgcmVwb3J0cywgZW1lcmdlbmN5IGNlbnRlciIsCiAgICAgICAgICAgIHN0YWJpbGl0eT1TdGFiaWxpdHlMZXZlbC5CRVRBLAogICAgICAgICAgICByZXF1aXJlcz0oIm1vbml0b3JpbmdfcGxhdGZvcm0iLCksCiAgICAgICAgKQoKICAgIGRlZiBidWlsZF9tb2R1bGVzKHNlbGYsIGNvbnRhaW5lcjogU2VydmljZUNvbnRhaW5lcikgLT4gU2VxdWVuY2VbSU1vZHVsZV06CiAgICAgICAgIiIiQ29uc3RydWN0IHRoZSBjb25zb2xlIGZyb20gaW5qZWN0ZWQgc2VydmljZXMuIiIiCiAgICAgICAgY29uZmlnID0gY29udGFpbmVyLnJlc29sdmUoQXBwQ29uZmlnKQogICAgICAgIGxvZ2dlcnMgPSBjb250YWluZXIucmVzb2x2ZShMb2dnZXJGYWN0b3J5KQogICAgICAgIGNsb2NrID0gY29udGFpbmVyLnJlc29sdmUoSUNsb2NrKSAgIyB0eXBlOiBpZ25vcmVbdHlwZS1hYnN0cmFjdF0KICAgICAgICBidXMgPSBjb250YWluZXIucmVzb2x2ZShJRXZlbnRCdXMpICAjIHR5cGU6IGlnbm9yZVt0eXBlLWFic3RyYWN0XQogICAgICAgIHNldHRpbmdzID0gdGVsZWdyYW1fc2V0dGluZ3MoY29uZmlnLnNlY3Rpb24oInRlbGVncmFtIikpCiAgICAgICAgY3JlZGVudGlhbHMgPSBUZWxlZ3JhbUNyZWRlbnRpYWxzLmZyb21fZW52aXJvbm1lbnQoKQogICAgICAgIGNsaWVudDogVGVsZWdyYW1Cb3RDbGllbnQgfCBOb25lID0gTm9uZQogICAgICAgIGlmIGNyZWRlbnRpYWxzIGlzIG5vdCBOb25lOgogICAgICAgICAgICBjbGllbnQgPSBUZWxlZ3JhbUJvdENsaWVudCgKICAgICAgICAgICAgICAgIHRva2VuPWNyZWRlbnRpYWxzLnRva2VuLAogICAgICAgICAgICAgICAgcG9sbF90aW1lb3V0X3M9c2V0dGluZ3MucG9sbF90aW1lb3V0X3MsCiAgICAgICAgICAgICAgICBsb2dnZXI9bG9nZ2Vycy5nZXQoInRlbGVncmFtLmNsaWVudCIpLAogICAgICAgICAgICApCiAgICAgICAgc2VyaWVzID0gdHVwbGUoCiAgICAgICAgICAgIChzeW1ib2wsIHRpbWVmcmFtZSkKICAgICAgICAgICAgZm9yIHN5bWJvbCBpbiBjb25maWcubWFya2V0LnN5bWJvbHMKICAgICAgICAgICAgZm9yIHRpbWVmcmFtZSBpbiBjb25maWcubWFya2V0LnRpbWVmcmFtZXMKICAgICAgICApCiAgICAgICAgc2VydmljZSA9IFRlbGVncmFtQ29uc29sZVNlcnZpY2UoCiAgICAgICAgICAgIHNldHRpbmdzPXNldHRpbmdzLAogICAgICAgICAgICBjcmVkZW50aWFscz1jcmVkZW50aWFscywKICAgICAgICAgICAgY2xpZW50PWNsaWVudCwKICAgICAgICAgICAgbW9uaXRvcmluZz1jb250YWluZXIucmVzb2x2ZShNb25pdG9yaW5nU2VydmljZSksCiAgICAgICAgICAgIHJlc2VhcmNoPWNvbnRhaW5lci5yZXNvbHZlKFJlc2VhcmNoU2VydmljZSksCiAgICAgICAgICAgIHBvcnRmb2xpb19yZXBvc2l0b3J5PWNvbnRhaW5lci5yZXNvbHZlKFNxbGl0ZVBvcnRmb2xpb1JlcG9zaXRvcnkpLAogICAgICAgICAgICBwb3J0Zm9saW9faWQ9cG9ydGZvbGlvX3NldHRpbmdzKAogICAgICAgICAgICAgICAgY29uZmlnLnNlY3Rpb24oInBvcnRmb2xpbyIpCiAgICAgICAgICAgICkucG9ydGZvbGlvX2lkLAogICAgICAgICAgICBzZXJpZXM9c2VyaWVzLAogICAgICAgICAgICBidXM9YnVzLAogICAgICAgICAgICBjbG9jaz1jbG9jaywKICAgICAgICAgICAgbG9nZ2VyPWxvZ2dlcnMuZ2V0KCJ0ZWxlZ3JhbS5zZXJ2aWNlIiksCiAgICAgICAgKQogICAgICAgIGNvbnRhaW5lci5yZWdpc3Rlcl9pbnN0YW5jZShUZWxlZ3JhbUNvbnNvbGVTZXJ2aWNlLCBzZXJ2aWNlKQogICAgICAgIHJldHVybiBbCiAgICAgICAgICAgIFRlbGVncmFtQ29uc29sZU1vZHVsZSgKICAgICAgICAgICAgICAgIHNlcnZpY2U9c2VydmljZSwKICAgICAgICAgICAgICAgIGxvZ2dlcj1sb2dnZXJzLmdldCgidGVsZWdyYW0ubW9kdWxlIiksCiAgICAgICAgICAgICkKICAgICAgICBdCgoKQVBFWF9QTFVHSU4gPSBUZWxlZ3JhbUNvbnNvbGVQbHVnaW4oKQo=
+"""Telegram console plugin (Book IV).
+
+Wires the control layer: console settings (telegram.yaml) -> env
+credentials (absent credentials leave the console dormant - trading
+never depends on Telegram) -> Bot API client -> console service ->
+kernel module. Boot is network-free: the client session opens only
+when the console runs.
+"""
+
+from collections.abc import Sequence
+
+from apex.core.config import AppConfig
+from apex.core.contracts.interfaces import IClock, IEventBus, IModule
+from apex.core.enums import HealthState, PluginKind, StabilityLevel
+from apex.core.logging import LoggerFactory, StructuredLogger
+from apex.core.versioning import SemanticVersion
+from apex.kernel.container import ServiceContainer
+from apex.monitoring.service import MonitoringService
+from apex.plugins.contract import PluginManifest
+from apex.portfolio.config import portfolio_settings
+from apex.portfolio.store import SqlitePortfolioRepository
+from apex.research.service import ResearchService
+from apex.telegram.client import TelegramBotClient
+from apex.telegram.config import telegram_settings
+from apex.telegram.credentials import TelegramCredentials
+from apex.telegram.service import TelegramConsoleService
+
+
+class TelegramConsoleModule:
+    """Kernel module representing the console's presence."""
+
+    MODULE_NAME = "telegram_console"
+
+    def __init__(
+        self,
+        *,
+        service: TelegramConsoleService,
+        logger: StructuredLogger,
+    ) -> None:
+        self._service = service
+        self._logger = logger
+        self._running = False
+
+    @property
+    def name(self) -> str:
+        """Unique module name."""
+        return self.MODULE_NAME
+
+    @property
+    def dependencies(self) -> tuple[str, ...]:
+        """Renders the monitoring feed; starts after it."""
+        return ("monitoring_platform",)
+
+    async def start(self) -> None:
+        """Mark the console present (network contact only on demand)."""
+        self._running = True
+        self._logger.info(
+            "telegram_console_ready", available=self._service.available
+        )
+
+    async def stop(self) -> None:
+        """Stop the console if a session is running."""
+        self._running = False
+        self._service.request_stop()
+        self._logger.info("telegram_console_stopped")
+
+    def health(self) -> HealthState:
+        """Healthy while registered; the console itself runs on demand."""
+        return HealthState.HEALTHY if self._running else HealthState.OFFLINE
+
+
+class TelegramConsolePlugin:
+    """Builds the Telegram console as a kernel plugin."""
+
+    @property
+    def manifest(self) -> PluginManifest:
+        """Plugin self-description."""
+        return PluginManifest(
+            name="telegram_console",
+            version=SemanticVersion(0, 1, 0),
+            kind=PluginKind.SERVICE,
+            api_version=SemanticVersion(1, 0, 0),
+            description="Telegram control layer: menus, reports, emergency center",
+            stability=StabilityLevel.BETA,
+            requires=("monitoring_platform",),
+        )
+
+    def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
+        """Construct the console from injected services."""
+        config = container.resolve(AppConfig)
+        loggers = container.resolve(LoggerFactory)
+        clock = container.resolve(IClock)  # type: ignore[type-abstract]
+        bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
+        settings = telegram_settings(config.section("telegram"))
+        credentials = TelegramCredentials.from_environment()
+        client: TelegramBotClient | None = None
+        if credentials is not None:
+            client = TelegramBotClient(
+                token=credentials.token,
+                poll_timeout_s=settings.poll_timeout_s,
+                logger=loggers.get("telegram.client"),
+            )
+        series = tuple(
+            (symbol, timeframe)
+            for symbol in config.market.symbols
+            for timeframe in config.market.timeframes
+        )
+        service = TelegramConsoleService(
+            settings=settings,
+            credentials=credentials,
+            client=client,
+            monitoring=container.resolve(MonitoringService),
+            research=container.resolve(ResearchService),
+            portfolio_repository=container.resolve(SqlitePortfolioRepository),
+            portfolio_id=portfolio_settings(
+                config.section("portfolio")
+            ).portfolio_id,
+            series=series,
+            bus=bus,
+            clock=clock,
+            logger=loggers.get("telegram.service"),
+        )
+        container.register_instance(TelegramConsoleService, service)
+        return [
+            TelegramConsoleModule(
+                service=service,
+                logger=loggers.get("telegram.module"),
+            )
+        ]
+
+
+APEX_PLUGIN = TelegramConsolePlugin()
