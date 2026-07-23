@@ -43,7 +43,12 @@ from apex import __version__
 from apex.core.config import AppConfig
 from apex.core.contracts.interfaces import IClock
 from apex.core.enums import Timeframe
-from apex.core.exceptions import ApexError, TelegramError, ValidationError
+from apex.core.exceptions import (
+    ApexError,
+    SecurityError,
+    TelegramError,
+    ValidationError,
+)
 from apex.data.catchup import CatchUpReport, CatchUpService
 from apex.data.pipeline import BarIngestionPipeline, IngestionSummary
 from apex.data.streaming import MarketStreamService, StreamStats
@@ -52,13 +57,19 @@ from apex.execution.service import ExecutionService, ExecutionSummary
 from apex.features.pipeline import FeatureComputationPipeline, FeatureComputationSummary
 from apex.kernel.kernel import Kernel, KernelStatus
 from apex.monitoring.loop import LoopStats, OperationsLoopService
-from apex.monitoring.records import AlertRecord, OperationsStatus
+from apex.monitoring.records import AlertRecord, KillSwitchLevel, OperationsStatus
 from apex.monitoring.service import MonitoringService
 from apex.optimization.risk.service import RiskOptimizationService
 from apex.optimization.signal.service import OptimizationSummary, SignalOptimizationService
 from apex.portfolio.service import PortfolioService, PortfolioSummary
 from apex.probability.service import ProbabilityService, ProbabilitySummary
 from apex.research.service import OrchestrationSummary, ResearchService, ResearchSummary
+from apex.security.cli import (
+    build_preflight,
+    run_audit,
+    run_secrets,
+    run_secure_check,
+)
 from apex.telegram.service import ConsoleStats, TelegramConsoleService
 
 DEFAULT_CONFIG_DIR = Path("config")
@@ -181,6 +192,58 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=0,
         help="bounded session length; 0 runs until SIGINT/SIGTERM",
+    )
+    secure_check = subcommands.add_parser(
+        "secure-check",
+        help="run the secure-boot preflight (Book I 13.11)",
+    )
+    secure_check.add_argument(
+        "--live",
+        action="store_true",
+        help="apply live-trading requirements (seal, credentials)",
+    )
+    secrets = subcommands.add_parser(
+        "secrets",
+        help="manage the encrypted vault (values only via --from-env)",
+    )
+    secrets.add_argument(
+        "action",
+        choices=("list", "set", "delete", "rotate", "seal"),
+        help="vault operation",
+    )
+    secrets.add_argument("--name", default=None, help="secret name (set/delete)")
+    secrets.add_argument(
+        "--from-env",
+        dest="from_env",
+        default=None,
+        help="environment variable carrying the value (set/rotate)",
+    )
+    audit = subcommands.add_parser(
+        "audit",
+        help="verify and tail the immutable audit ledger (25.16)",
+    )
+    audit.add_argument(
+        "--tail", type=int, default=10, help="newest entries to list"
+    )
+    kill = subcommands.add_parser(
+        "kill",
+        help="operate the kill switch (10.25/25.29)",
+    )
+    kill.add_argument(
+        "--engage",
+        choices=sorted(
+            level.value
+            for level in KillSwitchLevel
+            if level is not KillSwitchLevel.NONE
+        ),
+        default=None,
+        help="engage a restrictive level (flattened closes positions)",
+    )
+    kill.add_argument(
+        "--release", action="store_true", help="return to normal trading"
+    )
+    kill.add_argument(
+        "--reason", default="operator request", help="transition reason"
     )
     features = subcommands.add_parser(
         "features",
@@ -813,6 +876,20 @@ async def run_loop(
     kernel = Kernel(config_dir=config_dir)
     await kernel.boot()
     try:
+        if live:
+            preflight = await build_preflight(kernel).run(live=True)
+            if not preflight.passed:
+                raise SecurityError(
+                    "secure preflight failed; live trading refused (13.11)",
+                    code="SEC-040",
+                    details={
+                        "failures": ", ".join(
+                            check.name
+                            for check in preflight.checks
+                            if not check.passed and not check.skipped
+                        )
+                    },
+                )
         loop_service = kernel.container.resolve(OperationsLoopService)
         console: TelegramConsoleService | None = None
         if telegram:
@@ -1198,6 +1275,75 @@ def _run_telegram_command(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+async def run_kill(
+    config_dir: Path, *, engage: str | None, release: bool, reason: str
+) -> list[str]:
+    """Boot, operate (or read) the kill switch, shut down."""
+    if engage is not None and release:
+        raise ValidationError(
+            "choose one of --engage / --release", code="VAL-144"
+        )
+    kernel = Kernel(config_dir=config_dir)
+    await kernel.boot()
+    try:
+        engine = kernel.container.resolve(MonitoringService).kill_switch
+        if engage is not None:
+            record = await engine.engage(
+                KillSwitchLevel(engage), reason=reason, actor="operator"
+            )
+            return [f"kill switch engaged: {record.level.value} ({reason})"]
+        if release:
+            await engine.release(reason=reason, actor="operator")
+            return [f"kill switch released ({reason})"]
+        return [f"kill switch: {(await engine.level()).value}"]
+    finally:
+        await kernel.shutdown()
+
+
+def _run_secure_check_command(args: argparse.Namespace) -> int:
+    """Dispatch the secure-boot preflight."""
+    report = asyncio.run(run_secure_check(args.config_dir, live=args.live))
+    sys.stdout.write("\n".join(report.lines()) + "\n")
+    return EXIT_OK if report.passed else EXIT_FAILURE
+
+
+def _run_secrets_command(args: argparse.Namespace) -> int:
+    """Dispatch vault operations."""
+    lines = asyncio.run(
+        run_secrets(
+            args.config_dir,
+            action=args.action,
+            name=args.name,
+            from_env=args.from_env,
+        )
+    )
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
+def _run_audit_command(args: argparse.Namespace) -> int:
+    """Dispatch the audit ledger review."""
+    if args.tail < 0:
+        raise ValidationError("--tail must be non-negative", code="VAL-145")
+    lines = asyncio.run(run_audit(args.config_dir, tail=args.tail))
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
+def _run_kill_command(args: argparse.Namespace) -> int:
+    """Dispatch kill-switch operations."""
+    lines = asyncio.run(
+        run_kill(
+            args.config_dir,
+            engage=args.engage,
+            release=args.release,
+            reason=args.reason,
+        )
+    )
+    sys.stdout.write("\n".join(lines) + "\n")
+    return EXIT_OK
+
+
 def _run_optimizer_command(args: argparse.Namespace) -> int:
     """Dispatch the seeded optimizer commands."""
     runner = (
@@ -1258,6 +1404,10 @@ def main(argv: list[str] | None = None) -> int:
             "run": _run_loop_command,
             "monitor": _run_monitor_command,
             "telegram": _run_telegram_command,
+            "secure-check": _run_secure_check_command,
+            "secrets": _run_secrets_command,
+            "audit": _run_audit_command,
+            "kill": _run_kill_command,
         }
         handler = dispatchers.get(args.command or "")
         if handler is not None:
