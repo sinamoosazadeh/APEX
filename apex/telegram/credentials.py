@@ -1,11 +1,12 @@
-"""Telegram console credentials (Book IV; env until Phase 13).
+"""Telegram console credentials (Book IV; vault-first since Phase 13).
 
-The bot token and the chat allowlists come from the environment -
-``TELEGRAM_BOT_TOKEN``, ``TELEGRAM_ADMIN_CHAT_IDS`` and
-``TELEGRAM_VIEWER_CHAT_IDS`` (comma-separated integers) - exactly the
-interim pattern the trading credentials use until the secrets
-platform lands. The token never leaves this object: never logged,
-never persisted, never surfaced in errors.
+The bot token and the chat allowlists resolve vault-first through the
+security platform (``telegram_bot_token`` / ``telegram_admin_chat_ids``
+/ ``telegram_viewer_chat_ids`` secret names) with the original
+environment variables - ``TELEGRAM_BOT_TOKEN``,
+``TELEGRAM_ADMIN_CHAT_IDS`` and ``TELEGRAM_VIEWER_CHAT_IDS``
+(comma-separated integers) - as the fallback. The token never leaves
+this object: never logged, never persisted, never surfaced in errors.
 
 Roles implement Book IV Part 1's current-version scheme: two tiers.
 ``admin`` (Book IV "Administrator") reaches every surface including
@@ -82,6 +83,21 @@ class TelegramCredentials:
             os.environ.get(_VIEWERS_ENV, ""), variable=_VIEWERS_ENV
         )
         return cls(token=token, admin_chat_ids=admins, viewer_chat_ids=viewers)
+
+    @classmethod
+    def from_sources(
+        cls, *, token: str, admins_raw: str, viewers_raw: str
+    ) -> "TelegramCredentials":
+        """Build from explicit sources (the Phase 13 vault path)."""
+        return cls(
+            token=token,
+            admin_chat_ids=_parse_chat_ids(
+                admins_raw, variable="telegram_admin_chat_ids"
+            ),
+            viewer_chat_ids=_parse_chat_ids(
+                viewers_raw, variable="telegram_viewer_chat_ids"
+            ),
+        )
 
     @property
     def token(self) -> str:
