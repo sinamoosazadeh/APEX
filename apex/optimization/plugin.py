@@ -21,6 +21,7 @@ from apex.optimization.signal.engine import OptimizerSettings
 from apex.optimization.signal.service import SignalOptimizationService
 from apex.optimization.signal.store import SignalOptimizationStore
 from apex.plugins.contract import PluginManifest
+from apex.security.service import SecurityService
 from apex.storage.bars import SqliteBarRepository
 
 OPTIMIZATION_DATABASE_FILENAME = "optimization.sqlite"
@@ -123,7 +124,7 @@ class OptimizationPlatformPlugin:
             api_version=SemanticVersion(1, 0, 0),
             description="Signal and risk optimizers: ten-stage search, stores, artifacts",
             stability=StabilityLevel.BETA,
-            requires=("decision_platform",),
+            requires=("decision_platform", "security_platform"),
         )
 
     def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
@@ -137,6 +138,7 @@ class OptimizationPlatformPlugin:
         store = SignalOptimizationStore(
             database_path=data_dir / OPTIMIZATION_DATABASE_FILENAME,
             artifact_dir=data_dir / ARTIFACT_DIRECTORY,
+            signer=container.resolve(SecurityService).sign,
         )
         base_params = decision_params_from_config(config.market.decision)
         service = SignalOptimizationService(
