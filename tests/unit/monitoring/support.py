@@ -1,1 +1,56 @@
-IiIiU2hhcmVkIGhlbHBlcnMgZm9yIHRoZSBtb25pdG9yaW5nIHRlc3Qgc3VpdGUgKGV4aXN0aW5nIGNvbnZlbnRpb25zKS4iIiIKCmltcG9ydCBpbwpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKCmZyb20gYXBleC5jb3JlLmV2ZW50cy5idXMgaW1wb3J0IEluUHJvY2Vzc0V2ZW50QnVzCmZyb20gYXBleC5jb3JlLmV2ZW50cy5qb3VybmFsIGltcG9ydCBFdmVudEpvdXJuYWwKZnJvbSBhcGV4LmNvcmUubG9nZ2luZyBpbXBvcnQgTG9nRm9ybWF0LCBMb2dnZXJGYWN0b3J5LCBMb2dMZXZlbCwgU3RydWN0dXJlZExvZ2dlcgpmcm9tIGFwZXguY29yZS50aW1lLmNsb2NrIGltcG9ydCBNYW51YWxDbG9jawpmcm9tIGFwZXgubW9uaXRvcmluZy5jb25maWcgaW1wb3J0IE1vbml0b3JpbmdTZXR0aW5ncwpmcm9tIGFwZXgubW9uaXRvcmluZy5zdG9yZSBpbXBvcnQgU3FsaXRlTW9uaXRvcmluZ1JlcG9zaXRvcnkKCmZyb20gdGVzdHMuY29uZnRlc3QgaW1wb3J0IFQwCgoKZGVmIGxvZ2dlcigpIC0+IFN0cnVjdHVyZWRMb2dnZXI6CiAgICAiIiJBIHF1aWV0IHN0cnVjdHVyZWQgbG9nZ2VyIGZvciB0ZXN0cy4iIiIKICAgIGZhY3RvcnkgPSBMb2dnZXJGYWN0b3J5KAogICAgICAgIGNsb2NrPU1hbnVhbENsb2NrKFQwKSwKICAgICAgICBsZXZlbD1Mb2dMZXZlbC5DUklUSUNBTCwKICAgICAgICBsb2dfZm9ybWF0PUxvZ0Zvcm1hdC5KU09OLAogICAgICAgIHN0cmVhbT1pby5TdHJpbmdJTygpLAogICAgKQogICAgcmV0dXJuIGZhY3RvcnkuZ2V0KCJ0ZXN0Lm1vbml0b3JpbmciKQoKCmRlZiBtYWtlX2J1cyhjbG9jazogTWFudWFsQ2xvY2spIC0+IEluUHJvY2Vzc0V2ZW50QnVzOgogICAgIiIiQSByZWFsIGluLXByb2Nlc3MgYnVzIG92ZXIgYSBzbWFsbCBqb3VybmFsLiIiIgogICAgcmV0dXJuIEluUHJvY2Vzc0V2ZW50QnVzKAogICAgICAgIGpvdXJuYWw9RXZlbnRKb3VybmFsKGNhcGFjaXR5PTIwMCksCiAgICAgICAgY2xvY2s9Y2xvY2ssCiAgICAgICAgbG9nZ2VyPWxvZ2dlcigpLAogICAgICAgIGZhaWxfZmFzdD1GYWxzZSwKICAgICkKCgpkZWYgc3RvcmVfYXQodG1wX3BhdGg6IFBhdGgpIC0+IFNxbGl0ZU1vbml0b3JpbmdSZXBvc2l0b3J5OgogICAgIiIiQW4gdW5vcGVuZWQgbW9uaXRvcmluZyBzdG9yZSB1bmRlciB0aGUgdGVzdCdzIHRtcCBkaXIuIiIiCiAgICByZXR1cm4gU3FsaXRlTW9uaXRvcmluZ1JlcG9zaXRvcnkoZGF0YWJhc2VfcGF0aD10bXBfcGF0aCAvICJtb25pdG9yaW5nLnNxbGl0ZSIpCgoKZGVmIHNldHRpbmdzKCoqb3ZlcnJpZGVzOiBvYmplY3QpIC0+IE1vbml0b3JpbmdTZXR0aW5nczoKICAgICIiIlRlc3Qgc2V0dGluZ3Mgd2l0aCBzbWFsbCwgZmFzdCB3aW5kb3dzLiIiIgogICAgYmFzZTogZGljdFtzdHIsIG9iamVjdF0gPSB7CiAgICAgICAgImRlZHVwX3dpbmRvd19tcyI6IDYwXzAwMCwKICAgICAgICAiZXJyb3JfYnVyc3RfY291bnQiOiAzLAogICAgICAgICJlcnJvcl9idXJzdF93aW5kb3dfbXMiOiA2MF8wMDAsCiAgICAgICAgImRpc2Nvbm5lY3RfYnVyc3RfY291bnQiOiAyLAogICAgICAgICJoZWFydGJlYXRfc3RhbGVfbXMiOiAxMF8wMDAsCiAgICAgICAgInNsb193aW5kb3dfbXMiOiAxMjBfMDAwLAogICAgICAgICJzbG9fbWF4X2Vycm9yX3JhdGUiOiAwLjIsCiAgICAgICAgInNsb19taW5fb3BlcmF0aW9ucyI6IDUsCiAgICAgICAgInNuYXBzaG90X2ludGVydmFsX21zIjogMTBfMDAwLAogICAgfQogICAgYmFzZS51cGRhdGUob3ZlcnJpZGVzKQogICAgcmV0dXJuIE1vbml0b3JpbmdTZXR0aW5ncygqKmJhc2UpICAjIHR5cGU6IGlnbm9yZVthcmctdHlwZV0K
+"""Shared helpers for the monitoring test suite (existing conventions)."""
+
+import io
+from pathlib import Path
+
+from apex.core.events.bus import InProcessEventBus
+from apex.core.events.journal import EventJournal
+from apex.core.logging import LogFormat, LoggerFactory, LogLevel, StructuredLogger
+from apex.core.time.clock import ManualClock
+from apex.monitoring.config import MonitoringSettings
+from apex.monitoring.store import SqliteMonitoringRepository
+
+from tests.conftest import T0
+
+
+def logger() -> StructuredLogger:
+    """A quiet structured logger for tests."""
+    factory = LoggerFactory(
+        clock=ManualClock(T0),
+        level=LogLevel.CRITICAL,
+        log_format=LogFormat.JSON,
+        stream=io.StringIO(),
+    )
+    return factory.get("test.monitoring")
+
+
+def make_bus(clock: ManualClock) -> InProcessEventBus:
+    """A real in-process bus over a small journal."""
+    return InProcessEventBus(
+        journal=EventJournal(capacity=200),
+        clock=clock,
+        logger=logger(),
+        fail_fast=False,
+    )
+
+
+def store_at(tmp_path: Path) -> SqliteMonitoringRepository:
+    """An unopened monitoring store under the test's tmp dir."""
+    return SqliteMonitoringRepository(database_path=tmp_path / "monitoring.sqlite")
+
+
+def settings(**overrides: object) -> MonitoringSettings:
+    """Test settings with small, fast windows."""
+    base: dict[str, object] = {
+        "dedup_window_ms": 60_000,
+        "error_burst_count": 3,
+        "error_burst_window_ms": 60_000,
+        "disconnect_burst_count": 2,
+        "heartbeat_stale_ms": 10_000,
+        "slo_window_ms": 120_000,
+        "slo_max_error_rate": 0.2,
+        "slo_min_operations": 5,
+        "snapshot_interval_ms": 10_000,
+    }
+    base.update(overrides)
+    return MonitoringSettings(**base)  # type: ignore[arg-type]
