@@ -81,15 +81,23 @@ class ToobitMarketDataGateway:
         start: Timestamp,
         end: Timestamp,
     ) -> list[Bar]:
+        """Backward pagination on ``endTime`` (the venue's real dialect).
+
+        Production validation (Phase 15) established that Toobit
+        returns the newest ``limit`` klines at or before ``endTime``
+        and IGNORES ``startTime``, so deep windows page BACKWARD from
+        ``end`` until ``start`` is covered, history is exhausted (a
+        short page) or a page makes no older progress. Overlapping
+        boundary bars deduplicate through the keyed collection.
+        """
         collected: dict[int, Bar] = {}
-        cursor = start
-        step_ms = timeframe.duration_ms
-        while cursor.epoch_ms < end.epoch_ms:
+        cursor_end = end
+        while cursor_end.epoch_ms > start.epoch_ms:
             klines = await self._client.get_klines(
                 symbol,
                 interval_for(timeframe),
-                start_ms=cursor.epoch_ms,
-                end_ms=end.epoch_ms,
+                start_ms=start.epoch_ms,
+                end_ms=cursor_end.epoch_ms,
                 limit=self._page_limit,
             )
             if not klines:
@@ -100,13 +108,12 @@ class ToobitMarketDataGateway:
             for bar in page:
                 if start.epoch_ms <= bar.open_time.epoch_ms < end.epoch_ms:
                     collected[bar.open_time.epoch_ms] = bar
-            last_open = page[-1].open_time
-            next_cursor = last_open.add_ms(step_ms)
-            if next_cursor.epoch_ms <= cursor.epoch_ms:
-                break  # defensive: exchange returned no forward progress
-            cursor = next_cursor
+            oldest_open = page[0].open_time
+            if oldest_open.epoch_ms >= cursor_end.epoch_ms:
+                break  # defensive: exchange made no backward progress
+            cursor_end = oldest_open
             if len(page) < self._page_limit:
-                break  # final partial page
+                break  # history exhausted (partial page)
         return [collected[key] for key in sorted(collected)]
 
     async def fetch_ticks(
