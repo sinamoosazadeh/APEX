@@ -1,1 +1,155 @@
-IiIiVGVsZW1ldHJ5IGNvbGxlY3RvciAoQm9vayBJIDEwLjQ6IHRoZSB1bml2ZXJzYWwgdGVsZW1ldHJ5IGJ1cykuCgpUaGUgb2JzZXJ2YWJpbGl0eSBsYXllcidzIHNvbGUgaW5nZXN0aW9uIHBhdGg6IGVuZ2luZXMgbmV2ZXIgd3JpdGUgdG8KdGhlIG1vbml0b3Jpbmcgc3RvcmUgZGlyZWN0bHkuIFR3byBmZWVkcyBjb252ZXJnZSBoZXJlOgoKLSAqKkV2ZW50IHRlbGVtZXRyeSoqOiBzdWJzY3JpYmVkIHRvIHRoZSBwbGF0Zm9ybSBidXMsIGV2ZXJ5IGpvdXJuYWxlZAogIGV2ZW50IGJlY29tZXMgY291bnRlcnMgKGBgZXZlbnRzLnRvdGFsYGAsIHBlci10eXBlIGNvdW50cykgYW5kIGVycm9yCiAgdGVsZW1ldHJ5IChgYGVycm9ycy50b3RhbGBgKSB3aGVuIGl0IHNpZ25hbHMgYSBmYWlsdXJlIC0gdGhlIGJ1cyBpcwogIGFscmVhZHkgdGhlIGRldGVybWluaXN0aWMgcmVjb3JkIG9mIGV2ZXJ5dGhpbmcgdGhhdCBoYXBwZW5lZC4KLSAqKkRpcmVjdCBpbnN0cnVtZW50YXRpb24qKjogdGhlIG9wZXJhdGlvbmFsIGxvb3AgYW5kIHNlcnZpY2VzIHJlY29yZAogIHN0YWdlIGxhdGVuY2llcywgb3BlcmF0aW9uIGNvdW50cyBhbmQgaGVhcnRiZWF0cyB0aHJvdWdoIHRoZQogIGNvbGxlY3RvcidzIG1ldGhvZHMuCgpTYW1wbGVzIGJ1ZmZlciBpbiBtZW1vcnkgYW5kIGZsdXNoIGluIGJhdGNoZXM7IHRpbWVzdGFtcHMgY29tZSBmcm9tCmV2ZW50IG9jY3VycmVuY2Ugb3IgdGhlIGluamVjdGVkIGNsb2NrIC0gbmV2ZXIgYW1iaWVudCB0aW1lLgoiIiIKCmZyb20gdHlwaW5nIGltcG9ydCBGaW5hbAoKZnJvbSBhcGV4LmNvcmUuZW51bXMgaW1wb3J0IEV2ZW50UHJpb3JpdHkKZnJvbSBhcGV4LmNvcmUuZXZlbnRzLmV2ZW50IGltcG9ydCBFdmVudApmcm9tIGFwZXguY29yZS5sb2dnaW5nIGltcG9ydCBTdHJ1Y3R1cmVkTG9nZ2VyCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IENsb2NrCmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IE1ldHJpY1NhbXBsZQpmcm9tIGFwZXgubW9uaXRvcmluZy5zdG9yZSBpbXBvcnQgU3FsaXRlTW9uaXRvcmluZ1JlcG9zaXRvcnkKCk1FVFJJQ19FVkVOVFNfVE9UQUw6IEZpbmFsW3N0cl0gPSAiZXZlbnRzLnRvdGFsIgpNRVRSSUNfRVJST1JTX1RPVEFMOiBGaW5hbFtzdHJdID0gImVycm9ycy50b3RhbCIKTUVUUklDX09QRVJBVElPTlNfVE9UQUw6IEZpbmFsW3N0cl0gPSAib3BlcmF0aW9ucy50b3RhbCIKTUVUUklDX1NUUkVBTV9ESVNDT05ORUNUUzogRmluYWxbc3RyXSA9ICJldmVudHMubWFya2V0LnN0cmVhbS5kaXNjb25uZWN0ZWQiCgojIEV2ZW50IHR5cGVzIHRoYXQgYWx3YXlzIGNvdW50IGFzIGVycm9ycyByZWdhcmRsZXNzIG9mIHByaW9yaXR5LgpfRVJST1JfRVZFTlRfVFlQRVM6IEZpbmFsW2Zyb3plbnNldFtzdHJdXSA9IGZyb3plbnNldCgKICAgIHsKICAgICAgICAibWFya2V0LmluZ2VzdGlvbi5mYWlsZWQiLAogICAgICAgICJtYXJrZXQuc3RyZWFtLmRpc2Nvbm5lY3RlZCIsCiAgICAgICAgImRlY2lzaW9uLmZhaWxlZCIsCiAgICAgICAgInByb2JhYmlsaXR5LmZhaWxlZCIsCiAgICAgICAgInBvcnRmb2xpby5mYWlsZWQiLAogICAgICAgICJleGVjdXRpb24uZmFpbGVkIiwKICAgICAgICAicmVzZWFyY2guZmFpbGVkIiwKICAgICAgICAic3lzdGVtLmJ1cy5oYW5kbGVyX2ZhaWxlZCIsCiAgICAgICAgInN5c3RlbS5tb2R1bGUuZmFpbGVkIiwKICAgIH0KKQoKCmNsYXNzIFRlbGVtZXRyeUNvbGxlY3RvcjoKICAgICIiIkJ1ZmZlcnMgdGVsZW1ldHJ5IGFuZCBmb2xkcyBidXMgZXZlbnRzIGludG8gbWV0cmljcy4iIiIKCiAgICBkZWYgX19pbml0X18oCiAgICAgICAgc2VsZiwKICAgICAgICAqLAogICAgICAgIHN0b3JlOiBTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeSwKICAgICAgICBjbG9jazogQ2xvY2ssCiAgICAgICAgbG9nZ2VyOiBTdHJ1Y3R1cmVkTG9nZ2VyLAogICAgKSAtPiBOb25lOgogICAgICAgIHNlbGYuX3N0b3JlID0gc3RvcmUKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCiAgICAgICAgc2VsZi5fbG9nZ2VyID0gbG9nZ2VyCiAgICAgICAgc2VsZi5fYnVmZmVyOiBsaXN0W01ldHJpY1NhbXBsZV0gPSBbXQogICAgICAgIHNlbGYuX2V2ZW50c19zZWVuID0gMAogICAgICAgIHNlbGYuX2Vycm9yc19zZWVuID0gMAoKICAgIEBwcm9wZXJ0eQogICAgZGVmIGV2ZW50c19zZWVuKHNlbGYpIC0+IGludDoKICAgICAgICAiIiJCdXMgZXZlbnRzIG9ic2VydmVkIHRoaXMgc2Vzc2lvbi4iIiIKICAgICAgICByZXR1cm4gc2VsZi5fZXZlbnRzX3NlZW4KCiAgICBAcHJvcGVydHkKICAgIGRlZiBlcnJvcnNfc2VlbihzZWxmKSAtPiBpbnQ6CiAgICAgICAgIiIiRXJyb3IgZXZlbnRzIG9ic2VydmVkIHRoaXMgc2Vzc2lvbi4iIiIKICAgICAgICByZXR1cm4gc2VsZi5fZXJyb3JzX3NlZW4KCiAgICAjIC0tLSBEaXJlY3QgaW5zdHJ1bWVudGF0aW9uIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgZGVmIG1ldHJpYygKICAgICAgICBzZWxmLCBuYW1lOiBzdHIsIHZhbHVlOiBmbG9hdCwgKiwgdGFnczogZGljdFtzdHIsIHN0cl0gfCBOb25lID0gTm9uZQogICAgKSAtPiBOb25lOgogICAgICAgICIiIkJ1ZmZlciBvbmUgbWV0cmljIHNhbXBsZSBhdCB0aGUgY3VycmVudCBpbnN0YW50LiIiIgogICAgICAgIHNlbGYuX2J1ZmZlci5hcHBlbmQoCiAgICAgICAgICAgIE1ldHJpY1NhbXBsZSgKICAgICAgICAgICAgICAgIG5hbWU9bmFtZSwKICAgICAgICAgICAgICAgIHZhbHVlPXZhbHVlLAogICAgICAgICAgICAgICAgcmVjb3JkZWRfYXQ9c2VsZi5fY2xvY2subm93KCksCiAgICAgICAgICAgICAgICB0YWdzPWRpY3QodGFncyBvciB7fSksCiAgICAgICAgICAgICkKICAgICAgICApCgogICAgZGVmIG9wZXJhdGlvbihzZWxmLCAqLCB0YWdzOiBkaWN0W3N0ciwgc3RyXSB8IE5vbmUgPSBOb25lKSAtPiBOb25lOgogICAgICAgICIiIkNvdW50IG9uZSBjb21wbGV0ZWQgb3BlcmF0aW9uICh0aGUgU0xPIGRlbm9taW5hdG9yKS4iIiIKICAgICAgICBzZWxmLm1ldHJpYyhNRVRSSUNfT1BFUkFUSU9OU19UT1RBTCwgMS4wLCB0YWdzPXRhZ3MpCgogICAgZGVmIGVycm9yKHNlbGYsICosIHRhZ3M6IGRpY3Rbc3RyLCBzdHJdIHwgTm9uZSA9IE5vbmUpIC0+IE5vbmU6CiAgICAgICAgIiIiQ291bnQgb25lIGZhaWx1cmUgKHRoZSBTTE8gbnVtZXJhdG9yKS4iIiIKICAgICAgICBzZWxmLl9lcnJvcnNfc2VlbiArPSAxCiAgICAgICAgc2VsZi5tZXRyaWMoTUVUUklDX0VSUk9SU19UT1RBTCwgMS4wLCB0YWdzPXRhZ3MpCgogICAgYXN5bmMgZGVmIGJlYXQoc2VsZiwgY29tcG9uZW50OiBzdHIpIC0+IE5vbmU6CiAgICAgICAgIiIiUmVjb3JkIG9uZSBjb21wb25lbnQgaGVhcnRiZWF0IChCb29rIEkgMTAuOCkuIiIiCiAgICAgICAgYXdhaXQgc2VsZi5fc3RvcmUuYmVhdChjb21wb25lbnQsIHNlbGYuX2Nsb2NrLm5vdygpKQoKICAgICMgLS0tIEV2ZW50IHRlbGVtZXRyeSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgb2JzZXJ2ZV9ldmVudChzZWxmLCBldmVudDogRXZlbnQpIC0+IE5vbmU6CiAgICAgICAgIiIiQnVzIHN1YnNjcmliZXI6IGZvbGQgb25lIGpvdXJuYWxlZCBldmVudCBpbnRvIHRlbGVtZXRyeS4iIiIKICAgICAgICBzZWxmLl9ldmVudHNfc2VlbiArPSAxCiAgICAgICAgb2NjdXJyZWQgPSBldmVudC5vY2N1cnJlZF9hdAogICAgICAgIHNlbGYuX2J1ZmZlci5hcHBlbmQoCiAgICAgICAgICAgIE1ldHJpY1NhbXBsZSgKICAgICAgICAgICAgICAgIG5hbWU9TUVUUklDX0VWRU5UU19UT1RBTCwKICAgICAgICAgICAgICAgIHZhbHVlPTEuMCwKICAgICAgICAgICAgICAgIHJlY29yZGVkX2F0PW9jY3VycmVkLAogICAgICAgICAgICAgICAgdGFncz17InR5cGUiOiBldmVudC5ldmVudF90eXBlfSwKICAgICAgICAgICAgKQogICAgICAgICkKICAgICAgICBzZWxmLl9idWZmZXIuYXBwZW5kKAogICAgICAgICAgICBNZXRyaWNTYW1wbGUoCiAgICAgICAgICAgICAgICBuYW1lPWYiZXZlbnRzLntldmVudC5ldmVudF90eXBlfSIsCiAgICAgICAgICAgICAgICB2YWx1ZT0xLjAsCiAgICAgICAgICAgICAgICByZWNvcmRlZF9hdD1vY2N1cnJlZCwKICAgICAgICAgICAgICAgIHRhZ3M9e30sCiAgICAgICAgICAgICkKICAgICAgICApCiAgICAgICAgaWYgc2VsZi5faXNfZXJyb3IoZXZlbnQpOgogICAgICAgICAgICBzZWxmLl9lcnJvcnNfc2VlbiArPSAxCiAgICAgICAgICAgIHNlbGYuX2J1ZmZlci5hcHBlbmQoCiAgICAgICAgICAgICAgICBNZXRyaWNTYW1wbGUoCiAgICAgICAgICAgICAgICAgICAgbmFtZT1NRVRSSUNfRVJST1JTX1RPVEFMLAogICAgICAgICAgICAgICAgICAgIHZhbHVlPTEuMCwKICAgICAgICAgICAgICAgICAgICByZWNvcmRlZF9hdD1vY2N1cnJlZCwKICAgICAgICAgICAgICAgICAgICB0YWdzPXsidHlwZSI6IGV2ZW50LmV2ZW50X3R5cGUsICJzb3VyY2UiOiBldmVudC5zb3VyY2V9LAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICApCgogICAgQHN0YXRpY21ldGhvZAogICAgZGVmIF9pc19lcnJvcihldmVudDogRXZlbnQpIC0+IGJvb2w6CiAgICAgICAgaWYgZXZlbnQuZXZlbnRfdHlwZSBpbiBfRVJST1JfRVZFTlRfVFlQRVM6CiAgICAgICAgICAgIHJldHVybiBUcnVlCiAgICAgICAgcmV0dXJuICgKICAgICAgICAgICAgZXZlbnQucHJpb3JpdHkgaXMgRXZlbnRQcmlvcml0eS5DUklUSUNBTAogICAgICAgICAgICBhbmQgZXZlbnQuZXZlbnRfdHlwZS5lbmRzd2l0aCgiLmZhaWxlZCIpCiAgICAgICAgKQoKICAgICMgLS0tIEZsdXNoIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIGZsdXNoKHNlbGYpIC0+IGludDoKICAgICAgICAiIiJQZXJzaXN0IHRoZSBidWZmZXJlZCBzYW1wbGVzOyByZXR1cm5zIHRoZSBjb3VudCB3cml0dGVuLiIiIgogICAgICAgIGlmIG5vdCBzZWxmLl9idWZmZXI6CiAgICAgICAgICAgIHJldHVybiAwCiAgICAgICAgYmF0Y2ggPSBzZWxmLl9idWZmZXIKICAgICAgICBzZWxmLl9idWZmZXIgPSBbXQogICAgICAgIHdyaXR0ZW4gPSBhd2FpdCBzZWxmLl9zdG9yZS5pbnNlcnRfbWV0cmljcyhiYXRjaCkKICAgICAgICBzZWxmLl9sb2dnZXIuZGVidWcoInRlbGVtZXRyeV9mbHVzaGVkIiwgc2FtcGxlcz13cml0dGVuKQogICAgICAgIHJldHVybiB3cml0dGVuCg==
+"""Telemetry collector (Book I 10.4: the universal telemetry bus).
+
+The observability layer's sole ingestion path: engines never write to
+the monitoring store directly. Two feeds converge here:
+
+- **Event telemetry**: subscribed to the platform bus, every journaled
+  event becomes counters (``events.total``, per-type counts) and error
+  telemetry (``errors.total``) when it signals a failure - the bus is
+  already the deterministic record of everything that happened.
+- **Direct instrumentation**: the operational loop and services record
+  stage latencies, operation counts and heartbeats through the
+  collector's methods.
+
+Samples buffer in memory and flush in batches; timestamps come from
+event occurrence or the injected clock - never ambient time.
+"""
+
+from typing import Final
+
+from apex.core.enums import EventPriority
+from apex.core.events.event import Event
+from apex.core.logging import StructuredLogger
+from apex.core.time.clock import Clock
+from apex.monitoring.records import MetricSample
+from apex.monitoring.store import SqliteMonitoringRepository
+
+METRIC_EVENTS_TOTAL: Final[str] = "events.total"
+METRIC_ERRORS_TOTAL: Final[str] = "errors.total"
+METRIC_OPERATIONS_TOTAL: Final[str] = "operations.total"
+METRIC_STREAM_DISCONNECTS: Final[str] = "events.market.stream.disconnected"
+
+# Event types that always count as errors regardless of priority.
+_ERROR_EVENT_TYPES: Final[frozenset[str]] = frozenset(
+    {
+        "market.ingestion.failed",
+        "market.stream.disconnected",
+        "decision.failed",
+        "probability.failed",
+        "portfolio.failed",
+        "execution.failed",
+        "research.failed",
+        "system.bus.handler_failed",
+        "system.module.failed",
+    }
+)
+
+
+class TelemetryCollector:
+    """Buffers telemetry and folds bus events into metrics."""
+
+    def __init__(
+        self,
+        *,
+        store: SqliteMonitoringRepository,
+        clock: Clock,
+        logger: StructuredLogger,
+    ) -> None:
+        self._store = store
+        self._clock = clock
+        self._logger = logger
+        self._buffer: list[MetricSample] = []
+        self._events_seen = 0
+        self._errors_seen = 0
+
+    @property
+    def events_seen(self) -> int:
+        """Bus events observed this session."""
+        return self._events_seen
+
+    @property
+    def errors_seen(self) -> int:
+        """Error events observed this session."""
+        return self._errors_seen
+
+    # --- Direct instrumentation -----------------------------------------------------
+
+    def metric(
+        self, name: str, value: float, *, tags: dict[str, str] | None = None
+    ) -> None:
+        """Buffer one metric sample at the current instant."""
+        self._buffer.append(
+            MetricSample(
+                name=name,
+                value=value,
+                recorded_at=self._clock.now(),
+                tags=dict(tags or {}),
+            )
+        )
+
+    def operation(self, *, tags: dict[str, str] | None = None) -> None:
+        """Count one completed operation (the SLO denominator)."""
+        self.metric(METRIC_OPERATIONS_TOTAL, 1.0, tags=tags)
+
+    def error(self, *, tags: dict[str, str] | None = None) -> None:
+        """Count one failure (the SLO numerator)."""
+        self._errors_seen += 1
+        self.metric(METRIC_ERRORS_TOTAL, 1.0, tags=tags)
+
+    async def beat(self, component: str) -> None:
+        """Record one component heartbeat (Book I 10.8)."""
+        await self._store.beat(component, self._clock.now())
+
+    # --- Event telemetry ---------------------------------------------------------------
+
+    async def observe_event(self, event: Event) -> None:
+        """Bus subscriber: fold one journaled event into telemetry."""
+        self._events_seen += 1
+        occurred = event.occurred_at
+        self._buffer.append(
+            MetricSample(
+                name=METRIC_EVENTS_TOTAL,
+                value=1.0,
+                recorded_at=occurred,
+                tags={"type": event.event_type},
+            )
+        )
+        self._buffer.append(
+            MetricSample(
+                name=f"events.{event.event_type}",
+                value=1.0,
+                recorded_at=occurred,
+                tags={},
+            )
+        )
+        if self._is_error(event):
+            self._errors_seen += 1
+            self._buffer.append(
+                MetricSample(
+                    name=METRIC_ERRORS_TOTAL,
+                    value=1.0,
+                    recorded_at=occurred,
+                    tags={"type": event.event_type, "source": event.source},
+                )
+            )
+
+    @staticmethod
+    def _is_error(event: Event) -> bool:
+        if event.event_type in _ERROR_EVENT_TYPES:
+            return True
+        return (
+            event.priority is EventPriority.CRITICAL
+            and event.event_type.endswith(".failed")
+        )
+
+    # --- Flush -----------------------------------------------------------------------
+
+    async def flush(self) -> int:
+        """Persist the buffered samples; returns the count written."""
+        if not self._buffer:
+            return 0
+        batch = self._buffer
+        self._buffer = []
+        written = await self._store.insert_metrics(batch)
+        self._logger.debug("telemetry_flushed", samples=written)
+        return written
