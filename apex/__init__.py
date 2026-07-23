@@ -13,6 +13,6 @@ This package root exposes only the project version.
 
 from typing import Final
 
-__version__: Final[str] = "0.14.0"
+__version__: Final[str] = "0.15.0"
 
 __all__ = ["__version__"]
