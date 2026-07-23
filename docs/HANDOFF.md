@@ -59,8 +59,10 @@ then targeted line ranges) - never whole books.
    (ABC-123 pattern; grep used codes before allocating), `Result[T]`,
    files <=800 lines where practical, functions <=50 lines, downward-only
    dependencies (layer order: core < domain < contracts < storage <
-   features < probability < decision < portfolio < optimization <
-   execution < research), no bare asserts in production code
+   security < features < probability < decision < portfolio <
+   optimization < execution < research < monitoring < telegram; only
+   `apex/__main__.py` composes across layers), no bare asserts in
+   production code
    (type-narrowing asserts after explicit checks are established
    precedent).
 3. Per-phase ritual: extract spec surgically -> plan in the thread's
@@ -135,9 +137,7 @@ then targeted line ranges) - never whole books.
 
 - **Phase 12 - Monitoring + Telegram console**: COMPLETE (see the
   PHASES.md row).
-- **Phase 13 - Security platform**: secrets management (replacing the
-  env-credential interim in execution/telegram), key handling, audit
-  hardening - Book II security chapters.
+- **Phase 13 - Security platform**: COMPLETE (see the PHASES.md row).
 - **Phase 14 - Deployment**: packaging, runtime layout, service
   lifecycle for the target device (Termux/mobile per Book V part 7
   resource notes), backup/restore - Book II deployment chapters.
@@ -151,9 +151,11 @@ then targeted line ranges) - never whole books.
   promotion pipeline, Telegram menus and kill-switch surfaces all
   landed. Kill-switch position FLATTENING joins Phase 13 (the security
   response), alongside:
-- Phase 13: secrets platform replacing TOOBIT_API_KEY/SECRET env reads
-  (`apex/execution/trading/client.py` `TradingCredentials`) and the
-  Telegram token.
+- Phase 13: DONE - the vault-first credential chain, kill-switch
+  FLATTENED response, audit ledger, signing and secure preflight all
+  landed. The vault MASTER key still arrives via the APEX_MASTER_KEY
+  environment variable (the model's documented root); OS-keyring
+  storage on the Termux target belongs to Phase 14 deployment.
 - Backlog (schedule where their phase fits): automatic
   hypothesis/pattern/strategy discovery + synthetic markets + ablation
   (research corpus), Kalman filter, crypto dominance context,
@@ -165,7 +167,7 @@ then targeted line ranges) - never whole books.
 
 - `uv` lives at `~/.local/bin/uv` after pip install; the venv Python
   reports 3.14.x (>=3.13 requirement satisfied).
-- pytest count at handoff: 536; boot: 11 plugins / 12 modules healthy.
+- pytest count at handoff: 561; boot: 12 plugins / 13 modules healthy.
 - `config.section(name)` exposes EVERY config file's raw mapping
   (deep-validated files included) since Phase 10.
 - Learned per-file push commits mean local and remote histories
@@ -182,7 +184,24 @@ then targeted line ranges) - never whole books.
 
 ## State at handoff (update this block at every phase close)
 
-- Version 0.14.0; phases 0-12 complete; Phase 13 (Security) is next.
+- Version 0.15.0; phases 0-13 complete; Phase 14 (Deployment) is next.
+- 561 tests passing; ruff + mypy strict clean (288 files); 12 plugins /
+  13 modules boot healthy.
+- Security platform live: vault (APEX_MASTER_KEY -> scrypt -> Fernet;
+  canonical secret names in apex/security/vault.py), hash-chained
+  audit ledger, HMAC artifact/config signing (research injector
+  verifies sha256 + signature on stamped artifacts), access policy,
+  secure preflight gating `apex run --live` (SEC-040), kill-switch
+  FLATTENED response (venue reduce-only closes + ledger close at the
+  emergency mark). CLI: secrets/audit/kill/secure-check.
+- Phase 13 close validation: paper preflight PASSED sealed; live
+  preflight refused honestly without credentials (exit 1); kill drill
+  entries_disabled -> flattened -> release; audit chain VALID over the
+  8-entry operator trail.
+
+## Previous state (Phase 12 close)
+
+- Version 0.14.0; phases 0-12 complete.
 - 536 tests passing; ruff + mypy strict clean (269 files); 11 plugins /
   12 modules boot healthy.
 - Phase 12 recovery note: the original Phase 12 push (an earlier
