@@ -1,1 +1,247 @@
-IiIiTW9uaXRvcmluZyBwbGF0Zm9ybSBwbHVnaW4gKEJvb2sgSUkgY2guIDI2OyBCb29rIEkgY2guIDEwKS4KCldpcmVzIHRoZSBQaGFzZSAxMiBzbGljZTogdGVsZW1ldHJ5IHNldHRpbmdzICh0ZWxlbWV0cnkueWFtbCkgLT4gdGhlCm1vbml0b3Jpbmcgc3RvcmUgLT4gY29sbGVjdG9yIChidXMtc3Vic2NyaWJlZCBhdCBtb2R1bGUgc3RhcnQpIC0+CmhlYWx0aCBlbmdpbmUgb3ZlciB0aGUgbGl2ZSBtb2R1bGUgcmVnaXN0cnkgLT4ga2lsbCBzd2l0Y2ggKHdpdGggYQpiZXN0LWVmZm9ydCB2ZW51ZSBvcmRlciBjYW5jZWxsZXIpIC0+IGFsZXJ0IGVuZ2luZSAtPiBlcnJvciBidWRnZXQgLT4KbW9uaXRvcmluZyBzZXJ2aWNlIC0+IHRoZSBsaXZlIG9wZXJhdGlvbmFsIGxvb3AuIFJlcXVpcmVzIHRoZQpyZXNlYXJjaCBwbGF0Zm9ybSAoYW5kIHRyYW5zaXRpdmVseSBldmVyeXRoaW5nIGJlbG93KTogdGhlIGxvb3AKZHJpdmVzIGV2ZXJ5IHBsYXRmb3JtIGFuZCB0aGUgb3BzIGZlZWQgcmVhZHMgdGhlaXIgc3RvcmVzLgoiIiIKCmZyb20gY29sbGVjdGlvbnMuYWJjIGltcG9ydCBTZXF1ZW5jZQpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKZnJvbSB0eXBpbmcgaW1wb3J0IEZpbmFsCgpmcm9tIGFwZXguY29yZS5jb25maWcgaW1wb3J0IEFwcENvbmZpZwpmcm9tIGFwZXguY29yZS5jb250cmFjdHMuaW50ZXJmYWNlcyBpbXBvcnQgSUNsb2NrLCBJRXZlbnRCdXMsIElNb2R1bGUKZnJvbSBhcGV4LmNvcmUuZW51bXMgaW1wb3J0IEhlYWx0aFN0YXRlLCBQbHVnaW5LaW5kLCBTdGFiaWxpdHlMZXZlbApmcm9tIGFwZXguY29yZS5leGNlcHRpb25zIGltcG9ydCBBcGV4RXJyb3IKZnJvbSBhcGV4LmNvcmUuaWRlbnRpdHkgaW1wb3J0IElkUHJvdmlkZXIKZnJvbSBhcGV4LmNvcmUubG9nZ2luZyBpbXBvcnQgTG9nZ2VyRmFjdG9yeSwgU3RydWN0dXJlZExvZ2dlcgpmcm9tIGFwZXguY29yZS52ZXJzaW9uaW5nIGltcG9ydCBTZW1hbnRpY1ZlcnNpb24KZnJvbSBhcGV4LmRhdGEuY2F0Y2h1cCBpbXBvcnQgQ2F0Y2hVcFNlcnZpY2UKZnJvbSBhcGV4LmRhdGEuc3RyZWFtaW5nIGltcG9ydCBNYXJrZXRTdHJlYW1TZXJ2aWNlCmZyb20gYXBleC5kZWNpc2lvbi5zZXJ2aWNlIGltcG9ydCBEZWNpc2lvblNlcnZpY2UKZnJvbSBhcGV4LmRlY2lzaW9uLnN0b3JlIGltcG9ydCBTcWxpdGVEZWNpc2lvblJlcG9zaXRvcnkKZnJvbSBhcGV4LmV4ZWN1dGlvbi5jb25maWcgaW1wb3J0IGV4ZWN1dGlvbl9zZXR0aW5ncwpmcm9tIGFwZXguZXhlY3V0aW9uLnNlcnZpY2UgaW1wb3J0IEV4ZWN1dGlvblNlcnZpY2UKZnJvbSBhcGV4LmV4ZWN1dGlvbi5zdG9yZSBpbXBvcnQgU3FsaXRlRXhlY3V0aW9uUmVwb3NpdG9yeQpmcm9tIGFwZXguZXhlY3V0aW9uLnRyYWRpbmcuY2xpZW50IGltcG9ydCBUb29iaXRUcmFkaW5nQ2xpZW50CmZyb20gYXBleC5leGVjdXRpb24udHJhZGluZy50cmFuc2xhdG9yIGltcG9ydCBjb250cmFjdF9zeW1ib2wsIHVud3JhcApmcm9tIGFwZXguZmVhdHVyZXMucGlwZWxpbmUgaW1wb3J0IEZlYXR1cmVDb21wdXRhdGlvblBpcGVsaW5lCmZyb20gYXBleC5rZXJuZWwuY29udGFpbmVyIGltcG9ydCBTZXJ2aWNlQ29udGFpbmVyCmZyb20gYXBleC5rZXJuZWwuaGVhbHRoIGltcG9ydCBIZWFsdGhNb25pdG9yCmZyb20gYXBleC5rZXJuZWwubW9kdWxlcyBpbXBvcnQgTW9kdWxlUmVnaXN0cnkKZnJvbSBhcGV4Lm1vbml0b3JpbmcuYWxlcnRzIGltcG9ydCBBbGVydEVuZ2luZQpmcm9tIGFwZXgubW9uaXRvcmluZy5jb2xsZWN0b3IgaW1wb3J0IFRlbGVtZXRyeUNvbGxlY3Rvcgpmcm9tIGFwZXgubW9uaXRvcmluZy5jb25maWcgaW1wb3J0IG1vbml0b3Jpbmdfc2V0dGluZ3MKZnJvbSBhcGV4Lm1vbml0b3JpbmcuaGVhbHRoIGltcG9ydCBIZWFsdGhFbmdpbmUKZnJvbSBhcGV4Lm1vbml0b3Jpbmcua2lsbHN3aXRjaCBpbXBvcnQgS2lsbFN3aXRjaEVuZ2luZSwgT3JkZXJDYW5jZWxsZXIKZnJvbSBhcGV4Lm1vbml0b3JpbmcubG9vcCBpbXBvcnQgT3BlcmF0aW9uc0xvb3BTZXJ2aWNlCmZyb20gYXBleC5tb25pdG9yaW5nLnNlcnZpY2UgaW1wb3J0IE1vbml0b3JpbmdTZXJ2aWNlCmZyb20gYXBleC5tb25pdG9yaW5nLnNsbyBpbXBvcnQgRXJyb3JCdWRnZXRUcmFja2VyCmZyb20gYXBleC5tb25pdG9yaW5nLnN0b3JlIGltcG9ydCBTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeQpmcm9tIGFwZXgucGx1Z2lucy5jb250cmFjdCBpbXBvcnQgUGx1Z2luTWFuaWZlc3QKZnJvbSBhcGV4LnBvcnRmb2xpby5jb25maWcgaW1wb3J0IHBvcnRmb2xpb19zZXR0aW5ncwpmcm9tIGFwZXgucG9ydGZvbGlvLnN0b3JlIGltcG9ydCBTcWxpdGVQb3J0Zm9saW9SZXBvc2l0b3J5CmZyb20gYXBleC5wcm9iYWJpbGl0eS5zZXJ2aWNlIGltcG9ydCBQcm9iYWJpbGl0eVNlcnZpY2UKZnJvbSBhcGV4LnJlc2VhcmNoLnNlcnZpY2UgaW1wb3J0IFJlc2VhcmNoU2VydmljZQpmcm9tIGFwZXgucmVzZWFyY2guc3RvcmUgaW1wb3J0IFNxbGl0ZVJlc2VhcmNoUmVwb3NpdG9yeQoKTU9OSVRPUklOR19EQVRBQkFTRV9GSUxFTkFNRTogRmluYWxbc3RyXSA9ICJtb25pdG9yaW5nLnNxbGl0ZSIKX09QRU5fT1JERVJTX1BBVEg6IEZpbmFsW3N0cl0gPSAiL2FwaS92Mi9mdXR1cmVzL29wZW4tb3JkZXJzIgoKCmRlZiBfb3JkZXJfY2FuY2VsbGVyKAogICAgY2xpZW50OiBUb29iaXRUcmFkaW5nQ2xpZW50LAogICAgc3ltYm9sczogdHVwbGVbc3RyLCAuLi5dLAogICAgY29udHJhY3RfaW5maXg6IHN0ciwKICAgIGxvZ2dlcjogU3RydWN0dXJlZExvZ2dlciwKKSAtPiBPcmRlckNhbmNlbGxlcjoKICAgICIiIkJlc3QtZWZmb3J0IHZlbnVlIG9yZGVyIGNhbmNlbGxhdGlvbiBmb3IgU0FGRV9NT0RFICgxMC4yNSkuIiIiCgogICAgYXN5bmMgZGVmIGNhbmNlbF9hbGwoKSAtPiBpbnQ6CiAgICAgICAgaWYgbm90IGNsaWVudC5jYW5fdHJhZGU6CiAgICAgICAgICAgIHJldHVybiAwCiAgICAgICAgY2FuY2VsZWQgPSAwCiAgICAgICAgZm9yIHN5bWJvbCBpbiBzeW1ib2xzOgogICAgICAgICAgICBjb250cmFjdCA9IGNvbnRyYWN0X3N5bWJvbChzeW1ib2wsIGNvbnRyYWN0X2luZml4KQogICAgICAgICAgICBwYXlsb2FkID0gdW53cmFwKGF3YWl0IGNsaWVudC5vcGVuX29yZGVycyhjb250cmFjdCksIHBhdGg9X09QRU5fT1JERVJTX1BBVEgpCiAgICAgICAgICAgIG9yZGVycyA9IHBheWxvYWQgaWYgaXNpbnN0YW5jZShwYXlsb2FkLCBsaXN0KSBlbHNlIFtdCiAgICAgICAgICAgIGZvciBvcmRlciBpbiBvcmRlcnM6CiAgICAgICAgICAgICAgICBpZiBub3QgaXNpbnN0YW5jZShvcmRlciwgZGljdCk6CiAgICAgICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgICAgIG9yZGVyX2lkID0gb3JkZXIuZ2V0KCJvcmRlcklkIikKICAgICAgICAgICAgICAgIGlmIG9yZGVyX2lkIGlzIE5vbmU6CiAgICAgICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgICAgIHRyeToKICAgICAgICAgICAgICAgICAgICBhd2FpdCBjbGllbnQuY2FuY2VsX29yZGVyKG9yZGVyX2lkPXN0cihvcmRlcl9pZCkpCiAgICAgICAgICAgICAgICAgICAgY2FuY2VsZWQgKz0gMQogICAgICAgICAgICAgICAgZXhjZXB0IEFwZXhFcnJvciBhcyBlcnJvcjoKICAgICAgICAgICAgICAgICAgICBsb2dnZXIuZmFpbHVyZSgic2FmZV9tb2RlX2NhbmNlbF9mYWlsZWQiLCBlcnJvcikKICAgICAgICByZXR1cm4gY2FuY2VsZWQKCiAgICByZXR1cm4gY2FuY2VsX2FsbAoKCmNsYXNzIE1vbml0b3JpbmdQbGF0Zm9ybU1vZHVsZToKICAgICIiIktlcm5lbCBtb2R1bGUgb3duaW5nIHRoZSBtb25pdG9yaW5nIHN0b3JlIGFuZCBidXMgdGVsZW1ldHJ5LiIiIgoKICAgIE1PRFVMRV9OQU1FID0gIm1vbml0b3JpbmdfcGxhdGZvcm0iCgogICAgZGVmIF9faW5pdF9fKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICByZXBvc2l0b3J5OiBTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeSwKICAgICAgICBjb2xsZWN0b3I6IFRlbGVtZXRyeUNvbGxlY3RvciwKICAgICAgICBidXM6IElFdmVudEJ1cywKICAgICAgICBsb2dnZXI6IFN0cnVjdHVyZWRMb2dnZXIsCiAgICApIC0+IE5vbmU6CiAgICAgICAgc2VsZi5fcmVwb3NpdG9yeSA9IHJlcG9zaXRvcnkKICAgICAgICBzZWxmLl9jb2xsZWN0b3IgPSBjb2xsZWN0b3IKICAgICAgICBzZWxmLl9idXMgPSBidXMKICAgICAgICBzZWxmLl9sb2dnZXIgPSBsb2dnZXIKICAgICAgICBzZWxmLl9ydW5uaW5nID0gRmFsc2UKICAgICAgICBzZWxmLl9zdWJzY3JpYmVkID0gRmFsc2UKCiAgICBAcHJvcGVydHkKICAgIGRlZiBuYW1lKHNlbGYpIC0+IHN0cjoKICAgICAgICAiIiJVbmlxdWUgbW9kdWxlIG5hbWUuIiIiCiAgICAgICAgcmV0dXJuIHNlbGYuTU9EVUxFX05BTUUKCiAgICBAcHJvcGVydHkKICAgIGRlZiBkZXBlbmRlbmNpZXMoc2VsZikgLT4gdHVwbGVbc3RyLCAuLi5dOgogICAgICAgICIiIk9ic2VydmVzIGV2ZXJ5IHBsYXRmb3JtOyBzdGFydHMgYWZ0ZXIgdGhlIHJlc2VhcmNoIHBsYXRmb3JtLiIiIgogICAgICAgIHJldHVybiAoInJlc2VhcmNoX3BsYXRmb3JtIiwgImV4ZWN1dGlvbl9wbGF0Zm9ybSIsICJtYXJrZXRfZGF0YSIpCgogICAgYXN5bmMgZGVmIHN0YXJ0KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgIiIiT3BlbiB0aGUgbW9uaXRvcmluZyBzdG9yZSBhbmQgc3Vic2NyaWJlIHRoZSBjb2xsZWN0b3IuIiIiCiAgICAgICAgYXdhaXQgc2VsZi5fcmVwb3NpdG9yeS5vcGVuKCkKICAgICAgICBpZiBub3Qgc2VsZi5fc3Vic2NyaWJlZDoKICAgICAgICAgICAgc2VsZi5fYnVzLnN1YnNjcmliZV9hbGwoc2VsZi5fY29sbGVjdG9yLm9ic2VydmVfZXZlbnQpCiAgICAgICAgICAgIHNlbGYuX3N1YnNjcmliZWQgPSBUcnVlCiAgICAgICAgc2VsZi5fcnVubmluZyA9IFRydWUKICAgICAgICBzZWxmLl9sb2dnZXIuaW5mbygibW9uaXRvcmluZ19wbGF0Zm9ybV9zdGFydGVkIikKCiAgICBhc3luYyBkZWYgc3RvcChzZWxmKSAtPiBOb25lOgogICAgICAgICIiIkZsdXNoIHBlbmRpbmcgdGVsZW1ldHJ5IGFuZCBjbG9zZSB0aGUgc3RvcmUuIiIiCiAgICAgICAgc2VsZi5fcnVubmluZyA9IEZhbHNlCiAgICAgICAgYXdhaXQgc2VsZi5fY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICBhd2FpdCBzZWxmLl9yZXBvc2l0b3J5LmNsb3NlKCkKICAgICAgICBzZWxmLl9sb2dnZXIuaW5mbygibW9uaXRvcmluZ19wbGF0Zm9ybV9zdG9wcGVkIikKCiAgICBkZWYgaGVhbHRoKHNlbGYpIC0+IEhlYWx0aFN0YXRlOgogICAgICAgICIiIkhlYWx0aHkgd2hpbGUgdGhlIHN0b3JlIGlzIG9wZW4uIiIiCiAgICAgICAgcmV0dXJuIEhlYWx0aFN0YXRlLkhFQUxUSFkgaWYgc2VsZi5fcnVubmluZyBlbHNlIEhlYWx0aFN0YXRlLk9GRkxJTkUKCgpjbGFzcyBNb25pdG9yaW5nUGxhdGZvcm1QbHVnaW46CiAgICAiIiJCdWlsZHMgdGhlIG1vbml0b3JpbmcgcGxhdGZvcm0gYXMgYSBrZXJuZWwgcGx1Z2luLiIiIgoKICAgIEBwcm9wZXJ0eQogICAgZGVmIG1hbmlmZXN0KHNlbGYpIC0+IFBsdWdpbk1hbmlmZXN0OgogICAgICAgICIiIlBsdWdpbiBzZWxmLWRlc2NyaXB0aW9uLiIiIgogICAgICAgIHJldHVybiBQbHVnaW5NYW5pZmVzdCgKICAgICAgICAgICAgbmFtZT0ibW9uaXRvcmluZ19wbGF0Zm9ybSIsCiAgICAgICAgICAgIHZlcnNpb249U2VtYW50aWNWZXJzaW9uKDAsIDEsIDApLAogICAgICAgICAgICBraW5kPVBsdWdpbktpbmQuU0VSVklDRSwKICAgICAgICAgICAgYXBpX3ZlcnNpb249U2VtYW50aWNWZXJzaW9uKDEsIDAsIDApLAogICAgICAgICAgICBkZXNjcmlwdGlvbj0iVGVsZW1ldHJ5LCBoZWFsdGgsIGFsZXJ0cywga2lsbCBzd2l0Y2gsIG9wZXJhdGlvbmFsIGxvb3AiLAogICAgICAgICAgICBzdGFiaWxpdHk9U3RhYmlsaXR5TGV2ZWwuQkVUQSwKICAgICAgICAgICAgcmVxdWlyZXM9KCJyZXNlYXJjaF9wbGF0Zm9ybSIsICJleGVjdXRpb25fcGxhdGZvcm0iLCAidG9vYml0X2Nvbm5lY3RvciIpLAogICAgICAgICkKCiAgICBkZWYgYnVpbGRfbW9kdWxlcyhzZWxmLCBjb250YWluZXI6IFNlcnZpY2VDb250YWluZXIpIC0+IFNlcXVlbmNlW0lNb2R1bGVdOgogICAgICAgICIiIkNvbnN0cnVjdCB0aGUgbW9uaXRvcmluZyBwbGF0Zm9ybSBmcm9tIGluamVjdGVkIHNlcnZpY2VzLiIiIgogICAgICAgIGNvbmZpZyA9IGNvbnRhaW5lci5yZXNvbHZlKEFwcENvbmZpZykKICAgICAgICBsb2dnZXJzID0gY29udGFpbmVyLnJlc29sdmUoTG9nZ2VyRmFjdG9yeSkKICAgICAgICBjbG9jayA9IGNvbnRhaW5lci5yZXNvbHZlKElDbG9jaykgICMgdHlwZTogaWdub3JlW3R5cGUtYWJzdHJhY3RdCiAgICAgICAgYnVzID0gY29udGFpbmVyLnJlc29sdmUoSUV2ZW50QnVzKSAgIyB0eXBlOiBpZ25vcmVbdHlwZS1hYnN0cmFjdF0KICAgICAgICBzZXR0aW5ncyA9IG1vbml0b3Jpbmdfc2V0dGluZ3MoY29uZmlnLnNlY3Rpb24oInRlbGVtZXRyeSIpKQogICAgICAgIHJlcG9zaXRvcnkgPSBTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeSgKICAgICAgICAgICAgZGF0YWJhc2VfcGF0aD1QYXRoKGNvbmZpZy5zeXN0ZW0uZGF0YV9kaXIpIC8gTU9OSVRPUklOR19EQVRBQkFTRV9GSUxFTkFNRSwKICAgICAgICApCiAgICAgICAgY29sbGVjdG9yID0gVGVsZW1ldHJ5Q29sbGVjdG9yKAogICAgICAgICAgICBzdG9yZT1yZXBvc2l0b3J5LCBjbG9jaz1jbG9jaywgbG9nZ2VyPWxvZ2dlcnMuZ2V0KCJtb25pdG9yaW5nLmNvbGxlY3RvciIpCiAgICAgICAgKQogICAgICAgIGV4Y2hhbmdlX3NlY3Rpb24gPSBjb25maWcuc2VjdGlvbigiZXhjaGFuZ2UiKQogICAgICAgIHJhd19leGVjdXRpb24gPSBleGNoYW5nZV9zZWN0aW9uLmdldCgiZXhlY3V0aW9uIiwge30pCiAgICAgICAgZXhlY19zZXR0aW5ncyA9IGV4ZWN1dGlvbl9zZXR0aW5ncygKICAgICAgICAgICAgcmF3X2V4ZWN1dGlvbiBpZiBpc2luc3RhbmNlKHJhd19leGVjdXRpb24sIGRpY3QpIGVsc2Uge30KICAgICAgICApCiAgICAgICAgY2FuY2VsbGVyID0gX29yZGVyX2NhbmNlbGxlcigKICAgICAgICAgICAgY29udGFpbmVyLnJlc29sdmUoVG9vYml0VHJhZGluZ0NsaWVudCksCiAgICAgICAgICAgIGNvbmZpZy5tYXJrZXQuc3ltYm9scywKICAgICAgICAgICAgZXhlY19zZXR0aW5ncy5jb250cmFjdF9pbmZpeCwKICAgICAgICAgICAgbG9nZ2Vycy5nZXQoIm1vbml0b3Jpbmcua2lsbHN3aXRjaCIpLAogICAgICAgICkKICAgICAgICBraWxsX3N3aXRjaCA9IEtpbGxTd2l0Y2hFbmdpbmUoCiAgICAgICAgICAgIHNldHRpbmdzPXNldHRpbmdzLAogICAgICAgICAgICBzdG9yZT1yZXBvc2l0b3J5LAogICAgICAgICAgICBidXM9YnVzLAogICAgICAgICAgICBjbG9jaz1jbG9jaywKICAgICAgICAgICAgbG9nZ2VyPWxvZ2dlcnMuZ2V0KCJtb25pdG9yaW5nLmtpbGxzd2l0Y2giKSwKICAgICAgICAgICAgb3JkZXJfY2FuY2VsbGVyPWNhbmNlbGxlciwKICAgICAgICApCiAgICAgICAgYWxlcnRzID0gQWxlcnRFbmdpbmUoCiAgICAgICAgICAgIHNldHRpbmdzPXNldHRpbmdzLAogICAgICAgICAgICBzdG9yZT1yZXBvc2l0b3J5LAogICAgICAgICAgICBraWxsX3N3aXRjaD1raWxsX3N3aXRjaCwKICAgICAgICAgICAgYnVzPWJ1cywKICAgICAgICAgICAgY2xvY2s9Y2xvY2ssCiAgICAgICAgICAgIGxvZ2dlcj1sb2dnZXJzLmdldCgibW9uaXRvcmluZy5hbGVydHMiKSwKICAgICAgICApCiAgICAgICAgaGVhbHRoID0gSGVhbHRoRW5naW5lKAogICAgICAgICAgICByZWdpc3RyeT1jb250YWluZXIucmVzb2x2ZShNb2R1bGVSZWdpc3RyeSksCiAgICAgICAgICAgIG1vbml0b3I9Y29udGFpbmVyLnJlc29sdmUoSGVhbHRoTW9uaXRvciksCiAgICAgICAgKQogICAgICAgIHNsbyA9IEVycm9yQnVkZ2V0VHJhY2tlcihzZXR0aW5ncz1zZXR0aW5ncywgc3RvcmU9cmVwb3NpdG9yeSwgY2xvY2s9Y2xvY2spCiAgICAgICAgcG9ydGZvbGlvX2lkID0gcG9ydGZvbGlvX3NldHRpbmdzKGNvbmZpZy5zZWN0aW9uKCJwb3J0Zm9saW8iKSkucG9ydGZvbGlvX2lkCiAgICAgICAgc2VydmljZSA9IE1vbml0b3JpbmdTZXJ2aWNlKAogICAgICAgICAgICBwb3J0Zm9saW9faWQ9cG9ydGZvbGlvX2lkLAogICAgICAgICAgICBzZXR0aW5ncz1zZXR0aW5ncywKICAgICAgICAgICAgc3RvcmU9cmVwb3NpdG9yeSwKICAgICAgICAgICAgY29sbGVjdG9yPWNvbGxlY3RvciwKICAgICAgICAgICAgaGVhbHRoPWhlYWx0aCwKICAgICAgICAgICAgYWxlcnRzPWFsZXJ0cywKICAgICAgICAgICAga2lsbF9zd2l0Y2g9a2lsbF9zd2l0Y2gsCiAgICAgICAgICAgIHNsbz1zbG8sCiAgICAgICAgICAgIHBvcnRmb2xpb19yZXBvc2l0b3J5PWNvbnRhaW5lci5yZXNvbHZlKFNxbGl0ZVBvcnRmb2xpb1JlcG9zaXRvcnkpLAogICAgICAgICAgICByZXNlYXJjaF9yZXBvc2l0b3J5PWNvbnRhaW5lci5yZXNvbHZlKFNxbGl0ZVJlc2VhcmNoUmVwb3NpdG9yeSksCiAgICAgICAgICAgIGJ1cz1idXMsCiAgICAgICAgICAgIGNsb2NrPWNsb2NrLAogICAgICAgICAgICBsb2dnZXI9bG9nZ2Vycy5nZXQoIm1vbml0b3Jpbmcuc2VydmljZSIpLAogICAgICAgICkKICAgICAgICBsb29wID0gT3BlcmF0aW9uc0xvb3BTZXJ2aWNlKAogICAgICAgICAgICBjb25maWc9Y29uZmlnLAogICAgICAgICAgICBjYXRjaHVwPWNvbnRhaW5lci5yZXNvbHZlKENhdGNoVXBTZXJ2aWNlKSwKICAgICAgICAgICAgc3RyZWFtPWNvbnRhaW5lci5yZXNvbHZlKE1hcmtldFN0cmVhbVNlcnZpY2UpLAogICAgICAgICAgICBmZWF0dXJlcz1jb250YWluZXIucmVzb2x2ZShGZWF0dXJlQ29tcHV0YXRpb25QaXBlbGluZSksCiAgICAgICAgICAgIHByb2JhYmlsaXR5PWNvbnRhaW5lci5yZXNvbHZlKFByb2JhYmlsaXR5U2VydmljZSksCiAgICAgICAgICAgIGRlY2lzaW9uPWNvbnRhaW5lci5yZXNvbHZlKERlY2lzaW9uU2VydmljZSksCiAgICAgICAgICAgIGRlY2lzaW9uX3JlcG9zaXRvcnk9Y29udGFpbmVyLnJlc29sdmUoU3FsaXRlRGVjaXNpb25SZXBvc2l0b3J5KSwKICAgICAgICAgICAgZXhlY3V0aW9uPWNvbnRhaW5lci5yZXNvbHZlKEV4ZWN1dGlvblNlcnZpY2UpLAogICAgICAgICAgICBleGVjdXRpb25fcmVwb3NpdG9yeT1jb250YWluZXIucmVzb2x2ZShTcWxpdGVFeGVjdXRpb25SZXBvc2l0b3J5KSwKICAgICAgICAgICAgcmVzZWFyY2g9Y29udGFpbmVyLnJlc29sdmUoUmVzZWFyY2hTZXJ2aWNlKSwKICAgICAgICAgICAgbW9uaXRvcmluZz1zZXJ2aWNlLAogICAgICAgICAgICBwb3J0Zm9saW9faWQ9cG9ydGZvbGlvX2lkLAogICAgICAgICAgICBidXM9YnVzLAogICAgICAgICAgICBjbG9jaz1jbG9jaywKICAgICAgICAgICAgaWRfcHJvdmlkZXI9Y29udGFpbmVyLnJlc29sdmUoSWRQcm92aWRlciksCiAgICAgICAgICAgIGxvZ2dlcj1sb2dnZXJzLmdldCgibW9uaXRvcmluZy5sb29wIiksCiAgICAgICAgKQogICAgICAgIGNvbnRhaW5lci5yZWdpc3Rlcl9pbnN0YW5jZShTcWxpdGVNb25pdG9yaW5nUmVwb3NpdG9yeSwgcmVwb3NpdG9yeSkKICAgICAgICBjb250YWluZXIucmVnaXN0ZXJfaW5zdGFuY2UoTW9uaXRvcmluZ1NlcnZpY2UsIHNlcnZpY2UpCiAgICAgICAgY29udGFpbmVyLnJlZ2lzdGVyX2luc3RhbmNlKE9wZXJhdGlvbnNMb29wU2VydmljZSwgbG9vcCkKICAgICAgICByZXR1cm4gWwogICAgICAgICAgICBNb25pdG9yaW5nUGxhdGZvcm1Nb2R1bGUoCiAgICAgICAgICAgICAgICByZXBvc2l0b3J5PXJlcG9zaXRvcnksCiAgICAgICAgICAgICAgICBjb2xsZWN0b3I9Y29sbGVjdG9yLAogICAgICAgICAgICAgICAgYnVzPWJ1cywKICAgICAgICAgICAgICAgIGxvZ2dlcj1sb2dnZXJzLmdldCgibW9uaXRvcmluZy5tb2R1bGUiKSwKICAgICAgICAgICAgKQogICAgICAgIF0KCgpBUEVYX1BMVUdJTiA9IE1vbml0b3JpbmdQbGF0Zm9ybVBsdWdpbigpCg==
+"""Monitoring platform plugin (Book II ch. 26; Book I ch. 10).
+
+Wires the Phase 12 slice: telemetry settings (telemetry.yaml) -> the
+monitoring store -> collector (bus-subscribed at module start) ->
+health engine over the live module registry -> kill switch (with a
+best-effort venue order canceller) -> alert engine -> error budget ->
+monitoring service -> the live operational loop. Requires the
+research platform (and transitively everything below): the loop
+drives every platform and the ops feed reads their stores.
+"""
+
+from collections.abc import Sequence
+from pathlib import Path
+from typing import Final
+
+from apex.core.config import AppConfig
+from apex.core.contracts.interfaces import IClock, IEventBus, IModule
+from apex.core.enums import HealthState, PluginKind, StabilityLevel
+from apex.core.exceptions import ApexError
+from apex.core.identity import IdProvider
+from apex.core.logging import LoggerFactory, StructuredLogger
+from apex.core.versioning import SemanticVersion
+from apex.data.catchup import CatchUpService
+from apex.data.streaming import MarketStreamService
+from apex.decision.service import DecisionService
+from apex.decision.store import SqliteDecisionRepository
+from apex.execution.config import execution_settings
+from apex.execution.service import ExecutionService
+from apex.execution.store import SqliteExecutionRepository
+from apex.execution.trading.client import ToobitTradingClient
+from apex.execution.trading.translator import contract_symbol, unwrap
+from apex.features.pipeline import FeatureComputationPipeline
+from apex.kernel.container import ServiceContainer
+from apex.kernel.health import HealthMonitor
+from apex.kernel.modules import ModuleRegistry
+from apex.monitoring.alerts import AlertEngine
+from apex.monitoring.collector import TelemetryCollector
+from apex.monitoring.config import monitoring_settings
+from apex.monitoring.health import HealthEngine
+from apex.monitoring.killswitch import KillSwitchEngine, OrderCanceller
+from apex.monitoring.loop import OperationsLoopService
+from apex.monitoring.service import MonitoringService
+from apex.monitoring.slo import ErrorBudgetTracker
+from apex.monitoring.store import SqliteMonitoringRepository
+from apex.plugins.contract import PluginManifest
+from apex.portfolio.config import portfolio_settings
+from apex.portfolio.store import SqlitePortfolioRepository
+from apex.probability.service import ProbabilityService
+from apex.research.service import ResearchService
+from apex.research.store import SqliteResearchRepository
+
+MONITORING_DATABASE_FILENAME: Final[str] = "monitoring.sqlite"
+_OPEN_ORDERS_PATH: Final[str] = "/api/v2/futures/open-orders"
+
+
+def _order_canceller(
+    client: ToobitTradingClient,
+    symbols: tuple[str, ...],
+    contract_infix: str,
+    logger: StructuredLogger,
+) -> OrderCanceller:
+    """Best-effort venue order cancellation for SAFE_MODE (10.25)."""
+
+    async def cancel_all() -> int:
+        if not client.can_trade:
+            return 0
+        canceled = 0
+        for symbol in symbols:
+            contract = contract_symbol(symbol, contract_infix)
+            payload = unwrap(await client.open_orders(contract), path=_OPEN_ORDERS_PATH)
+            orders = payload if isinstance(payload, list) else []
+            for order in orders:
+                if not isinstance(order, dict):
+                    continue
+                order_id = order.get("orderId")
+                if order_id is None:
+                    continue
+                try:
+                    await client.cancel_order(order_id=str(order_id))
+                    canceled += 1
+                except ApexError as error:
+                    logger.failure("safe_mode_cancel_failed", error)
+        return canceled
+
+    return cancel_all
+
+
+class MonitoringPlatformModule:
+    """Kernel module owning the monitoring store and bus telemetry."""
+
+    MODULE_NAME = "monitoring_platform"
+
+    def __init__(
+        self,
+        *,
+        repository: SqliteMonitoringRepository,
+        collector: TelemetryCollector,
+        bus: IEventBus,
+        logger: StructuredLogger,
+    ) -> None:
+        self._repository = repository
+        self._collector = collector
+        self._bus = bus
+        self._logger = logger
+        self._running = False
+        self._subscribed = False
+
+    @property
+    def name(self) -> str:
+        """Unique module name."""
+        return self.MODULE_NAME
+
+    @property
+    def dependencies(self) -> tuple[str, ...]:
+        """Observes every platform; starts after the research platform."""
+        return ("research_platform", "execution_platform", "market_data")
+
+    async def start(self) -> None:
+        """Open the monitoring store and subscribe the collector."""
+        await self._repository.open()
+        if not self._subscribed:
+            self._bus.subscribe_all(self._collector.observe_event)
+            self._subscribed = True
+        self._running = True
+        self._logger.info("monitoring_platform_started")
+
+    async def stop(self) -> None:
+        """Flush pending telemetry and close the store."""
+        self._running = False
+        await self._collector.flush()
+        await self._repository.close()
+        self._logger.info("monitoring_platform_stopped")
+
+    def health(self) -> HealthState:
+        """Healthy while the store is open."""
+        return HealthState.HEALTHY if self._running else HealthState.OFFLINE
+
+
+class MonitoringPlatformPlugin:
+    """Builds the monitoring platform as a kernel plugin."""
+
+    @property
+    def manifest(self) -> PluginManifest:
+        """Plugin self-description."""
+        return PluginManifest(
+            name="monitoring_platform",
+            version=SemanticVersion(0, 1, 0),
+            kind=PluginKind.SERVICE,
+            api_version=SemanticVersion(1, 0, 0),
+            description="Telemetry, health, alerts, kill switch, operational loop",
+            stability=StabilityLevel.BETA,
+            requires=("research_platform", "execution_platform", "toobit_connector"),
+        )
+
+    def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
+        """Construct the monitoring platform from injected services."""
+        config = container.resolve(AppConfig)
+        loggers = container.resolve(LoggerFactory)
+        clock = container.resolve(IClock)  # type: ignore[type-abstract]
+        bus = container.resolve(IEventBus)  # type: ignore[type-abstract]
+        settings = monitoring_settings(config.section("telemetry"))
+        repository = SqliteMonitoringRepository(
+            database_path=Path(config.system.data_dir) / MONITORING_DATABASE_FILENAME,
+        )
+        collector = TelemetryCollector(
+            store=repository, clock=clock, logger=loggers.get("monitoring.collector")
+        )
+        exchange_section = config.section("exchange")
+        raw_execution = exchange_section.get("execution", {})
+        exec_settings = execution_settings(
+            raw_execution if isinstance(raw_execution, dict) else {}
+        )
+        canceller = _order_canceller(
+            container.resolve(ToobitTradingClient),
+            config.market.symbols,
+            exec_settings.contract_infix,
+            loggers.get("monitoring.killswitch"),
+        )
+        kill_switch = KillSwitchEngine(
+            settings=settings,
+            store=repository,
+            bus=bus,
+            clock=clock,
+            logger=loggers.get("monitoring.killswitch"),
+            order_canceller=canceller,
+        )
+        alerts = AlertEngine(
+            settings=settings,
+            store=repository,
+            kill_switch=kill_switch,
+            bus=bus,
+            clock=clock,
+            logger=loggers.get("monitoring.alerts"),
+        )
+        health = HealthEngine(
+            registry=container.resolve(ModuleRegistry),
+            monitor=container.resolve(HealthMonitor),
+        )
+        slo = ErrorBudgetTracker(settings=settings, store=repository, clock=clock)
+        portfolio_id = portfolio_settings(config.section("portfolio")).portfolio_id
+        service = MonitoringService(
+            portfolio_id=portfolio_id,
+            settings=settings,
+            store=repository,
+            collector=collector,
+            health=health,
+            alerts=alerts,
+            kill_switch=kill_switch,
+            slo=slo,
+            portfolio_repository=container.resolve(SqlitePortfolioRepository),
+            research_repository=container.resolve(SqliteResearchRepository),
+            bus=bus,
+            clock=clock,
+            logger=loggers.get("monitoring.service"),
+        )
+        loop = OperationsLoopService(
+            config=config,
+            catchup=container.resolve(CatchUpService),
+            stream=container.resolve(MarketStreamService),
+            features=container.resolve(FeatureComputationPipeline),
+            probability=container.resolve(ProbabilityService),
+            decision=container.resolve(DecisionService),
+            decision_repository=container.resolve(SqliteDecisionRepository),
+            execution=container.resolve(ExecutionService),
+            execution_repository=container.resolve(SqliteExecutionRepository),
+            research=container.resolve(ResearchService),
+            monitoring=service,
+            portfolio_id=portfolio_id,
+            bus=bus,
+            clock=clock,
+            id_provider=container.resolve(IdProvider),
+            logger=loggers.get("monitoring.loop"),
+        )
+        container.register_instance(SqliteMonitoringRepository, repository)
+        container.register_instance(MonitoringService, service)
+        container.register_instance(OperationsLoopService, loop)
+        return [
+            MonitoringPlatformModule(
+                repository=repository,
+                collector=collector,
+                bus=bus,
+                logger=loggers.get("monitoring.module"),
+            )
+        ]
+
+
+APEX_PLUGIN = MonitoringPlatformPlugin()
