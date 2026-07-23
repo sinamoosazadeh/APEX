@@ -22,7 +22,7 @@ class TestOpsStatus:
                 service = kernel.container.resolve(MonitoringService)
                 status = await service.ops_status()
                 assert status.overall_health is HealthState.HEALTHY
-                assert len(status.components) == 12  # every kernel module
+                assert len(status.components) == 13  # every kernel module
                 assert status.kill_switch is KillSwitchLevel.NONE
                 assert status.incidents_open == 0
                 assert status.open_positions == 0
