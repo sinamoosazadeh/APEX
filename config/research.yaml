@@ -11,4 +11,9 @@ learning:                        # AICE online-learning inputs (Book VI gLearn/g
 orchestrator:
   default_window_bars: 480       # job window when a job carries none
 
+promotion:                       # shadow deployment (Book II 14.24/22.19)
+  shadow_min_bars: 96            # forward bars required before a verdict
+  shadow_horizon_bars: 48        # simulated trade horizon inside the shadow fold
+  shadow_tolerance: 0.05         # allowed score shortfall vs the incumbent
+
 experiments: {}
