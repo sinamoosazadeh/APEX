@@ -33,6 +33,7 @@ from apex.portfolio.store import SqlitePortfolioRepository
 from apex.probability.store import SqliteProbabilityRepository
 from apex.research.service import ResearchService
 from apex.research.store import SqliteResearchRepository
+from apex.security.service import SecurityService
 from apex.storage.bars import SqliteBarRepository
 
 RESEARCH_DATABASE_FILENAME = "research.sqlite"
@@ -132,7 +133,11 @@ class ResearchPlatformPlugin:
             api_version=SemanticVersion(1, 0, 0),
             description="Research studies, experiment registry, orchestrator",
             stability=StabilityLevel.BETA,
-            requires=("portfolio_platform", "execution_platform"),
+            requires=(
+                "portfolio_platform",
+                "execution_platform",
+                "security_platform",
+            ),
         )
 
     def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
@@ -173,6 +178,7 @@ class ResearchPlatformPlugin:
                 _promotion_number(promotion, "shadow_horizon_bars", 48)
             ),
             shadow_tolerance=_promotion_number(promotion, "shadow_tolerance", 0.05),
+            artifact_verifier=container.resolve(SecurityService).verify,
             bus=bus,
             clock=clock,
             logger=loggers.get("research.service"),

@@ -98,6 +98,31 @@ def order_params(
     return params
 
 
+def close_params(
+    *,
+    contract: str,
+    direction: str,
+    quantity: Decimal,
+    client_order_id: str,
+) -> dict[str, str]:
+    """Reduce-only market close of one open position (25.29 flatten).
+
+    Closing a long is a SELL on the LONG position side (mirrored for
+    shorts); ``reduceOnly`` guarantees the order can never grow
+    exposure.
+    """
+    long_position = direction == "long"
+    return {
+        "symbol": contract,
+        "side": "SELL" if long_position else "BUY",
+        "positionSide": "LONG" if long_position else "SHORT",
+        "type": "MARKET",
+        "reduceOnly": "true",
+        "newClientOrderId": client_order_id,
+        "quantity": str(quantity),
+    }
+
+
 def unwrap(payload: JsonValue, *, path: str) -> JsonValue:
     """Unwrap the v2 ``{code, msg, data}`` envelope; error on failure."""
     if not isinstance(payload, dict):

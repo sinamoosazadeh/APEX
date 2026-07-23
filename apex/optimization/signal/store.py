@@ -3,15 +3,17 @@
 Every run is recorded in SQLite; accepted winners additionally publish
 the Book V per-symbol-per-timeframe artifact
 (``{SYMBOL}_{TF}_signal.json``) carrying the optimized parameters,
-dataset information, validation scores and a SHA256 integrity hash.
-Symbol/timeframe isolation is structural: one artifact per series,
-nothing shared.
+dataset information, validation scores, a SHA256 integrity hash and -
+when the security platform holds a signing key - an HMAC signature
+(25.18). Symbol/timeframe isolation is structural: one artifact per
+series, nothing shared.
 """
 
 import asyncio
 import hashlib
 import json
 import sqlite3
+from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
 from typing import Final
@@ -57,9 +59,13 @@ def report_payload(report: SignalOptimizationReport) -> dict[str, object]:
 
 
 def artifact_document(
-    report: SignalOptimizationReport, *, created_at: Timestamp, apex_version: str
+    report: SignalOptimizationReport,
+    *,
+    created_at: Timestamp,
+    apex_version: str,
+    signer: Callable[[str], str | None] | None = None,
 ) -> dict[str, object]:
-    """The Book V artifact document with its SHA256 integrity hash."""
+    """The Book V artifact document: SHA256 hash + optional signature."""
     body: dict[str, object] = {
         "symbol": report.symbol,
         "timeframe": report.timeframe,
@@ -89,15 +95,26 @@ def artifact_document(
     }
     canonical = json.dumps(body, sort_keys=True, separators=(",", ":"))
     body["sha256"] = hashlib.sha256(canonical.encode()).hexdigest()
+    if signer is not None:
+        signature = signer(canonical)
+        if signature is not None:
+            body["signature"] = signature
     return body
 
 
 class SignalOptimizationStore:
     """SQLite run history plus the per-series JSON artifacts."""
 
-    def __init__(self, *, database_path: Path, artifact_dir: Path) -> None:
+    def __init__(
+        self,
+        *,
+        database_path: Path,
+        artifact_dir: Path,
+        signer: Callable[[str], str | None] | None = None,
+    ) -> None:
         self._path = database_path
         self._artifacts = artifact_dir
+        self._signer = signer
         self._lock = asyncio.Lock()
         self._connection: sqlite3.Connection | None = None
 
@@ -164,7 +181,10 @@ class SignalOptimizationStore:
                 details={"symbol": report.symbol, "timeframe": report.timeframe},
             )
         document = artifact_document(
-            report, created_at=created_at, apex_version=apex_version
+            report,
+            created_at=created_at,
+            apex_version=apex_version,
+            signer=self._signer,
         )
         kind = report.optimizer_version.split("-", 1)[0]
         path = self._artifacts / f"{report.symbol}_{report.timeframe}_{kind}.json"

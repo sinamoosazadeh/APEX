@@ -67,6 +67,7 @@ class TestKernelBoot:
             assert status.health is HealthState.HEALTHY
             assert status.plugins_loaded == (
                 "storage_core",
+                "security_platform",
                 "toobit_connector",
                 "feature_platform",
                 "probability_platform",
@@ -84,6 +85,7 @@ class TestKernelBoot:
                 "storage_core",
                 "consumer",
                 "event_archive",
+                "security_platform",
                 "market_data",
                 "feature_platform",
                 "probability_platform",

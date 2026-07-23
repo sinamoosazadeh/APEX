@@ -10,6 +10,7 @@ drives every platform and the ops feed reads their stores.
 """
 
 from collections.abc import Sequence
+from decimal import Decimal
 from pathlib import Path
 from typing import Final
 
@@ -19,12 +20,14 @@ from apex.core.enums import HealthState, PluginKind, StabilityLevel
 from apex.core.exceptions import ApexError
 from apex.core.identity import IdProvider
 from apex.core.logging import LoggerFactory, StructuredLogger
+from apex.core.time.clock import Clock
 from apex.core.versioning import SemanticVersion
 from apex.data.catchup import CatchUpService
 from apex.data.streaming import MarketStreamService
 from apex.decision.service import DecisionService
 from apex.decision.store import SqliteDecisionRepository
 from apex.execution.config import execution_settings
+from apex.execution.flatten import flatten_positions
 from apex.execution.service import ExecutionService
 from apex.execution.store import SqliteExecutionRepository
 from apex.execution.trading.client import ToobitTradingClient
@@ -37,7 +40,12 @@ from apex.monitoring.alerts import AlertEngine
 from apex.monitoring.collector import TelemetryCollector
 from apex.monitoring.config import monitoring_settings
 from apex.monitoring.health import HealthEngine
-from apex.monitoring.killswitch import KillSwitchEngine, OrderCanceller
+from apex.monitoring.killswitch import (
+    KillSwitchEngine,
+    OrderCanceller,
+    PositionFlattener,
+    TransitionAuditor,
+)
 from apex.monitoring.loop import OperationsLoopService
 from apex.monitoring.service import MonitoringService
 from apex.monitoring.slo import ErrorBudgetTracker
@@ -48,6 +56,8 @@ from apex.portfolio.store import SqlitePortfolioRepository
 from apex.probability.service import ProbabilityService
 from apex.research.service import ResearchService
 from apex.research.store import SqliteResearchRepository
+from apex.security.service import SecurityService
+from apex.storage.bars import SqliteBarRepository
 
 MONITORING_DATABASE_FILENAME: Final[str] = "monitoring.sqlite"
 _OPEN_ORDERS_PATH: Final[str] = "/api/v2/futures/open-orders"
@@ -83,6 +93,52 @@ def _order_canceller(
         return canceled
 
     return cancel_all
+
+
+def _position_flattener(
+    *,
+    portfolio: SqlitePortfolioRepository,
+    portfolio_id: str,
+    bars: SqliteBarRepository,
+    client: ToobitTradingClient,
+    contract_infix: str,
+    fee_rate: Decimal,
+    ids: IdProvider,
+    clock: Clock,
+    logger: StructuredLogger,
+) -> PositionFlattener:
+    """The FLATTENED response: close every open position (25.29)."""
+
+    async def flatten_all() -> int:
+        return await flatten_positions(
+            portfolio=portfolio,
+            portfolio_id=portfolio_id,
+            bars=bars,
+            exchange_id="toobit",
+            client=client,
+            contract_infix=contract_infix,
+            fee_rate=fee_rate,
+            ids=ids,
+            clock=clock,
+            logger=logger,
+        )
+
+    return flatten_all
+
+
+def _transition_auditor(security: SecurityService) -> TransitionAuditor:
+    """Every kill-switch transition lands on the audit ledger (25.16)."""
+
+    async def audit(actor: str, level: str, reason: str) -> None:
+        await security.audit(
+            actor=actor,
+            action="kill.transition",
+            target=level,
+            result="ok",
+            details={"reason": reason},
+        )
+
+    return audit
 
 
 class MonitoringPlatformModule:
@@ -149,7 +205,12 @@ class MonitoringPlatformPlugin:
             api_version=SemanticVersion(1, 0, 0),
             description="Telemetry, health, alerts, kill switch, operational loop",
             stability=StabilityLevel.BETA,
-            requires=("research_platform", "execution_platform", "toobit_connector"),
+            requires=(
+                "research_platform",
+                "execution_platform",
+                "toobit_connector",
+                "security_platform",
+            ),
         )
 
     def build_modules(self, container: ServiceContainer) -> Sequence[IModule]:
@@ -176,6 +237,19 @@ class MonitoringPlatformPlugin:
             exec_settings.contract_infix,
             loggers.get("monitoring.killswitch"),
         )
+        portfolio_config = portfolio_settings(config.section("portfolio"))
+        portfolio_id = portfolio_config.portfolio_id
+        flattener = _position_flattener(
+            portfolio=container.resolve(SqlitePortfolioRepository),
+            portfolio_id=portfolio_id,
+            bars=container.resolve(SqliteBarRepository),
+            client=container.resolve(ToobitTradingClient),
+            contract_infix=exec_settings.contract_infix,
+            fee_rate=Decimal(str(portfolio_config.account.fee_rate)),
+            ids=container.resolve(IdProvider),
+            clock=clock,
+            logger=loggers.get("monitoring.killswitch"),
+        )
         kill_switch = KillSwitchEngine(
             settings=settings,
             store=repository,
@@ -183,6 +257,8 @@ class MonitoringPlatformPlugin:
             clock=clock,
             logger=loggers.get("monitoring.killswitch"),
             order_canceller=canceller,
+            position_flattener=flattener,
+            auditor=_transition_auditor(container.resolve(SecurityService)),
         )
         alerts = AlertEngine(
             settings=settings,
@@ -197,7 +273,6 @@ class MonitoringPlatformPlugin:
             monitor=container.resolve(HealthMonitor),
         )
         slo = ErrorBudgetTracker(settings=settings, store=repository, clock=clock)
-        portfolio_id = portfolio_settings(config.section("portfolio")).portfolio_id
         service = MonitoringService(
             portfolio_id=portfolio_id,
             settings=settings,
