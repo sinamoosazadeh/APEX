@@ -1,1 +1,295 @@
-IiIiVG9vYml0IHVzZXItZGF0YSBzdHJlYW0gKEJvb2sgVklJIGxpc3RlbktleTsgdGhlIFBoYXNlIDEwIGRlZmVycmFsKS4KCk9yZGVyIGFuZCBmaWxsIGV2ZW50cyBwdXNoZWQgYnkgdGhlIHZlbnVlIG92ZXIKYGB3c3M6Ly8uLi4vYXBpL3YxL3dzLzxsaXN0ZW5LZXk+YGAgcmVwbGFjZSBSRVNUIGZpbGwgcG9sbGluZyBhcyB0aGUKcHJpbWFyeSBzaWduYWwgdGhhdCBhbiBvcmRlciByZWFjaGVkIGEgdGVybWluYWwgc3RhdGUuIFRoZSBsaXN0ZW5LZXkKbGlmZWN5Y2xlIGlzIGV4YWN0IEJvb2sgVklJOiBjcmVhdGVkIHZpYSBQT1NULCBrZXB0IGFsaXZlIHdpdGggYSBQVVQKImV2ZXJ5IDYwIG1pbnV0ZXMgb3IgbGVzcyIgKHRoZSBwbGF0Zm9ybSBkZWZhdWx0cyB0byAzMCBtaW51dGVzIC0KaGFsZiB0aGUgaGFyZCBUVEwpLCBjbG9zZWQgd2l0aCBERUxFVEU7IHRoZSB2ZW51ZSBhbHNvIHB1c2hlcwpgYGxpc3RlbktleVdpbGxFeHBpcmVgYCBmaXZlIG1pbnV0ZXMgYWhlYWQsIHdoaWNoIHRyaWdnZXJzIGFuCmltbWVkaWF0ZSBrZWVwYWxpdmUuCgpQYXlsb2FkIHBhcnNpbmcga2V5cyBvZmYgdGhlIGV2ZW50IHR5cGUgYmVmb3JlIHRvdWNoaW5nIGFueQpzaW5nbGUtbGV0dGVyIGZpZWxkIC0gQm9vayBWSUkgcmV1c2VzIGxldHRlcnMgYWNyb3NzIGV2ZW50IHR5cGVzCihgYGZgYCBpcyBmcmVlIGJhbGFuY2UgaW4gb25lLCBsaXF1aWRhdGlvbiBwcmljZSBpbiBhbm90aGVyKS4gRXZlbnRzCmFyZSBvcmRlcmVkIGJ5IHRoZWlyIGBgRWBgIGV2ZW50IHRpbWUsIHBlciB0aGUgdmVudWUncyBvd24gZ3VpZGFuY2UuClRoZSBSRVNUIHBvbGwgc3RheXMgYXMgdGhlIGZhbGxiYWNrOiBhIHF1aWV0IHN0cmVhbSBuZXZlciBibG9ja3MgYW4KZXhlY3V0aW9uICh0aGUgZW5naW5lIHJlLWNoZWNrcyB0aGUgdmVudWUgYXQgaXRzIHBvbGwgY2FkZW5jZSkuCiIiIgoKaW1wb3J0IGFzeW5jaW8KaW1wb3J0IGNvbnRleHRsaWIKaW1wb3J0IGpzb24KZnJvbSBkYXRhY2xhc3NlcyBpbXBvcnQgZGF0YWNsYXNzCmZyb20gdHlwaW5nIGltcG9ydCBGaW5hbAoKZnJvbSBhcGV4LmNvcmUuZW51bXMgaW1wb3J0IE9yZGVyU3RhdHVzCmZyb20gYXBleC5jb3JlLmV4Y2VwdGlvbnMgaW1wb3J0IEFwZXhFcnJvciwgRXhlY3V0aW9uRXJyb3IKZnJvbSBhcGV4LmNvcmUubG9nZ2luZyBpbXBvcnQgU3RydWN0dXJlZExvZ2dlcgpmcm9tIGFwZXguY29yZS5zZXJpYWxpemF0aW9uIGltcG9ydCBKc29uVmFsdWUKZnJvbSBhcGV4LmNvcmUudGltZS5jbG9jayBpbXBvcnQgQ2xvY2sKZnJvbSBhcGV4LmRhdGEudG9vYml0LnN0cmVhbSBpbXBvcnQgV3NDb25uZWN0RmFjdG9yeSwgV3NDb25uZWN0aW9uCmZyb20gYXBleC5leGVjdXRpb24udHJhZGluZy5jbGllbnQgaW1wb3J0IFRvb2JpdFRyYWRpbmdDbGllbnQKCkVWRU5UX09SREVSOiBGaW5hbFtzdHJdID0gImNvbnRyYWN0RXhlY3V0aW9uUmVwb3J0IgpFVkVOVF9USUNLRVQ6IEZpbmFsW3N0cl0gPSAidGlja2V0SW5mbyIKRVZFTlRfS0VZX0VYUElSSU5HOiBGaW5hbFtzdHJdID0gImxpc3RlbktleVdpbGxFeHBpcmUiCgpfU1RBVFVTX0JZX1ZFTlVFOiBGaW5hbFtkaWN0W3N0ciwgT3JkZXJTdGF0dXNdXSA9IHsKICAgICJORVciOiBPcmRlclN0YXR1cy5ORVcsCiAgICAiUEFSVElBTExZX0ZJTExFRCI6IE9yZGVyU3RhdHVzLlBBUlRJQUxMWV9GSUxMRUQsCiAgICAiRklMTEVEIjogT3JkZXJTdGF0dXMuRklMTEVELAogICAgIkNBTkNFTEVEIjogT3JkZXJTdGF0dXMuQ0FOQ0VMRUQsCiAgICAiUEVORElOR19DQU5DRUwiOiBPcmRlclN0YXR1cy5ORVcsCiAgICAiUkVKRUNURUQiOiBPcmRlclN0YXR1cy5SRUpFQ1RFRCwKfQoKCkBkYXRhY2xhc3MoZnJvemVuPVRydWUsIHNsb3RzPVRydWUsIGt3X29ubHk9VHJ1ZSkKY2xhc3MgVXNlckRhdGFFdmVudDoKICAgICIiIk9uZSBwYXJzZWQgdXNlci1kYXRhIHB1c2guIiIiCgogICAgZXZlbnRfdHlwZTogc3RyCiAgICBldmVudF90aW1lX21zOiBpbnQKICAgIG9yZGVyX2lkOiBzdHIgfCBOb25lCiAgICBjbGllbnRfb3JkZXJfaWQ6IHN0ciB8IE5vbmUKICAgIHN0YXR1czogT3JkZXJTdGF0dXMgfCBOb25lCiAgICByYXc6IGRpY3Rbc3RyLCBKc29uVmFsdWVdCgoKZGVmIHBhcnNlX3VzZXJfZGF0YShtZXNzYWdlOiBKc29uVmFsdWUpIC0+IGxpc3RbVXNlckRhdGFFdmVudF06CiAgICAiIiJQYXJzZSBvbmUgV2ViU29ja2V0IGZyYW1lIGludG8gdXNlci1kYXRhIGV2ZW50cy4KCiAgICBGcmFtZXMgYXJyaXZlIGFzIGVpdGhlciBhIHNpbmdsZSBvYmplY3Qgb3IgYW4gYXJyYXkgb2YgZXZlbnQKICAgIG9iamVjdHMgKEJvb2sgVklJIHNob3dzIGJvdGggc2hhcGVzKS4gVW5rbm93biBldmVudCB0eXBlcyBwYXNzCiAgICB0aHJvdWdoIHdpdGggdHlwZS1vbmx5IHBhcnNpbmcgLSBuZXZlciBkcm9wcGVkIHNpbGVudGx5LCBuZXZlcgogICAgbWlzcmVhZCB0aHJvdWdoIGFub3RoZXIgdHlwZSdzIGZpZWxkIGxldHRlcnMuCiAgICAiIiIKICAgIGl0ZW1zOiBsaXN0W0pzb25WYWx1ZV0gPSBtZXNzYWdlIGlmIGlzaW5zdGFuY2UobWVzc2FnZSwgbGlzdCkgZWxzZSBbbWVzc2FnZV0KICAgIGV2ZW50czogbGlzdFtVc2VyRGF0YUV2ZW50XSA9IFtdCiAgICBmb3IgaXRlbSBpbiBpdGVtczoKICAgICAgICBpZiBub3QgaXNpbnN0YW5jZShpdGVtLCBkaWN0KToKICAgICAgICAgICAgY29udGludWUKICAgICAgICBldmVudF90eXBlID0gc3RyKGl0ZW0uZ2V0KCJlIikgb3IgaXRlbS5nZXQoImV2ZW50VHlwZSIpIG9yICIiKQogICAgICAgIGlmIG5vdCBldmVudF90eXBlOgogICAgICAgICAgICBjb250aW51ZQogICAgICAgIGV2ZW50cy5hcHBlbmQoX3BhcnNlX29uZShldmVudF90eXBlLCBpdGVtKSkKICAgIGV2ZW50cy5zb3J0KGtleT1sYW1iZGEgZXZlbnQ6IGV2ZW50LmV2ZW50X3RpbWVfbXMpCiAgICByZXR1cm4gZXZlbnRzCgoKZGVmIF9wYXJzZV9vbmUoZXZlbnRfdHlwZTogc3RyLCBpdGVtOiBkaWN0W3N0ciwgSnNvblZhbHVlXSkgLT4gVXNlckRhdGFFdmVudDoKICAgIGV2ZW50X3RpbWUgPSBpdGVtLmdldCgiRSIpIG9yIGl0ZW0uZ2V0KCJldmVudFRpbWUiKSBvciBpdGVtLmdldCgidGltZSIpIG9yIDAKICAgIG9yZGVyX2lkOiBzdHIgfCBOb25lID0gTm9uZQogICAgY2xpZW50X29yZGVyX2lkOiBzdHIgfCBOb25lID0gTm9uZQogICAgc3RhdHVzOiBPcmRlclN0YXR1cyB8IE5vbmUgPSBOb25lCiAgICBpZiBldmVudF90eXBlID09IEVWRU5UX09SREVSOgogICAgICAgIG9yZGVyX2lkID0gX3RleHQoaXRlbS5nZXQoImkiKSkKICAgICAgICBjbGllbnRfb3JkZXJfaWQgPSBfdGV4dChpdGVtLmdldCgiYyIpKQogICAgICAgIHJhd19zdGF0dXMgPSBzdHIoaXRlbS5nZXQoIlgiLCAiIikpCiAgICAgICAgc3RhdHVzID0gX1NUQVRVU19CWV9WRU5VRS5nZXQocmF3X3N0YXR1cykKICAgIGVsaWYgZXZlbnRfdHlwZSA9PSBFVkVOVF9USUNLRVQ6CiAgICAgICAgb3JkZXJfaWQgPSBfdGV4dChpdGVtLmdldCgibyIpKQogICAgICAgIGNsaWVudF9vcmRlcl9pZCA9IF90ZXh0KGl0ZW0uZ2V0KCJjIikpCiAgICByZXR1cm4gVXNlckRhdGFFdmVudCgKICAgICAgICBldmVudF90eXBlPWV2ZW50X3R5cGUsCiAgICAgICAgZXZlbnRfdGltZV9tcz1pbnQoc3RyKGV2ZW50X3RpbWUpKSBpZiBzdHIoZXZlbnRfdGltZSkuaXNkaWdpdCgpIGVsc2UgMCwKICAgICAgICBvcmRlcl9pZD1vcmRlcl9pZCwKICAgICAgICBjbGllbnRfb3JkZXJfaWQ9Y2xpZW50X29yZGVyX2lkLAogICAgICAgIHN0YXR1cz1zdGF0dXMsCiAgICAgICAgcmF3PWl0ZW0sCiAgICApCgoKZGVmIF90ZXh0KHZhbHVlOiBKc29uVmFsdWUgfCBOb25lKSAtPiBzdHIgfCBOb25lOgogICAgcmV0dXJuIHN0cih2YWx1ZSkgaWYgdmFsdWUgaXMgbm90IE5vbmUgZWxzZSBOb25lCgoKZGVmIF9leHRyYWN0X2xpc3Rlbl9rZXkocGF5bG9hZDogSnNvblZhbHVlKSAtPiBzdHIgfCBOb25lOgogICAgIiIiVGhlIGxpc3RlbktleSBmcm9tIEJvb2sgVklJJ3MgYmFyZSByZXNwb25zZSAobm8gdjIgZW52ZWxvcGUpLgoKICAgIFRoZSBkb2Mgc2hvd3MgYGB7Imxpc3RlbktleSI6ICIuLi4ifWBgIHZlcmJhdGltOyBhIGBgZGF0YWBgLXdyYXBwZWQKICAgIHZhcmlhbnQgaXMgdG9sZXJhdGVkIGRlZmVuc2l2ZWx5IHdpdGhvdXQgZXZlciBpbnZlbnRpbmcgYSBrZXkuCiAgICAiIiIKICAgIGlmIG5vdCBpc2luc3RhbmNlKHBheWxvYWQsIGRpY3QpOgogICAgICAgIHJldHVybiBOb25lCiAgICBrZXkgPSBwYXlsb2FkLmdldCgibGlzdGVuS2V5IikKICAgIGlmIGlzaW5zdGFuY2Uoa2V5LCBzdHIpIGFuZCBrZXk6CiAgICAgICAgcmV0dXJuIGtleQogICAgZGF0YSA9IHBheWxvYWQuZ2V0KCJkYXRhIikKICAgIGlmIGlzaW5zdGFuY2UoZGF0YSwgZGljdCk6CiAgICAgICAgbmVzdGVkID0gZGF0YS5nZXQoImxpc3RlbktleSIpCiAgICAgICAgaWYgaXNpbnN0YW5jZShuZXN0ZWQsIHN0cikgYW5kIG5lc3RlZDoKICAgICAgICAgICAgcmV0dXJuIG5lc3RlZAogICAgcmV0dXJuIE5vbmUKCgpjbGFzcyBVc2VyRGF0YUZlZWQ6CiAgICAiIiJPd25zIHRoZSBsaXN0ZW5LZXkgbGlmZWN5Y2xlIGFuZCB0aGUgbGF0ZXN0IHBlci1vcmRlciBzdGF0ZS4KCiAgICBTdGFydGVkIGxhemlseSBieSB0aGUgbGl2ZSBlbmdpbmUgb24gZmlyc3QgdXNlIChib290IHN0YXlzCiAgICBuZXR3b3JrLWZyZWUpLCBpdCBtYWludGFpbnMgb25lIFdlYlNvY2tldCBjb25uZWN0aW9uLCBrZWVwcyB0aGUKICAgIGxpc3RlbktleSBhbGl2ZSBvbiB0aGUgY29uZmlndXJlZCBjYWRlbmNlLCBhbmQgZm9sZHMgb3JkZXIgZXZlbnRzCiAgICBpbnRvIGEgcGVyLXZlbnVlLW9yZGVyLWlkIHN0YXR1cyBtYXAgdGhlIGVuZ2luZSBjb25zdWx0cyBiZXR3ZWVuCiAgICBSRVNUIHBvbGxzLgogICAgIiIiCgogICAgZGVmIF9faW5pdF9fKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBjbGllbnQ6IFRvb2JpdFRyYWRpbmdDbGllbnQsCiAgICAgICAgd3NfYmFzZV91cmw6IHN0ciwKICAgICAgICBrZWVwYWxpdmVfaW50ZXJ2YWxfbXM6IGludCwKICAgICAgICByZWN2X3RpbWVvdXRfbXM6IGludCwKICAgICAgICBjbG9jazogQ2xvY2ssCiAgICAgICAgbG9nZ2VyOiBTdHJ1Y3R1cmVkTG9nZ2VyLAogICAgICAgIGNvbm5lY3Q6IFdzQ29ubmVjdEZhY3RvcnksCiAgICApIC0+IE5vbmU6CiAgICAgICAgc2VsZi5fY2xpZW50ID0gY2xpZW50CiAgICAgICAgc2VsZi5fd3NfYmFzZV91cmwgPSB3c19iYXNlX3VybC5yc3RyaXAoIi8iKQogICAgICAgIHNlbGYuX2tlZXBhbGl2ZV9pbnRlcnZhbF9tcyA9IGtlZXBhbGl2ZV9pbnRlcnZhbF9tcwogICAgICAgIHNlbGYuX3JlY3ZfdGltZW91dF9tcyA9IHJlY3ZfdGltZW91dF9tcwogICAgICAgIHNlbGYuX2Nsb2NrID0gY2xvY2sKICAgICAgICBzZWxmLl9sb2dnZXIgPSBsb2dnZXIKICAgICAgICBzZWxmLl9jb25uZWN0ID0gY29ubmVjdAogICAgICAgIHNlbGYuX2xpc3Rlbl9rZXk6IHN0ciB8IE5vbmUgPSBOb25lCiAgICAgICAgc2VsZi5fY29ubmVjdGlvbjogV3NDb25uZWN0aW9uIHwgTm9uZSA9IE5vbmUKICAgICAgICBzZWxmLl9yZWFkZXI6IGFzeW5jaW8uVGFza1tOb25lXSB8IE5vbmUgPSBOb25lCiAgICAgICAgc2VsZi5fbGFzdF9rZWVwYWxpdmVfbXMgPSAwCiAgICAgICAgc2VsZi5fc3RhdHVzZXM6IGRpY3Rbc3RyLCBPcmRlclN0YXR1c10gPSB7fQogICAgICAgIHNlbGYuX3N0YXR1c2VzX2J5X2NsaWVudDogZGljdFtzdHIsIE9yZGVyU3RhdHVzXSA9IHt9CiAgICAgICAgc2VsZi5fZXZlbnRzX3NlZW4gPSAwCgogICAgQHByb3BlcnR5CiAgICBkZWYgcnVubmluZyhzZWxmKSAtPiBib29sOgogICAgICAgICIiIldoZXRoZXIgdGhlIGZlZWQgaG9sZHMgYSBsaXZlIGNvbm5lY3Rpb24uIiIiCiAgICAgICAgcmV0dXJuIHNlbGYuX3JlYWRlciBpcyBub3QgTm9uZSBhbmQgbm90IHNlbGYuX3JlYWRlci5kb25lKCkKCiAgICBAcHJvcGVydHkKICAgIGRlZiBldmVudHNfc2VlbihzZWxmKSAtPiBpbnQ6CiAgICAgICAgIiIiVXNlci1kYXRhIGV2ZW50cyBmb2xkZWQgdGhpcyBzZXNzaW9uLiIiIgogICAgICAgIHJldHVybiBzZWxmLl9ldmVudHNfc2VlbgoKICAgIGRlZiBzdGF0dXNfZm9yKAogICAgICAgIHNlbGYsICosIG9yZGVyX2lkOiBzdHIgfCBOb25lID0gTm9uZSwgY2xpZW50X29yZGVyX2lkOiBzdHIgfCBOb25lID0gTm9uZQogICAgKSAtPiBPcmRlclN0YXR1cyB8IE5vbmU6CiAgICAgICAgIiIiVGhlIGxhdGVzdCBwdXNoZWQgc3RhdHVzIGZvciBvbmUgb3JkZXIsIGlmIGFueSBhcnJpdmVkLiIiIgogICAgICAgIGlmIG9yZGVyX2lkIGlzIG5vdCBOb25lIGFuZCBvcmRlcl9pZCBpbiBzZWxmLl9zdGF0dXNlczoKICAgICAgICAgICAgcmV0dXJuIHNlbGYuX3N0YXR1c2VzW29yZGVyX2lkXQogICAgICAgIGlmIGNsaWVudF9vcmRlcl9pZCBpcyBub3QgTm9uZToKICAgICAgICAgICAgcmV0dXJuIHNlbGYuX3N0YXR1c2VzX2J5X2NsaWVudC5nZXQoY2xpZW50X29yZGVyX2lkKQogICAgICAgIHJldHVybiBOb25lCgogICAgIyAtLS0gTGlmZWN5Y2xlIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIHN0YXJ0KHNlbGYpIC0+IE5vbmU6CiAgICAgICAgIiIiQ3JlYXRlIHRoZSBsaXN0ZW5LZXkgYW5kIGJlZ2luIGNvbnN1bWluZyBwdXNoZXMuIiIiCiAgICAgICAgaWYgc2VsZi5ydW5uaW5nOgogICAgICAgICAgICByZXR1cm4KICAgICAgICBwYXlsb2FkID0gYXdhaXQgc2VsZi5fY2xpZW50LmNyZWF0ZV9saXN0ZW5fa2V5KCkKICAgICAgICBrZXkgPSBfZXh0cmFjdF9saXN0ZW5fa2V5KHBheWxvYWQpCiAgICAgICAgaWYga2V5IGlzIE5vbmU6CiAgICAgICAgICAgIHJhaXNlIEV4ZWN1dGlvbkVycm9yKAogICAgICAgICAgICAgICAgInZlbnVlIHJldHVybmVkIG5vIGxpc3RlbktleSIsCiAgICAgICAgICAgICAgICBjb2RlPSJFWEUtMDMzIiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJwYXlsb2FkX3R5cGUiOiB0eXBlKHBheWxvYWQpLl9fbmFtZV9ffSwKICAgICAgICAgICAgKQogICAgICAgIHNlbGYuX2xpc3Rlbl9rZXkgPSBrZXkKICAgICAgICBzZWxmLl9sYXN0X2tlZXBhbGl2ZV9tcyA9IHNlbGYuX2Nsb2NrLm5vdygpLmVwb2NoX21zCiAgICAgICAgdXJsID0gZiJ7c2VsZi5fd3NfYmFzZV91cmx9L2FwaS92MS93cy97a2V5fSIKICAgICAgICB0cnk6CiAgICAgICAgICAgIHNlbGYuX2Nvbm5lY3Rpb24gPSBhd2FpdCBzZWxmLl9jb25uZWN0KHVybCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGVycm9yOgogICAgICAgICAgICByYWlzZSBFeGVjdXRpb25FcnJvcigKICAgICAgICAgICAgICAgICJ1c2VyLWRhdGEgc3RyZWFtIGNvbm5lY3Rpb24gZmFpbGVkIiwKICAgICAgICAgICAgICAgIGNvZGU9IkVYRS0wMzQiLAogICAgICAgICAgICAgICAgZGV0YWlscz17InJlYXNvbiI6IHN0cihlcnJvcil9LAogICAgICAgICAgICApIGZyb20gZXJyb3IKICAgICAgICBzZWxmLl9yZWFkZXIgPSBhc3luY2lvLmNyZWF0ZV90YXNrKHNlbGYuX2NvbnN1bWUoKSkKICAgICAgICBzZWxmLl9sb2dnZXIuaW5mbygidXNlcl9kYXRhX3N0cmVhbV9zdGFydGVkIikKCiAgICBhc3luYyBkZWYgc3RvcChzZWxmKSAtPiBOb25lOgogICAgICAgICIiIkNsb3NlIHRoZSBzdHJlYW0gYW5kIGludmFsaWRhdGUgdGhlIGxpc3RlbktleS4iIiIKICAgICAgICBpZiBzZWxmLl9yZWFkZXIgaXMgbm90IE5vbmU6CiAgICAgICAgICAgIHNlbGYuX3JlYWRlci5jYW5jZWwoKQogICAgICAgICAgICB3aXRoIGNvbnRleHRsaWIuc3VwcHJlc3MoYXN5bmNpby5DYW5jZWxsZWRFcnJvciwgQXBleEVycm9yKToKICAgICAgICAgICAgICAgIGF3YWl0IHNlbGYuX3JlYWRlcgogICAgICAgICAgICBzZWxmLl9yZWFkZXIgPSBOb25lCiAgICAgICAgaWYgc2VsZi5fY29ubmVjdGlvbiBpcyBub3QgTm9uZToKICAgICAgICAgICAgYXdhaXQgc2VsZi5fY29ubmVjdGlvbi5jbG9zZSgpCiAgICAgICAgICAgIHNlbGYuX2Nvbm5lY3Rpb24gPSBOb25lCiAgICAgICAgaWYgc2VsZi5fbGlzdGVuX2tleSBpcyBub3QgTm9uZToKICAgICAgICAgICAgdHJ5OgogICAgICAgICAgICAgICAgYXdhaXQgc2VsZi5fY2xpZW50LmNsb3NlX2xpc3Rlbl9rZXkoc2VsZi5fbGlzdGVuX2tleSkKICAgICAgICAgICAgZXhjZXB0IEFwZXhFcnJvciBhcyBlcnJvcjoKICAgICAgICAgICAgICAgIHNlbGYuX2xvZ2dlci5mYWlsdXJlKCJsaXN0ZW5fa2V5X2Nsb3NlX2ZhaWxlZCIsIGVycm9yKQogICAgICAgICAgICBzZWxmLl9saXN0ZW5fa2V5ID0gTm9uZQogICAgICAgIHNlbGYuX2xvZ2dlci5pbmZvKCJ1c2VyX2RhdGFfc3RyZWFtX3N0b3BwZWQiKQoKICAgICMgLS0tIENvbnN1bXB0aW9uIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIGFzeW5jIGRlZiBfY29uc3VtZShzZWxmKSAtPiBOb25lOgogICAgICAgIGNvbm5lY3Rpb24gPSBzZWxmLl9jb25uZWN0aW9uCiAgICAgICAgaWYgY29ubmVjdGlvbiBpcyBOb25lOgogICAgICAgICAgICByZXR1cm4KICAgICAgICB3aGlsZSBUcnVlOgogICAgICAgICAgICBtZXNzYWdlID0gYXdhaXQgc2VsZi5fcmVjZWl2ZShjb25uZWN0aW9uKQogICAgICAgICAgICBhd2FpdCBzZWxmLl9tYXliZV9rZWVwYWxpdmUoKQogICAgICAgICAgICBpZiBtZXNzYWdlIGlzIE5vbmU6CiAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICBmb3IgZXZlbnQgaW4gcGFyc2VfdXNlcl9kYXRhKG1lc3NhZ2UpOgogICAgICAgICAgICAgICAgYXdhaXQgc2VsZi5fZm9sZChldmVudCkKCiAgICBhc3luYyBkZWYgX3JlY2VpdmUoc2VsZiwgY29ubmVjdGlvbjogV3NDb25uZWN0aW9uKSAtPiBKc29uVmFsdWUgfCBOb25lOgogICAgICAgIHRyeToKICAgICAgICAgICAgcmF3ID0gYXdhaXQgYXN5bmNpby53YWl0X2ZvcigKICAgICAgICAgICAgICAgIGNvbm5lY3Rpb24ucmVjdigpLCB0aW1lb3V0PXNlbGYuX3JlY3ZfdGltZW91dF9tcyAvIDEwMDAKICAgICAgICAgICAgKQogICAgICAgIGV4Y2VwdCBUaW1lb3V0RXJyb3I6CiAgICAgICAgICAgIHJldHVybiBOb25lCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlcnJvcjoKICAgICAgICAgICAgcmFpc2UgRXhlY3V0aW9uRXJyb3IoCiAgICAgICAgICAgICAgICAidXNlci1kYXRhIHN0cmVhbSByZWNlaXZlIGZhaWxlZCIsCiAgICAgICAgICAgICAgICBjb2RlPSJFWEUtMDM1IiwKICAgICAgICAgICAgICAgIGRldGFpbHM9eyJyZWFzb24iOiBzdHIoZXJyb3IpfSwKICAgICAgICAgICAgKSBmcm9tIGVycm9yCiAgICAgICAgdGV4dCA9IHJhdy5kZWNvZGUoKSBpZiBpc2luc3RhbmNlKHJhdywgYnl0ZXMpIGVsc2UgcmF3CiAgICAgICAgdHJ5OgogICAgICAgICAgICBwYXlsb2FkOiBKc29uVmFsdWUgPSBqc29uLmxvYWRzKHRleHQpCiAgICAgICAgZXhjZXB0IFZhbHVlRXJyb3I6CiAgICAgICAgICAgIHNlbGYuX2xvZ2dlci53YXJuaW5nKCJ1c2VyX2RhdGFfaW52YWxpZF9qc29uIikKICAgICAgICAgICAgcmV0dXJuIE5vbmUKICAgICAgICByZXR1cm4gcGF5bG9hZAoKICAgIGFzeW5jIGRlZiBfZm9sZChzZWxmLCBldmVudDogVXNlckRhdGFFdmVudCkgLT4gTm9uZToKICAgICAgICBzZWxmLl9ldmVudHNfc2VlbiArPSAxCiAgICAgICAgaWYgZXZlbnQuZXZlbnRfdHlwZSA9PSBFVkVOVF9LRVlfRVhQSVJJTkc6CiAgICAgICAgICAgIGF3YWl0IHNlbGYuX2tlZXBhbGl2ZV9ub3coKQogICAgICAgICAgICByZXR1cm4KICAgICAgICBpZiBldmVudC5zdGF0dXMgaXMgbm90IE5vbmU6CiAgICAgICAgICAgIGlmIGV2ZW50Lm9yZGVyX2lkIGlzIG5vdCBOb25lOgogICAgICAgICAgICAgICAgc2VsZi5fc3RhdHVzZXNbZXZlbnQub3JkZXJfaWRdID0gZXZlbnQuc3RhdHVzCiAgICAgICAgICAgIGlmIGV2ZW50LmNsaWVudF9vcmRlcl9pZCBpcyBub3QgTm9uZToKICAgICAgICAgICAgICAgIHNlbGYuX3N0YXR1c2VzX2J5X2NsaWVudFtldmVudC5jbGllbnRfb3JkZXJfaWRdID0gZXZlbnQuc3RhdHVzCiAgICAgICAgICAgIHNlbGYuX2xvZ2dlci5kZWJ1ZygKICAgICAgICAgICAgICAgICJ1c2VyX2RhdGFfb3JkZXJfdXBkYXRlIiwKICAgICAgICAgICAgICAgIG9yZGVyX2lkPWV2ZW50Lm9yZGVyX2lkIG9yICItIiwKICAgICAgICAgICAgICAgIHN0YXR1cz1ldmVudC5zdGF0dXMudmFsdWUsCiAgICAgICAgICAgICkKCiAgICBhc3luYyBkZWYgX21heWJlX2tlZXBhbGl2ZShzZWxmKSAtPiBOb25lOgogICAgICAgIG5vd19tcyA9IHNlbGYuX2Nsb2NrLm5vdygpLmVwb2NoX21zCiAgICAgICAgaWYgbm93X21zIC0gc2VsZi5fbGFzdF9rZWVwYWxpdmVfbXMgPCBzZWxmLl9rZWVwYWxpdmVfaW50ZXJ2YWxfbXM6CiAgICAgICAgICAgIHJldHVybgogICAgICAgIGF3YWl0IHNlbGYuX2tlZXBhbGl2ZV9ub3coKQoKICAgIGFzeW5jIGRlZiBfa2VlcGFsaXZlX25vdyhzZWxmKSAtPiBOb25lOgogICAgICAgIGlmIHNlbGYuX2xpc3Rlbl9rZXkgaXMgTm9uZToKICAgICAgICAgICAgcmV0dXJuCiAgICAgICAgdHJ5OgogICAgICAgICAgICBhd2FpdCBzZWxmLl9jbGllbnQua2VlcGFsaXZlX2xpc3Rlbl9rZXkoc2VsZi5fbGlzdGVuX2tleSkKICAgICAgICBleGNlcHQgQXBleEVycm9yIGFzIGVycm9yOgogICAgICAgICAgICBzZWxmLl9sb2dnZXIuZmFpbHVyZSgibGlzdGVuX2tleV9rZWVwYWxpdmVfZmFpbGVkIiwgZXJyb3IpCiAgICAgICAgICAgIHJldHVybgogICAgICAgIHNlbGYuX2xhc3Rfa2VlcGFsaXZlX21zID0gc2VsZi5fY2xvY2subm93KCkuZXBvY2hfbXMKICAgICAgICBzZWxmLl9sb2dnZXIuZGVidWcoImxpc3Rlbl9rZXlfa2VlcGFsaXZlX3NlbnQiKQo=
+"""Toobit user-data stream (Book VII listenKey; the Phase 10 deferral).
+
+Order and fill events pushed by the venue over
+``wss://.../api/v1/ws/<listenKey>`` replace REST fill polling as the
+primary signal that an order reached a terminal state. The listenKey
+lifecycle is exact Book VII: created via POST, kept alive with a PUT
+"every 60 minutes or less" (the platform defaults to 30 minutes -
+half the hard TTL), closed with DELETE; the venue also pushes
+``listenKeyWillExpire`` five minutes ahead, which triggers an
+immediate keepalive.
+
+Payload parsing keys off the event type before touching any
+single-letter field - Book VII reuses letters across event types
+(``f`` is free balance in one, liquidation price in another). Events
+are ordered by their ``E`` event time, per the venue's own guidance.
+The REST poll stays as the fallback: a quiet stream never blocks an
+execution (the engine re-checks the venue at its poll cadence).
+"""
+
+import asyncio
+import contextlib
+import json
+from dataclasses import dataclass
+from typing import Final
+
+from apex.core.enums import OrderStatus
+from apex.core.exceptions import ApexError, ExecutionError
+from apex.core.logging import StructuredLogger
+from apex.core.serialization import JsonValue
+from apex.core.time.clock import Clock
+from apex.data.toobit.stream import WsConnectFactory, WsConnection
+from apex.execution.trading.client import ToobitTradingClient
+
+EVENT_ORDER: Final[str] = "contractExecutionReport"
+EVENT_TICKET: Final[str] = "ticketInfo"
+EVENT_KEY_EXPIRING: Final[str] = "listenKeyWillExpire"
+
+_STATUS_BY_VENUE: Final[dict[str, OrderStatus]] = {
+    "NEW": OrderStatus.NEW,
+    "PARTIALLY_FILLED": OrderStatus.PARTIALLY_FILLED,
+    "FILLED": OrderStatus.FILLED,
+    "CANCELED": OrderStatus.CANCELED,
+    "PENDING_CANCEL": OrderStatus.NEW,
+    "REJECTED": OrderStatus.REJECTED,
+}
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class UserDataEvent:
+    """One parsed user-data push."""
+
+    event_type: str
+    event_time_ms: int
+    order_id: str | None
+    client_order_id: str | None
+    status: OrderStatus | None
+    raw: dict[str, JsonValue]
+
+
+def parse_user_data(message: JsonValue) -> list[UserDataEvent]:
+    """Parse one WebSocket frame into user-data events.
+
+    Frames arrive as either a single object or an array of event
+    objects (Book VII shows both shapes). Unknown event types pass
+    through with type-only parsing - never dropped silently, never
+    misread through another type's field letters.
+    """
+    items: list[JsonValue] = message if isinstance(message, list) else [message]
+    events: list[UserDataEvent] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        event_type = str(item.get("e") or item.get("eventType") or "")
+        if not event_type:
+            continue
+        events.append(_parse_one(event_type, item))
+    events.sort(key=lambda event: event.event_time_ms)
+    return events
+
+
+def _parse_one(event_type: str, item: dict[str, JsonValue]) -> UserDataEvent:
+    event_time = item.get("E") or item.get("eventTime") or item.get("time") or 0
+    order_id: str | None = None
+    client_order_id: str | None = None
+    status: OrderStatus | None = None
+    if event_type == EVENT_ORDER:
+        order_id = _text(item.get("i"))
+        client_order_id = _text(item.get("c"))
+        raw_status = str(item.get("X", ""))
+        status = _STATUS_BY_VENUE.get(raw_status)
+    elif event_type == EVENT_TICKET:
+        order_id = _text(item.get("o"))
+        client_order_id = _text(item.get("c"))
+    return UserDataEvent(
+        event_type=event_type,
+        event_time_ms=int(str(event_time)) if str(event_time).isdigit() else 0,
+        order_id=order_id,
+        client_order_id=client_order_id,
+        status=status,
+        raw=item,
+    )
+
+
+def _text(value: JsonValue | None) -> str | None:
+    return str(value) if value is not None else None
+
+
+def _extract_listen_key(payload: JsonValue) -> str | None:
+    """The listenKey from Book VII's bare response (no v2 envelope).
+
+    The doc shows ``{"listenKey": "..."}`` verbatim; a ``data``-wrapped
+    variant is tolerated defensively without ever inventing a key.
+    """
+    if not isinstance(payload, dict):
+        return None
+    key = payload.get("listenKey")
+    if isinstance(key, str) and key:
+        return key
+    data = payload.get("data")
+    if isinstance(data, dict):
+        nested = data.get("listenKey")
+        if isinstance(nested, str) and nested:
+            return nested
+    return None
+
+
+class UserDataFeed:
+    """Owns the listenKey lifecycle and the latest per-order state.
+
+    Started lazily by the live engine on first use (boot stays
+    network-free), it maintains one WebSocket connection, keeps the
+    listenKey alive on the configured cadence, and folds order events
+    into a per-venue-order-id status map the engine consults between
+    REST polls.
+    """
+
+    def __init__(
+        self,
+        *,
+        client: ToobitTradingClient,
+        ws_base_url: str,
+        keepalive_interval_ms: int,
+        recv_timeout_ms: int,
+        clock: Clock,
+        logger: StructuredLogger,
+        connect: WsConnectFactory,
+    ) -> None:
+        self._client = client
+        self._ws_base_url = ws_base_url.rstrip("/")
+        self._keepalive_interval_ms = keepalive_interval_ms
+        self._recv_timeout_ms = recv_timeout_ms
+        self._clock = clock
+        self._logger = logger
+        self._connect = connect
+        self._listen_key: str | None = None
+        self._connection: WsConnection | None = None
+        self._reader: asyncio.Task[None] | None = None
+        self._last_keepalive_ms = 0
+        self._statuses: dict[str, OrderStatus] = {}
+        self._statuses_by_client: dict[str, OrderStatus] = {}
+        self._events_seen = 0
+
+    @property
+    def running(self) -> bool:
+        """Whether the feed holds a live connection."""
+        return self._reader is not None and not self._reader.done()
+
+    @property
+    def events_seen(self) -> int:
+        """User-data events folded this session."""
+        return self._events_seen
+
+    def status_for(
+        self, *, order_id: str | None = None, client_order_id: str | None = None
+    ) -> OrderStatus | None:
+        """The latest pushed status for one order, if any arrived."""
+        if order_id is not None and order_id in self._statuses:
+            return self._statuses[order_id]
+        if client_order_id is not None:
+            return self._statuses_by_client.get(client_order_id)
+        return None
+
+    # --- Lifecycle -----------------------------------------------------------------
+
+    async def start(self) -> None:
+        """Create the listenKey and begin consuming pushes."""
+        if self.running:
+            return
+        payload = await self._client.create_listen_key()
+        key = _extract_listen_key(payload)
+        if key is None:
+            raise ExecutionError(
+                "venue returned no listenKey",
+                code="EXE-033",
+                details={"payload_type": type(payload).__name__},
+            )
+        self._listen_key = key
+        self._last_keepalive_ms = self._clock.now().epoch_ms
+        url = f"{self._ws_base_url}/api/v1/ws/{key}"
+        try:
+            self._connection = await self._connect(url)
+        except Exception as error:
+            raise ExecutionError(
+                "user-data stream connection failed",
+                code="EXE-034",
+                details={"reason": str(error)},
+            ) from error
+        self._reader = asyncio.create_task(self._consume())
+        self._logger.info("user_data_stream_started")
+
+    async def stop(self) -> None:
+        """Close the stream and invalidate the listenKey."""
+        if self._reader is not None:
+            self._reader.cancel()
+            with contextlib.suppress(asyncio.CancelledError, ApexError):
+                await self._reader
+            self._reader = None
+        if self._connection is not None:
+            await self._connection.close()
+            self._connection = None
+        if self._listen_key is not None:
+            try:
+                await self._client.close_listen_key(self._listen_key)
+            except ApexError as error:
+                self._logger.failure("listen_key_close_failed", error)
+            self._listen_key = None
+        self._logger.info("user_data_stream_stopped")
+
+    # --- Consumption ---------------------------------------------------------------
+
+    async def _consume(self) -> None:
+        connection = self._connection
+        if connection is None:
+            return
+        while True:
+            message = await self._receive(connection)
+            await self._maybe_keepalive()
+            if message is None:
+                continue
+            for event in parse_user_data(message):
+                await self._fold(event)
+
+    async def _receive(self, connection: WsConnection) -> JsonValue | None:
+        try:
+            raw = await asyncio.wait_for(
+                connection.recv(), timeout=self._recv_timeout_ms / 1000
+            )
+        except TimeoutError:
+            return None
+        except Exception as error:
+            raise ExecutionError(
+                "user-data stream receive failed",
+                code="EXE-035",
+                details={"reason": str(error)},
+            ) from error
+        text = raw.decode() if isinstance(raw, bytes) else raw
+        try:
+            payload: JsonValue = json.loads(text)
+        except ValueError:
+            self._logger.warning("user_data_invalid_json")
+            return None
+        return payload
+
+    async def _fold(self, event: UserDataEvent) -> None:
+        self._events_seen += 1
+        if event.event_type == EVENT_KEY_EXPIRING:
+            await self._keepalive_now()
+            return
+        if event.status is not None:
+            if event.order_id is not None:
+                self._statuses[event.order_id] = event.status
+            if event.client_order_id is not None:
+                self._statuses_by_client[event.client_order_id] = event.status
+            self._logger.debug(
+                "user_data_order_update",
+                order_id=event.order_id or "-",
+                status=event.status.value,
+            )
+
+    async def _maybe_keepalive(self) -> None:
+        now_ms = self._clock.now().epoch_ms
+        if now_ms - self._last_keepalive_ms < self._keepalive_interval_ms:
+            return
+        await self._keepalive_now()
+
+    async def _keepalive_now(self) -> None:
+        if self._listen_key is None:
+            return
+        try:
+            await self._client.keepalive_listen_key(self._listen_key)
+        except ApexError as error:
+            self._logger.failure("listen_key_keepalive_failed", error)
+            return
+        self._last_keepalive_ms = self._clock.now().epoch_ms
+        self._logger.debug("listen_key_keepalive_sent")
