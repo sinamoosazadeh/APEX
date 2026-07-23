@@ -1,1 +1,67 @@
-IiIiTW9uaXRvcmluZyBwbGF0Zm9ybSBldmVudCBjYXRhbG9nIChCb29rIElJIDI5LjcpLgoKQWxlcnRzLCBpbmNpZGVudHMsIGtpbGwtc3dpdGNoIHRyYW5zaXRpb25zLCBzbmFwc2hvdHMgYW5kIHRoZSBsaXZlCm9wZXJhdGlvbmFsIGxvb3AncyBsaWZlY3ljbGUgLSBkZWZpbmVkIGhlcmUgZmlyc3QsIG5ldmVyIGlubGluZSBhdApjYWxsIHNpdGVzLgoiIiIKCmltcG9ydCB1dWlkCmZyb20gZW51bSBpbXBvcnQgRW51bSwgdW5pcXVlCgpmcm9tIGFwZXguY29yZS5lbnVtcyBpbXBvcnQgRXZlbnRDYXRlZ29yeSwgRXZlbnRQcmlvcml0eQpmcm9tIGFwZXguY29yZS5ldmVudHMuZXZlbnQgaW1wb3J0IEV2ZW50LCBFdmVudFBheWxvYWQKZnJvbSBhcGV4LmNvcmUudGltZS50aW1lc3RhbXAgaW1wb3J0IFRpbWVzdGFtcAoKCkB1bmlxdWUKY2xhc3MgTW9uaXRvcmluZ0V2ZW50KEVudW0pOgogICAgIiIiQ2Fub25pY2FsIG1vbml0b3JpbmctcGxhdGZvcm0gZXZlbnQgdHlwZXMuIiIiCgogICAgQUxFUlRfUkFJU0VEID0gIm1vbml0b3JpbmcuYWxlcnQucmFpc2VkIgogICAgSU5DSURFTlRfT1BFTkVEID0gIm1vbml0b3JpbmcuaW5jaWRlbnQub3BlbmVkIgogICAgS0lMTF9TV0lUQ0hfQ0hBTkdFRCA9ICJtb25pdG9yaW5nLmtpbGxzd2l0Y2guY2hhbmdlZCIKICAgIFNOQVBTSE9UX1NUT1JFRCA9ICJtb25pdG9yaW5nLnNuYXBzaG90LnN0b3JlZCIKICAgIExPT1BfU1RBUlRFRCA9ICJvcGVyYXRpb25zLmxvb3Auc3RhcnRlZCIKICAgIExPT1BfU1RPUFBFRCA9ICJvcGVyYXRpb25zLmxvb3Auc3RvcHBlZCIKICAgIEJBUl9QUk9DRVNTRUQgPSAib3BlcmF0aW9ucy5iYXIucHJvY2Vzc2VkIgoKCl9DQVRFR09SWTogZGljdFtNb25pdG9yaW5nRXZlbnQsIEV2ZW50Q2F0ZWdvcnldID0gewogICAgTW9uaXRvcmluZ0V2ZW50LkFMRVJUX1JBSVNFRDogRXZlbnRDYXRlZ29yeS5IRUFMVEgsCiAgICBNb25pdG9yaW5nRXZlbnQuSU5DSURFTlRfT1BFTkVEOiBFdmVudENhdGVnb3J5LkhFQUxUSCwKICAgIE1vbml0b3JpbmdFdmVudC5LSUxMX1NXSVRDSF9DSEFOR0VEOiBFdmVudENhdGVnb3J5LkhFQUxUSCwKICAgIE1vbml0b3JpbmdFdmVudC5TTkFQU0hPVF9TVE9SRUQ6IEV2ZW50Q2F0ZWdvcnkuU1lTVEVNLAogICAgTW9uaXRvcmluZ0V2ZW50LkxPT1BfU1RBUlRFRDogRXZlbnRDYXRlZ29yeS5TWVNURU0sCiAgICBNb25pdG9yaW5nRXZlbnQuTE9PUF9TVE9QUEVEOiBFdmVudENhdGVnb3J5LlNZU1RFTSwKICAgIE1vbml0b3JpbmdFdmVudC5CQVJfUFJPQ0VTU0VEOiBFdmVudENhdGVnb3J5LlNZU1RFTSwKfQoKX1BSSU9SSVRZOiBkaWN0W01vbml0b3JpbmdFdmVudCwgRXZlbnRQcmlvcml0eV0gPSB7CiAgICBNb25pdG9yaW5nRXZlbnQuQUxFUlRfUkFJU0VEOiBFdmVudFByaW9yaXR5LkhJR0gsCiAgICBNb25pdG9yaW5nRXZlbnQuSU5DSURFTlRfT1BFTkVEOiBFdmVudFByaW9yaXR5LkNSSVRJQ0FMLAogICAgTW9uaXRvcmluZ0V2ZW50LktJTExfU1dJVENIX0NIQU5HRUQ6IEV2ZW50UHJpb3JpdHkuQ1JJVElDQUwsCiAgICBNb25pdG9yaW5nRXZlbnQuU05BUFNIT1RfU1RPUkVEOiBFdmVudFByaW9yaXR5LkJBQ0tHUk9VTkQsCiAgICBNb25pdG9yaW5nRXZlbnQuTE9PUF9TVEFSVEVEOiBFdmVudFByaW9yaXR5Lk1FRElVTSwKICAgIE1vbml0b3JpbmdFdmVudC5MT09QX1NUT1BQRUQ6IEV2ZW50UHJpb3JpdHkuTUVESVVNLAogICAgTW9uaXRvcmluZ0V2ZW50LkJBUl9QUk9DRVNTRUQ6IEV2ZW50UHJpb3JpdHkuQkFDS0dST1VORCwKfQoKCmRlZiBtb25pdG9yaW5nX2V2ZW50KAogICAga2luZDogTW9uaXRvcmluZ0V2ZW50LAogICAgKiwKICAgIG9jY3VycmVkX2F0OiBUaW1lc3RhbXAsCiAgICBzb3VyY2U6IHN0ciwKICAgIHBheWxvYWQ6IEV2ZW50UGF5bG9hZCB8IE5vbmUgPSBOb25lLAogICAgdHJhY2VfaWQ6IHV1aWQuVVVJRCB8IE5vbmUgPSBOb25lLAopIC0+IEV2ZW50OgogICAgIiIiQnVpbGQgYSBjYXRhbG9nIGV2ZW50IHdpdGggaXRzIGNhbm9uaWNhbCBjYXRlZ29yeSBhbmQgcHJpb3JpdHkuIiIiCiAgICByZXR1cm4gRXZlbnQoCiAgICAgICAgZXZlbnRfdHlwZT1raW5kLnZhbHVlLAogICAgICAgIGNhdGVnb3J5PV9DQVRFR09SWVtraW5kXSwKICAgICAgICBwcmlvcml0eT1fUFJJT1JJVFlba2luZF0sCiAgICAgICAgb2NjdXJyZWRfYXQ9b2NjdXJyZWRfYXQsCiAgICAgICAgc291cmNlPXNvdXJjZSwKICAgICAgICBwYXlsb2FkPWRpY3QocGF5bG9hZCBvciB7fSksCiAgICAgICAgdHJhY2VfaWQ9dHJhY2VfaWQsCiAgICApCg==
+"""Monitoring platform event catalog (Book II 29.7).
+
+Alerts, incidents, kill-switch transitions, snapshots and the live
+operational loop's lifecycle - defined here first, never inline at
+call sites.
+"""
+
+import uuid
+from enum import Enum, unique
+
+from apex.core.enums import EventCategory, EventPriority
+from apex.core.events.event import Event, EventPayload
+from apex.core.time.timestamp import Timestamp
+
+
+@unique
+class MonitoringEvent(Enum):
+    """Canonical monitoring-platform event types."""
+
+    ALERT_RAISED = "monitoring.alert.raised"
+    INCIDENT_OPENED = "monitoring.incident.opened"
+    KILL_SWITCH_CHANGED = "monitoring.killswitch.changed"
+    SNAPSHOT_STORED = "monitoring.snapshot.stored"
+    LOOP_STARTED = "operations.loop.started"
+    LOOP_STOPPED = "operations.loop.stopped"
+    BAR_PROCESSED = "operations.bar.processed"
+
+
+_CATEGORY: dict[MonitoringEvent, EventCategory] = {
+    MonitoringEvent.ALERT_RAISED: EventCategory.HEALTH,
+    MonitoringEvent.INCIDENT_OPENED: EventCategory.HEALTH,
+    MonitoringEvent.KILL_SWITCH_CHANGED: EventCategory.HEALTH,
+    MonitoringEvent.SNAPSHOT_STORED: EventCategory.SYSTEM,
+    MonitoringEvent.LOOP_STARTED: EventCategory.SYSTEM,
+    MonitoringEvent.LOOP_STOPPED: EventCategory.SYSTEM,
+    MonitoringEvent.BAR_PROCESSED: EventCategory.SYSTEM,
+}
+
+_PRIORITY: dict[MonitoringEvent, EventPriority] = {
+    MonitoringEvent.ALERT_RAISED: EventPriority.HIGH,
+    MonitoringEvent.INCIDENT_OPENED: EventPriority.CRITICAL,
+    MonitoringEvent.KILL_SWITCH_CHANGED: EventPriority.CRITICAL,
+    MonitoringEvent.SNAPSHOT_STORED: EventPriority.BACKGROUND,
+    MonitoringEvent.LOOP_STARTED: EventPriority.MEDIUM,
+    MonitoringEvent.LOOP_STOPPED: EventPriority.MEDIUM,
+    MonitoringEvent.BAR_PROCESSED: EventPriority.BACKGROUND,
+}
+
+
+def monitoring_event(
+    kind: MonitoringEvent,
+    *,
+    occurred_at: Timestamp,
+    source: str,
+    payload: EventPayload | None = None,
+    trace_id: uuid.UUID | None = None,
+) -> Event:
+    """Build a catalog event with its canonical category and priority."""
+    return Event(
+        event_type=kind.value,
+        category=_CATEGORY[kind],
+        priority=_PRIORITY[kind],
+        occurred_at=occurred_at,
+        source=source,
+        payload=dict(payload or {}),
+        trace_id=trace_id,
+    )
