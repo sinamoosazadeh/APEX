@@ -1,1 +1,261 @@
-IiIiTW9uaXRvcmluZyBzZXJ2aWNlIChCb29rIElJIGNoLiAyNjsgQm9vayBJIGNoLiAxMCkuCgpUaGUgb2JzZXJ2YWJpbGl0eSBmYWNhZGUgZXZlcnkgc3VyZmFjZSB0YWxrcyB0bzogdGhlIHVuaWZpZWQKb3BlcmF0aW9ucyBzdGF0dXMgKDI2LjI5IC0gb25lIGFnZ3JlZ2F0ZSBvZiBoZWFsdGgsIGtpbGwgc3dpdGNoLAphbGVydHMsIGVycm9yIGJ1ZGdldCwgcG9ydGZvbGlvIGhlYWRsaW5lLCByZXNlYXJjaCBxdWV1ZSBhbmQKaGVhcnRiZWF0cyksIHBlcmlvZGljIHN0YXRlIHNuYXBzaG90cyAoMTAuMTc6IHRoZSB3aG9sZSBzeXN0ZW0ncwpzdGF0ZSwgZHVyYWJsZSBhbmQgcmVwbGF5YWJsZSksIHRoZSBhbGVydCB0aWNrLCBhbmQgY29uZmlnLWRyaXZlbgpyZXRlbnRpb24gcHJ1bmluZy4gSW5nZXN0aW9uIHN0YXlzIHdpdGggdGhlIGNvbGxlY3Rvcjsgc3RvcmFnZSB3aXRoCnRoZSBtb25pdG9yaW5nIHN0b3JlOyB0aGlzIHNlcnZpY2UgY29tcG9zZXMgdGhlbS4KIiIiCgppbXBvcnQganNvbgpmcm9tIHR5cGluZyBpbXBvcnQgRmluYWwKCmZyb20gYXBleC5jb3JlLmNvbnRyYWN0cy5pbnRlcmZhY2VzIGltcG9ydCBJRXZlbnRCdXMKZnJvbSBhcGV4LmNvcmUuZW51bXMgaW1wb3J0IEhlYWx0aFN0YXRlLCBQb3NpdGlvblN0YXR1cwpmcm9tIGFwZXguY29yZS5sb2dnaW5nIGltcG9ydCBTdHJ1Y3R1cmVkTG9nZ2VyCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IENsb2NrCmZyb20gYXBleC5tb25pdG9yaW5nLmFsZXJ0cyBpbXBvcnQgQWxlcnRFbmdpbmUsIFBvcnRmb2xpb1B1bHNlCmZyb20gYXBleC5tb25pdG9yaW5nLmNvbGxlY3RvciBpbXBvcnQgVGVsZW1ldHJ5Q29sbGVjdG9yCmZyb20gYXBleC5tb25pdG9yaW5nLmNvbmZpZyBpbXBvcnQgTW9uaXRvcmluZ1NldHRpbmdzCmZyb20gYXBleC5tb25pdG9yaW5nLmV2ZW50cyBpbXBvcnQgTW9uaXRvcmluZ0V2ZW50LCBtb25pdG9yaW5nX2V2ZW50CmZyb20gYXBleC5tb25pdG9yaW5nLmhlYWx0aCBpbXBvcnQgSGVhbHRoRW5naW5lCmZyb20gYXBleC5tb25pdG9yaW5nLmtpbGxzd2l0Y2ggaW1wb3J0IEtpbGxTd2l0Y2hFbmdpbmUKZnJvbSBhcGV4Lm1vbml0b3JpbmcucmVjb3JkcyBpbXBvcnQgKAogICAgQWxlcnRSZWNvcmQsCiAgICBBbGVydFNldmVyaXR5LAogICAgS2lsbFN3aXRjaExldmVsLAogICAgT3BlcmF0aW9uc1N0YXR1cywKICAgIFN0YXRlU25hcHNob3RSZWNvcmQsCikKZnJvbSBhcGV4Lm1vbml0b3Jpbmcuc2xvIGltcG9ydCBFcnJvckJ1ZGdldFRyYWNrZXIKZnJvbSBhcGV4Lm1vbml0b3Jpbmcuc3RvcmUgaW1wb3J0IFNxbGl0ZU1vbml0b3JpbmdSZXBvc2l0b3J5CmZyb20gYXBleC5wb3J0Zm9saW8uc3RvcmUgaW1wb3J0IFNxbGl0ZVBvcnRmb2xpb1JlcG9zaXRvcnkKZnJvbSBhcGV4LnJlc2VhcmNoLnN0b3JlIGltcG9ydCAoCiAgICBKT0JfUEVORElORywKICAgIEpPQl9SVU5OSU5HLAogICAgUFJPTU9USU9OX1BBU1NFRCwKICAgIFBST01PVElPTl9TSEFET1csCiAgICBTcWxpdGVSZXNlYXJjaFJlcG9zaXRvcnksCikKCl9TT1VSQ0U6IEZpbmFsW3N0cl0gPSAiYXBleC5tb25pdG9yaW5nLnNlcnZpY2UiCl9EQVlfTVM6IEZpbmFsW2ludF0gPSA4Nl80MDBfMDAwCgoKY2xhc3MgTW9uaXRvcmluZ1NlcnZpY2U6CiAgICAiIiJDb21wb3NlcyB0aGUgb2JzZXJ2YWJpbGl0eSBlbmdpbmVzIGludG8gb25lIG9wZXJhdGlvbnMgZmVlZC4iIiIKCiAgICBkZWYgX19pbml0X18oCiAgICAgICAgc2VsZiwKICAgICAgICAqLAogICAgICAgIHBvcnRmb2xpb19pZDogc3RyLAogICAgICAgIHNldHRpbmdzOiBNb25pdG9yaW5nU2V0dGluZ3MsCiAgICAgICAgc3RvcmU6IFNxbGl0ZU1vbml0b3JpbmdSZXBvc2l0b3J5LAogICAgICAgIGNvbGxlY3RvcjogVGVsZW1ldHJ5Q29sbGVjdG9yLAogICAgICAgIGhlYWx0aDogSGVhbHRoRW5naW5lLAogICAgICAgIGFsZXJ0czogQWxlcnRFbmdpbmUsCiAgICAgICAga2lsbF9zd2l0Y2g6IEtpbGxTd2l0Y2hFbmdpbmUsCiAgICAgICAgc2xvOiBFcnJvckJ1ZGdldFRyYWNrZXIsCiAgICAgICAgcG9ydGZvbGlvX3JlcG9zaXRvcnk6IFNxbGl0ZVBvcnRmb2xpb1JlcG9zaXRvcnksCiAgICAgICAgcmVzZWFyY2hfcmVwb3NpdG9yeTogU3FsaXRlUmVzZWFyY2hSZXBvc2l0b3J5LAogICAgICAgIGJ1czogSUV2ZW50QnVzLAogICAgICAgIGNsb2NrOiBDbG9jaywKICAgICAgICBsb2dnZXI6IFN0cnVjdHVyZWRMb2dnZXIsCiAgICApIC0+IE5vbmU6CiAgICAgICAgc2VsZi5fcG9ydGZvbGlvX2lkID0gcG9ydGZvbGlvX2lkCiAgICAgICAgc2VsZi5fc2V0dGluZ3MgPSBzZXR0aW5ncwogICAgICAgIHNlbGYuX3N0b3JlID0gc3RvcmUKICAgICAgICBzZWxmLl9jb2xsZWN0b3IgPSBjb2xsZWN0b3IKICAgICAgICBzZWxmLl9oZWFsdGggPSBoZWFsdGgKICAgICAgICBzZWxmLl9hbGVydHMgPSBhbGVydHMKICAgICAgICBzZWxmLl9raWxsX3N3aXRjaCA9IGtpbGxfc3dpdGNoCiAgICAgICAgc2VsZi5fc2xvID0gc2xvCiAgICAgICAgc2VsZi5fcG9ydGZvbGlvID0gcG9ydGZvbGlvX3JlcG9zaXRvcnkKICAgICAgICBzZWxmLl9yZXNlYXJjaCA9IHJlc2VhcmNoX3JlcG9zaXRvcnkKICAgICAgICBzZWxmLl9idXMgPSBidXMKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCiAgICAgICAgc2VsZi5fbG9nZ2VyID0gbG9nZ2VyCgogICAgIyAtLS0gQWNjZXNzb3JzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIEBwcm9wZXJ0eQogICAgZGVmIHNldHRpbmdzKHNlbGYpIC0+IE1vbml0b3JpbmdTZXR0aW5nczoKICAgICAgICAiIiJUaGUgdmFsaWRhdGVkIG1vbml0b3JpbmcgY29uZmlndXJhdGlvbi4iIiIKICAgICAgICByZXR1cm4gc2VsZi5fc2V0dGluZ3MKCiAgICBAcHJvcGVydHkKICAgIGRlZiBjb2xsZWN0b3Ioc2VsZikgLT4gVGVsZW1ldHJ5Q29sbGVjdG9yOgogICAgICAgICIiIlRoZSB0ZWxlbWV0cnkgaW5nZXN0aW9uIHBhdGguIiIiCiAgICAgICAgcmV0dXJuIHNlbGYuX2NvbGxlY3RvcgoKICAgIEBwcm9wZXJ0eQogICAgZGVmIGtpbGxfc3dpdGNoKHNlbGYpIC0+IEtpbGxTd2l0Y2hFbmdpbmU6CiAgICAgICAgIiIiVGhlIGtpbGwtc3dpdGNoIHN1cmZhY2VzLiIiIgogICAgICAgIHJldHVybiBzZWxmLl9raWxsX3N3aXRjaAoKICAgIEBwcm9wZXJ0eQogICAgZGVmIHNsbyhzZWxmKSAtPiBFcnJvckJ1ZGdldFRyYWNrZXI6CiAgICAgICAgIiIiVGhlIGVycm9yLWJ1ZGdldCB0cmFja2VyICgyNi4yOCkuIiIiCiAgICAgICAgcmV0dXJuIHNlbGYuX3NsbwoKICAgIGFzeW5jIGRlZiByZWNlbnRfYWxlcnRzKHNlbGYsICosIGxpbWl0OiBpbnQgPSAxMCkgLT4gbGlzdFtBbGVydFJlY29yZF06CiAgICAgICAgIiIiTW9zdCByZWNlbnQgYWxlcnRzLCBuZXdlc3QgZmlyc3QuIiIiCiAgICAgICAgcmV0dXJuIGF3YWl0IHNlbGYuX3N0b3JlLmFsZXJ0cyhsaW1pdD1saW1pdCkKCiAgICBhc3luYyBkZWYgcmFpc2VfYWxlcnQoCiAgICAgICAgc2VsZiwKICAgICAgICAqLAogICAgICAgIHNldmVyaXR5OiBBbGVydFNldmVyaXR5LAogICAgICAgIGNhdGVnb3J5OiBzdHIsCiAgICAgICAgbWVzc2FnZTogc3RyLAogICAgICAgIGRlZHVwX2tleTogc3RyLAogICAgKSAtPiBib29sOgogICAgICAgICIiIlJhaXNlIG9uZSBhbGVydCB0aHJvdWdoIHRoZSBkZWR1cGxpY2F0aW5nIGVuZ2luZS4iIiIKICAgICAgICByZXR1cm4gYXdhaXQgc2VsZi5fYWxlcnRzLnJhaXNlX2FsZXJ0KAogICAgICAgICAgICBzZXZlcml0eT1zZXZlcml0eSwgY2F0ZWdvcnk9Y2F0ZWdvcnksIG1lc3NhZ2U9bWVzc2FnZSwgZGVkdXBfa2V5PWRlZHVwX2tleQogICAgICAgICkKCiAgICAjIC0tLSBPcGVyYXRpb25zIGNlbnRlciAoMjYuMjkpIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIG9wc19zdGF0dXMoc2VsZikgLT4gT3BlcmF0aW9uc1N0YXR1czoKICAgICAgICAiIiJUaGUgdW5pZmllZCBvcGVyYXRpb25zIGZlZWQgZXZlcnkgZGFzaGJvYXJkIHJlbmRlcnMuIiIiCiAgICAgICAgbm93ID0gc2VsZi5fY2xvY2subm93KCkKICAgICAgICBjb21wb25lbnRzID0gc2VsZi5faGVhbHRoLmFzc2VzcygpCiAgICAgICAgb3ZlcmFsbCA9IHNlbGYuX2hlYWx0aC5vdmVyYWxsKGNvbXBvbmVudHMpCiAgICAgICAgYmVhdHMgPSBzZWxmLl9oZWFsdGguaGVhcnRiZWF0X2FnZXMoCiAgICAgICAgICAgIGF3YWl0IHNlbGYuX3N0b3JlLmhlYXJ0YmVhdHMoKSwKICAgICAgICAgICAgbm93PW5vdywKICAgICAgICAgICAgc3RhbGVfbXM9c2VsZi5fc2V0dGluZ3MuaGVhcnRiZWF0X3N0YWxlX21zLAogICAgICAgICkKICAgICAgICBzd2l0Y2ggPSBhd2FpdCBzZWxmLl9raWxsX3N3aXRjaC5jdXJyZW50KCkKICAgICAgICBwdWxzZSA9IGF3YWl0IHNlbGYucG9ydGZvbGlvX3B1bHNlKCkKICAgICAgICBzdGF0aXN0aWNzID0gYXdhaXQgc2VsZi5fcG9ydGZvbGlvLnN0YXRpc3RpY3Moc2VsZi5fcG9ydGZvbGlvX2lkKQogICAgICAgIG9wZW5fcG9zaXRpb25zID0gYXdhaXQgc2VsZi5fcG9ydGZvbGlvLmdldF9wb3NpdGlvbnMoCiAgICAgICAgICAgIHNlbGYuX3BvcnRmb2xpb19pZCwgc3RhdHVzPVBvc2l0aW9uU3RhdHVzLk9QRU4udmFsdWUKICAgICAgICApCiAgICAgICAgc25hcHNob3RzID0gYXdhaXQgc2VsZi5fcG9ydGZvbGlvLmdldF9zbmFwc2hvdHMoc2VsZi5fcG9ydGZvbGlvX2lkKQogICAgICAgIGVxdWl0eSA9IHN0cihzbmFwc2hvdHNbLTFdLmVxdWl0eSkgaWYgc25hcHNob3RzIGVsc2UgIjAiCiAgICAgICAgY2FzaCA9IHN0cihzbmFwc2hvdHNbLTFdLmNhc2gpIGlmIHNuYXBzaG90cyBlbHNlICIwIgogICAgICAgIHJldHVybiBPcGVyYXRpb25zU3RhdHVzKAogICAgICAgICAgICBhc19vZj1ub3csCiAgICAgICAgICAgIG92ZXJhbGxfaGVhbHRoPW92ZXJhbGwgaWYgY29tcG9uZW50cyBlbHNlIEhlYWx0aFN0YXRlLk9GRkxJTkUsCiAgICAgICAgICAgIGNvbXBvbmVudHM9Y29tcG9uZW50cywKICAgICAgICAgICAgaGVhcnRiZWF0cz1iZWF0cywKICAgICAgICAgICAga2lsbF9zd2l0Y2g9c3dpdGNoLmxldmVsIGlmIHN3aXRjaCBlbHNlIEtpbGxTd2l0Y2hMZXZlbC5OT05FLAogICAgICAgICAgICBraWxsX3N3aXRjaF9yZWFzb249c3dpdGNoLnJlYXNvbiBpZiBzd2l0Y2ggZWxzZSAiIiwKICAgICAgICAgICAgYWxlcnRzX3JlY2VudD10dXBsZShhd2FpdCBzZWxmLl9zdG9yZS5hbGVydHMobGltaXQ9NSkpLAogICAgICAgICAgICBpbmNpZGVudHNfb3Blbj1sZW4oYXdhaXQgc2VsZi5fc3RvcmUub3Blbl9pbmNpZGVudHMoKSksCiAgICAgICAgICAgIGVycm9yX2J1ZGdldD1hd2FpdCBzZWxmLl9zbG8uc3RhdHVzKCksCiAgICAgICAgICAgIGVxdWl0eT1lcXVpdHksCiAgICAgICAgICAgIGNhc2g9Y2FzaCwKICAgICAgICAgICAgZHJhd2Rvd249cHVsc2UuZHJhd2Rvd24sCiAgICAgICAgICAgIG9wZW5fcG9zaXRpb25zPWxlbihvcGVuX3Bvc2l0aW9ucyksCiAgICAgICAgICAgIGNsb3NlZF90cmFkZXM9c3RhdGlzdGljcy50cmFkZXMsCiAgICAgICAgICAgIHdpbl9yYXRlPXN0YXRpc3RpY3Mud2luX3JhdGUsCiAgICAgICAgICAgIHJfc3VtPXN0YXRpc3RpY3Mucl9zdW0sCiAgICAgICAgICAgIGpvYnNfcGVuZGluZz1sZW4oYXdhaXQgc2VsZi5fcmVzZWFyY2guam9icyhzdGF0dXM9Sk9CX1BFTkRJTkcpKSwKICAgICAgICAgICAgam9ic19ydW5uaW5nPWxlbihhd2FpdCBzZWxmLl9yZXNlYXJjaC5qb2JzKHN0YXR1cz1KT0JfUlVOTklORykpLAogICAgICAgICAgICBwcm9tb3Rpb25zX3NoYWRvdz1sZW4oCiAgICAgICAgICAgICAgICBhd2FpdCBzZWxmLl9yZXNlYXJjaC5wcm9tb3Rpb25zKHN0YXR1cz1QUk9NT1RJT05fU0hBRE9XKQogICAgICAgICAgICApLAogICAgICAgICAgICBwcm9tb3Rpb25zX3BlbmRpbmdfYXBwcm92YWw9bGVuKAogICAgICAgICAgICAgICAgYXdhaXQgc2VsZi5fcmVzZWFyY2gucHJvbW90aW9ucyhzdGF0dXM9UFJPTU9USU9OX1BBU1NFRCkKICAgICAgICAgICAgKSwKICAgICAgICAgICAgc25hcHNob3RzX3N0b3JlZD1hd2FpdCBzZWxmLl9zdG9yZS5zbmFwc2hvdF9jb3VudCgpLAogICAgICAgICkKCiAgICBhc3luYyBkZWYgcG9ydGZvbGlvX3B1bHNlKHNlbGYpIC0+IFBvcnRmb2xpb1B1bHNlOgogICAgICAgICIiIlRoZSBwb3J0Zm9saW8gZmlndXJlcyB0aGUgYWxlcnQgcnVsZXMgcmVhZC4iIiIKICAgICAgICBzbmFwc2hvdHMgPSBhd2FpdCBzZWxmLl9wb3J0Zm9saW8uZ2V0X3NuYXBzaG90cyhzZWxmLl9wb3J0Zm9saW9faWQpCiAgICAgICAgc3RhdGlzdGljcyA9IGF3YWl0IHNlbGYuX3BvcnRmb2xpby5zdGF0aXN0aWNzKHNlbGYuX3BvcnRmb2xpb19pZCkKICAgICAgICBkcmF3ZG93biA9IHNuYXBzaG90c1stMV0uZHJhd2Rvd24gaWYgc25hcHNob3RzIGVsc2UgMC4wCiAgICAgICAgcmV0dXJuIFBvcnRmb2xpb1B1bHNlKAogICAgICAgICAgICBkcmF3ZG93bj1kcmF3ZG93biwKICAgICAgICAgICAgY29uc2VjdXRpdmVfbG9zc2VzPXN0YXRpc3RpY3MuY29uc2VjdXRpdmVfbG9zc2VzLAogICAgICAgICkKCiAgICAjIC0tLSBUaWNrcyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIGFsZXJ0X3RpY2soc2VsZikgLT4gaW50OgogICAgICAgICIiIkZsdXNoIHRlbGVtZXRyeSwgdGhlbiBydW4gZXZlcnkgYWxlcnQgcnVsZSBvbmNlLiIiIgogICAgICAgIGF3YWl0IHNlbGYuX2NvbGxlY3Rvci5mbHVzaCgpCiAgICAgICAgcHVsc2UgPSBhd2FpdCBzZWxmLnBvcnRmb2xpb19wdWxzZSgpCiAgICAgICAgYmVhdHMgPSBzZWxmLl9oZWFsdGguaGVhcnRiZWF0X2FnZXMoCiAgICAgICAgICAgIGF3YWl0IHNlbGYuX3N0b3JlLmhlYXJ0YmVhdHMoKSwKICAgICAgICAgICAgbm93PXNlbGYuX2Nsb2NrLm5vdygpLAogICAgICAgICAgICBzdGFsZV9tcz1zZWxmLl9zZXR0aW5ncy5oZWFydGJlYXRfc3RhbGVfbXMsCiAgICAgICAgKQogICAgICAgIHJldHVybiBhd2FpdCBzZWxmLl9hbGVydHMuZXZhbHVhdGUocG9ydGZvbGlvPXB1bHNlLCBoZWFydGJlYXRzPWJlYXRzKQoKICAgIGFzeW5jIGRlZiBjYXB0dXJlX3NuYXBzaG90KHNlbGYpIC0+IFN0YXRlU25hcHNob3RSZWNvcmQ6CiAgICAgICAgIiIiUGVyc2lzdCBvbmUgZnVsbC1zeXN0ZW0gc3RhdGUgc25hcHNob3QgKEJvb2sgSSAxMC4xNykuIiIiCiAgICAgICAgc3RhdHVzID0gYXdhaXQgc2VsZi5vcHNfc3RhdHVzKCkKICAgICAgICBwYXlsb2FkID0ganNvbi5kdW1wcyhfc25hcHNob3RfcGF5bG9hZChzdGF0dXMpLCBzb3J0X2tleXM9VHJ1ZSkKICAgICAgICBub3cgPSBzZWxmLl9jbG9jay5ub3coKQogICAgICAgIHNuYXBzaG90X2lkID0gYXdhaXQgc2VsZi5fc3RvcmUuaW5zZXJ0X3NuYXBzaG90KHRha2VuX2F0PW5vdywgcGF5bG9hZD1wYXlsb2FkKQogICAgICAgIGF3YWl0IHNlbGYuX2Fubm91bmNlX3NuYXBzaG90KHNuYXBzaG90X2lkKQogICAgICAgIHJldHVybiBTdGF0ZVNuYXBzaG90UmVjb3JkKAogICAgICAgICAgICBzbmFwc2hvdF9pZD1zbmFwc2hvdF9pZCwgdGFrZW5fYXQ9bm93LCBwYXlsb2FkPXBheWxvYWQKICAgICAgICApCgogICAgYXN5bmMgZGVmIF9hbm5vdW5jZV9zbmFwc2hvdChzZWxmLCBzbmFwc2hvdF9pZDogaW50KSAtPiBOb25lOgogICAgICAgIGF3YWl0IHNlbGYuX2J1cy5wdWJsaXNoKAogICAgICAgICAgICBtb25pdG9yaW5nX2V2ZW50KAogICAgICAgICAgICAgICAgTW9uaXRvcmluZ0V2ZW50LlNOQVBTSE9UX1NUT1JFRCwKICAgICAgICAgICAgICAgIG9jY3VycmVkX2F0PXNlbGYuX2Nsb2NrLm5vdygpLAogICAgICAgICAgICAgICAgc291cmNlPV9TT1VSQ0UsCiAgICAgICAgICAgICAgICBwYXlsb2FkPXsic25hcHNob3RfaWQiOiBzbmFwc2hvdF9pZH0sCiAgICAgICAgICAgICkKICAgICAgICApCgogICAgYXN5bmMgZGVmIHBydW5lKHNlbGYpIC0+IGludDoKICAgICAgICAiIiJBcHBseSB0aGUgY29uZmlndXJlZCByZXRlbnRpb24gdG8gbWV0cmljcyBhbmQgc25hcHNob3RzLiIiIgogICAgICAgIGN1dG9mZiA9ICgKICAgICAgICAgICAgc2VsZi5fY2xvY2subm93KCkuZXBvY2hfbXMKICAgICAgICAgICAgLSBzZWxmLl9zZXR0aW5ncy5tZXRyaWNfcmV0ZW50aW9uX2RheXMgKiBfREFZX01TCiAgICAgICAgKQogICAgICAgIHJlbW92ZWQgPSBhd2FpdCBzZWxmLl9zdG9yZS5wcnVuZShvbGRlcl90aGFuX21zPWN1dG9mZikKICAgICAgICBpZiByZW1vdmVkOgogICAgICAgICAgICBzZWxmLl9sb2dnZXIuaW5mbygibW9uaXRvcmluZ19wcnVuZWQiLCByb3dzPXJlbW92ZWQpCiAgICAgICAgcmV0dXJuIHJlbW92ZWQKCgpkZWYgX3NuYXBzaG90X3BheWxvYWQoc3RhdHVzOiBPcGVyYXRpb25zU3RhdHVzKSAtPiBkaWN0W3N0ciwgb2JqZWN0XToKICAgICIiIlRoZSBzZXJpYWxpemVkIGZvcm0gb2Ygb25lIG9wZXJhdGlvbnMgc25hcHNob3QuIiIiCiAgICByZXR1cm4gewogICAgICAgICJhc19vZl9tcyI6IHN0YXR1cy5hc19vZi5lcG9jaF9tcywKICAgICAgICAib3ZlcmFsbF9oZWFsdGgiOiBzdGF0dXMub3ZlcmFsbF9oZWFsdGgudmFsdWUsCiAgICAgICAgImNvbXBvbmVudHMiOiB7CiAgICAgICAgICAgIGNvbXBvbmVudC5jb21wb25lbnQ6IGNvbXBvbmVudC5zdGF0ZS52YWx1ZQogICAgICAgICAgICBmb3IgY29tcG9uZW50IGluIHN0YXR1cy5jb21wb25lbnRzCiAgICAgICAgfSwKICAgICAgICAia2lsbF9zd2l0Y2giOiBzdGF0dXMua2lsbF9zd2l0Y2gudmFsdWUsCiAgICAgICAgImtpbGxfc3dpdGNoX3JlYXNvbiI6IHN0YXR1cy5raWxsX3N3aXRjaF9yZWFzb24sCiAgICAgICAgImluY2lkZW50c19vcGVuIjogc3RhdHVzLmluY2lkZW50c19vcGVuLAogICAgICAgICJlcnJvcl9idWRnZXQiOiB7CiAgICAgICAgICAgICJvcGVyYXRpb25zIjogc3RhdHVzLmVycm9yX2J1ZGdldC5vcGVyYXRpb25zLAogICAgICAgICAgICAiZXJyb3JzIjogc3RhdHVzLmVycm9yX2J1ZGdldC5lcnJvcnMsCiAgICAgICAgICAgICJlcnJvcl9yYXRlIjogc3RhdHVzLmVycm9yX2J1ZGdldC5lcnJvcl9yYXRlLAogICAgICAgICAgICAiZXhoYXVzdGVkIjogc3RhdHVzLmVycm9yX2J1ZGdldC5leGhhdXN0ZWQsCiAgICAgICAgfSwKICAgICAgICAicG9ydGZvbGlvIjogewogICAgICAgICAgICAiZXF1aXR5Ijogc3RhdHVzLmVxdWl0eSwKICAgICAgICAgICAgImNhc2giOiBzdGF0dXMuY2FzaCwKICAgICAgICAgICAgImRyYXdkb3duIjogc3RhdHVzLmRyYXdkb3duLAogICAgICAgICAgICAib3Blbl9wb3NpdGlvbnMiOiBzdGF0dXMub3Blbl9wb3NpdGlvbnMsCiAgICAgICAgICAgICJjbG9zZWRfdHJhZGVzIjogc3RhdHVzLmNsb3NlZF90cmFkZXMsCiAgICAgICAgICAgICJ3aW5fcmF0ZSI6IHN0YXR1cy53aW5fcmF0ZSwKICAgICAgICAgICAgInJfc3VtIjogc3RhdHVzLnJfc3VtLAogICAgICAgIH0sCiAgICAgICAgInJlc2VhcmNoIjogewogICAgICAgICAgICAiam9ic19wZW5kaW5nIjogc3RhdHVzLmpvYnNfcGVuZGluZywKICAgICAgICAgICAgImpvYnNfcnVubmluZyI6IHN0YXR1cy5qb2JzX3J1bm5pbmcsCiAgICAgICAgICAgICJwcm9tb3Rpb25zX3NoYWRvdyI6IHN0YXR1cy5wcm9tb3Rpb25zX3NoYWRvdywKICAgICAgICAgICAgInByb21vdGlvbnNfcGVuZGluZ19hcHByb3ZhbCI6IHN0YXR1cy5wcm9tb3Rpb25zX3BlbmRpbmdfYXBwcm92YWwsCiAgICAgICAgfSwKICAgICAgICAiaGVhcnRiZWF0cyI6IHsKICAgICAgICAgICAgYmVhdC5jb21wb25lbnQ6IGJlYXQuYWdlX21zIGZvciBiZWF0IGluIHN0YXR1cy5oZWFydGJlYXRzCiAgICAgICAgfSwKICAgIH0K
+"""Monitoring service (Book II ch. 26; Book I ch. 10).
+
+The observability facade every surface talks to: the unified
+operations status (26.29 - one aggregate of health, kill switch,
+alerts, error budget, portfolio headline, research queue and
+heartbeats), periodic state snapshots (10.17: the whole system's
+state, durable and replayable), the alert tick, and config-driven
+retention pruning. Ingestion stays with the collector; storage with
+the monitoring store; this service composes them.
+"""
+
+import json
+from typing import Final
+
+from apex.core.contracts.interfaces import IEventBus
+from apex.core.enums import HealthState, PositionStatus
+from apex.core.logging import StructuredLogger
+from apex.core.time.clock import Clock
+from apex.monitoring.alerts import AlertEngine, PortfolioPulse
+from apex.monitoring.collector import TelemetryCollector
+from apex.monitoring.config import MonitoringSettings
+from apex.monitoring.events import MonitoringEvent, monitoring_event
+from apex.monitoring.health import HealthEngine
+from apex.monitoring.killswitch import KillSwitchEngine
+from apex.monitoring.records import (
+    AlertRecord,
+    AlertSeverity,
+    KillSwitchLevel,
+    OperationsStatus,
+    StateSnapshotRecord,
+)
+from apex.monitoring.slo import ErrorBudgetTracker
+from apex.monitoring.store import SqliteMonitoringRepository
+from apex.portfolio.store import SqlitePortfolioRepository
+from apex.research.store import (
+    JOB_PENDING,
+    JOB_RUNNING,
+    PROMOTION_PASSED,
+    PROMOTION_SHADOW,
+    SqliteResearchRepository,
+)
+
+_SOURCE: Final[str] = "apex.monitoring.service"
+_DAY_MS: Final[int] = 86_400_000
+
+
+class MonitoringService:
+    """Composes the observability engines into one operations feed."""
+
+    def __init__(
+        self,
+        *,
+        portfolio_id: str,
+        settings: MonitoringSettings,
+        store: SqliteMonitoringRepository,
+        collector: TelemetryCollector,
+        health: HealthEngine,
+        alerts: AlertEngine,
+        kill_switch: KillSwitchEngine,
+        slo: ErrorBudgetTracker,
+        portfolio_repository: SqlitePortfolioRepository,
+        research_repository: SqliteResearchRepository,
+        bus: IEventBus,
+        clock: Clock,
+        logger: StructuredLogger,
+    ) -> None:
+        self._portfolio_id = portfolio_id
+        self._settings = settings
+        self._store = store
+        self._collector = collector
+        self._health = health
+        self._alerts = alerts
+        self._kill_switch = kill_switch
+        self._slo = slo
+        self._portfolio = portfolio_repository
+        self._research = research_repository
+        self._bus = bus
+        self._clock = clock
+        self._logger = logger
+
+    # --- Accessors ---------------------------------------------------------------
+
+    @property
+    def settings(self) -> MonitoringSettings:
+        """The validated monitoring configuration."""
+        return self._settings
+
+    @property
+    def collector(self) -> TelemetryCollector:
+        """The telemetry ingestion path."""
+        return self._collector
+
+    @property
+    def kill_switch(self) -> KillSwitchEngine:
+        """The kill-switch surfaces."""
+        return self._kill_switch
+
+    @property
+    def slo(self) -> ErrorBudgetTracker:
+        """The error-budget tracker (26.28)."""
+        return self._slo
+
+    async def recent_alerts(self, *, limit: int = 10) -> list[AlertRecord]:
+        """Most recent alerts, newest first."""
+        return await self._store.alerts(limit=limit)
+
+    async def raise_alert(
+        self,
+        *,
+        severity: AlertSeverity,
+        category: str,
+        message: str,
+        dedup_key: str,
+    ) -> bool:
+        """Raise one alert through the deduplicating engine."""
+        return await self._alerts.raise_alert(
+            severity=severity, category=category, message=message, dedup_key=dedup_key
+        )
+
+    # --- Operations center (26.29) --------------------------------------------------
+
+    async def ops_status(self) -> OperationsStatus:
+        """The unified operations feed every dashboard renders."""
+        now = self._clock.now()
+        components = self._health.assess()
+        overall = self._health.overall(components)
+        beats = self._health.heartbeat_ages(
+            await self._store.heartbeats(),
+            now=now,
+            stale_ms=self._settings.heartbeat_stale_ms,
+        )
+        switch = await self._kill_switch.current()
+        pulse = await self.portfolio_pulse()
+        statistics = await self._portfolio.statistics(self._portfolio_id)
+        open_positions = await self._portfolio.get_positions(
+            self._portfolio_id, status=PositionStatus.OPEN.value
+        )
+        snapshots = await self._portfolio.get_snapshots(self._portfolio_id)
+        equity = str(snapshots[-1].equity) if snapshots else "0"
+        cash = str(snapshots[-1].cash) if snapshots else "0"
+        return OperationsStatus(
+            as_of=now,
+            overall_health=overall if components else HealthState.OFFLINE,
+            components=components,
+            heartbeats=beats,
+            kill_switch=switch.level if switch else KillSwitchLevel.NONE,
+            kill_switch_reason=switch.reason if switch else "",
+            alerts_recent=tuple(await self._store.alerts(limit=5)),
+            incidents_open=len(await self._store.open_incidents()),
+            error_budget=await self._slo.status(),
+            equity=equity,
+            cash=cash,
+            drawdown=pulse.drawdown,
+            open_positions=len(open_positions),
+            closed_trades=statistics.trades,
+            win_rate=statistics.win_rate,
+            r_sum=statistics.r_sum,
+            jobs_pending=len(await self._research.jobs(status=JOB_PENDING)),
+            jobs_running=len(await self._research.jobs(status=JOB_RUNNING)),
+            promotions_shadow=len(
+                await self._research.promotions(status=PROMOTION_SHADOW)
+            ),
+            promotions_pending_approval=len(
+                await self._research.promotions(status=PROMOTION_PASSED)
+            ),
+            snapshots_stored=await self._store.snapshot_count(),
+        )
+
+    async def portfolio_pulse(self) -> PortfolioPulse:
+        """The portfolio figures the alert rules read."""
+        snapshots = await self._portfolio.get_snapshots(self._portfolio_id)
+        statistics = await self._portfolio.statistics(self._portfolio_id)
+        drawdown = snapshots[-1].drawdown if snapshots else 0.0
+        return PortfolioPulse(
+            drawdown=drawdown,
+            consecutive_losses=statistics.consecutive_losses,
+        )
+
+    # --- Ticks -------------------------------------------------------------------------
+
+    async def alert_tick(self) -> int:
+        """Flush telemetry, then run every alert rule once."""
+        await self._collector.flush()
+        pulse = await self.portfolio_pulse()
+        beats = self._health.heartbeat_ages(
+            await self._store.heartbeats(),
+            now=self._clock.now(),
+            stale_ms=self._settings.heartbeat_stale_ms,
+        )
+        return await self._alerts.evaluate(portfolio=pulse, heartbeats=beats)
+
+    async def capture_snapshot(self) -> StateSnapshotRecord:
+        """Persist one full-system state snapshot (Book I 10.17)."""
+        status = await self.ops_status()
+        payload = json.dumps(_snapshot_payload(status), sort_keys=True)
+        now = self._clock.now()
+        snapshot_id = await self._store.insert_snapshot(taken_at=now, payload=payload)
+        await self._announce_snapshot(snapshot_id)
+        return StateSnapshotRecord(
+            snapshot_id=snapshot_id, taken_at=now, payload=payload
+        )
+
+    async def _announce_snapshot(self, snapshot_id: int) -> None:
+        await self._bus.publish(
+            monitoring_event(
+                MonitoringEvent.SNAPSHOT_STORED,
+                occurred_at=self._clock.now(),
+                source=_SOURCE,
+                payload={"snapshot_id": snapshot_id},
+            )
+        )
+
+    async def prune(self) -> int:
+        """Apply the configured retention to metrics and snapshots."""
+        cutoff = (
+            self._clock.now().epoch_ms
+            - self._settings.metric_retention_days * _DAY_MS
+        )
+        removed = await self._store.prune(older_than_ms=cutoff)
+        if removed:
+            self._logger.info("monitoring_pruned", rows=removed)
+        return removed
+
+
+def _snapshot_payload(status: OperationsStatus) -> dict[str, object]:
+    """The serialized form of one operations snapshot."""
+    return {
+        "as_of_ms": status.as_of.epoch_ms,
+        "overall_health": status.overall_health.value,
+        "components": {
+            component.component: component.state.value
+            for component in status.components
+        },
+        "kill_switch": status.kill_switch.value,
+        "kill_switch_reason": status.kill_switch_reason,
+        "incidents_open": status.incidents_open,
+        "error_budget": {
+            "operations": status.error_budget.operations,
+            "errors": status.error_budget.errors,
+            "error_rate": status.error_budget.error_rate,
+            "exhausted": status.error_budget.exhausted,
+        },
+        "portfolio": {
+            "equity": status.equity,
+            "cash": status.cash,
+            "drawdown": status.drawdown,
+            "open_positions": status.open_positions,
+            "closed_trades": status.closed_trades,
+            "win_rate": status.win_rate,
+            "r_sum": status.r_sum,
+        },
+        "research": {
+            "jobs_pending": status.jobs_pending,
+            "jobs_running": status.jobs_running,
+            "promotions_shadow": status.promotions_shadow,
+            "promotions_pending_approval": status.promotions_pending_approval,
+        },
+        "heartbeats": {
+            beat.component: beat.age_ms for beat in status.heartbeats
+        },
+    }
