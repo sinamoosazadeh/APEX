@@ -1,4 +1,40 @@
 # Telemetry configuration - owned by Phase 12 (Monitoring Platform).
+# Deep-validated by apex/monitoring/config.py (CFG-040): every number
+# here is a documented platform choice where the spec states the
+# requirement but not the value (Book II 26.22/10.17 silences).
 schema_version: 1
 
-metrics: {}
+metrics:
+  retention_days: 14             # durable metric horizon
+
+heartbeat:
+  stale_ms: 900000               # module heartbeat staleness alarm (15 min)
+
+alerts:
+  dedup_window_ms: 300000        # identical alerts collapse for 5 min
+  error_burst_count: 5           # errors inside the window -> burst alert
+  error_burst_window_ms: 600000
+  disconnect_burst_count: 3      # stream reconnects inside the window
+  drawdown_warning: 0.05         # account drawdown thresholds (fraction)
+  drawdown_critical: 0.10
+  loss_streak_high: 4            # consecutive losing trades -> HIGH
+  stage_latency_warning_ms: 15000.0
+  stage_latency_critical_ms: 60000.0
+  trend_window: 5                # samples for degradation trends
+
+kill_switch:                     # Book II 10.25 auto-response
+  auto_engage: true
+  engage_severity: emergency     # alerts at/above this severity engage it
+  engage_level: entries_disabled
+
+slo:                             # Book II 26.28 error budget
+  window_ms: 86400000            # 24h rolling window
+  max_error_rate: 0.05
+  min_operations: 20             # no verdict below this sample
+
+snapshots:
+  interval_ms: 300000            # periodic status snapshot cadence
+
+loop:                            # operational-loop research upkeep
+  promotion_guard_trades: 10     # closed trades before the guard judges
+  promotion_guard_floor_r: -5.0  # summed R at/below this rolls back
