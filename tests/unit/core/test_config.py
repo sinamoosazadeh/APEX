@@ -44,6 +44,7 @@ class TestLoadConfig:
         assert 0.0 <= config.market.gap_penalty <= 1.0
         assert config.system.plugin_modules == (
             "apex.storage.plugin",
+            "apex.security.plugin",
             "apex.data.toobit.plugin",
             "apex.features.plugin",
             "apex.probability.plugin",
