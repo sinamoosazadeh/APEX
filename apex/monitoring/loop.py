@@ -1,1 +1,478 @@
-IiIiTGl2ZSBvcGVyYXRpb25hbCBsb29wIChCb29rIEkgMTAuMTIgZW5kLXRvLWVuZCBwYXRoOyBCb29rIElJIGNoLiAyNikuCgpUaGUgcmVhbHRpbWUgc3BpbmU6IHN0cmVhbWVkIGJhcnMgY2xvc2UgLT4gZmVhdHVyZXMgLT4gYXNzZXNzbWVudCAtPgpkZWNpc2lvbiAocmVzZWFyY2gtaW5qZWN0ZWQpIC0+IGtpbGwtc3dpdGNoIGdhdGUgLT4gZXhlY3V0aW9uIC0+CnBvcnRmb2xpbyBmb2xkIC0+IHJlc2VhcmNoIHVwa2VlcCAtIGV2ZXJ5IHN0YWdlIHRpbWVkLCBoZWFydGJlYXRlbiwKdHJhY2VkIGFuZCBhbGVydC1jaGVja2VkLiBUaGUgbG9vcCBjb25zdW1lcyBgYG1hcmtldC5iYXIuY2xvc2VkYGAKZXZlbnRzIGlubGluZSAodGhlIGJ1cyBpcyBkZXRlcm1pbmlzdGljIGFuZCBzZXF1ZW50aWFsIGJ5IGRlc2lnbjoKb25lIGJhciBpcyBmdWxseSBwcm9jZXNzZWQgYmVmb3JlIHRoZSBuZXh0IG1lc3NhZ2UpLCBzbyB0aGUgd2hvbGUKcGlwZWxpbmUgc3RheXMgc3RyaWN0bHkgY2F1c2FsIG9uIGNvbmZpcm1lZCBiYXJzIG9ubHkuCgpSZXNlYXJjaCB1cGtlZXAgcGVyIGJhcjogc2hhZG93IHByb21vdGlvbnMgYXJlIGV2YWx1YXRlZCBvbmNlIGVub3VnaApmb3J3YXJkIGJhcnMgYWNjdW11bGF0ZWQsIHRoZSBwb3N0LXByb21vdGlvbiBndWFyZCByb2xscyBhIGRlZ3JhZGluZwphcnRpZmFjdCBiYWNrIGF1dG9tYXRpY2FsbHkgKEJvb2sgViBjb250aW51b3VzIG1vbml0b3JpbmcpLCBhbmQgLQp3aGVuIGVuYWJsZWQgLSBvbmUgcXVldWVkIG9wdGltaXphdGlvbiBqb2IgZHJhaW5zIGJldHdlZW4gYmFycy4KClJ1bnMgYm91bmRlZCAoYGAtLXNlY29uZHNgYCkgZm9yIHZhbGlkYXRpb24gb3IgaW5kZWZpbml0ZWx5IHdpdGgKT1Mtc2lnbmFsLWRyaXZlbiBncmFjZWZ1bCBzaHV0ZG93biAtIHRoZSBmaXJzdCBpbmRlZmluaXRlIHJ1bnRpbWUKc3VyZmFjZSBpbiB0aGUgcGxhdGZvcm0uCiIiIgoKaW1wb3J0IGFzeW5jaW8KZnJvbSBjb2xsZWN0aW9ucy5hYmMgaW1wb3J0IEF3YWl0YWJsZQpmcm9tIGRhdGFjbGFzc2VzIGltcG9ydCBkYXRhY2xhc3MKZnJvbSB0eXBpbmcgaW1wb3J0IEZpbmFsCgpmcm9tIGFwZXguY29yZS5jb25maWcgaW1wb3J0IEFwcENvbmZpZwpmcm9tIGFwZXguY29yZS5jb250cmFjdHMuaW50ZXJmYWNlcyBpbXBvcnQgSUV2ZW50QnVzCmZyb20gYXBleC5jb3JlLmVudW1zIGltcG9ydCBUaW1lZnJhbWUKZnJvbSBhcGV4LmNvcmUuZXZlbnRzLmV2ZW50IGltcG9ydCBFdmVudApmcm9tIGFwZXguY29yZS5leGNlcHRpb25zIGltcG9ydCBBcGV4RXJyb3IKZnJvbSBhcGV4LmNvcmUuaWRlbnRpdHkgaW1wb3J0IElkUHJvdmlkZXIKZnJvbSBhcGV4LmNvcmUubG9nZ2luZyBpbXBvcnQgU3RydWN0dXJlZExvZ2dlcgpmcm9tIGFwZXguY29yZS5yZXN1bHQgaW1wb3J0IFJlc3VsdApmcm9tIGFwZXguY29yZS50aW1lLmNsb2NrIGltcG9ydCBDbG9jawpmcm9tIGFwZXguY29yZS50aW1lLnRpbWVzdGFtcCBpbXBvcnQgVGltZXN0YW1wCmZyb20gYXBleC5kYXRhLmNhdGNodXAgaW1wb3J0IENhdGNoVXBTZXJ2aWNlCmZyb20gYXBleC5kYXRhLmV2ZW50cyBpbXBvcnQgTWFya2V0RXZlbnQKZnJvbSBhcGV4LmRhdGEuc3RyZWFtaW5nIGltcG9ydCBNYXJrZXRTdHJlYW1TZXJ2aWNlCmZyb20gYXBleC5kZWNpc2lvbi5rZXJuZWwgaW1wb3J0IENlbnRyYWxEZWNpc2lvbktlcm5lbApmcm9tIGFwZXguZGVjaXNpb24ucGx1Z2luIGltcG9ydCBkZWNpc2lvbl9wYXJhbXNfZnJvbV9jb25maWcKZnJvbSBhcGV4LmRlY2lzaW9uLnNlcnZpY2UgaW1wb3J0IERlY2lzaW9uU2VydmljZQpmcm9tIGFwZXguZGVjaXNpb24uc3RvcmUgaW1wb3J0IFNxbGl0ZURlY2lzaW9uUmVwb3NpdG9yeQpmcm9tIGFwZXguZXhlY3V0aW9uLnNlcnZpY2UgaW1wb3J0IEV4ZWN1dGlvblNlcnZpY2UKZnJvbSBhcGV4LmV4ZWN1dGlvbi5zdG9yZSBpbXBvcnQgU3FsaXRlRXhlY3V0aW9uUmVwb3NpdG9yeQpmcm9tIGFwZXguZmVhdHVyZXMucGlwZWxpbmUgaW1wb3J0IEZlYXR1cmVDb21wdXRhdGlvblBpcGVsaW5lCmZyb20gYXBleC5tb25pdG9yaW5nLmV2ZW50cyBpbXBvcnQgTW9uaXRvcmluZ0V2ZW50LCBtb25pdG9yaW5nX2V2ZW50CmZyb20gYXBleC5tb25pdG9yaW5nLnJlY29yZHMgaW1wb3J0IEFsZXJ0U2V2ZXJpdHkKZnJvbSBhcGV4Lm1vbml0b3Jpbmcuc2VydmljZSBpbXBvcnQgTW9uaXRvcmluZ1NlcnZpY2UKZnJvbSBhcGV4LnByb2JhYmlsaXR5LmVuZ2luZSBpbXBvcnQgQ29uZmx1ZW5jZVByb2JhYmlsaXR5RW5naW5lCmZyb20gYXBleC5wcm9iYWJpbGl0eS5wbHVnaW4gaW1wb3J0IHByb2JhYmlsaXR5X3BhcmFtc19mcm9tX2NvbmZpZwpmcm9tIGFwZXgucHJvYmFiaWxpdHkuc2VydmljZSBpbXBvcnQgUHJvYmFiaWxpdHlTZXJ2aWNlCmZyb20gYXBleC5yZXNlYXJjaC5zZXJ2aWNlIGltcG9ydCBSZXNlYXJjaFNlcnZpY2UKCl9TT1VSQ0U6IEZpbmFsW3N0cl0gPSAiYXBleC5tb25pdG9yaW5nLmxvb3AiCl9TVFJFQU1fQ0hVTktfTVM6IEZpbmFsW2ludF0gPSA2MF8wMDAKX0NPTVBPTkVOVDogRmluYWxbc3RyXSA9ICJvcGVyYXRpb25zX2xvb3AiCgoKQGRhdGFjbGFzcyhmcm96ZW49VHJ1ZSwgc2xvdHM9VHJ1ZSwga3dfb25seT1UcnVlKQpjbGFzcyBMb29wU3RhdHM6CiAgICAiIiJPdXRjb21lIG9mIG9uZSBvcGVyYXRpb25hbC1sb29wIHNlc3Npb24uIiIiCgogICAgYmFyc19wcm9jZXNzZWQ6IGludAogICAgc2lnbmFsc19maXJlZDogaW50CiAgICBleGVjdXRpb25zX2F0dGVtcHRlZDogaW50CiAgICBleGVjdXRpb25zX2ZpbGxlZDogaW50CiAgICBhbGVydHNfcmFpc2VkOiBpbnQKICAgIGpvYnNfZHJhaW5lZDogaW50CiAgICBwcm9tb3Rpb25zX2V2YWx1YXRlZDogaW50CiAgICByb2xsYmFja3M6IGludAogICAgc25hcHNob3RzX3Rha2VuOiBpbnQKICAgIHN0cmVhbV9yZWNvbm5lY3RzOiBpbnQKCgpAZGF0YWNsYXNzKHNsb3RzPVRydWUpCmNsYXNzIF9Mb29wU3RhdGU6CiAgICAiIiJNdXRhYmxlIGNvdW50ZXJzIGZvciBvbmUgbG9vcCBzZXNzaW9uLiIiIgoKICAgIGJhcnNfcHJvY2Vzc2VkOiBpbnQgPSAwCiAgICBzaWduYWxzX2ZpcmVkOiBpbnQgPSAwCiAgICBleGVjdXRpb25zX2F0dGVtcHRlZDogaW50ID0gMAogICAgZXhlY3V0aW9uc19maWxsZWQ6IGludCA9IDAKICAgIGFsZXJ0c19yYWlzZWQ6IGludCA9IDAKICAgIGpvYnNfZHJhaW5lZDogaW50ID0gMAogICAgcHJvbW90aW9uc19ldmFsdWF0ZWQ6IGludCA9IDAKICAgIHJvbGxiYWNrczogaW50ID0gMAogICAgc25hcHNob3RzX3Rha2VuOiBpbnQgPSAwCiAgICBzdHJlYW1fcmVjb25uZWN0czogaW50ID0gMAogICAgbGFzdF9zbmFwc2hvdF9tczogaW50ID0gMAoKCmNsYXNzIE9wZXJhdGlvbnNMb29wU2VydmljZToKICAgICIiIkRyaXZlcyB0aGUgbGl2ZSBwaXBlbGluZSBvZmYgY2xvc2VkLWJhciBldmVudHMuIiIiCgogICAgZGVmIF9faW5pdF9fKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBjb25maWc6IEFwcENvbmZpZywKICAgICAgICBjYXRjaHVwOiBDYXRjaFVwU2VydmljZSwKICAgICAgICBzdHJlYW06IE1hcmtldFN0cmVhbVNlcnZpY2UsCiAgICAgICAgZmVhdHVyZXM6IEZlYXR1cmVDb21wdXRhdGlvblBpcGVsaW5lLAogICAgICAgIHByb2JhYmlsaXR5OiBQcm9iYWJpbGl0eVNlcnZpY2UsCiAgICAgICAgZGVjaXNpb246IERlY2lzaW9uU2VydmljZSwKICAgICAgICBkZWNpc2lvbl9yZXBvc2l0b3J5OiBTcWxpdGVEZWNpc2lvblJlcG9zaXRvcnksCiAgICAgICAgZXhlY3V0aW9uOiBFeGVjdXRpb25TZXJ2aWNlLAogICAgICAgIGV4ZWN1dGlvbl9yZXBvc2l0b3J5OiBTcWxpdGVFeGVjdXRpb25SZXBvc2l0b3J5LAogICAgICAgIHJlc2VhcmNoOiBSZXNlYXJjaFNlcnZpY2UsCiAgICAgICAgbW9uaXRvcmluZzogTW9uaXRvcmluZ1NlcnZpY2UsCiAgICAgICAgcG9ydGZvbGlvX2lkOiBzdHIsCiAgICAgICAgYnVzOiBJRXZlbnRCdXMsCiAgICAgICAgY2xvY2s6IENsb2NrLAogICAgICAgIGlkX3Byb3ZpZGVyOiBJZFByb3ZpZGVyLAogICAgICAgIGxvZ2dlcjogU3RydWN0dXJlZExvZ2dlciwKICAgICkgLT4gTm9uZToKICAgICAgICBzZWxmLl9jb25maWcgPSBjb25maWcKICAgICAgICBzZWxmLl9jYXRjaHVwID0gY2F0Y2h1cAogICAgICAgIHNlbGYuX3N0cmVhbSA9IHN0cmVhbQogICAgICAgIHNlbGYuX2ZlYXR1cmVzID0gZmVhdHVyZXMKICAgICAgICBzZWxmLl9wcm9iYWJpbGl0eSA9IHByb2JhYmlsaXR5CiAgICAgICAgc2VsZi5fZGVjaXNpb24gPSBkZWNpc2lvbgogICAgICAgIHNlbGYuX2RlY2lzaW9ucyA9IGRlY2lzaW9uX3JlcG9zaXRvcnkKICAgICAgICBzZWxmLl9leGVjdXRpb24gPSBleGVjdXRpb24KICAgICAgICBzZWxmLl9leGVjdXRpb25zID0gZXhlY3V0aW9uX3JlcG9zaXRvcnkKICAgICAgICBzZWxmLl9yZXNlYXJjaCA9IHJlc2VhcmNoCiAgICAgICAgc2VsZi5fbW9uaXRvcmluZyA9IG1vbml0b3JpbmcKICAgICAgICBzZWxmLl9wb3J0Zm9saW9faWQgPSBwb3J0Zm9saW9faWQKICAgICAgICBzZWxmLl9idXMgPSBidXMKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCiAgICAgICAgc2VsZi5faWRzID0gaWRfcHJvdmlkZXIKICAgICAgICBzZWxmLl9sb2dnZXIgPSBsb2dnZXIKICAgICAgICBzZWxmLl9zdWJzY3JpYmVkID0gRmFsc2UKICAgICAgICBzZWxmLl9zdG9wID0gYXN5bmNpby5FdmVudCgpCiAgICAgICAgc2VsZi5fc3RhdGUgPSBfTG9vcFN0YXRlKCkKICAgICAgICBzZWxmLl9saXZlID0gRmFsc2UKICAgICAgICBzZWxmLl9vcmNoZXN0cmF0ZSA9IEZhbHNlCiAgICAgICAgc2VsZi5fdHJhY2tlZDogZnJvemVuc2V0W3R1cGxlW3N0ciwgc3RyXV0gPSBmcm96ZW5zZXQoKQoKICAgICMgLS0tIFNlc3Npb24gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBhc3luYyBkZWYgcnVuKAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBzZWNvbmRzOiBpbnQsCiAgICAgICAgbGl2ZTogYm9vbCA9IEZhbHNlLAogICAgICAgIG9yY2hlc3RyYXRlOiBib29sID0gRmFsc2UsCiAgICAgICAgc3ltYm9sczogdHVwbGVbc3RyLCAuLi5dID0gKCksCiAgICAgICAgdGltZWZyYW1lczogdHVwbGVbVGltZWZyYW1lLCAuLi5dID0gKCksCiAgICApIC0+IExvb3BTdGF0czoKICAgICAgICAiIiJDYXRjaCB1cCwgdGhlbiBzdHJlYW0gYW5kIHByb2Nlc3MgdW50aWwgc3RvcCBvciBkZWFkbGluZS4KCiAgICAgICAgYGBzZWNvbmRzID09IDBgYCBydW5zIGluZGVmaW5pdGVseSB1bnRpbCBTSUdJTlQvU0lHVEVSTS4KICAgICAgICAiIiIKICAgICAgICBzZWxmLl9saXZlID0gbGl2ZQogICAgICAgIHNlbGYuX29yY2hlc3RyYXRlID0gb3JjaGVzdHJhdGUKICAgICAgICBzZWxmLl90cmFja2VkID0gc2VsZi5fcmVzb2x2ZV90cmFja2VkKHN5bWJvbHMsIHRpbWVmcmFtZXMpCiAgICAgICAgc2VsZi5fc3RhdGUgPSBfTG9vcFN0YXRlKGxhc3Rfc25hcHNob3RfbXM9c2VsZi5fY2xvY2subm93KCkuZXBvY2hfbXMpCiAgICAgICAgc2VsZi5fc3RvcC5jbGVhcigpCiAgICAgICAgc2VsZi5fc3Vic2NyaWJlX29uY2UoKQogICAgICAgIGF3YWl0IHNlbGYuX2Fubm91bmNlKE1vbml0b3JpbmdFdmVudC5MT09QX1NUQVJURUQpCiAgICAgICAgYXdhaXQgc2VsZi5fY2F0Y2h1cC5ydW5fb25jZSgpCiAgICAgICAgdHJ5OgogICAgICAgICAgICBhd2FpdCBzZWxmLl9zdHJlYW1fdW50aWxfZG9uZShzZWNvbmRzKQogICAgICAgIGZpbmFsbHk6CiAgICAgICAgICAgIGF3YWl0IHNlbGYuX21vbml0b3JpbmcuY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICAgICAgYXdhaXQgc2VsZi5fYW5ub3VuY2UoTW9uaXRvcmluZ0V2ZW50LkxPT1BfU1RPUFBFRCkKICAgICAgICByZXR1cm4gc2VsZi5fc3RhdHMoKQoKICAgIGRlZiByZXF1ZXN0X3N0b3Aoc2VsZikgLT4gTm9uZToKICAgICAgICAiIiJBc2sgdGhlIGxvb3AgdG8gZmluaXNoIGFmdGVyIHRoZSBjdXJyZW50IHN0cmVhbSBjaHVuay4iIiIKICAgICAgICBzZWxmLl9zdG9wLnNldCgpCgogICAgZGVmIF9yZXNvbHZlX3RyYWNrZWQoCiAgICAgICAgc2VsZiwgc3ltYm9sczogdHVwbGVbc3RyLCAuLi5dLCB0aW1lZnJhbWVzOiB0dXBsZVtUaW1lZnJhbWUsIC4uLl0KICAgICkgLT4gZnJvemVuc2V0W3R1cGxlW3N0ciwgc3RyXV06CiAgICAgICAgY2hvc2VuX3N5bWJvbHMgPSBzeW1ib2xzIG9yIHNlbGYuX2NvbmZpZy5tYXJrZXQuc3ltYm9scwogICAgICAgIGNob3Nlbl90aW1lZnJhbWVzID0gdGltZWZyYW1lcyBvciBzZWxmLl9jb25maWcubWFya2V0LnRpbWVmcmFtZXMKICAgICAgICByZXR1cm4gZnJvemVuc2V0KAogICAgICAgICAgICAoc3ltYm9sLCB0aW1lZnJhbWUudmFsdWUpCiAgICAgICAgICAgIGZvciBzeW1ib2wgaW4gY2hvc2VuX3N5bWJvbHMKICAgICAgICAgICAgZm9yIHRpbWVmcmFtZSBpbiBjaG9zZW5fdGltZWZyYW1lcwogICAgICAgICkKCiAgICBkZWYgX3N1YnNjcmliZV9vbmNlKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgaWYgc2VsZi5fc3Vic2NyaWJlZDoKICAgICAgICAgICAgcmV0dXJuCiAgICAgICAgc2VsZi5fYnVzLnN1YnNjcmliZShNYXJrZXRFdmVudC5CQVJfQ0xPU0VELnZhbHVlLCBzZWxmLl9vbl9iYXJfY2xvc2VkKQogICAgICAgIHNlbGYuX3N1YnNjcmliZWQgPSBUcnVlCgogICAgYXN5bmMgZGVmIF9zdHJlYW1fdW50aWxfZG9uZShzZWxmLCBzZWNvbmRzOiBpbnQpIC0+IE5vbmU6CiAgICAgICAgZGVhZGxpbmVfbXMgPSAoCiAgICAgICAgICAgIHNlbGYuX2Nsb2NrLm5vdygpLmVwb2NoX21zICsgc2Vjb25kcyAqIDFfMDAwIGlmIHNlY29uZHMgPiAwIGVsc2UgTm9uZQogICAgICAgICkKICAgICAgICB3aGlsZSBub3Qgc2VsZi5fc3RvcC5pc19zZXQoKToKICAgICAgICAgICAgcmVtYWluaW5nID0gKAogICAgICAgICAgICAgICAgZGVhZGxpbmVfbXMgLSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcwogICAgICAgICAgICAgICAgaWYgZGVhZGxpbmVfbXMgaXMgbm90IE5vbmUKICAgICAgICAgICAgICAgIGVsc2UgX1NUUkVBTV9DSFVOS19NUwogICAgICAgICAgICApCiAgICAgICAgICAgIGlmIHJlbWFpbmluZyA8PSAwOgogICAgICAgICAgICAgICAgYnJlYWsKICAgICAgICAgICAgc3RhdHMgPSBhd2FpdCBzZWxmLl9zdHJlYW0ucnVuKAogICAgICAgICAgICAgICAgZHVyYXRpb25fbXM9bWluKHJlbWFpbmluZywgX1NUUkVBTV9DSFVOS19NUykKICAgICAgICAgICAgKQogICAgICAgICAgICBzZWxmLl9zdGF0ZS5zdHJlYW1fcmVjb25uZWN0cyArPSBzdGF0cy5yZWNvbm5lY3RzCgogICAgIyAtLS0gQmFyIHByb2Nlc3NpbmcgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIF9vbl9iYXJfY2xvc2VkKHNlbGYsIGV2ZW50OiBFdmVudCkgLT4gTm9uZToKICAgICAgICAiIiJCdXMgaGFuZGxlcjogcnVuIHRoZSBwaXBlbGluZSBmb3Igb25lIHRyYWNrZWQgY2xvc2VkIGJhci4iIiIKICAgICAgICBwYXlsb2FkID0gZXZlbnQucGF5bG9hZAogICAgICAgIHN5bWJvbCA9IHN0cihwYXlsb2FkLmdldCgic3ltYm9sIiwgIiIpKQogICAgICAgIHRpbWVmcmFtZV9yYXcgPSBzdHIocGF5bG9hZC5nZXQoInRpbWVmcmFtZSIsICIiKSkKICAgICAgICBvcGVuX3RpbWUgPSBwYXlsb2FkLmdldCgib3Blbl90aW1lIikKICAgICAgICBpZiAoc3ltYm9sLCB0aW1lZnJhbWVfcmF3KSBub3QgaW4gc2VsZi5fdHJhY2tlZDoKICAgICAgICAgICAgcmV0dXJuCiAgICAgICAgaWYgbm90IGlzaW5zdGFuY2Uob3Blbl90aW1lLCBpbnQpOgogICAgICAgICAgICByZXR1cm4KICAgICAgICB0aW1lZnJhbWUgPSBUaW1lZnJhbWUodGltZWZyYW1lX3JhdykKICAgICAgICB0cnk6CiAgICAgICAgICAgIGF3YWl0IHNlbGYuX3Byb2Nlc3NfYmFyKHN5bWJvbCwgdGltZWZyYW1lLCBvcGVuX3RpbWUpCiAgICAgICAgZXhjZXB0IEFwZXhFcnJvciBhcyBlcnJvcjoKICAgICAgICAgICAgYXdhaXQgc2VsZi5fb25fc3RhZ2VfZmFpbHVyZShzeW1ib2wsIHRpbWVmcmFtZSwgZXJyb3IpCgogICAgYXN5bmMgZGVmIF9wcm9jZXNzX2JhcigKICAgICAgICBzZWxmLCBzeW1ib2w6IHN0ciwgdGltZWZyYW1lOiBUaW1lZnJhbWUsIG9wZW5fbXM6IGludAogICAgKSAtPiBOb25lOgogICAgICAgIHN0YXJ0ZWRfbXMgPSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcwogICAgICAgIGVuZCA9IFRpbWVzdGFtcChlcG9jaF9tcz1vcGVuX21zICsgdGltZWZyYW1lLmR1cmF0aW9uX21zKQogICAgICAgIHN0YXJ0ID0gZW5kLmFkZF9tcygtc2VsZi5fY29uZmlnLm1hcmtldC5oaXN0b3J5X2JhcnMgKiB0aW1lZnJhbWUuZHVyYXRpb25fbXMpCiAgICAgICAgdGFncyA9IHsic3ltYm9sIjogc3ltYm9sLCAidGltZWZyYW1lIjogdGltZWZyYW1lLnZhbHVlfQogICAgICAgIGNvbGxlY3RvciA9IHNlbGYuX21vbml0b3JpbmcuY29sbGVjdG9yCiAgICAgICAgYXdhaXQgc2VsZi5fc3RhZ2VkKAogICAgICAgICAgICAiZmVhdHVyZXMiLCB0YWdzLAogICAgICAgICAgICBzZWxmLl9mZWF0dXJlcy5jb21wdXRlKHN5bWJvbCwgdGltZWZyYW1lLCBzdGFydD1zdGFydCwgZW5kPWVuZCksCiAgICAgICAgKQogICAgICAgIGlmIGF3YWl0IHNlbGYuX21vbml0b3Jpbmcua2lsbF9zd2l0Y2guYWxsb3dzX3Byb2Nlc3NpbmcoKToKICAgICAgICAgICAgYXdhaXQgc2VsZi5fYXNzZXNzX2FuZF9kZWNpZGUoc3ltYm9sLCB0aW1lZnJhbWUsIHN0YXJ0LCBlbmQsIHRhZ3MpCiAgICAgICAgZWxzZToKICAgICAgICAgICAgY29sbGVjdG9yLm1ldHJpYygibG9vcC5za2lwcGVkX3BhdXNlZCIsIDEuMCwgdGFncz10YWdzKQogICAgICAgIGF3YWl0IHNlbGYuX3Jlc2VhcmNoX3Vwa2VlcChzeW1ib2wsIHRpbWVmcmFtZSkKICAgICAgICBjb2xsZWN0b3Iub3BlcmF0aW9uKHRhZ3M9dGFncykKICAgICAgICBhd2FpdCBjb2xsZWN0b3IuYmVhdChfQ09NUE9ORU5UKQogICAgICAgIHRvdGFsX21zID0gc2VsZi5fY2xvY2subm93KCkuZXBvY2hfbXMgLSBzdGFydGVkX21zCiAgICAgICAgY29sbGVjdG9yLm1ldHJpYygibG9vcC5iYXIudG90YWxfbXMiLCBmbG9hdCh0b3RhbF9tcyksIHRhZ3M9dGFncykKICAgICAgICBzZWxmLl9zdGF0ZS5iYXJzX3Byb2Nlc3NlZCArPSAxCiAgICAgICAgYXdhaXQgc2VsZi5fZmluaXNoX2JhcihzeW1ib2wsIHRpbWVmcmFtZSwgb3Blbl9tcywgdG90YWxfbXMpCgogICAgYXN5bmMgZGVmIF9hc3Nlc3NfYW5kX2RlY2lkZSgKICAgICAgICBzZWxmLAogICAgICAgIHN5bWJvbDogc3RyLAogICAgICAgIHRpbWVmcmFtZTogVGltZWZyYW1lLAogICAgICAgIHN0YXJ0OiBUaW1lc3RhbXAsCiAgICAgICAgZW5kOiBUaW1lc3RhbXAsCiAgICAgICAgdGFnczogZGljdFtzdHIsIHN0cl0sCiAgICApIC0+IE5vbmU6CiAgICAgICAgbGVhcm5pbmcgPSBhd2FpdCBzZWxmLl9yZXNlYXJjaC5sZWFybmluZ19zdGF0ZShzeW1ib2wsIHRpbWVmcmFtZSkKICAgICAgICBlbmdpbmVfb3ZlcnJpZGUgPSBOb25lCiAgICAgICAgaWYgbGVhcm5pbmcgaXMgbm90IE5vbmU6CiAgICAgICAgICAgIGVuZ2luZV9vdmVycmlkZSA9IENvbmZsdWVuY2VQcm9iYWJpbGl0eUVuZ2luZSgKICAgICAgICAgICAgICAgIHBhcmFtcz1wcm9iYWJpbGl0eV9wYXJhbXNfZnJvbV9jb25maWcoc2VsZi5fY29uZmlnLm1hcmtldC5wcm9iYWJpbGl0eSksCiAgICAgICAgICAgICAgICBjbG9jaz1zZWxmLl9jbG9jaywKICAgICAgICAgICAgICAgIGxlYXJuaW5nPWxlYXJuaW5nLAogICAgICAgICAgICApCiAgICAgICAgYXdhaXQgc2VsZi5fc3RhZ2VkKAogICAgICAgICAgICAicHJvYmFiaWxpdHkiLCB0YWdzLAogICAgICAgICAgICBzZWxmLl9wcm9iYWJpbGl0eS5jb21wdXRlKAogICAgICAgICAgICAgICAgc3ltYm9sLCB0aW1lZnJhbWUsIHN0YXJ0PXN0YXJ0LCBlbmQ9ZW5kLAogICAgICAgICAgICAgICAgZW5naW5lX292ZXJyaWRlPWVuZ2luZV9vdmVycmlkZSwKICAgICAgICAgICAgKSwKICAgICAgICApCiAgICAgICAgb3ZlcnJpZGVzID0gYXdhaXQgc2VsZi5fcmVzZWFyY2guYWN0aXZlX292ZXJyaWRlcyhzeW1ib2wsIHRpbWVmcmFtZSkKICAgICAgICBrZXJuZWxfb3ZlcnJpZGUgPSBOb25lCiAgICAgICAgaWYgb3ZlcnJpZGVzIG9yIGxlYXJuaW5nIGlzIG5vdCBOb25lOgogICAgICAgICAgICBiYXNlID0gZGVjaXNpb25fcGFyYW1zX2Zyb21fY29uZmlnKHNlbGYuX2NvbmZpZy5tYXJrZXQuZGVjaXNpb24pCiAgICAgICAgICAgIHBhcmFtcyA9IGJhc2Uud2l0aF9vdmVycmlkZXMob3ZlcnJpZGVzKSBpZiBvdmVycmlkZXMgZWxzZSBiYXNlCiAgICAgICAgICAgIGtlcm5lbF9vdmVycmlkZSA9IENlbnRyYWxEZWNpc2lvbktlcm5lbCgKICAgICAgICAgICAgICAgIHBhcmFtcz1wYXJhbXMsIGNsb2NrPXNlbGYuX2Nsb2NrLCBsZWFybmluZz1sZWFybmluZwogICAgICAgICAgICApCiAgICAgICAgYXdhaXQgc2VsZi5fc3RhZ2VkKAogICAgICAgICAgICAiZGVjaXNpb24iLCB0YWdzLAogICAgICAgICAgICBzZWxmLl9kZWNpc2lvbi5jb21wdXRlKAogICAgICAgICAgICAgICAgc3ltYm9sLCB0aW1lZnJhbWUsIHN0YXJ0PXN0YXJ0LCBlbmQ9ZW5kLAogICAgICAgICAgICAgICAga2VybmVsX292ZXJyaWRlPWtlcm5lbF9vdmVycmlkZSwKICAgICAgICAgICAgKSwKICAgICAgICApCiAgICAgICAgYXdhaXQgc2VsZi5fbWF5YmVfZXhlY3V0ZShzeW1ib2wsIHRpbWVmcmFtZSwgc3RhcnQsIGVuZCwgdGFncykKCiAgICBhc3luYyBkZWYgX21heWJlX2V4ZWN1dGUoCiAgICAgICAgc2VsZiwKICAgICAgICBzeW1ib2w6IHN0ciwKICAgICAgICB0aW1lZnJhbWU6IFRpbWVmcmFtZSwKICAgICAgICBzdGFydDogVGltZXN0YW1wLAogICAgICAgIGVuZDogVGltZXN0YW1wLAogICAgICAgIHRhZ3M6IGRpY3Rbc3RyLCBzdHJdLAogICAgKSAtPiBOb25lOgogICAgICAgICIiIkV4ZWN1dGUgdGhlIG5ld2VzdCB1bmV4ZWN1dGVkIGZpcmVkIHNpZ25hbCwgaWYgZW50cmllcyBhbGxvd2VkLiIiIgogICAgICAgIHNpZ25hbF9iYXIgPSBhd2FpdCBzZWxmLl9sYXRlc3RfdW5leGVjdXRlZF9zaWduYWwoCiAgICAgICAgICAgIHN5bWJvbCwgdGltZWZyYW1lLCBzdGFydCwgZW5kCiAgICAgICAgKQogICAgICAgIGlmIHNpZ25hbF9iYXIgaXMgTm9uZToKICAgICAgICAgICAgcmV0dXJuCiAgICAgICAgc2VsZi5fc3RhdGUuc2lnbmFsc19maXJlZCArPSAxCiAgICAgICAgaWYgbm90IGF3YWl0IHNlbGYuX21vbml0b3Jpbmcua2lsbF9zd2l0Y2guYWxsb3dzX25ld19lbnRyaWVzKCk6CiAgICAgICAgICAgIHNlbGYuX21vbml0b3JpbmcuY29sbGVjdG9yLm1ldHJpYygibG9vcC5lbnRyaWVzX2Jsb2NrZWQiLCAxLjAsIHRhZ3M9dGFncykKICAgICAgICAgICAgcmV0dXJuCiAgICAgICAgc2VsZi5fc3RhdGUuZXhlY3V0aW9uc19hdHRlbXB0ZWQgKz0gMQogICAgICAgIHN0YWdlX3N0YXJ0ID0gc2VsZi5fY2xvY2subm93KCkuZXBvY2hfbXMKICAgICAgICBvdXRjb21lID0gYXdhaXQgc2VsZi5fZXhlY3V0aW9uLmV4ZWN1dGVfbGF0ZXN0X3NpZ25hbCgKICAgICAgICAgICAgc3ltYm9sLCB0aW1lZnJhbWUsIHN0YXJ0PXN0YXJ0LCBlbmQ9ZW5kLCBsaXZlPXNlbGYuX2xpdmUKICAgICAgICApCiAgICAgICAgZWxhcHNlZCA9IHNlbGYuX2Nsb2NrLm5vdygpLmVwb2NoX21zIC0gc3RhZ2Vfc3RhcnQKICAgICAgICBzZWxmLl9tb25pdG9yaW5nLmNvbGxlY3Rvci5tZXRyaWMoCiAgICAgICAgICAgICJsb29wLnN0YWdlLmV4ZWN1dGlvbi5tcyIsIGZsb2F0KGVsYXBzZWQpLCB0YWdzPXRhZ3MKICAgICAgICApCiAgICAgICAgaWYgb3V0Y29tZS5vayBhbmQgb3V0Y29tZS51bndyYXAoKS5wb3NpdGlvbl9vcGVuZWQ6CiAgICAgICAgICAgIHNlbGYuX3N0YXRlLmV4ZWN1dGlvbnNfZmlsbGVkICs9IDEKCiAgICBhc3luYyBkZWYgX2xhdGVzdF91bmV4ZWN1dGVkX3NpZ25hbCgKICAgICAgICBzZWxmLCBzeW1ib2w6IHN0ciwgdGltZWZyYW1lOiBUaW1lZnJhbWUsIHN0YXJ0OiBUaW1lc3RhbXAsIGVuZDogVGltZXN0YW1wCiAgICApIC0+IGludCB8IE5vbmU6CiAgICAgICAgIiIiVGhlIG5ld2VzdCBmaXJlZCBzaWduYWwgYmFyIHdpdGhvdXQgYW4gZXhlY3V0aW9uIHJlY29yZC4iIiIKICAgICAgICBkZWNpc2lvbnMgPSBhd2FpdCBzZWxmLl9kZWNpc2lvbnMuZ2V0X3JhbmdlKAogICAgICAgICAgICAidG9vYml0Iiwgc3ltYm9sLCB0aW1lZnJhbWUsIHN0YXJ0PXN0YXJ0LCBlbmQ9ZW5kCiAgICAgICAgKQogICAgICAgIGZpcmVkID0gW3JlY29yZCBmb3IgcmVjb3JkIGluIGRlY2lzaW9ucyBpZiByZWNvcmQuYWN0aW9uID09ICJzaWduYWwiXQogICAgICAgIGlmIG5vdCBmaXJlZDoKICAgICAgICAgICAgcmV0dXJuIE5vbmUKICAgICAgICBsYXRlc3QgPSBmaXJlZFstMV0KICAgICAgICBleGVjdXRpb25zID0gYXdhaXQgc2VsZi5fZXhlY3V0aW9ucy5nZXRfZXhlY3V0aW9ucyhzZWxmLl9wb3J0Zm9saW9faWQpCiAgICAgICAgZm9yIHJlY29yZCBpbiBleGVjdXRpb25zOgogICAgICAgICAgICBpZiAoCiAgICAgICAgICAgICAgICByZWNvcmQuc3ltYm9sID09IHN5bWJvbAogICAgICAgICAgICAgICAgYW5kIHJlY29yZC50aW1lZnJhbWUgaXMgdGltZWZyYW1lCiAgICAgICAgICAgICAgICBhbmQgcmVjb3JkLnNpZ25hbF9iYXJfdGltZS5lcG9jaF9tcyA9PSBsYXRlc3QuYmFyX29wZW5fdGltZS5lcG9jaF9tcwogICAgICAgICAgICApOgogICAgICAgICAgICAgICAgcmV0dXJuIE5vbmUKICAgICAgICByZXR1cm4gbGF0ZXN0LmJhcl9vcGVuX3RpbWUuZXBvY2hfbXMKCiAgICBhc3luYyBkZWYgX3Jlc2VhcmNoX3Vwa2VlcChzZWxmLCBzeW1ib2w6IHN0ciwgdGltZWZyYW1lOiBUaW1lZnJhbWUpIC0+IE5vbmU6CiAgICAgICAgIiIiU2hhZG93IGV2YWx1YXRpb24sIHRoZSBwcm9tb3Rpb24gZ3VhcmQgYW5kIHF1ZXVlIGRyYWluaW5nLiIiIgogICAgICAgIGV2YWx1YXRlZCA9IGF3YWl0IHNlbGYuX3Jlc2VhcmNoLmV2YWx1YXRlX3Byb21vdGlvbnMoc3ltYm9sLCB0aW1lZnJhbWUpCiAgICAgICAgc2VsZi5fc3RhdGUucHJvbW90aW9uc19ldmFsdWF0ZWQgKz0gZXZhbHVhdGVkCiAgICAgICAgc2V0dGluZ3MgPSBzZWxmLl9tb25pdG9yaW5nLnNldHRpbmdzCiAgICAgICAgcm9sbGVkX2JhY2sgPSBhd2FpdCBzZWxmLl9yZXNlYXJjaC5hcHBseV9wcm9tb3Rpb25fZ3VhcmQoCiAgICAgICAgICAgIHN5bWJvbCwKICAgICAgICAgICAgdGltZWZyYW1lLAogICAgICAgICAgICBtaW5fdHJhZGVzPXNldHRpbmdzLnByb21vdGlvbl9ndWFyZF90cmFkZXMsCiAgICAgICAgICAgIGZsb29yX3I9c2V0dGluZ3MucHJvbW90aW9uX2d1YXJkX2Zsb29yX3IsCiAgICAgICAgKQogICAgICAgIGlmIHJvbGxlZF9iYWNrIGlzIG5vdCBOb25lOgogICAgICAgICAgICBzZWxmLl9zdGF0ZS5yb2xsYmFja3MgKz0gMQogICAgICAgICAgICBhd2FpdCBzZWxmLl9hbGVydF9yb2xsYmFjayhzeW1ib2wsIHRpbWVmcmFtZSwgcm9sbGVkX2JhY2spCiAgICAgICAgaWYgc2VsZi5fb3JjaGVzdHJhdGUgYW5kIGF3YWl0IHNlbGYuX21vbml0b3Jpbmcua2lsbF9zd2l0Y2guYWxsb3dzX3Byb2Nlc3NpbmcoKToKICAgICAgICAgICAgc3VtbWFyeSA9IGF3YWl0IHNlbGYuX3Jlc2VhcmNoLm9yY2hlc3RyYXRlKAogICAgICAgICAgICAgICAgbGltaXQ9MSwgZGVmYXVsdF93aW5kb3dfYmFycz1zZWxmLl9jb25maWcubWFya2V0Lmhpc3RvcnlfYmFycwogICAgICAgICAgICApCiAgICAgICAgICAgIGlmIHN1bW1hcnkub2s6CiAgICAgICAgICAgICAgICBzZWxmLl9zdGF0ZS5qb2JzX2RyYWluZWQgKz0gc3VtbWFyeS51bndyYXAoKS5kcmFpbmVkCgogICAgYXN5bmMgZGVmIF9hbGVydF9yb2xsYmFjaygKICAgICAgICBzZWxmLCBzeW1ib2w6IHN0ciwgdGltZWZyYW1lOiBUaW1lZnJhbWUsIGFydGlmYWN0OiBzdHIKICAgICkgLT4gTm9uZToKICAgICAgICBhd2FpdCBzZWxmLl9tb25pdG9yaW5nLmNvbGxlY3Rvci5mbHVzaCgpCiAgICAgICAgcmFpc2VkID0gYXdhaXQgc2VsZi5fbW9uaXRvcmluZ19hbGVydCgKICAgICAgICAgICAgc2V2ZXJpdHk9QWxlcnRTZXZlcml0eS5FTUVSR0VOQ1ksCiAgICAgICAgICAgIGNhdGVnb3J5PSJyZXNlYXJjaCIsCiAgICAgICAgICAgIG1lc3NhZ2U9KAogICAgICAgICAgICAgICAgZiJwcm9tb3Rpb24gZ3VhcmQgcm9sbGVkIGJhY2sge3N5bWJvbH0ge3RpbWVmcmFtZS52YWx1ZX0gIgogICAgICAgICAgICAgICAgZiJ0byB7YXJ0aWZhY3R9IgogICAgICAgICAgICApLAogICAgICAgICAgICBkZWR1cF9rZXk9ZiJyZXNlYXJjaC5wcm9tb3Rpb25fZ3VhcmQue3N5bWJvbH0ue3RpbWVmcmFtZS52YWx1ZX0iLAogICAgICAgICkKICAgICAgICBzZWxmLl9zdGF0ZS5hbGVydHNfcmFpc2VkICs9IGludChyYWlzZWQpCgogICAgYXN5bmMgZGVmIF9tb25pdG9yaW5nX2FsZXJ0KAogICAgICAgIHNlbGYsCiAgICAgICAgKiwKICAgICAgICBzZXZlcml0eTogQWxlcnRTZXZlcml0eSwKICAgICAgICBjYXRlZ29yeTogc3RyLAogICAgICAgIG1lc3NhZ2U6IHN0ciwKICAgICAgICBkZWR1cF9rZXk6IHN0ciwKICAgICkgLT4gYm9vbDoKICAgICAgICByZXR1cm4gYXdhaXQgc2VsZi5fbW9uaXRvcmluZy5yYWlzZV9hbGVydCgKICAgICAgICAgICAgc2V2ZXJpdHk9c2V2ZXJpdHksIGNhdGVnb3J5PWNhdGVnb3J5LCBtZXNzYWdlPW1lc3NhZ2UsIGRlZHVwX2tleT1kZWR1cF9rZXkKICAgICAgICApCgogICAgYXN5bmMgZGVmIF9maW5pc2hfYmFyKAogICAgICAgIHNlbGYsIHN5bWJvbDogc3RyLCB0aW1lZnJhbWU6IFRpbWVmcmFtZSwgb3Blbl9tczogaW50LCB0b3RhbF9tczogaW50CiAgICApIC0+IE5vbmU6CiAgICAgICAgIiIiQWxlcnQgdGljaywgc25hcHNob3QgY2FkZW5jZSwgcmV0ZW50aW9uIGFuZCB0aGUgYmFyIGV2ZW50LiIiIgogICAgICAgIHNlbGYuX3N0YXRlLmFsZXJ0c19yYWlzZWQgKz0gYXdhaXQgc2VsZi5fbW9uaXRvcmluZy5hbGVydF90aWNrKCkKICAgICAgICBub3dfbXMgPSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcwogICAgICAgIGlmIG5vd19tcyAtIHNlbGYuX3N0YXRlLmxhc3Rfc25hcHNob3RfbXMgPj0gKAogICAgICAgICAgICBzZWxmLl9tb25pdG9yaW5nLnNldHRpbmdzLnNuYXBzaG90X2ludGVydmFsX21zCiAgICAgICAgKToKICAgICAgICAgICAgYXdhaXQgc2VsZi5fbW9uaXRvcmluZy5jYXB0dXJlX3NuYXBzaG90KCkKICAgICAgICAgICAgYXdhaXQgc2VsZi5fbW9uaXRvcmluZy5wcnVuZSgpCiAgICAgICAgICAgIHNlbGYuX3N0YXRlLmxhc3Rfc25hcHNob3RfbXMgPSBub3dfbXMKICAgICAgICAgICAgc2VsZi5fc3RhdGUuc25hcHNob3RzX3Rha2VuICs9IDEKICAgICAgICB0cmFjZSA9IHNlbGYuX2lkcy5kZXJpdmVfaWQoZiJsb29wLntzeW1ib2x9Lnt0aW1lZnJhbWUudmFsdWV9LntvcGVuX21zfSIpCiAgICAgICAgYXdhaXQgc2VsZi5fYnVzLnB1Ymxpc2goCiAgICAgICAgICAgIG1vbml0b3JpbmdfZXZlbnQoCiAgICAgICAgICAgICAgICBNb25pdG9yaW5nRXZlbnQuQkFSX1BST0NFU1NFRCwKICAgICAgICAgICAgICAgIG9jY3VycmVkX2F0PXNlbGYuX2Nsb2NrLm5vdygpLAogICAgICAgICAgICAgICAgc291cmNlPV9TT1VSQ0UsCiAgICAgICAgICAgICAgICB0cmFjZV9pZD10cmFjZSwKICAgICAgICAgICAgICAgIHBheWxvYWQ9ewogICAgICAgICAgICAgICAgICAgICJzeW1ib2wiOiBzeW1ib2wsCiAgICAgICAgICAgICAgICAgICAgInRpbWVmcmFtZSI6IHRpbWVmcmFtZS52YWx1ZSwKICAgICAgICAgICAgICAgICAgICAib3Blbl90aW1lIjogb3Blbl9tcywKICAgICAgICAgICAgICAgICAgICAidG90YWxfbXMiOiB0b3RhbF9tcywKICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICkKICAgICAgICApCgogICAgIyAtLS0gRmFpbHVyZXMgYW5kIHJlcG9ydGluZyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgYXN5bmMgZGVmIF9zdGFnZWRbVF0oCiAgICAgICAgc2VsZiwgc3RhZ2U6IHN0ciwgdGFnczogZGljdFtzdHIsIHN0cl0sIGF3YWl0YWJsZTogQXdhaXRhYmxlW1Jlc3VsdFtUXV0KICAgICkgLT4gUmVzdWx0W1RdOgogICAgICAgICIiIkF3YWl0IG9uZSBwaXBlbGluZSBzdGFnZSwgdGltaW5nIGl0IGFuZCBzdXJmYWNpbmcgZmFpbHVyZXMuIiIiCiAgICAgICAgc3RhZ2Vfc3RhcnQgPSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcwogICAgICAgIHJlc3VsdCA9IGF3YWl0IGF3YWl0YWJsZQogICAgICAgIGVsYXBzZWQgPSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcyAtIHN0YWdlX3N0YXJ0CiAgICAgICAgc2VsZi5fbW9uaXRvcmluZy5jb2xsZWN0b3IubWV0cmljKAogICAgICAgICAgICBmImxvb3Auc3RhZ2Uue3N0YWdlfS5tcyIsIGZsb2F0KGVsYXBzZWQpLCB0YWdzPXRhZ3MKICAgICAgICApCiAgICAgICAgaWYgbm90IHJlc3VsdC5vazoKICAgICAgICAgICAgYXNzZXJ0IHJlc3VsdC5lcnJvciBpcyBub3QgTm9uZSAgIyBSZXN1bHQgY29udHJhY3Q6IGVycm9yIHNldCBvbiBmYWlsdXJlCiAgICAgICAgICAgIHJhaXNlIHJlc3VsdC5lcnJvcgogICAgICAgIHJldHVybiByZXN1bHQKCiAgICBhc3luYyBkZWYgX29uX3N0YWdlX2ZhaWx1cmUoCiAgICAgICAgc2VsZiwgc3ltYm9sOiBzdHIsIHRpbWVmcmFtZTogVGltZWZyYW1lLCBlcnJvcjogQXBleEVycm9yCiAgICApIC0+IE5vbmU6CiAgICAgICAgIiIiUmVjb3JkLCBhbGVydCBhbmQgY29udGludWUgLSB0aGUgbG9vcCBuZXZlciBkaWVzIG9uIG9uZSBiYXIuIiIiCiAgICAgICAgc2VsZi5fbW9uaXRvcmluZy5jb2xsZWN0b3IuZXJyb3IoCiAgICAgICAgICAgIHRhZ3M9eyJzeW1ib2wiOiBzeW1ib2wsICJ0aW1lZnJhbWUiOiB0aW1lZnJhbWUudmFsdWV9CiAgICAgICAgKQogICAgICAgIGF3YWl0IHNlbGYuX21vbml0b3JpbmcuY29sbGVjdG9yLmZsdXNoKCkKICAgICAgICByYWlzZWQgPSBhd2FpdCBzZWxmLl9tb25pdG9yaW5nX2FsZXJ0KAogICAgICAgICAgICBzZXZlcml0eT1BbGVydFNldmVyaXR5LkhJR0gsCiAgICAgICAgICAgIGNhdGVnb3J5PSJzeXN0ZW0iLAogICAgICAgICAgICBtZXNzYWdlPWYibG9vcCBzdGFnZSBmYWlsZWQgZm9yIHtzeW1ib2x9IHt0aW1lZnJhbWUudmFsdWV9OiB7ZXJyb3IuY29kZX0iLAogICAgICAgICAgICBkZWR1cF9rZXk9ZiJsb29wLnN0YWdlX2ZhaWx1cmUue3N5bWJvbH0ue3RpbWVmcmFtZS52YWx1ZX0iLAogICAgICAgICkKICAgICAgICBzZWxmLl9zdGF0ZS5hbGVydHNfcmFpc2VkICs9IGludChyYWlzZWQpCiAgICAgICAgc2VsZi5fbG9nZ2VyLmZhaWx1cmUoCiAgICAgICAgICAgICJsb29wX2Jhcl9mYWlsZWQiLCBlcnJvciwgc3ltYm9sPXN5bWJvbCwgdGltZWZyYW1lPXRpbWVmcmFtZS52YWx1ZQogICAgICAgICkKCiAgICBhc3luYyBkZWYgX2Fubm91bmNlKHNlbGYsIGtpbmQ6IE1vbml0b3JpbmdFdmVudCkgLT4gTm9uZToKICAgICAgICBhd2FpdCBzZWxmLl9idXMucHVibGlzaCgKICAgICAgICAgICAgbW9uaXRvcmluZ19ldmVudCgKICAgICAgICAgICAgICAgIGtpbmQsCiAgICAgICAgICAgICAgICBvY2N1cnJlZF9hdD1zZWxmLl9jbG9jay5ub3coKSwKICAgICAgICAgICAgICAgIHNvdXJjZT1fU09VUkNFLAogICAgICAgICAgICAgICAgcGF5bG9hZD17CiAgICAgICAgICAgICAgICAgICAgInRyYWNrZWQiOiBsZW4oc2VsZi5fdHJhY2tlZCksCiAgICAgICAgICAgICAgICAgICAgImxpdmUiOiBzZWxmLl9saXZlLAogICAgICAgICAgICAgICAgICAgICJvcmNoZXN0cmF0ZSI6IHNlbGYuX29yY2hlc3RyYXRlLAogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgKQogICAgICAgICkKCiAgICBkZWYgX3N0YXRzKHNlbGYpIC0+IExvb3BTdGF0czoKICAgICAgICByZXR1cm4gTG9vcFN0YXRzKAogICAgICAgICAgICBiYXJzX3Byb2Nlc3NlZD1zZWxmLl9zdGF0ZS5iYXJzX3Byb2Nlc3NlZCwKICAgICAgICAgICAgc2lnbmFsc19maXJlZD1zZWxmLl9zdGF0ZS5zaWduYWxzX2ZpcmVkLAogICAgICAgICAgICBleGVjdXRpb25zX2F0dGVtcHRlZD1zZWxmLl9zdGF0ZS5leGVjdXRpb25zX2F0dGVtcHRlZCwKICAgICAgICAgICAgZXhlY3V0aW9uc19maWxsZWQ9c2VsZi5fc3RhdGUuZXhlY3V0aW9uc19maWxsZWQsCiAgICAgICAgICAgIGFsZXJ0c19yYWlzZWQ9c2VsZi5fc3RhdGUuYWxlcnRzX3JhaXNlZCwKICAgICAgICAgICAgam9ic19kcmFpbmVkPXNlbGYuX3N0YXRlLmpvYnNfZHJhaW5lZCwKICAgICAgICAgICAgcHJvbW90aW9uc19ldmFsdWF0ZWQ9c2VsZi5fc3RhdGUucHJvbW90aW9uc19ldmFsdWF0ZWQsCiAgICAgICAgICAgIHJvbGxiYWNrcz1zZWxmLl9zdGF0ZS5yb2xsYmFja3MsCiAgICAgICAgICAgIHNuYXBzaG90c190YWtlbj1zZWxmLl9zdGF0ZS5zbmFwc2hvdHNfdGFrZW4sCiAgICAgICAgICAgIHN0cmVhbV9yZWNvbm5lY3RzPXNlbGYuX3N0YXRlLnN0cmVhbV9yZWNvbm5lY3RzLAogICAgICAgICkK
+"""Live operational loop (Book I 10.12 end-to-end path; Book II ch. 26).
+
+The realtime spine: streamed bars close -> features -> assessment ->
+decision (research-injected) -> kill-switch gate -> execution ->
+portfolio fold -> research upkeep - every stage timed, heartbeaten,
+traced and alert-checked. The loop consumes ``market.bar.closed``
+events inline (the bus is deterministic and sequential by design:
+one bar is fully processed before the next message), so the whole
+pipeline stays strictly causal on confirmed bars only.
+
+Research upkeep per bar: shadow promotions are evaluated once enough
+forward bars accumulated, the post-promotion guard rolls a degrading
+artifact back automatically (Book V continuous monitoring), and -
+when enabled - one queued optimization job drains between bars.
+
+Runs bounded (``--seconds``) for validation or indefinitely with
+OS-signal-driven graceful shutdown - the first indefinite runtime
+surface in the platform.
+"""
+
+import asyncio
+from collections.abc import Awaitable
+from dataclasses import dataclass
+from typing import Final
+
+from apex.core.config import AppConfig
+from apex.core.contracts.interfaces import IEventBus
+from apex.core.enums import Timeframe
+from apex.core.events.event import Event
+from apex.core.exceptions import ApexError
+from apex.core.identity import IdProvider
+from apex.core.logging import StructuredLogger
+from apex.core.result import Result
+from apex.core.time.clock import Clock
+from apex.core.time.timestamp import Timestamp
+from apex.data.catchup import CatchUpService
+from apex.data.events import MarketEvent
+from apex.data.streaming import MarketStreamService
+from apex.decision.kernel import CentralDecisionKernel
+from apex.decision.plugin import decision_params_from_config
+from apex.decision.service import DecisionService
+from apex.decision.store import SqliteDecisionRepository
+from apex.execution.service import ExecutionService
+from apex.execution.store import SqliteExecutionRepository
+from apex.features.pipeline import FeatureComputationPipeline
+from apex.monitoring.events import MonitoringEvent, monitoring_event
+from apex.monitoring.records import AlertSeverity
+from apex.monitoring.service import MonitoringService
+from apex.probability.engine import ConfluenceProbabilityEngine
+from apex.probability.plugin import probability_params_from_config
+from apex.probability.service import ProbabilityService
+from apex.research.service import ResearchService
+
+_SOURCE: Final[str] = "apex.monitoring.loop"
+_STREAM_CHUNK_MS: Final[int] = 60_000
+_COMPONENT: Final[str] = "operations_loop"
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class LoopStats:
+    """Outcome of one operational-loop session."""
+
+    bars_processed: int
+    signals_fired: int
+    executions_attempted: int
+    executions_filled: int
+    alerts_raised: int
+    jobs_drained: int
+    promotions_evaluated: int
+    rollbacks: int
+    snapshots_taken: int
+    stream_reconnects: int
+
+
+@dataclass(slots=True)
+class _LoopState:
+    """Mutable counters for one loop session."""
+
+    bars_processed: int = 0
+    signals_fired: int = 0
+    executions_attempted: int = 0
+    executions_filled: int = 0
+    alerts_raised: int = 0
+    jobs_drained: int = 0
+    promotions_evaluated: int = 0
+    rollbacks: int = 0
+    snapshots_taken: int = 0
+    stream_reconnects: int = 0
+    last_snapshot_ms: int = 0
+
+
+class OperationsLoopService:
+    """Drives the live pipeline off closed-bar events."""
+
+    def __init__(
+        self,
+        *,
+        config: AppConfig,
+        catchup: CatchUpService,
+        stream: MarketStreamService,
+        features: FeatureComputationPipeline,
+        probability: ProbabilityService,
+        decision: DecisionService,
+        decision_repository: SqliteDecisionRepository,
+        execution: ExecutionService,
+        execution_repository: SqliteExecutionRepository,
+        research: ResearchService,
+        monitoring: MonitoringService,
+        portfolio_id: str,
+        bus: IEventBus,
+        clock: Clock,
+        id_provider: IdProvider,
+        logger: StructuredLogger,
+    ) -> None:
+        self._config = config
+        self._catchup = catchup
+        self._stream = stream
+        self._features = features
+        self._probability = probability
+        self._decision = decision
+        self._decisions = decision_repository
+        self._execution = execution
+        self._executions = execution_repository
+        self._research = research
+        self._monitoring = monitoring
+        self._portfolio_id = portfolio_id
+        self._bus = bus
+        self._clock = clock
+        self._ids = id_provider
+        self._logger = logger
+        self._subscribed = False
+        self._stop = asyncio.Event()
+        self._state = _LoopState()
+        self._live = False
+        self._orchestrate = False
+        self._tracked: frozenset[tuple[str, str]] = frozenset()
+
+    # --- Session -----------------------------------------------------------------
+
+    async def run(
+        self,
+        *,
+        seconds: int,
+        live: bool = False,
+        orchestrate: bool = False,
+        symbols: tuple[str, ...] = (),
+        timeframes: tuple[Timeframe, ...] = (),
+    ) -> LoopStats:
+        """Catch up, then stream and process until stop or deadline.
+
+        ``seconds == 0`` runs indefinitely until SIGINT/SIGTERM.
+        """
+        self._live = live
+        self._orchestrate = orchestrate
+        self._tracked = self._resolve_tracked(symbols, timeframes)
+        self._state = _LoopState(last_snapshot_ms=self._clock.now().epoch_ms)
+        self._stop.clear()
+        self._subscribe_once()
+        await self._announce(MonitoringEvent.LOOP_STARTED)
+        await self._catchup.run_once()
+        try:
+            await self._stream_until_done(seconds)
+        finally:
+            await self._monitoring.collector.flush()
+            await self._announce(MonitoringEvent.LOOP_STOPPED)
+        return self._stats()
+
+    def request_stop(self) -> None:
+        """Ask the loop to finish after the current stream chunk."""
+        self._stop.set()
+
+    def _resolve_tracked(
+        self, symbols: tuple[str, ...], timeframes: tuple[Timeframe, ...]
+    ) -> frozenset[tuple[str, str]]:
+        chosen_symbols = symbols or self._config.market.symbols
+        chosen_timeframes = timeframes or self._config.market.timeframes
+        return frozenset(
+            (symbol, timeframe.value)
+            for symbol in chosen_symbols
+            for timeframe in chosen_timeframes
+        )
+
+    def _subscribe_once(self) -> None:
+        if self._subscribed:
+            return
+        self._bus.subscribe(MarketEvent.BAR_CLOSED.value, self._on_bar_closed)
+        self._subscribed = True
+
+    async def _stream_until_done(self, seconds: int) -> None:
+        deadline_ms = (
+            self._clock.now().epoch_ms + seconds * 1_000 if seconds > 0 else None
+        )
+        while not self._stop.is_set():
+            remaining = (
+                deadline_ms - self._clock.now().epoch_ms
+                if deadline_ms is not None
+                else _STREAM_CHUNK_MS
+            )
+            if remaining <= 0:
+                break
+            stats = await self._stream.run(
+                duration_ms=min(remaining, _STREAM_CHUNK_MS)
+            )
+            self._state.stream_reconnects += stats.reconnects
+
+    # --- Bar processing ------------------------------------------------------------
+
+    async def _on_bar_closed(self, event: Event) -> None:
+        """Bus handler: run the pipeline for one tracked closed bar."""
+        payload = event.payload
+        symbol = str(payload.get("symbol", ""))
+        timeframe_raw = str(payload.get("timeframe", ""))
+        open_time = payload.get("open_time")
+        if (symbol, timeframe_raw) not in self._tracked:
+            return
+        if not isinstance(open_time, int):
+            return
+        timeframe = Timeframe(timeframe_raw)
+        try:
+            await self._process_bar(symbol, timeframe, open_time)
+        except ApexError as error:
+            await self._on_stage_failure(symbol, timeframe, error)
+
+    async def _process_bar(
+        self, symbol: str, timeframe: Timeframe, open_ms: int
+    ) -> None:
+        started_ms = self._clock.now().epoch_ms
+        end = Timestamp(epoch_ms=open_ms + timeframe.duration_ms)
+        start = end.add_ms(-self._config.market.history_bars * timeframe.duration_ms)
+        tags = {"symbol": symbol, "timeframe": timeframe.value}
+        collector = self._monitoring.collector
+        await self._staged(
+            "features", tags,
+            self._features.compute(symbol, timeframe, start=start, end=end),
+        )
+        if await self._monitoring.kill_switch.allows_processing():
+            await self._assess_and_decide(symbol, timeframe, start, end, tags)
+        else:
+            collector.metric("loop.skipped_paused", 1.0, tags=tags)
+        await self._research_upkeep(symbol, timeframe)
+        collector.operation(tags=tags)
+        await collector.beat(_COMPONENT)
+        total_ms = self._clock.now().epoch_ms - started_ms
+        collector.metric("loop.bar.total_ms", float(total_ms), tags=tags)
+        self._state.bars_processed += 1
+        await self._finish_bar(symbol, timeframe, open_ms, total_ms)
+
+    async def _assess_and_decide(
+        self,
+        symbol: str,
+        timeframe: Timeframe,
+        start: Timestamp,
+        end: Timestamp,
+        tags: dict[str, str],
+    ) -> None:
+        learning = await self._research.learning_state(symbol, timeframe)
+        engine_override = None
+        if learning is not None:
+            engine_override = ConfluenceProbabilityEngine(
+                params=probability_params_from_config(self._config.market.probability),
+                clock=self._clock,
+                learning=learning,
+            )
+        await self._staged(
+            "probability", tags,
+            self._probability.compute(
+                symbol, timeframe, start=start, end=end,
+                engine_override=engine_override,
+            ),
+        )
+        overrides = await self._research.active_overrides(symbol, timeframe)
+        kernel_override = None
+        if overrides or learning is not None:
+            base = decision_params_from_config(self._config.market.decision)
+            params = base.with_overrides(overrides) if overrides else base
+            kernel_override = CentralDecisionKernel(
+                params=params, clock=self._clock, learning=learning
+            )
+        await self._staged(
+            "decision", tags,
+            self._decision.compute(
+                symbol, timeframe, start=start, end=end,
+                kernel_override=kernel_override,
+            ),
+        )
+        await self._maybe_execute(symbol, timeframe, start, end, tags)
+
+    async def _maybe_execute(
+        self,
+        symbol: str,
+        timeframe: Timeframe,
+        start: Timestamp,
+        end: Timestamp,
+        tags: dict[str, str],
+    ) -> None:
+        """Execute the newest unexecuted fired signal, if entries allowed."""
+        signal_bar = await self._latest_unexecuted_signal(
+            symbol, timeframe, start, end
+        )
+        if signal_bar is None:
+            return
+        self._state.signals_fired += 1
+        if not await self._monitoring.kill_switch.allows_new_entries():
+            self._monitoring.collector.metric("loop.entries_blocked", 1.0, tags=tags)
+            return
+        self._state.executions_attempted += 1
+        stage_start = self._clock.now().epoch_ms
+        outcome = await self._execution.execute_latest_signal(
+            symbol, timeframe, start=start, end=end, live=self._live
+        )
+        elapsed = self._clock.now().epoch_ms - stage_start
+        self._monitoring.collector.metric(
+            "loop.stage.execution.ms", float(elapsed), tags=tags
+        )
+        if outcome.ok and outcome.unwrap().position_opened:
+            self._state.executions_filled += 1
+
+    async def _latest_unexecuted_signal(
+        self, symbol: str, timeframe: Timeframe, start: Timestamp, end: Timestamp
+    ) -> int | None:
+        """The newest fired signal bar without an execution record."""
+        decisions = await self._decisions.get_range(
+            "toobit", symbol, timeframe, start=start, end=end
+        )
+        fired = [record for record in decisions if record.action == "signal"]
+        if not fired:
+            return None
+        latest = fired[-1]
+        executions = await self._executions.get_executions(self._portfolio_id)
+        for record in executions:
+            if (
+                record.symbol == symbol
+                and record.timeframe is timeframe
+                and record.signal_bar_time.epoch_ms == latest.bar_open_time.epoch_ms
+            ):
+                return None
+        return latest.bar_open_time.epoch_ms
+
+    async def _research_upkeep(self, symbol: str, timeframe: Timeframe) -> None:
+        """Shadow evaluation, the promotion guard and queue draining."""
+        evaluated = await self._research.evaluate_promotions(symbol, timeframe)
+        self._state.promotions_evaluated += evaluated
+        settings = self._monitoring.settings
+        rolled_back = await self._research.apply_promotion_guard(
+            symbol,
+            timeframe,
+            min_trades=settings.promotion_guard_trades,
+            floor_r=settings.promotion_guard_floor_r,
+        )
+        if rolled_back is not None:
+            self._state.rollbacks += 1
+            await self._alert_rollback(symbol, timeframe, rolled_back)
+        if self._orchestrate and await self._monitoring.kill_switch.allows_processing():
+            summary = await self._research.orchestrate(
+                limit=1, default_window_bars=self._config.market.history_bars
+            )
+            if summary.ok:
+                self._state.jobs_drained += summary.unwrap().drained
+
+    async def _alert_rollback(
+        self, symbol: str, timeframe: Timeframe, artifact: str
+    ) -> None:
+        await self._monitoring.collector.flush()
+        raised = await self._monitoring_alert(
+            severity=AlertSeverity.EMERGENCY,
+            category="research",
+            message=(
+                f"promotion guard rolled back {symbol} {timeframe.value} "
+                f"to {artifact}"
+            ),
+            dedup_key=f"research.promotion_guard.{symbol}.{timeframe.value}",
+        )
+        self._state.alerts_raised += int(raised)
+
+    async def _monitoring_alert(
+        self,
+        *,
+        severity: AlertSeverity,
+        category: str,
+        message: str,
+        dedup_key: str,
+    ) -> bool:
+        return await self._monitoring.raise_alert(
+            severity=severity, category=category, message=message, dedup_key=dedup_key
+        )
+
+    async def _finish_bar(
+        self, symbol: str, timeframe: Timeframe, open_ms: int, total_ms: int
+    ) -> None:
+        """Alert tick, snapshot cadence, retention and the bar event."""
+        self._state.alerts_raised += await self._monitoring.alert_tick()
+        now_ms = self._clock.now().epoch_ms
+        if now_ms - self._state.last_snapshot_ms >= (
+            self._monitoring.settings.snapshot_interval_ms
+        ):
+            await self._monitoring.capture_snapshot()
+            await self._monitoring.prune()
+            self._state.last_snapshot_ms = now_ms
+            self._state.snapshots_taken += 1
+        trace = self._ids.derive_id(f"loop.{symbol}.{timeframe.value}.{open_ms}")
+        await self._bus.publish(
+            monitoring_event(
+                MonitoringEvent.BAR_PROCESSED,
+                occurred_at=self._clock.now(),
+                source=_SOURCE,
+                trace_id=trace,
+                payload={
+                    "symbol": symbol,
+                    "timeframe": timeframe.value,
+                    "open_time": open_ms,
+                    "total_ms": total_ms,
+                },
+            )
+        )
+
+    # --- Failures and reporting -------------------------------------------------------
+
+    async def _staged[T](
+        self, stage: str, tags: dict[str, str], awaitable: Awaitable[Result[T]]
+    ) -> Result[T]:
+        """Await one pipeline stage, timing it and surfacing failures."""
+        stage_start = self._clock.now().epoch_ms
+        result = await awaitable
+        elapsed = self._clock.now().epoch_ms - stage_start
+        self._monitoring.collector.metric(
+            f"loop.stage.{stage}.ms", float(elapsed), tags=tags
+        )
+        if not result.ok:
+            assert result.error is not None  # Result contract: error set on failure
+            raise result.error
+        return result
+
+    async def _on_stage_failure(
+        self, symbol: str, timeframe: Timeframe, error: ApexError
+    ) -> None:
+        """Record, alert and continue - the loop never dies on one bar."""
+        self._monitoring.collector.error(
+            tags={"symbol": symbol, "timeframe": timeframe.value}
+        )
+        await self._monitoring.collector.flush()
+        raised = await self._monitoring_alert(
+            severity=AlertSeverity.HIGH,
+            category="system",
+            message=f"loop stage failed for {symbol} {timeframe.value}: {error.code}",
+            dedup_key=f"loop.stage_failure.{symbol}.{timeframe.value}",
+        )
+        self._state.alerts_raised += int(raised)
+        self._logger.failure(
+            "loop_bar_failed", error, symbol=symbol, timeframe=timeframe.value
+        )
+
+    async def _announce(self, kind: MonitoringEvent) -> None:
+        await self._bus.publish(
+            monitoring_event(
+                kind,
+                occurred_at=self._clock.now(),
+                source=_SOURCE,
+                payload={
+                    "tracked": len(self._tracked),
+                    "live": self._live,
+                    "orchestrate": self._orchestrate,
+                },
+            )
+        )
+
+    def _stats(self) -> LoopStats:
+        return LoopStats(
+            bars_processed=self._state.bars_processed,
+            signals_fired=self._state.signals_fired,
+            executions_attempted=self._state.executions_attempted,
+            executions_filled=self._state.executions_filled,
+            alerts_raised=self._state.alerts_raised,
+            jobs_drained=self._state.jobs_drained,
+            promotions_evaluated=self._state.promotions_evaluated,
+            rollbacks=self._state.rollbacks,
+            snapshots_taken=self._state.snapshots_taken,
+            stream_reconnects=self._state.stream_reconnects,
+        )
