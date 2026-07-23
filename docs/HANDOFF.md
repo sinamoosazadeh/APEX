@@ -1,12 +1,13 @@
-# APEX Continuation Handoff (Phases 12-15)
+# APEX Continuation Handoff
 
-You are taking over the APEX project mid-build. Previous agents built
-phases 0-11 across earlier threads; you continue from the next pending
-phase exactly as if you were them. Do not restart, re-plan, or
-re-derive anything already built. This file is the complete bootstrap:
+**PROJECT COMPLETE at v1.0.0** — all 16 phases (0-15) delivered and
+the Book II 29.26 acceptance passed (docs/ACCEPTANCE.md). This file
+remains the bootstrap for any future session working on the
+documented backlog (see PHASES.md "Project complete"): read it
 together with `docs/PHASES.md` and `manifest.yaml` (both authoritative
-at the current head of `main`), it carries everything a fresh thread
-needs.
+at the current head of `main`), follow the standing rules below, and
+treat backlog items exactly like phases (spec extraction -> build ->
+gates -> live validation -> docs -> approved push -> CI green).
 
 ## The project
 
@@ -183,8 +184,22 @@ then targeted line ranges) - never whole books.
 
 ## State at handoff (update this block at every phase close)
 
-- Version 0.16.0; phases 0-14 complete; Phase 15 (Production
-  Validation) is the LAST phase.
+- **Version 1.0.0; ALL 16 phases complete; 29.26 acceptance PASSED.**
+- 574 tests passing; ruff + mypy strict clean (299 files); 12 plugins /
+  13 modules boot healthy; secure preflight PASS (config sealed).
+- Phase 15 delivered: the endTime backward-pagination fix (Toobit
+  ignores startTime - the fake in tests/unit/data/test_toobit.py now
+  speaks the real dialect), deep-history acceptance runs with honest
+  Book V rejections, the end-to-end paper trade (FVG Continuation
+  Short, 4h, opened and closed through the portfolio), and
+  docs/ACCEPTANCE.md.
+- Deep-history note for future sessions: the venue serves ~3,500 1h
+  bars (~146 days) and >=2,000 4h bars (~333 days); multi-year
+  acceptance runs need the multi-exchange backfill backlog item.
+
+## Previous state (Phase 14 close)
+
+- Version 0.16.0; phases 0-14 complete.
 - 574 tests passing; ruff + mypy strict clean (299 files); 12 plugins /
   13 modules boot healthy.
 - Deployment layer live: signed deterministic release packaging
