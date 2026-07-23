@@ -153,3 +153,9 @@ class TelegramError(ApexError):
     """Telegram console transport or command failure."""
 
     DEFAULT_CODE = "TGM-000"
+
+
+class DeploymentError(ApexError):
+    """Packaging, backup/restore or scheduling failure."""
+
+    DEFAULT_CODE = "DEP-000"
