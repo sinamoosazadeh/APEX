@@ -1,1 +1,149 @@
-IiIiQ2FsbGJhY2sgcm91dGluZywgc2Vzc2lvbnMgYW5kIHRoZSBjb25maXJtYXRpb24gZ2F0ZSAoQm9vayBJVikuCgpWYWxpZGF0aW9uIG9yZGVyIHBlciBQYXJ0IDEyOiBQZXJtaXNzaW9uIC0+IFN0YXRlIC0+IENhbGxiYWNrIC0+CkFwcGxpY2F0aW9uLiBDYWxsYmFjayBkYXRhIHVzZXMgdGhlIGRvdHRlZCBgYG1vZHVsZS5hY3Rpb24udGFyZ2V0YGAKY29udmVudGlvbiAoUGFydCAyKSAtIGZyZWUtZm9ybSBjYWxsYmFjayBzdHJpbmdzIGRvIG5vdCBleGlzdC4gRXZlcnkKdXNlciBob2xkcyBhbiBpbmRlcGVuZGVudCBzZXNzaW9uICgxMC1taW51dGUgdGltZW91dCwgUGFydCA1KTsKZGFuZ2Vyb3VzIGFjdGlvbnMgYXJtIGEgbm9uY2UtZ3VhcmRlZCBwZW5kaW5nIGNvbmZpcm1hdGlvbiB0aGF0IGEKc2Vjb25kIGNsaWNrIG11c3QgbWF0Y2ggd2l0aGluIGl0cyBUVEwgKHByaW5jaXBsZSAzOiBubyBkYW5nZXJvdXMKYWN0aW9uIHdpdGhvdXQgY29uZmlybWF0aW9uKS4gVW5rbm93biBjYWxsYmFja3MgYXJlIGxvZ2dlZCBhbmQKaWdub3JlZCAtIG5ldmVyIGEgY3Jhc2gsIG5ldmVyIGEgc2lsZW50IGFjY2VwdGFuY2UuCiIiIgoKaW1wb3J0IHV1aWQKZnJvbSBkYXRhY2xhc3NlcyBpbXBvcnQgZGF0YWNsYXNzLCBmaWVsZApmcm9tIHR5cGluZyBpbXBvcnQgRmluYWwKCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IENsb2NrCmZyb20gYXBleC50ZWxlZ3JhbS5jcmVkZW50aWFscyBpbXBvcnQgUk9MRV9BRE1JTgoKIyBBY3Rpb25zIGEgdmlld2VyIG1heSByZWFjaDsgZXZlcnl0aGluZyBlbHNlIHJlcXVpcmVzIGFkbWluLgpfVklFV0VSX1BSRUZJWEVTOiBGaW5hbFt0dXBsZVtzdHIsIC4uLl1dID0gKAogICAgIm1lbnUubWFpbiIsCiAgICAibWVudS5zdGF0dXMiLAogICAgIm1lbnUucG9ydGZvbGlvIiwKICAgICJtZW51LnBvc2l0aW9ucyIsCiAgICAibWVudS5yZXBvcnRzIiwKICAgICJtZW51LmhlYWx0aCIsCiAgICAibWVudS5oZWxwIiwKICAgICJwb3NpdGlvbnMucGFnZS4iLAogICAgIm5vb3AiLAopCgojIEFjdGlvbnMgdGhhdCByZXF1aXJlIHRoZSB0d28tc3RlcCBjb25maXJtYXRpb24gZ2F0ZS4KX0RBTkdFUk9VU19QUkVGSVhFUzogRmluYWxbdHVwbGVbc3RyLCAuLi5dXSA9ICgKICAgICJlbWVyZ2VuY3kucGF1c2UiLAogICAgImVtZXJnZW5jeS5yZXN1bWUiLAogICAgImVtZXJnZW5jeS5kaXNhYmxlX2VudHJpZXMiLAogICAgImVtZXJnZW5jeS5zYWZlX21vZGUiLAogICAgImVtZXJnZW5jeS5jYW5jZWxfb3JkZXJzIiwKICAgICJwcm9tb3Rpb24uYXBwcm92ZS4iLAogICAgInByb21vdGlvbi5yZWplY3QuIiwKICAgICJyb2xsYmFjay4iLAopCgpERUNJU0lPTl9ERU5JRUQ6IEZpbmFsW3N0cl0gPSAiZGVuaWVkIgpERUNJU0lPTl9DT05GSVJNOiBGaW5hbFtzdHJdID0gImNvbmZpcm0iCkRFQ0lTSU9OX0VYRUNVVEU6IEZpbmFsW3N0cl0gPSAiZXhlY3V0ZSIKREVDSVNJT05fQ0FOQ0VMTEVEOiBGaW5hbFtzdHJdID0gImNhbmNlbGxlZCIKREVDSVNJT05fSUdOT1JFRDogRmluYWxbc3RyXSA9ICJpZ25vcmVkIgoKCkBkYXRhY2xhc3Moc2xvdHM9VHJ1ZSkKY2xhc3MgU2Vzc2lvbjoKICAgICIiIk9uZSBjaGF0J3MgY29uc29sZSBzdGF0ZS4iIiIKCiAgICBjaGF0X2lkOiBpbnQKICAgIHJvbGU6IHN0cgogICAgdXBkYXRlZF9tczogaW50CiAgICBwZW5kaW5nX2FjdGlvbjogc3RyIHwgTm9uZSA9IE5vbmUKICAgIHBlbmRpbmdfbm9uY2U6IHN0ciB8IE5vbmUgPSBOb25lCiAgICBwZW5kaW5nX2V4cGlyZXNfbXM6IGludCA9IDAKICAgIG5hdmlnYXRpb246IGxpc3Rbc3RyXSA9IGZpZWxkKGRlZmF1bHRfZmFjdG9yeT1saXN0KQoKCkBkYXRhY2xhc3MoZnJvemVuPVRydWUsIHNsb3RzPVRydWUsIGt3X29ubHk9VHJ1ZSkKY2xhc3MgUm91dGVEZWNpc2lvbjoKICAgICIiIlRoZSByb3V0ZXIncyB2ZXJkaWN0IGZvciBvbmUgY2FsbGJhY2suIiIiCgogICAga2luZDogc3RyCiAgICBhY3Rpb246IHN0ciA9ICIiCiAgICBub25jZTogc3RyID0gIiIKCgpjbGFzcyBTZXNzaW9uTWFuYWdlcjoKICAgICIiIlBlci1jaGF0IHNlc3Npb25zIHdpdGggdGhlIGNvbmZpZ3VyZWQgaW5hY3Rpdml0eSB0aW1lb3V0LiIiIgoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCAqLCBjbG9jazogQ2xvY2ssIHRpbWVvdXRfbXM6IGludCkgLT4gTm9uZToKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCiAgICAgICAgc2VsZi5fdGltZW91dF9tcyA9IHRpbWVvdXRfbXMKICAgICAgICBzZWxmLl9zZXNzaW9uczogZGljdFtpbnQsIFNlc3Npb25dID0ge30KCiAgICBkZWYgc2Vzc2lvbihzZWxmLCBjaGF0X2lkOiBpbnQsIHJvbGU6IHN0cikgLT4gU2Vzc2lvbjoKICAgICAgICAiIiJUaGUgY2hhdCdzIHNlc3Npb247IGV4cGlyZWQgc2Vzc2lvbnMgcmVzZXQgY2xlYW5seS4iIiIKICAgICAgICBub3dfbXMgPSBzZWxmLl9jbG9jay5ub3coKS5lcG9jaF9tcwogICAgICAgIGV4aXN0aW5nID0gc2VsZi5fc2Vzc2lvbnMuZ2V0KGNoYXRfaWQpCiAgICAgICAgaWYgZXhpc3RpbmcgaXMgbm90IE5vbmUgYW5kIG5vd19tcyAtIGV4aXN0aW5nLnVwZGF0ZWRfbXMgPD0gc2VsZi5fdGltZW91dF9tczoKICAgICAgICAgICAgZXhpc3RpbmcudXBkYXRlZF9tcyA9IG5vd19tcwogICAgICAgICAgICBleGlzdGluZy5yb2xlID0gcm9sZQogICAgICAgICAgICByZXR1cm4gZXhpc3RpbmcKICAgICAgICBmcmVzaCA9IFNlc3Npb24oY2hhdF9pZD1jaGF0X2lkLCByb2xlPXJvbGUsIHVwZGF0ZWRfbXM9bm93X21zKQogICAgICAgIHNlbGYuX3Nlc3Npb25zW2NoYXRfaWRdID0gZnJlc2gKICAgICAgICByZXR1cm4gZnJlc2gKCgpjbGFzcyBDYWxsYmFja1JvdXRlcjoKICAgICIiIlBlcm1pc3Npb24gY2hlY2tzIGFuZCB0aGUgY29uZmlybWF0aW9uIHN0YXRlIG1hY2hpbmUuIiIiCgogICAgZGVmIF9faW5pdF9fKHNlbGYsICosIGNsb2NrOiBDbG9jaywgY29uZmlybV90dGxfbXM6IGludCkgLT4gTm9uZToKICAgICAgICBzZWxmLl9jbG9jayA9IGNsb2NrCiAgICAgICAgc2VsZi5fY29uZmlybV90dGxfbXMgPSBjb25maXJtX3R0bF9tcwoKICAgIEBzdGF0aWNtZXRob2QKICAgIGRlZiBwZXJtaXR0ZWQocm9sZTogc3RyLCBhY3Rpb246IHN0cikgLT4gYm9vbDoKICAgICAgICAiIiJXaGV0aGVyIHRoZSByb2xlIG1heSBpbnZva2UgdGhlIGFjdGlvbiAoUGVybWlzc2lvbiBzdGFnZSkuIiIiCiAgICAgICAgaWYgcm9sZSA9PSBST0xFX0FETUlOOgogICAgICAgICAgICByZXR1cm4gVHJ1ZQogICAgICAgIHJldHVybiBhbnkoYWN0aW9uLnN0YXJ0c3dpdGgocHJlZml4KSBmb3IgcHJlZml4IGluIF9WSUVXRVJfUFJFRklYRVMpCgogICAgQHN0YXRpY21ldGhvZAogICAgZGVmIGRhbmdlcm91cyhhY3Rpb246IHN0cikgLT4gYm9vbDoKICAgICAgICAiIiJXaGV0aGVyIHRoZSBhY3Rpb24gcmVxdWlyZXMgZG91YmxlIGNvbmZpcm1hdGlvbi4iIiIKICAgICAgICByZXR1cm4gYW55KGFjdGlvbi5zdGFydHN3aXRoKHByZWZpeCkgZm9yIHByZWZpeCBpbiBfREFOR0VST1VTX1BSRUZJWEVTKQoKICAgIGRlZiByb3V0ZShzZWxmLCBzZXNzaW9uOiBTZXNzaW9uLCBhY3Rpb246IHN0cikgLT4gUm91dGVEZWNpc2lvbjoKICAgICAgICAiIiJWYWxpZGF0ZSBvbmUgY2FsbGJhY2s6IHBlcm1pc3Npb24sIHN0YXRlLCB0aGVuIGRpc3BhdGNoLiIiIgogICAgICAgIGlmIG5vdCBzZWxmLnBlcm1pdHRlZChzZXNzaW9uLnJvbGUsIGFjdGlvbik6CiAgICAgICAgICAgIHJldHVybiBSb3V0ZURlY2lzaW9uKGtpbmQ9REVDSVNJT05fREVOSUVEKQogICAgICAgIG5vd19tcyA9IHNlbGYuX2Nsb2NrLm5vdygpLmVwb2NoX21zCiAgICAgICAgaWYgYWN0aW9uLnN0YXJ0c3dpdGgoImNvbmZpcm0uIik6CiAgICAgICAgICAgIHJldHVybiBzZWxmLl9yZXNvbHZlX2NvbmZpcm1hdGlvbihzZXNzaW9uLCBhY3Rpb24sIG5vd19tcykKICAgICAgICBpZiBhY3Rpb24uc3RhcnRzd2l0aCgiY2FuY2VsLiIpOgogICAgICAgICAgICBzZXNzaW9uLnBlbmRpbmdfYWN0aW9uID0gTm9uZQogICAgICAgICAgICBzZXNzaW9uLnBlbmRpbmdfbm9uY2UgPSBOb25lCiAgICAgICAgICAgIHJldHVybiBSb3V0ZURlY2lzaW9uKGtpbmQ9REVDSVNJT05fQ0FOQ0VMTEVEKQogICAgICAgIGlmIHNlbGYuZGFuZ2Vyb3VzKGFjdGlvbik6CiAgICAgICAgICAgIG5vbmNlID0gdXVpZC51dWlkNCgpLmhleFs6MTJdCiAgICAgICAgICAgIHNlc3Npb24ucGVuZGluZ19hY3Rpb24gPSBhY3Rpb24KICAgICAgICAgICAgc2Vzc2lvbi5wZW5kaW5nX25vbmNlID0gbm9uY2UKICAgICAgICAgICAgc2Vzc2lvbi5wZW5kaW5nX2V4cGlyZXNfbXMgPSBub3dfbXMgKyBzZWxmLl9jb25maXJtX3R0bF9tcwogICAgICAgICAgICByZXR1cm4gUm91dGVEZWNpc2lvbihraW5kPURFQ0lTSU9OX0NPTkZJUk0sIGFjdGlvbj1hY3Rpb24sIG5vbmNlPW5vbmNlKQogICAgICAgIHJldHVybiBSb3V0ZURlY2lzaW9uKGtpbmQ9REVDSVNJT05fRVhFQ1VURSwgYWN0aW9uPWFjdGlvbikKCiAgICBkZWYgX3Jlc29sdmVfY29uZmlybWF0aW9uKAogICAgICAgIHNlbGYsIHNlc3Npb246IFNlc3Npb24sIGFjdGlvbjogc3RyLCBub3dfbXM6IGludAogICAgKSAtPiBSb3V0ZURlY2lzaW9uOgogICAgICAgICIiIlRoZSBTdGF0ZSBzdGFnZTogdGhlIG5vbmNlIG11c3QgbWF0Y2ggYW5kIGJlIGZyZXNoLiIiIgogICAgICAgIG5vbmNlID0gYWN0aW9uLnJlbW92ZXByZWZpeCgiY29uZmlybS4iKQogICAgICAgIGlmICgKICAgICAgICAgICAgc2Vzc2lvbi5wZW5kaW5nX2FjdGlvbiBpcyBOb25lCiAgICAgICAgICAgIG9yIHNlc3Npb24ucGVuZGluZ19ub25jZSAhPSBub25jZQogICAgICAgICAgICBvciBub3dfbXMgPiBzZXNzaW9uLnBlbmRpbmdfZXhwaXJlc19tcwogICAgICAgICk6CiAgICAgICAgICAgIHNlc3Npb24ucGVuZGluZ19hY3Rpb24gPSBOb25lCiAgICAgICAgICAgIHNlc3Npb24ucGVuZGluZ19ub25jZSA9IE5vbmUKICAgICAgICAgICAgcmV0dXJuIFJvdXRlRGVjaXNpb24oa2luZD1ERUNJU0lPTl9JR05PUkVEKQogICAgICAgIGNvbmZpcm1lZCA9IHNlc3Npb24ucGVuZGluZ19hY3Rpb24KICAgICAgICBzZXNzaW9uLnBlbmRpbmdfYWN0aW9uID0gTm9uZQogICAgICAgIHNlc3Npb24ucGVuZGluZ19ub25jZSA9IE5vbmUKICAgICAgICByZXR1cm4gUm91dGVEZWNpc2lvbihraW5kPURFQ0lTSU9OX0VYRUNVVEUsIGFjdGlvbj1jb25maXJtZWQpCg==
+"""Callback routing, sessions and the confirmation gate (Book IV).
+
+Validation order per Part 12: Permission -> State -> Callback ->
+Application. Callback data uses the dotted ``module.action.target``
+convention (Part 2) - free-form callback strings do not exist. Every
+user holds an independent session (10-minute timeout, Part 5);
+dangerous actions arm a nonce-guarded pending confirmation that a
+second click must match within its TTL (principle 3: no dangerous
+action without confirmation). Unknown callbacks are logged and
+ignored - never a crash, never a silent acceptance.
+"""
+
+import uuid
+from dataclasses import dataclass, field
+from typing import Final
+
+from apex.core.time.clock import Clock
+from apex.telegram.credentials import ROLE_ADMIN
+
+# Actions a viewer may reach; everything else requires admin.
+_VIEWER_PREFIXES: Final[tuple[str, ...]] = (
+    "menu.main",
+    "menu.status",
+    "menu.portfolio",
+    "menu.positions",
+    "menu.reports",
+    "menu.health",
+    "menu.help",
+    "positions.page.",
+    "noop",
+)
+
+# Actions that require the two-step confirmation gate.
+_DANGEROUS_PREFIXES: Final[tuple[str, ...]] = (
+    "emergency.pause",
+    "emergency.resume",
+    "emergency.disable_entries",
+    "emergency.safe_mode",
+    "emergency.cancel_orders",
+    "promotion.approve.",
+    "promotion.reject.",
+    "rollback.",
+)
+
+DECISION_DENIED: Final[str] = "denied"
+DECISION_CONFIRM: Final[str] = "confirm"
+DECISION_EXECUTE: Final[str] = "execute"
+DECISION_CANCELLED: Final[str] = "cancelled"
+DECISION_IGNORED: Final[str] = "ignored"
+
+
+@dataclass(slots=True)
+class Session:
+    """One chat's console state."""
+
+    chat_id: int
+    role: str
+    updated_ms: int
+    pending_action: str | None = None
+    pending_nonce: str | None = None
+    pending_expires_ms: int = 0
+    navigation: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class RouteDecision:
+    """The router's verdict for one callback."""
+
+    kind: str
+    action: str = ""
+    nonce: str = ""
+
+
+class SessionManager:
+    """Per-chat sessions with the configured inactivity timeout."""
+
+    def __init__(self, *, clock: Clock, timeout_ms: int) -> None:
+        self._clock = clock
+        self._timeout_ms = timeout_ms
+        self._sessions: dict[int, Session] = {}
+
+    def session(self, chat_id: int, role: str) -> Session:
+        """The chat's session; expired sessions reset cleanly."""
+        now_ms = self._clock.now().epoch_ms
+        existing = self._sessions.get(chat_id)
+        if existing is not None and now_ms - existing.updated_ms <= self._timeout_ms:
+            existing.updated_ms = now_ms
+            existing.role = role
+            return existing
+        fresh = Session(chat_id=chat_id, role=role, updated_ms=now_ms)
+        self._sessions[chat_id] = fresh
+        return fresh
+
+
+class CallbackRouter:
+    """Permission checks and the confirmation state machine."""
+
+    def __init__(self, *, clock: Clock, confirm_ttl_ms: int) -> None:
+        self._clock = clock
+        self._confirm_ttl_ms = confirm_ttl_ms
+
+    @staticmethod
+    def permitted(role: str, action: str) -> bool:
+        """Whether the role may invoke the action (Permission stage)."""
+        if role == ROLE_ADMIN:
+            return True
+        return any(action.startswith(prefix) for prefix in _VIEWER_PREFIXES)
+
+    @staticmethod
+    def dangerous(action: str) -> bool:
+        """Whether the action requires double confirmation."""
+        return any(action.startswith(prefix) for prefix in _DANGEROUS_PREFIXES)
+
+    def route(self, session: Session, action: str) -> RouteDecision:
+        """Validate one callback: permission, state, then dispatch."""
+        if not self.permitted(session.role, action):
+            return RouteDecision(kind=DECISION_DENIED)
+        now_ms = self._clock.now().epoch_ms
+        if action.startswith("confirm."):
+            return self._resolve_confirmation(session, action, now_ms)
+        if action.startswith("cancel."):
+            session.pending_action = None
+            session.pending_nonce = None
+            return RouteDecision(kind=DECISION_CANCELLED)
+        if self.dangerous(action):
+            nonce = uuid.uuid4().hex[:12]
+            session.pending_action = action
+            session.pending_nonce = nonce
+            session.pending_expires_ms = now_ms + self._confirm_ttl_ms
+            return RouteDecision(kind=DECISION_CONFIRM, action=action, nonce=nonce)
+        return RouteDecision(kind=DECISION_EXECUTE, action=action)
+
+    def _resolve_confirmation(
+        self, session: Session, action: str, now_ms: int
+    ) -> RouteDecision:
+        """The State stage: the nonce must match and be fresh."""
+        nonce = action.removeprefix("confirm.")
+        if (
+            session.pending_action is None
+            or session.pending_nonce != nonce
+            or now_ms > session.pending_expires_ms
+        ):
+            session.pending_action = None
+            session.pending_nonce = None
+            return RouteDecision(kind=DECISION_IGNORED)
+        confirmed = session.pending_action
+        session.pending_action = None
+        session.pending_nonce = None
+        return RouteDecision(kind=DECISION_EXECUTE, action=confirmed)
