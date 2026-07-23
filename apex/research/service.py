@@ -17,7 +17,9 @@ Two responsibilities behind one service:
   latest learning state per series.
 """
 
+import hashlib
 import json
+from collections.abc import Callable
 from dataclasses import dataclass
 from dataclasses import fields as dataclass_fields
 from pathlib import Path
@@ -148,6 +150,7 @@ class ResearchService:
         shadow_min_bars: int = 96,
         shadow_horizon_bars: int = 48,
         shadow_tolerance: float = 0.05,
+        artifact_verifier: Callable[[str, str], bool] | None = None,
     ) -> None:
         self._decision_service = decision_service
         self._bars = bar_repository
@@ -169,6 +172,7 @@ class ResearchService:
         self._shadow_min_bars = shadow_min_bars
         self._shadow_horizon_bars = shadow_horizon_bars
         self._shadow_tolerance = shadow_tolerance
+        self._artifact_verifier = artifact_verifier
 
     # --- Study -----------------------------------------------------------------
 
@@ -682,7 +686,7 @@ class ResearchService:
         return self._artifact_parameters(path)
 
     def _artifact_parameters(self, path: str) -> dict[str, float]:
-        """One artifact's ``optimized_parameters`` mapping."""
+        """One artifact's ``optimized_parameters`` mapping (verified)."""
         try:
             payload = json.loads(Path(path).read_text(encoding="utf-8"))
         except (OSError, ValueError) as error:
@@ -691,6 +695,8 @@ class ResearchService:
                 code="RES-002",
                 details={"path": path, "reason": str(error)},
             ) from error
+        if isinstance(payload, dict):
+            self._verify_artifact(payload, path)
         parameters = payload.get("optimized_parameters", {})
         if not isinstance(parameters, dict):
             raise ResearchError(
@@ -699,6 +705,41 @@ class ResearchService:
                 details={"path": path},
             )
         return {str(name): float(value) for name, value in parameters.items()}
+
+    def _verify_artifact(self, payload: dict[str, object], path: str) -> None:
+        """Integrity and signature checks on stamped artifacts (25.18/25.26).
+
+        Artifacts without stamps (hand-written fixtures, external
+        parameter files) pass untouched; a STAMPED artifact that fails
+        its hash or signature is rejected loudly - tampering with an
+        accepted optimizer package must never reach the kernel.
+        """
+        stored = payload.get("sha256")
+        if not isinstance(stored, str):
+            return
+        body = {
+            key: value
+            for key, value in payload.items()
+            if key not in ("sha256", "signature")
+        }
+        canonical = json.dumps(body, sort_keys=True, separators=(",", ":"))
+        if hashlib.sha256(canonical.encode()).hexdigest() != stored:
+            raise ResearchError(
+                "optimization artifact failed its integrity check",
+                code="RES-010",
+                details={"path": path},
+            )
+        signature = payload.get("signature")
+        if (
+            isinstance(signature, str)
+            and self._artifact_verifier is not None
+            and not self._artifact_verifier(canonical, signature)
+        ):
+            raise ResearchError(
+                "optimization artifact failed signature verification",
+                code="RES-011",
+                details={"path": path},
+            )
 
     def _kernel_overrides(self, path: str) -> dict[str, float]:
         """Artifact parameters filtered to decision-kernel fields.
