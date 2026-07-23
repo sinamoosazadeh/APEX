@@ -1,1 +1,233 @@
-IiIiVXNlci1kYXRhIHN0cmVhbTogcGFyc2luZywgbGlzdGVuS2V5IGxpZmVjeWNsZSwgZW5naW5lIGNvbnN1bHRhdGlvbi4iIiIKCmltcG9ydCBhc3luY2lvCmltcG9ydCBpbwppbXBvcnQganNvbgpmcm9tIHR5cGluZyBpbXBvcnQgRmluYWwKCmltcG9ydCBodHRweApmcm9tIGFwZXguY29yZS5lbnVtcyBpbXBvcnQgT3JkZXJTdGF0dXMKZnJvbSBhcGV4LmNvcmUubG9nZ2luZyBpbXBvcnQgTG9nRm9ybWF0LCBMb2dnZXJGYWN0b3J5LCBMb2dMZXZlbCwgU3RydWN0dXJlZExvZ2dlcgpmcm9tIGFwZXguY29yZS5zZXJpYWxpemF0aW9uIGltcG9ydCBKc29uVmFsdWUKZnJvbSBhcGV4LmNvcmUudGltZS5jbG9jayBpbXBvcnQgTWFudWFsQ2xvY2sKZnJvbSBhcGV4LmV4ZWN1dGlvbi50cmFkaW5nLmNsaWVudCBpbXBvcnQgVG9vYml0VHJhZGluZ0NsaWVudCwgVHJhZGluZ0NyZWRlbnRpYWxzCmZyb20gYXBleC5leGVjdXRpb24udHJhZGluZy51c2VyZGF0YSBpbXBvcnQgKAogICAgRVZFTlRfS0VZX0VYUElSSU5HLAogICAgRVZFTlRfT1JERVIsCiAgICBVc2VyRGF0YUZlZWQsCiAgICBwYXJzZV91c2VyX2RhdGEsCikKCmZyb20gdGVzdHMuY29uZnRlc3QgaW1wb3J0IFQwCgpfS0VZOiBGaW5hbFtzdHJdID0gInRlc3QtbGlzdGVuLWtleSIKCgpkZWYgbG9nZ2VyKCkgLT4gU3RydWN0dXJlZExvZ2dlcjoKICAgIGZhY3RvcnkgPSBMb2dnZXJGYWN0b3J5KAogICAgICAgIGNsb2NrPU1hbnVhbENsb2NrKFQwKSwKICAgICAgICBsZXZlbD1Mb2dMZXZlbC5DUklUSUNBTCwKICAgICAgICBsb2dfZm9ybWF0PUxvZ0Zvcm1hdC5KU09OLAogICAgICAgIHN0cmVhbT1pby5TdHJpbmdJTygpLAogICAgKQogICAgcmV0dXJuIGZhY3RvcnkuZ2V0KCJ0ZXN0LnVzZXJkYXRhIikKCgpjbGFzcyBUZXN0UGFyc2luZzoKICAgIGRlZiB0ZXN0X29yZGVyX3JlcG9ydF9hcnJheV9wYXJzZXNfc3RhdHVzX2FuZF9pZHMoc2VsZikgLT4gTm9uZToKICAgICAgICBmcmFtZTogSnNvblZhbHVlID0gWwogICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAiZSI6ICJjb250cmFjdEV4ZWN1dGlvblJlcG9ydCIsCiAgICAgICAgICAgICAgICAiRSI6IDE0OTk0MDU2NTg2NTgsCiAgICAgICAgICAgICAgICAicyI6ICJCVEMtU1dBUC1VU0RUIiwKICAgICAgICAgICAgICAgICJjIjogMTAwMDA4Nzc2MSwKICAgICAgICAgICAgICAgICJTIjogIkJVWSIsCiAgICAgICAgICAgICAgICAiWCI6ICJGSUxMRUQiLAogICAgICAgICAgICAgICAgImkiOiA0MjkzMTUzLAogICAgICAgICAgICB9CiAgICAgICAgXQogICAgICAgIGV2ZW50cyA9IHBhcnNlX3VzZXJfZGF0YShmcmFtZSkKICAgICAgICBhc3NlcnQgbGVuKGV2ZW50cykgPT0gMQogICAgICAgIGV2ZW50ID0gZXZlbnRzWzBdCiAgICAgICAgYXNzZXJ0IGV2ZW50LmV2ZW50X3R5cGUgPT0gRVZFTlRfT1JERVIKICAgICAgICBhc3NlcnQgZXZlbnQuc3RhdHVzIGlzIE9yZGVyU3RhdHVzLkZJTExFRAogICAgICAgIGFzc2VydCBldmVudC5vcmRlcl9pZCA9PSAiNDI5MzE1MyIKICAgICAgICBhc3NlcnQgZXZlbnQuY2xpZW50X29yZGVyX2lkID09ICIxMDAwMDg3NzYxIgoKICAgIGRlZiB0ZXN0X3RpY2tldF9pbmZvX2NhcnJpZXNfb3JkZXJfaWRzX3dpdGhvdXRfc3RhdHVzKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgZnJhbWU6IEpzb25WYWx1ZSA9IFsKICAgICAgICAgICAgewogICAgICAgICAgICAgICAgImUiOiAidGlja2V0SW5mbyIsCiAgICAgICAgICAgICAgICAiRSI6ICIxNjY4NjkzNDQwOTc2IiwKICAgICAgICAgICAgICAgICJzIjogIkJUQy1TV0FQLVVTRFQiLAogICAgICAgICAgICAgICAgIm8iOiAiMTI5MTQ4ODYyMDE2NzgzNTEzNiIsCiAgICAgICAgICAgICAgICAiYyI6ICIxNjY4NjkzNDQwMDkzIiwKICAgICAgICAgICAgfQogICAgICAgIF0KICAgICAgICBldmVudHMgPSBwYXJzZV91c2VyX2RhdGEoZnJhbWUpCiAgICAgICAgYXNzZXJ0IGV2ZW50c1swXS5vcmRlcl9pZCA9PSAiMTI5MTQ4ODYyMDE2NzgzNTEzNiIKICAgICAgICBhc3NlcnQgZXZlbnRzWzBdLnN0YXR1cyBpcyBOb25lCgogICAgZGVmIHRlc3RfYmFsYW5jZV9ldmVudF9sZXR0ZXJzX2RvX25vdF9sZWFrKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgIyBgYGZgYC9gYGFgYCBtZWFuIGRpZmZlcmVudCB0aGluZ3MgcGVyIGV2ZW50IHR5cGUgKEJvb2sgVklJKTsKICAgICAgICAjIGEgYmFsYW5jZSBmcmFtZSBtdXN0IG5ldmVyIHByb2R1Y2Ugb3JkZXIgaWRzIG9yIHN0YXR1c2VzLgogICAgICAgIGZyYW1lOiBKc29uVmFsdWUgPSBbCiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICJlIjogIm91dGJvdW5kQ29udHJhY3RBY2NvdW50SW5mbyIsCiAgICAgICAgICAgICAgICAiRSI6IDE1NjQ3NDU3OTg5MzksCiAgICAgICAgICAgICAgICAiVCI6IFRydWUsCiAgICAgICAgICAgICAgICAiQiI6IFt7ImEiOiAiTFRDIiwgImYiOiAiMTczNjYuMTg1MzgwODMiLCAibCI6ICIwLjAifV0sCiAgICAgICAgICAgIH0KICAgICAgICBdCiAgICAgICAgZXZlbnRzID0gcGFyc2VfdXNlcl9kYXRhKGZyYW1lKQogICAgICAgIGFzc2VydCBldmVudHNbMF0ub3JkZXJfaWQgaXMgTm9uZQogICAgICAgIGFzc2VydCBldmVudHNbMF0uc3RhdHVzIGlzIE5vbmUKCiAgICBkZWYgdGVzdF9ldmVudHNfb3JkZXJfYnlfZXZlbnRfdGltZShzZWxmKSAtPiBOb25lOgogICAgICAgIGZyYW1lOiBKc29uVmFsdWUgPSBbCiAgICAgICAgICAgIHsiZSI6ICJ0aWNrZXRJbmZvIiwgIkUiOiAiMjAwIiwgIm8iOiAiMiJ9LAogICAgICAgICAgICB7ImUiOiAidGlja2V0SW5mbyIsICJFIjogIjEwMCIsICJvIjogIjEifSwKICAgICAgICBdCiAgICAgICAgZXZlbnRzID0gcGFyc2VfdXNlcl9kYXRhKGZyYW1lKQogICAgICAgIGFzc2VydCBbZXZlbnQub3JkZXJfaWQgZm9yIGV2ZW50IGluIGV2ZW50c10gPT0gWyIxIiwgIjIiXQoKICAgIGRlZiB0ZXN0X2V4cGlyeV9ldmVudF9wYXJzZXMoc2VsZikgLT4gTm9uZToKICAgICAgICBmcmFtZTogSnNvblZhbHVlID0gewogICAgICAgICAgICAiZXZlbnRUaW1lIjogMTc2NzUzNjEwMDM2MCwKICAgICAgICAgICAgImV2ZW50VHlwZSI6ICJsaXN0ZW5LZXlXaWxsRXhwaXJlIiwKICAgICAgICAgICAgImxpc3RlbktleSI6ICJ6VWUiLAogICAgICAgIH0KICAgICAgICBldmVudHMgPSBwYXJzZV91c2VyX2RhdGEoZnJhbWUpCiAgICAgICAgYXNzZXJ0IGV2ZW50c1swXS5ldmVudF90eXBlID09IEVWRU5UX0tFWV9FWFBJUklORwoKCmNsYXNzIF9TY3JpcHRlZENvbm5lY3Rpb246CiAgICAiIiJBIFdzQ29ubmVjdGlvbiB5aWVsZGluZyBzY3JpcHRlZCBmcmFtZXMsIHRoZW4gcGVuZGluZyBmb3JldmVyLiIiIgoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBmcmFtZXM6IGxpc3Rbb2JqZWN0XSkgLT4gTm9uZToKICAgICAgICBzZWxmLl9mcmFtZXMgPSBsaXN0KGZyYW1lcykKICAgICAgICBzZWxmLmNsb3NlZCA9IEZhbHNlCgogICAgYXN5bmMgZGVmIHNlbmQoc2VsZiwgbWVzc2FnZTogc3RyKSAtPiBOb25lOgogICAgICAgIHJldHVybgoKICAgIGFzeW5jIGRlZiByZWN2KHNlbGYpIC0+IHN0cjoKICAgICAgICBpZiBzZWxmLl9mcmFtZXM6CiAgICAgICAgICAgIHJldHVybiBqc29uLmR1bXBzKHNlbGYuX2ZyYW1lcy5wb3AoMCkpCiAgICAgICAgYXdhaXQgYXN5bmNpby5zbGVlcCgzNjAwKQogICAgICAgIHJhaXNlIEFzc2VydGlvbkVycm9yKCJ1bnJlYWNoYWJsZSIpCgogICAgYXN5bmMgZGVmIGNsb3NlKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgc2VsZi5jbG9zZWQgPSBUcnVlCgoKY2xhc3MgX1JlY29yZGVyOgogICAgIiIiUmVjb3JkcyBsaXN0ZW5LZXkgUkVTVCBjYWxscyBtYWRlIHRocm91Z2ggdGhlIHRyYWRpbmcgY2xpZW50LiIiIgoKICAgIGRlZiBfX2luaXRfXyhzZWxmKSAtPiBOb25lOgogICAgICAgIHNlbGYuY2FsbHM6IGxpc3RbdHVwbGVbc3RyLCBzdHJdXSA9IFtdCgogICAgZGVmIGhhbmRsZXIoc2VsZiwgcmVxdWVzdDogaHR0cHguUmVxdWVzdCkgLT4gaHR0cHguUmVzcG9uc2U6CiAgICAgICAgc2VsZi5jYWxscy5hcHBlbmQoKHJlcXVlc3QubWV0aG9kLCByZXF1ZXN0LnVybC5wYXRoKSkKICAgICAgICByZXR1cm4gaHR0cHguUmVzcG9uc2UoMjAwLCBqc29uPXsibGlzdGVuS2V5IjogX0tFWX0pCgoKZGVmIHRyYWRpbmdfY2xpZW50KHJlY29yZGVyOiBfUmVjb3JkZXIsIGNsb2NrOiBNYW51YWxDbG9jaykgLT4gVG9vYml0VHJhZGluZ0NsaWVudDoKICAgIHJldHVybiBUb29iaXRUcmFkaW5nQ2xpZW50KAogICAgICAgIGJhc2VfdXJsPSJodHRwczovL2FwaS50b29iaXQudGVzdCIsCiAgICAgICAgcmVxdWVzdF90aW1lb3V0X21zPTJfMDAwLAogICAgICAgIHJlY3Zfd2luZG93X21zPTVfMDAwLAogICAgICAgIG1heF9yZXRyaWVzPTAsCiAgICAgICAgcmV0cnlfYmFja29mZl9tcz0xLAogICAgICAgIGNsb2NrPWNsb2NrLAogICAgICAgIGxvZ2dlcj1sb2dnZXIoKSwKICAgICAgICBjcmVkZW50aWFscz1UcmFkaW5nQ3JlZGVudGlhbHMoYXBpX2tleT0iayIsIGFwaV9zZWNyZXQ9InMiKSwKICAgICAgICB0cmFuc3BvcnQ9aHR0cHguTW9ja1RyYW5zcG9ydChyZWNvcmRlci5oYW5kbGVyKSwKICAgICkKCgpkZWYgZmVlZF93aXRoKAogICAgcmVjb3JkZXI6IF9SZWNvcmRlciwKICAgIGNsb2NrOiBNYW51YWxDbG9jaywKICAgIGNvbm5lY3Rpb246IF9TY3JpcHRlZENvbm5lY3Rpb24sCiAgICAqLAogICAga2VlcGFsaXZlX21zOiBpbnQgPSA2MF8wMDAsCikgLT4gdHVwbGVbVXNlckRhdGFGZWVkLCBUb29iaXRUcmFkaW5nQ2xpZW50XToKICAgIGNsaWVudCA9IHRyYWRpbmdfY2xpZW50KHJlY29yZGVyLCBjbG9jaykKCiAgICBhc3luYyBkZWYgY29ubmVjdCh1cmw6IHN0cikgLT4gX1NjcmlwdGVkQ29ubmVjdGlvbjoKICAgICAgICBhc3NlcnQgdXJsLmVuZHN3aXRoKGYiL2FwaS92MS93cy97X0tFWX0iKQogICAgICAgIHJldHVybiBjb25uZWN0aW9uCgogICAgZmVlZCA9IFVzZXJEYXRhRmVlZCgKICAgICAgICBjbGllbnQ9Y2xpZW50LAogICAgICAgIHdzX2Jhc2VfdXJsPSJ3c3M6Ly9zdHJlYW0udG9vYml0LnRlc3QiLAogICAgICAgIGtlZXBhbGl2ZV9pbnRlcnZhbF9tcz1rZWVwYWxpdmVfbXMsCiAgICAgICAgcmVjdl90aW1lb3V0X21zPTUwLAogICAgICAgIGNsb2NrPWNsb2NrLAogICAgICAgIGxvZ2dlcj1sb2dnZXIoKSwKICAgICAgICBjb25uZWN0PWNvbm5lY3QsCiAgICApCiAgICByZXR1cm4gZmVlZCwgY2xpZW50CgoKY2xhc3MgVGVzdEZlZWRMaWZlY3ljbGU6CiAgICBkZWYgdGVzdF9zdGFydF9mb2xkc19wdXNoZWRfc3RhdHVzX2FuZF9zdG9wX2Nsb3Nlc19rZXkoc2VsZikgLT4gTm9uZToKICAgICAgICBhc3luYyBkZWYgc2NlbmFyaW8oKSAtPiBOb25lOgogICAgICAgICAgICBjbG9jayA9IE1hbnVhbENsb2NrKFQwKQogICAgICAgICAgICByZWNvcmRlciA9IF9SZWNvcmRlcigpCiAgICAgICAgICAgIGNvbm5lY3Rpb24gPSBfU2NyaXB0ZWRDb25uZWN0aW9uKAogICAgICAgICAgICAgICAgWwogICAgICAgICAgICAgICAgICAgIFsKICAgICAgICAgICAgICAgICAgICAgICAgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgImUiOiAiY29udHJhY3RFeGVjdXRpb25SZXBvcnQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIkUiOiAxLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgImkiOiA0MiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJjIjogImNpZC0xIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICJYIjogIkZJTExFRCIsCiAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBdCiAgICAgICAgICAgICAgICBdCiAgICAgICAgICAgICkKICAgICAgICAgICAgZmVlZCwgY2xpZW50ID0gZmVlZF93aXRoKHJlY29yZGVyLCBjbG9jaywgY29ubmVjdGlvbikKICAgICAgICAgICAgYXdhaXQgY2xpZW50Lm9wZW4oKQogICAgICAgICAgICBhd2FpdCBmZWVkLnN0YXJ0KCkKICAgICAgICAgICAgZm9yIF8gaW4gcmFuZ2UoNTApOgogICAgICAgICAgICAgICAgaWYgZmVlZC5zdGF0dXNfZm9yKG9yZGVyX2lkPSI0MiIpIGlzIG5vdCBOb25lOgogICAgICAgICAgICAgICAgICAgIGJyZWFrCiAgICAgICAgICAgICAgICBhd2FpdCBhc3luY2lvLnNsZWVwKDAuMDEpCiAgICAgICAgICAgIGFzc2VydCBmZWVkLnN0YXR1c19mb3Iob3JkZXJfaWQ9IjQyIikgaXMgT3JkZXJTdGF0dXMuRklMTEVECiAgICAgICAgICAgIGFzc2VydCBmZWVkLnN0YXR1c19mb3IoY2xpZW50X29yZGVyX2lkPSJjaWQtMSIpIGlzIE9yZGVyU3RhdHVzLkZJTExFRAogICAgICAgICAgICBhc3NlcnQgZmVlZC5zdGF0dXNfZm9yKG9yZGVyX2lkPSI0MDQiKSBpcyBOb25lCiAgICAgICAgICAgIGF3YWl0IGZlZWQuc3RvcCgpCiAgICAgICAgICAgIGFzc2VydCBmZWVkLnJ1bm5pbmcgaXMgRmFsc2UKICAgICAgICAgICAgYXNzZXJ0IGNvbm5lY3Rpb24uY2xvc2VkCiAgICAgICAgICAgIG1ldGhvZHMgPSBbbWV0aG9kIGZvciBtZXRob2QsIHBhdGggaW4gcmVjb3JkZXIuY2FsbHNdCiAgICAgICAgICAgIGFzc2VydCBtZXRob2RzWzBdID09ICJQT1NUIiAgIyBjcmVhdGUgbGlzdGVuS2V5CiAgICAgICAgICAgIGFzc2VydCBtZXRob2RzWy0xXSA9PSAiREVMRVRFIiAgIyBjbG9zZSBsaXN0ZW5LZXkKICAgICAgICAgICAgYXdhaXQgY2xpZW50LmNsb3NlKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCiAgICBkZWYgdGVzdF9leHBpcnlfcHVzaF90cmlnZ2Vyc19pbW1lZGlhdGVfa2VlcGFsaXZlKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgYXN5bmMgZGVmIHNjZW5hcmlvKCkgLT4gTm9uZToKICAgICAgICAgICAgY2xvY2sgPSBNYW51YWxDbG9jayhUMCkKICAgICAgICAgICAgcmVjb3JkZXIgPSBfUmVjb3JkZXIoKQogICAgICAgICAgICBjb25uZWN0aW9uID0gX1NjcmlwdGVkQ29ubmVjdGlvbigKICAgICAgICAgICAgICAgIFt7ImV2ZW50VHlwZSI6ICJsaXN0ZW5LZXlXaWxsRXhwaXJlIiwgImxpc3RlbktleSI6IF9LRVl9XQogICAgICAgICAgICApCiAgICAgICAgICAgIGZlZWQsIGNsaWVudCA9IGZlZWRfd2l0aChyZWNvcmRlciwgY2xvY2ssIGNvbm5lY3Rpb24sIGtlZXBhbGl2ZV9tcz0zXzYwMF8wMDApCiAgICAgICAgICAgIGF3YWl0IGNsaWVudC5vcGVuKCkKICAgICAgICAgICAgYXdhaXQgZmVlZC5zdGFydCgpCiAgICAgICAgICAgIGZvciBfIGluIHJhbmdlKDUwKToKICAgICAgICAgICAgICAgIGlmIGFueShtZXRob2QgPT0gIlBVVCIgZm9yIG1ldGhvZCwgXyBpbiByZWNvcmRlci5jYWxscyk6CiAgICAgICAgICAgICAgICAgICAgYnJlYWsKICAgICAgICAgICAgICAgIGF3YWl0IGFzeW5jaW8uc2xlZXAoMC4wMSkKICAgICAgICAgICAgYXNzZXJ0IGFueSgKICAgICAgICAgICAgICAgIG1ldGhvZCA9PSAiUFVUIiBhbmQgcGF0aCA9PSAiL2FwaS92MS9saXN0ZW5LZXkiCiAgICAgICAgICAgICAgICBmb3IgbWV0aG9kLCBwYXRoIGluIHJlY29yZGVyLmNhbGxzCiAgICAgICAgICAgICkKICAgICAgICAgICAgYXdhaXQgZmVlZC5zdG9wKCkKICAgICAgICAgICAgYXdhaXQgY2xpZW50LmNsb3NlKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkK
+"""User-data stream: parsing, listenKey lifecycle, engine consultation."""
+
+import asyncio
+import io
+import json
+from typing import Final
+
+import httpx
+from apex.core.enums import OrderStatus
+from apex.core.logging import LogFormat, LoggerFactory, LogLevel, StructuredLogger
+from apex.core.serialization import JsonValue
+from apex.core.time.clock import ManualClock
+from apex.execution.trading.client import ToobitTradingClient, TradingCredentials
+from apex.execution.trading.userdata import (
+    EVENT_KEY_EXPIRING,
+    EVENT_ORDER,
+    UserDataFeed,
+    parse_user_data,
+)
+
+from tests.conftest import T0
+
+_KEY: Final[str] = "test-listen-key"
+
+
+def logger() -> StructuredLogger:
+    factory = LoggerFactory(
+        clock=ManualClock(T0),
+        level=LogLevel.CRITICAL,
+        log_format=LogFormat.JSON,
+        stream=io.StringIO(),
+    )
+    return factory.get("test.userdata")
+
+
+class TestParsing:
+    def test_order_report_array_parses_status_and_ids(self) -> None:
+        frame: JsonValue = [
+            {
+                "e": "contractExecutionReport",
+                "E": 1499405658658,
+                "s": "BTC-SWAP-USDT",
+                "c": 1000087761,
+                "S": "BUY",
+                "X": "FILLED",
+                "i": 4293153,
+            }
+        ]
+        events = parse_user_data(frame)
+        assert len(events) == 1
+        event = events[0]
+        assert event.event_type == EVENT_ORDER
+        assert event.status is OrderStatus.FILLED
+        assert event.order_id == "4293153"
+        assert event.client_order_id == "1000087761"
+
+    def test_ticket_info_carries_order_ids_without_status(self) -> None:
+        frame: JsonValue = [
+            {
+                "e": "ticketInfo",
+                "E": "1668693440976",
+                "s": "BTC-SWAP-USDT",
+                "o": "1291488620167835136",
+                "c": "1668693440093",
+            }
+        ]
+        events = parse_user_data(frame)
+        assert events[0].order_id == "1291488620167835136"
+        assert events[0].status is None
+
+    def test_balance_event_letters_do_not_leak(self) -> None:
+        # ``f``/``a`` mean different things per event type (Book VII);
+        # a balance frame must never produce order ids or statuses.
+        frame: JsonValue = [
+            {
+                "e": "outboundContractAccountInfo",
+                "E": 1564745798939,
+                "T": True,
+                "B": [{"a": "LTC", "f": "17366.18538083", "l": "0.0"}],
+            }
+        ]
+        events = parse_user_data(frame)
+        assert events[0].order_id is None
+        assert events[0].status is None
+
+    def test_events_order_by_event_time(self) -> None:
+        frame: JsonValue = [
+            {"e": "ticketInfo", "E": "200", "o": "2"},
+            {"e": "ticketInfo", "E": "100", "o": "1"},
+        ]
+        events = parse_user_data(frame)
+        assert [event.order_id for event in events] == ["1", "2"]
+
+    def test_expiry_event_parses(self) -> None:
+        frame: JsonValue = {
+            "eventTime": 1767536100360,
+            "eventType": "listenKeyWillExpire",
+            "listenKey": "zUe",
+        }
+        events = parse_user_data(frame)
+        assert events[0].event_type == EVENT_KEY_EXPIRING
+
+
+class _ScriptedConnection:
+    """A WsConnection yielding scripted frames, then pending forever."""
+
+    def __init__(self, frames: list[object]) -> None:
+        self._frames = list(frames)
+        self.closed = False
+
+    async def send(self, message: str) -> None:
+        return
+
+    async def recv(self) -> str:
+        if self._frames:
+            return json.dumps(self._frames.pop(0))
+        await asyncio.sleep(3600)
+        raise AssertionError("unreachable")
+
+    async def close(self) -> None:
+        self.closed = True
+
+
+class _Recorder:
+    """Records listenKey REST calls made through the trading client."""
+
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, str]] = []
+
+    def handler(self, request: httpx.Request) -> httpx.Response:
+        self.calls.append((request.method, request.url.path))
+        return httpx.Response(200, json={"listenKey": _KEY})
+
+
+def trading_client(recorder: _Recorder, clock: ManualClock) -> ToobitTradingClient:
+    return ToobitTradingClient(
+        base_url="https://api.toobit.test",
+        request_timeout_ms=2_000,
+        recv_window_ms=5_000,
+        max_retries=0,
+        retry_backoff_ms=1,
+        clock=clock,
+        logger=logger(),
+        credentials=TradingCredentials(api_key="k", api_secret="s"),
+        transport=httpx.MockTransport(recorder.handler),
+    )
+
+
+def feed_with(
+    recorder: _Recorder,
+    clock: ManualClock,
+    connection: _ScriptedConnection,
+    *,
+    keepalive_ms: int = 60_000,
+) -> tuple[UserDataFeed, ToobitTradingClient]:
+    client = trading_client(recorder, clock)
+
+    async def connect(url: str) -> _ScriptedConnection:
+        assert url.endswith(f"/api/v1/ws/{_KEY}")
+        return connection
+
+    feed = UserDataFeed(
+        client=client,
+        ws_base_url="wss://stream.toobit.test",
+        keepalive_interval_ms=keepalive_ms,
+        recv_timeout_ms=50,
+        clock=clock,
+        logger=logger(),
+        connect=connect,
+    )
+    return feed, client
+
+
+class TestFeedLifecycle:
+    def test_start_folds_pushed_status_and_stop_closes_key(self) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            recorder = _Recorder()
+            connection = _ScriptedConnection(
+                [
+                    [
+                        {
+                            "e": "contractExecutionReport",
+                            "E": 1,
+                            "i": 42,
+                            "c": "cid-1",
+                            "X": "FILLED",
+                        }
+                    ]
+                ]
+            )
+            feed, client = feed_with(recorder, clock, connection)
+            await client.open()
+            await feed.start()
+            for _ in range(50):
+                if feed.status_for(order_id="42") is not None:
+                    break
+                await asyncio.sleep(0.01)
+            assert feed.status_for(order_id="42") is OrderStatus.FILLED
+            assert feed.status_for(client_order_id="cid-1") is OrderStatus.FILLED
+            assert feed.status_for(order_id="404") is None
+            await feed.stop()
+            assert feed.running is False
+            assert connection.closed
+            methods = [method for method, path in recorder.calls]
+            assert methods[0] == "POST"  # create listenKey
+            assert methods[-1] == "DELETE"  # close listenKey
+            await client.close()
+
+        asyncio.run(scenario())
+
+    def test_expiry_push_triggers_immediate_keepalive(self) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            recorder = _Recorder()
+            connection = _ScriptedConnection(
+                [{"eventType": "listenKeyWillExpire", "listenKey": _KEY}]
+            )
+            feed, client = feed_with(recorder, clock, connection, keepalive_ms=3_600_000)
+            await client.open()
+            await feed.start()
+            for _ in range(50):
+                if any(method == "PUT" for method, _ in recorder.calls):
+                    break
+                await asyncio.sleep(0.01)
+            assert any(
+                method == "PUT" and path == "/api/v1/listenKey"
+                for method, path in recorder.calls
+            )
+            await feed.stop()
+            await client.close()
+
+        asyncio.run(scenario())
