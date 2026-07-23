@@ -1,1 +1,350 @@
-IiIiUHJvbW90aW9uIHBpcGVsaW5lOiBzaGFkb3cgZXZhbHVhdGlvbiwgbGlmZWN5Y2xlLCBndWFyZCwgcXVldWUgcGF1c2UuIiIiCgppbXBvcnQgYXN5bmNpbwppbXBvcnQganNvbgpmcm9tIGRlY2ltYWwgaW1wb3J0IERlY2ltYWwKZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCgpmcm9tIGFwZXguY29udHJhY3RzLmVuZ2luZXMgaW1wb3J0IERlY2lzaW9uU25hcHNob3QKZnJvbSBhcGV4LmNvcmUuY29uZmlnIGltcG9ydCBBcHBDb25maWcKZnJvbSBhcGV4LmNvcmUuY29udGV4dCBpbXBvcnQgTWFya2V0Q29udGV4dApmcm9tIGFwZXguY29yZS5lbnVtcyBpbXBvcnQgVGltZWZyYW1lCmZyb20gYXBleC5jb3JlLnRpbWUuY2xvY2sgaW1wb3J0IE1hbnVhbENsb2NrCmZyb20gYXBleC5jb3JlLnRpbWUudGltZXN0YW1wIGltcG9ydCBUaW1lc3RhbXAKZnJvbSBhcGV4LmRlY2lzaW9uLmtlcm5lbCBpbXBvcnQgRGVjaXNpb25QYXJhbXMKZnJvbSBhcGV4Lmtlcm5lbC5rZXJuZWwgaW1wb3J0IEtlcm5lbApmcm9tIGFwZXgub3B0aW1pemF0aW9uLm9iamVjdGl2ZSBpbXBvcnQgT2JqZWN0aXZlV2VpZ2h0cwpmcm9tIGFwZXgucG9ydGZvbGlvLmNvbmZpZyBpbXBvcnQgcG9ydGZvbGlvX3NldHRpbmdzCmZyb20gYXBleC5wb3J0Zm9saW8uc3RvcmUgaW1wb3J0IFBvc2l0aW9uUmVjb3JkLCBTcWxpdGVQb3J0Zm9saW9SZXBvc2l0b3J5CmZyb20gYXBleC5yZXNlYXJjaC5wcm9tb3Rpb24gaW1wb3J0IGV2YWx1YXRlX3NoYWRvdwpmcm9tIGFwZXgucmVzZWFyY2guc2VydmljZSBpbXBvcnQgUmVzZWFyY2hTZXJ2aWNlCmZyb20gYXBleC5yZXNlYXJjaC5zdG9yZSBpbXBvcnQgKAogICAgUFJPTU9USU9OX1BBU1NFRCwKICAgIFBST01PVElPTl9QUk9NT1RFRCwKICAgIFBST01PVElPTl9SRUpFQ1RFRCwKICAgIFBST01PVElPTl9ST0xMRURfQkFDSywKICAgIFBST01PVElPTl9TSEFET1csCiAgICBTcWxpdGVSZXNlYXJjaFJlcG9zaXRvcnksCikKCmZyb20gdGVzdHMuY29uZnRlc3QgaW1wb3J0IFQwCmZyb20gdGVzdHMudW5pdC5kZWNpc2lvbi50ZXN0X2RlY2lzaW9uIGltcG9ydCBidWxsaXNoX3ZlY3RvciwgbWFrZV9iYXIsIHN0cm9uZ19jaGFubmVscwoKSDFfTVMgPSBUaW1lZnJhbWUuSDEuZHVyYXRpb25fbXMKCgpkZWYgc25hcHNob3RzKGNvdW50OiBpbnQpIC0+IGxpc3RbRGVjaXNpb25TbmFwc2hvdF06CiAgICAiIiJSaXNpbmcgY29uZmlybWVkIGJhcnMgd3JhcHBlZCBhcyBkZWNpc2lvbiBzbmFwc2hvdHMuIiIiCiAgICByZXN1bHQgPSBbXQogICAgZm9yIGluZGV4IGluIHJhbmdlKGNvdW50KToKICAgICAgICBiYXNlID0gMTAwLjAgKyBpbmRleAogICAgICAgIGJhciA9IG1ha2VfYmFyKGluZGV4LCBiYXNlLCBiYXNlICsgMi4yLCBiYXNlIC0gMC40LCBiYXNlICsgMi4wKQogICAgICAgIHJlc3VsdC5hcHBlbmQoCiAgICAgICAgICAgIERlY2lzaW9uU25hcHNob3QoCiAgICAgICAgICAgICAgICBiYXI9YmFyLAogICAgICAgICAgICAgICAgdmVjdG9yPWJ1bGxpc2hfdmVjdG9yKCksCiAgICAgICAgICAgICAgICBwcm9iYWJpbGl0eV9sb25nPTAuODUsCiAgICAgICAgICAgICAgICBwcm9iYWJpbGl0eV9zaG9ydD0wLjA1LAogICAgICAgICAgICAgICAgY2hhbm5lbHM9c3Ryb25nX2NoYW5uZWxzKCksCiAgICAgICAgICAgICAgICBtYWNyb19oaWdoPWZsb2F0KGJhci5jbG9zZS52YWx1ZSkgKyA1MC4wLAogICAgICAgICAgICAgICAgbWFjcm9fbG93PWZsb2F0KGJhci5jbG9zZS52YWx1ZSkgLSA1MC4wLAogICAgICAgICAgICApCiAgICAgICAgKQogICAgcmV0dXJuIHJlc3VsdAoKCmRlZiBzaGFkb3dfcGFyYW1zKCkgLT4gRGVjaXNpb25QYXJhbXM6CiAgICByZXR1cm4gRGVjaXNpb25QYXJhbXMoCiAgICAgICAgYXRyX2xlbmd0aD0zLAogICAgICAgIGVtYV9sZW5ndGg9MywKICAgICAgICBydm9sX2dhdGVfZW5hYmxlZD1GYWxzZSwKICAgICAgICBzaW1pbGFyaXR5X2Nvb2xkb3duX2VuYWJsZWQ9RmFsc2UsCiAgICAgICAgY29vbGRvd25fYmFycz0xLAogICAgICAgIGZsYXRuZXNzX2dhdGVfZW5hYmxlZD1GYWxzZSwKICAgICkKCgpjbGFzcyBUZXN0RXZhbHVhdGVTaGFkb3c6CiAgICBkZWYgdGVzdF9pbnN1ZmZpY2llbnRfZm9yd2FyZF9iYXJzX2ZhaWxzX3dpdGhfcmVhc29uKHNlbGYpIC0+IE5vbmU6CiAgICAgICAgcmVwb3J0ID0gZXZhbHVhdGVfc2hhZG93KAogICAgICAgICAgICBzbmFwc2hvdHM9c25hcHNob3RzKDMpLAogICAgICAgICAgICBiYXNlX3BhcmFtcz1zaGFkb3dfcGFyYW1zKCksCiAgICAgICAgICAgIGNhbmRpZGF0ZV9vdmVycmlkZXM9e30sCiAgICAgICAgICAgIGJhc2VsaW5lX292ZXJyaWRlcz1Ob25lLAogICAgICAgICAgICBjb250ZXh0PU1hcmtldENvbnRleHQoc3ltYm9sPSJCVENVU0RUIiwgdGltZWZyYW1lPVRpbWVmcmFtZS5IMSwgYXNfb2Y9VDApLAogICAgICAgICAgICBjbG9jaz1NYW51YWxDbG9jayhUMCksCiAgICAgICAgICAgIHdlaWdodHM9T2JqZWN0aXZlV2VpZ2h0cygpLAogICAgICAgICAgICBob3Jpem9uX2JhcnM9NiwKICAgICAgICAgICAgbWluX2JhcnM9MTAsCiAgICAgICAgICAgIHRvbGVyYW5jZT0wLjAsCiAgICAgICAgKQogICAgICAgIGFzc2VydCBub3QgcmVwb3J0LnBhc3NlZAogICAgICAgIGFzc2VydCAiaW5zdWZmaWNpZW50IGZvcndhcmQgYmFycyIgaW4gcmVwb3J0LnJlYXNvbgoKICAgIGRlZiB0ZXN0X2lkZW50aWNhbF9jYW5kaWRhdGVfcGFzc2VzX3dpdGhpbl90b2xlcmFuY2Uoc2VsZikgLT4gTm9uZToKICAgICAgICByZXBvcnQgPSBldmFsdWF0ZV9zaGFkb3coCiAgICAgICAgICAgIHNuYXBzaG90cz1zbmFwc2hvdHMoMzApLAogICAgICAgICAgICBiYXNlX3BhcmFtcz1zaGFkb3dfcGFyYW1zKCksCiAgICAgICAgICAgIGNhbmRpZGF0ZV9vdmVycmlkZXM9e30sCiAgICAgICAgICAgIGJhc2VsaW5lX292ZXJyaWRlcz1Ob25lLAogICAgICAgICAgICBjb250ZXh0PU1hcmtldENvbnRleHQoc3ltYm9sPSJCVENVU0RUIiwgdGltZWZyYW1lPVRpbWVmcmFtZS5IMSwgYXNfb2Y9VDApLAogICAgICAgICAgICBjbG9jaz1NYW51YWxDbG9jayhUMCksCiAgICAgICAgICAgIHdlaWdodHM9T2JqZWN0aXZlV2VpZ2h0cygpLAogICAgICAgICAgICBob3Jpem9uX2JhcnM9NiwKICAgICAgICAgICAgbWluX2JhcnM9MTAsCiAgICAgICAgICAgIHRvbGVyYW5jZT0wLjAsCiAgICAgICAgKQogICAgICAgIGFzc2VydCByZXBvcnQucGFzc2VkCiAgICAgICAgYXNzZXJ0IHJlcG9ydC5jYW5kaWRhdGVfc2NvcmUgPT0gcmVwb3J0LmJhc2VsaW5lX3Njb3JlCiAgICAgICAgYXNzZXJ0IHJlcG9ydC5iYXJzID09IDMwCiAgICAgICAgcGF5bG9hZCA9IGpzb24ubG9hZHMocmVwb3J0LnRvX2pzb24oKSkKICAgICAgICBhc3NlcnQgcGF5bG9hZFsicGFzc2VkIl0gaXMgVHJ1ZQogICAgICAgIGFzc2VydCBwYXlsb2FkWyJjYW5kaWRhdGUiXVsic2lnbmFscyJdID09IHJlcG9ydC5jYW5kaWRhdGVfc2lnbmFscwoKCmNsYXNzIFRlc3RQcm9tb3Rpb25TdG9yZToKICAgIGRlZiB0ZXN0X2xpZmVjeWNsZV9zdGF0ZXNfYW5kX2xhdGVzdChzZWxmLCB0bXBfcGF0aDogUGF0aCkgLT4gTm9uZToKICAgICAgICBhc3luYyBkZWYgc2NlbmFyaW8oKSAtPiBOb25lOgogICAgICAgICAgICBzdG9yZSA9IFNxbGl0ZVJlc2VhcmNoUmVwb3NpdG9yeSgKICAgICAgICAgICAgICAgIGRhdGFiYXNlX3BhdGg9dG1wX3BhdGggLyAicmVzZWFyY2guc3FsaXRlIgogICAgICAgICAgICApCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm9wZW4oKQogICAgICAgICAgICBwcm9tb3Rpb25faWQgPSBhd2FpdCBzdG9yZS5yZWdpc3Rlcl9wcm9tb3Rpb24oCiAgICAgICAgICAgICAgICBzeW1ib2w9IkJUQ1VTRFQiLAogICAgICAgICAgICAgICAgdGltZWZyYW1lPVRpbWVmcmFtZS5IMSwKICAgICAgICAgICAgICAgIGtpbmQ9InNpZ25hbCIsCiAgICAgICAgICAgICAgICBhcnRpZmFjdF9wYXRoPSIvdG1wL2EuanNvbiIsCiAgICAgICAgICAgICAgICBiYXNlbGluZV9hcnRpZmFjdD1Ob25lLAogICAgICAgICAgICAgICAgcmVnaXN0ZXJlZF9hdD1UMCwKICAgICAgICAgICAgKQogICAgICAgICAgICBzaGFkb3dzID0gYXdhaXQgc3RvcmUucHJvbW90aW9ucyhzdGF0dXM9UFJPTU9USU9OX1NIQURPVykKICAgICAgICAgICAgYXNzZXJ0IGxlbihzaGFkb3dzKSA9PSAxCiAgICAgICAgICAgIGF3YWl0IHN0b3JlLm1hcmtfcHJvbW90aW9uX2V2YWx1YXRlZCgKICAgICAgICAgICAgICAgIHByb21vdGlvbl9pZCwKICAgICAgICAgICAgICAgIHN0YXR1cz1QUk9NT1RJT05fUEFTU0VELAogICAgICAgICAgICAgICAgcmVwb3J0PSd7InBhc3NlZCI6IHRydWV9JywKICAgICAgICAgICAgICAgIGF0PVQwLmFkZF9tcygxXzAwMCksCiAgICAgICAgICAgICkKICAgICAgICAgICAgcmVjb3JkID0gYXdhaXQgc3RvcmUucHJvbW90aW9uKHByb21vdGlvbl9pZCkKICAgICAgICAgICAgYXNzZXJ0IHJlY29yZCBpcyBub3QgTm9uZQogICAgICAgICAgICBhc3NlcnQgcmVjb3JkLnN0YXR1cyA9PSBQUk9NT1RJT05fUEFTU0VECiAgICAgICAgICAgIGFzc2VydCByZWNvcmQucmVwb3J0ID09ICd7InBhc3NlZCI6IHRydWV9JwogICAgICAgICAgICBhd2FpdCBzdG9yZS5tYXJrX3Byb21vdGlvbl9kZWNpZGVkKAogICAgICAgICAgICAgICAgcHJvbW90aW9uX2lkLAogICAgICAgICAgICAgICAgc3RhdHVzPVBST01PVElPTl9QUk9NT1RFRCwKICAgICAgICAgICAgICAgIGFjdG9yPSJvcGVyYXRvciIsCiAgICAgICAgICAgICAgICBhdD1UMC5hZGRfbXMoMl8wMDApLAogICAgICAgICAgICApCiAgICAgICAgICAgIGxhdGVzdCA9IGF3YWl0IHN0b3JlLmxhdGVzdF9wcm9tb3Rpb24oCiAgICAgICAgICAgICAgICAiQlRDVVNEVCIsIFRpbWVmcmFtZS5IMSwgInNpZ25hbCIsIHN0YXR1cz1QUk9NT1RJT05fUFJPTU9URUQKICAgICAgICAgICAgKQogICAgICAgICAgICBhc3NlcnQgbGF0ZXN0IGlzIG5vdCBOb25lCiAgICAgICAgICAgIGFzc2VydCBsYXRlc3QuZGVjaWRlZF9ieSA9PSAib3BlcmF0b3IiCiAgICAgICAgICAgIGFzc2VydCBsYXRlc3QuZGVjaWRlZF9hdCBpcyBub3QgTm9uZQogICAgICAgICAgICBhd2FpdCBzdG9yZS5jbG9zZSgpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgogICAgZGVmIHRlc3RfZmxhZ3Nfcm91bmR0cmlwKHNlbGYsIHRtcF9wYXRoOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIHN0b3JlID0gU3FsaXRlUmVzZWFyY2hSZXBvc2l0b3J5KAogICAgICAgICAgICAgICAgZGF0YWJhc2VfcGF0aD10bXBfcGF0aCAvICJyZXNlYXJjaC5zcWxpdGUiCiAgICAgICAgICAgICkKICAgICAgICAgICAgYXdhaXQgc3RvcmUub3BlbigpCiAgICAgICAgICAgIGFzc2VydCBhd2FpdCBzdG9yZS5nZXRfZmxhZygicXVldWVfcGF1c2VkIikgaXMgTm9uZQogICAgICAgICAgICBhd2FpdCBzdG9yZS5zZXRfZmxhZygicXVldWVfcGF1c2VkIiwgIjEiKQogICAgICAgICAgICBhc3NlcnQgYXdhaXQgc3RvcmUuZ2V0X2ZsYWcoInF1ZXVlX3BhdXNlZCIpID09ICIxIgogICAgICAgICAgICBhd2FpdCBzdG9yZS5zZXRfZmxhZygicXVldWVfcGF1c2VkIiwgIjAiKQogICAgICAgICAgICBhc3NlcnQgYXdhaXQgc3RvcmUuZ2V0X2ZsYWcoInF1ZXVlX3BhdXNlZCIpID09ICIwIgogICAgICAgICAgICBhd2FpdCBzdG9yZS5jbG9zZSgpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgoKY2xhc3MgVGVzdFByb21vdGlvblNlcnZpY2U6CiAgICAiIiJMaWZlY3ljbGUgYmVoYXZpb3IgdGhyb3VnaCB0aGUgYm9vdGVkIHBsYXRmb3JtIHNlcnZpY2VzLiIiIgoKICAgIGRlZiB0ZXN0X3Byb21vdGVfcmVqZWN0X2FuZF9xdWV1ZV9wYXVzZShzZWxmLCBjb25maWdfZGlyOiBQYXRoKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGtlcm5lbCA9IEtlcm5lbChjb25maWdfZGlyPWNvbmZpZ19kaXIsIGNsb2NrPU1hbnVhbENsb2NrKFQwKSkKICAgICAgICAgICAgYXdhaXQga2VybmVsLmJvb3QoKQogICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICByZXNlYXJjaCA9IGtlcm5lbC5jb250YWluZXIucmVzb2x2ZShSZXNlYXJjaFNlcnZpY2UpCiAgICAgICAgICAgICAgICBzdG9yZSA9IGtlcm5lbC5jb250YWluZXIucmVzb2x2ZShTcWxpdGVSZXNlYXJjaFJlcG9zaXRvcnkpCiAgICAgICAgICAgICAgICBtaXNzaW5nID0gYXdhaXQgcmVzZWFyY2gucHJvbW90ZSg5OTksIGFjdG9yPSJvcCIpCiAgICAgICAgICAgICAgICBhc3NlcnQgbm90IG1pc3Npbmcub2sKICAgICAgICAgICAgICAgIGFzc2VydCBtaXNzaW5nLmVycm9yIGlzIG5vdCBOb25lCiAgICAgICAgICAgICAgICBhc3NlcnQgbWlzc2luZy5lcnJvci5jb2RlID09ICJSRVMtMDA3IgogICAgICAgICAgICAgICAgcHJvbW90aW9uX2lkID0gYXdhaXQgc3RvcmUucmVnaXN0ZXJfcHJvbW90aW9uKAogICAgICAgICAgICAgICAgICAgIHN5bWJvbD0iQlRDVVNEVCIsCiAgICAgICAgICAgICAgICAgICAgdGltZWZyYW1lPVRpbWVmcmFtZS5IMSwKICAgICAgICAgICAgICAgICAgICBraW5kPSJzaWduYWwiLAogICAgICAgICAgICAgICAgICAgIGFydGlmYWN0X3BhdGg9c3RyKGNvbmZpZ19kaXIgLyAiYXJ0aWZhY3QuanNvbiIpLAogICAgICAgICAgICAgICAgICAgIGJhc2VsaW5lX2FydGlmYWN0PU5vbmUsCiAgICAgICAgICAgICAgICAgICAgcmVnaXN0ZXJlZF9hdD1UMCwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIHByZW1hdHVyZSA9IGF3YWl0IHJlc2VhcmNoLnByb21vdGUocHJvbW90aW9uX2lkLCBhY3Rvcj0ib3AiKQogICAgICAgICAgICAgICAgYXNzZXJ0IG5vdCBwcmVtYXR1cmUub2sKICAgICAgICAgICAgICAgIGFzc2VydCBwcmVtYXR1cmUuZXJyb3IgaXMgbm90IE5vbmUKICAgICAgICAgICAgICAgIGFzc2VydCBwcmVtYXR1cmUuZXJyb3IuY29kZSA9PSAiUkVTLTAwOCIKICAgICAgICAgICAgICAgIHJlamVjdGVkID0gYXdhaXQgcmVzZWFyY2gucmVqZWN0X3Byb21vdGlvbihwcm9tb3Rpb25faWQsIGFjdG9yPSJvcCIpCiAgICAgICAgICAgICAgICBhc3NlcnQgcmVqZWN0ZWQub2sKICAgICAgICAgICAgICAgIHJlY29yZCA9IGF3YWl0IHN0b3JlLnByb21vdGlvbihwcm9tb3Rpb25faWQpCiAgICAgICAgICAgICAgICBhc3NlcnQgcmVjb3JkIGlzIG5vdCBOb25lCiAgICAgICAgICAgICAgICBhc3NlcnQgcmVjb3JkLnN0YXR1cyA9PSBQUk9NT1RJT05fUkVKRUNURUQKICAgICAgICAgICAgICAgIHJlX3JlamVjdCA9IGF3YWl0IHJlc2VhcmNoLnJlamVjdF9wcm9tb3Rpb24ocHJvbW90aW9uX2lkLCBhY3Rvcj0ib3AiKQogICAgICAgICAgICAgICAgYXNzZXJ0IG5vdCByZV9yZWplY3Qub2sKICAgICAgICAgICAgICAgIGFzc2VydCByZV9yZWplY3QuZXJyb3IgaXMgbm90IE5vbmUKICAgICAgICAgICAgICAgIGFzc2VydCByZV9yZWplY3QuZXJyb3IuY29kZSA9PSAiUkVTLTAwOSIKICAgICAgICAgICAgICAgIGFzc2VydCBub3QgYXdhaXQgcmVzZWFyY2gucXVldWVfcGF1c2VkKCkKICAgICAgICAgICAgICAgIGF3YWl0IHJlc2VhcmNoLnBhdXNlX3F1ZXVlKCkKICAgICAgICAgICAgICAgIGFzc2VydCBhd2FpdCByZXNlYXJjaC5xdWV1ZV9wYXVzZWQoKQogICAgICAgICAgICAgICAgZHJhaW5lZCA9IGF3YWl0IHJlc2VhcmNoLm9yY2hlc3RyYXRlKAogICAgICAgICAgICAgICAgICAgIGxpbWl0PTEsIGRlZmF1bHRfd2luZG93X2JhcnM9MTAwCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICBhc3NlcnQgZHJhaW5lZC51bndyYXAoKS5kcmFpbmVkID09IDAgICMgcGF1c2VkIHF1ZXVlIG5ldmVyIGRyYWlucwogICAgICAgICAgICAgICAgYXdhaXQgcmVzZWFyY2gucmVzdW1lX3F1ZXVlKCkKICAgICAgICAgICAgICAgIGFzc2VydCBub3QgYXdhaXQgcmVzZWFyY2gucXVldWVfcGF1c2VkKCkKICAgICAgICAgICAgZmluYWxseToKICAgICAgICAgICAgICAgIGF3YWl0IGtlcm5lbC5zaHV0ZG93bigpCgogICAgICAgIGFzeW5jaW8ucnVuKHNjZW5hcmlvKCkpCgogICAgZGVmIHRlc3RfcGFzc2VkX3Byb21vdGlvbl9hY3RpdmF0ZXNfb25fYXBwcm92YWwoc2VsZiwgY29uZmlnX2RpcjogUGF0aCkgLT4gTm9uZToKICAgICAgICBhc3luYyBkZWYgc2NlbmFyaW8oKSAtPiBOb25lOgogICAgICAgICAgICBrZXJuZWwgPSBLZXJuZWwoY29uZmlnX2Rpcj1jb25maWdfZGlyLCBjbG9jaz1NYW51YWxDbG9jayhUMCkpCiAgICAgICAgICAgIGF3YWl0IGtlcm5lbC5ib290KCkKICAgICAgICAgICAgdHJ5OgogICAgICAgICAgICAgICAgcmVzZWFyY2ggPSBrZXJuZWwuY29udGFpbmVyLnJlc29sdmUoUmVzZWFyY2hTZXJ2aWNlKQogICAgICAgICAgICAgICAgc3RvcmUgPSBrZXJuZWwuY29udGFpbmVyLnJlc29sdmUoU3FsaXRlUmVzZWFyY2hSZXBvc2l0b3J5KQogICAgICAgICAgICAgICAgYXJ0aWZhY3QgPSBjb25maWdfZGlyIC8gImNhbmRpZGF0ZS5qc29uIgogICAgICAgICAgICAgICAgYXJ0aWZhY3Qud3JpdGVfdGV4dCgKICAgICAgICAgICAgICAgICAgICBqc29uLmR1bXBzKHsib3B0aW1pemVkX3BhcmFtZXRlcnMiOiB7ImNvb2xkb3duX2JhcnMiOiAyLjB9fSksCiAgICAgICAgICAgICAgICAgICAgZW5jb2Rpbmc9InV0Zi04IiwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIHByb21vdGlvbl9pZCA9IGF3YWl0IHN0b3JlLnJlZ2lzdGVyX3Byb21vdGlvbigKICAgICAgICAgICAgICAgICAgICBzeW1ib2w9IkJUQ1VTRFQiLAogICAgICAgICAgICAgICAgICAgIHRpbWVmcmFtZT1UaW1lZnJhbWUuSDEsCiAgICAgICAgICAgICAgICAgICAga2luZD0ic2lnbmFsIiwKICAgICAgICAgICAgICAgICAgICBhcnRpZmFjdF9wYXRoPXN0cihhcnRpZmFjdCksCiAgICAgICAgICAgICAgICAgICAgYmFzZWxpbmVfYXJ0aWZhY3Q9Tm9uZSwKICAgICAgICAgICAgICAgICAgICByZWdpc3RlcmVkX2F0PVQwLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXdhaXQgc3RvcmUubWFya19wcm9tb3Rpb25fZXZhbHVhdGVkKAogICAgICAgICAgICAgICAgICAgIHByb21vdGlvbl9pZCwKICAgICAgICAgICAgICAgICAgICBzdGF0dXM9UFJPTU9USU9OX1BBU1NFRCwKICAgICAgICAgICAgICAgICAgICByZXBvcnQ9Int9IiwKICAgICAgICAgICAgICAgICAgICBhdD1UMC5hZGRfbXMoMV8wMDApLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXBwcm92ZWQgPSBhd2FpdCByZXNlYXJjaC5wcm9tb3RlKHByb21vdGlvbl9pZCwgYWN0b3I9Im9wZXJhdG9yIikKICAgICAgICAgICAgICAgIGFzc2VydCBhcHByb3ZlZC5vawogICAgICAgICAgICAgICAgb3ZlcnJpZGVzID0gYXdhaXQgcmVzZWFyY2guYWN0aXZlX292ZXJyaWRlcygiQlRDVVNEVCIsIFRpbWVmcmFtZS5IMSkKICAgICAgICAgICAgICAgIGFzc2VydCBvdmVycmlkZXMgPT0geyJjb29sZG93bl9iYXJzIjogMi4wfQogICAgICAgICAgICBmaW5hbGx5OgogICAgICAgICAgICAgICAgYXdhaXQga2VybmVsLnNodXRkb3duKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCiAgICBkZWYgdGVzdF9wcm9tb3Rpb25fZ3VhcmRfcm9sbHNfYmFja19kZWdyYWRpbmdfYXJ0aWZhY3QoCiAgICAgICAgc2VsZiwgY29uZmlnX2RpcjogUGF0aAogICAgKSAtPiBOb25lOgogICAgICAgIGFzeW5jIGRlZiBzY2VuYXJpbygpIC0+IE5vbmU6CiAgICAgICAgICAgIGNsb2NrID0gTWFudWFsQ2xvY2soVDApCiAgICAgICAgICAgIGtlcm5lbCA9IEtlcm5lbChjb25maWdfZGlyPWNvbmZpZ19kaXIsIGNsb2NrPWNsb2NrKQogICAgICAgICAgICBhd2FpdCBrZXJuZWwuYm9vdCgpCiAgICAgICAgICAgIHRyeToKICAgICAgICAgICAgICAgIHJlc2VhcmNoID0ga2VybmVsLmNvbnRhaW5lci5yZXNvbHZlKFJlc2VhcmNoU2VydmljZSkKICAgICAgICAgICAgICAgIHN0b3JlID0ga2VybmVsLmNvbnRhaW5lci5yZXNvbHZlKFNxbGl0ZVJlc2VhcmNoUmVwb3NpdG9yeSkKICAgICAgICAgICAgICAgIHBvcnRmb2xpbyA9IGtlcm5lbC5jb250YWluZXIucmVzb2x2ZShTcWxpdGVQb3J0Zm9saW9SZXBvc2l0b3J5KQogICAgICAgICAgICAgICAgY29uZmlnID0ga2VybmVsLmNvbnRhaW5lci5yZXNvbHZlKEFwcENvbmZpZykKICAgICAgICAgICAgICAgIHBvcnRmb2xpb19pZCA9IHBvcnRmb2xpb19zZXR0aW5ncygKICAgICAgICAgICAgICAgICAgICBjb25maWcuc2VjdGlvbigicG9ydGZvbGlvIikKICAgICAgICAgICAgICAgICkucG9ydGZvbGlvX2lkCiAgICAgICAgICAgICAgICBiYXNlbGluZSA9IGNvbmZpZ19kaXIgLyAiYmFzZWxpbmUuanNvbiIKICAgICAgICAgICAgICAgIGNhbmRpZGF0ZSA9IGNvbmZpZ19kaXIgLyAiY2FuZGlkYXRlLmpzb24iCiAgICAgICAgICAgICAgICBmb3IgcGF0aCBpbiAoYmFzZWxpbmUsIGNhbmRpZGF0ZSk6CiAgICAgICAgICAgICAgICAgICAgcGF0aC53cml0ZV90ZXh0KAogICAgICAgICAgICAgICAgICAgICAgICBqc29uLmR1bXBzKHsib3B0aW1pemVkX3BhcmFtZXRlcnMiOiB7fX0pLCBlbmNvZGluZz0idXRmLTgiCiAgICAgICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXdhaXQgc3RvcmUuYWN0aXZhdGVfdmVyc2lvbigKICAgICAgICAgICAgICAgICAgICBzeW1ib2w9IkJUQ1VTRFQiLAogICAgICAgICAgICAgICAgICAgIHRpbWVmcmFtZT1UaW1lZnJhbWUuSDEsCiAgICAgICAgICAgICAgICAgICAga2luZD0ic2lnbmFsIiwKICAgICAgICAgICAgICAgICAgICBhcnRpZmFjdF9wYXRoPXN0cihiYXNlbGluZSksCiAgICAgICAgICAgICAgICAgICAgYWN0aXZhdGVkX2F0PVQwLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXdhaXQgc3RvcmUuYWN0aXZhdGVfdmVyc2lvbigKICAgICAgICAgICAgICAgICAgICBzeW1ib2w9IkJUQ1VTRFQiLAogICAgICAgICAgICAgICAgICAgIHRpbWVmcmFtZT1UaW1lZnJhbWUuSDEsCiAgICAgICAgICAgICAgICAgICAga2luZD0ic2lnbmFsIiwKICAgICAgICAgICAgICAgICAgICBhcnRpZmFjdF9wYXRoPXN0cihjYW5kaWRhdGUpLAogICAgICAgICAgICAgICAgICAgIGFjdGl2YXRlZF9hdD1UMC5hZGRfbXMoMV8wMDApLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgcHJvbW90aW9uX2lkID0gYXdhaXQgc3RvcmUucmVnaXN0ZXJfcHJvbW90aW9uKAogICAgICAgICAgICAgICAgICAgIHN5bWJvbD0iQlRDVVNEVCIsCiAgICAgICAgICAgICAgICAgICAgdGltZWZyYW1lPVRpbWVmcmFtZS5IMSwKICAgICAgICAgICAgICAgICAgICBraW5kPSJzaWduYWwiLAogICAgICAgICAgICAgICAgICAgIGFydGlmYWN0X3BhdGg9c3RyKGNhbmRpZGF0ZSksCiAgICAgICAgICAgICAgICAgICAgYmFzZWxpbmVfYXJ0aWZhY3Q9c3RyKGJhc2VsaW5lKSwKICAgICAgICAgICAgICAgICAgICByZWdpc3RlcmVkX2F0PVQwLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXdhaXQgc3RvcmUubWFya19wcm9tb3Rpb25fZGVjaWRlZCgKICAgICAgICAgICAgICAgICAgICBwcm9tb3Rpb25faWQsCiAgICAgICAgICAgICAgICAgICAgc3RhdHVzPVBST01PVElPTl9QUk9NT1RFRCwKICAgICAgICAgICAgICAgICAgICBhY3Rvcj0ib3BlcmF0b3IiLAogICAgICAgICAgICAgICAgICAgIGF0PVQwLmFkZF9tcygyXzAwMCksCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICBhd2FpdCBwb3J0Zm9saW8udXBzZXJ0X3Bvc2l0aW9ucygKICAgICAgICAgICAgICAgICAgICBbCiAgICAgICAgICAgICAgICAgICAgICAgIF9sb3NpbmdfcG9zaXRpb24ocG9ydGZvbGlvX2lkLCBpbmRleCkKICAgICAgICAgICAgICAgICAgICAgICAgZm9yIGluZGV4IGluIHJhbmdlKDMpCiAgICAgICAgICAgICAgICAgICAgXQogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgdW50b3VjaGVkID0gYXdhaXQgcmVzZWFyY2guYXBwbHlfcHJvbW90aW9uX2d1YXJkKAogICAgICAgICAgICAgICAgICAgICJCVENVU0RUIiwgVGltZWZyYW1lLkgxLCBtaW5fdHJhZGVzPTUsIGZsb29yX3I9LTIuMAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgYXNzZXJ0IHVudG91Y2hlZCBpcyBOb25lICAjIG5vdCBlbm91Z2ggdHJhZGVzIHlldAogICAgICAgICAgICAgICAgcmVzdG9yZWQgPSBhd2FpdCByZXNlYXJjaC5hcHBseV9wcm9tb3Rpb25fZ3VhcmQoCiAgICAgICAgICAgICAgICAgICAgIkJUQ1VTRFQiLCBUaW1lZnJhbWUuSDEsIG1pbl90cmFkZXM9MywgZmxvb3Jfcj0tMi4wCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICBhc3NlcnQgcmVzdG9yZWQgPT0gc3RyKGJhc2VsaW5lKQogICAgICAgICAgICAgICAgcmVjb3JkID0gYXdhaXQgc3RvcmUucHJvbW90aW9uKHByb21vdGlvbl9pZCkKICAgICAgICAgICAgICAgIGFzc2VydCByZWNvcmQgaXMgbm90IE5vbmUKICAgICAgICAgICAgICAgIGFzc2VydCByZWNvcmQuc3RhdHVzID09IFBST01PVElPTl9ST0xMRURfQkFDSwogICAgICAgICAgICAgICAgYXNzZXJ0IHJlY29yZC5kZWNpZGVkX2J5ID09ICJwcm9tb3Rpb25fZ3VhcmQiCiAgICAgICAgICAgICAgICAjIFRoZSBndWFyZCBuZXZlciBmaXJlcyB0d2ljZSBmb3IgdGhlIHNhbWUgcHJvbW90aW9uLgogICAgICAgICAgICAgICAgYWdhaW4gPSBhd2FpdCByZXNlYXJjaC5hcHBseV9wcm9tb3Rpb25fZ3VhcmQoCiAgICAgICAgICAgICAgICAgICAgIkJUQ1VTRFQiLCBUaW1lZnJhbWUuSDEsIG1pbl90cmFkZXM9MywgZmxvb3Jfcj0tMi4wCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICBhc3NlcnQgYWdhaW4gaXMgTm9uZQogICAgICAgICAgICBmaW5hbGx5OgogICAgICAgICAgICAgICAgYXdhaXQga2VybmVsLnNodXRkb3duKCkKCiAgICAgICAgYXN5bmNpby5ydW4oc2NlbmFyaW8oKSkKCgpkZWYgX2xvc2luZ19wb3NpdGlvbihwb3J0Zm9saW9faWQ6IHN0ciwgaW5kZXg6IGludCkgLT4gUG9zaXRpb25SZWNvcmQ6CiAgICAiIiJPbmUgY2xvc2VkIGxvc2luZyB0cmFkZSBhZnRlciB0aGUgcHJvbW90aW9uIGRlY2lzaW9uLiIiIgogICAgb3BlbmVkID0gVGltZXN0YW1wKGVwb2NoX21zPVQwLmVwb2NoX21zICsgM18wMDAgKyBpbmRleCAqIEgxX01TKQogICAgcmV0dXJuIFBvc2l0aW9uUmVjb3JkKAogICAgICAgIHBvcnRmb2xpb19pZD1wb3J0Zm9saW9faWQsCiAgICAgICAgZXhjaGFuZ2U9InRvb2JpdCIsCiAgICAgICAgc3ltYm9sPSJCVENVU0RUIiwKICAgICAgICB0aW1lZnJhbWU9VGltZWZyYW1lLkgxLAogICAgICAgIGVudHJ5X2Jhcl90aW1lPW9wZW5lZCwKICAgICAgICBwb3NpdGlvbl9pZD1mImd1YXJkLXtpbmRleH0iLAogICAgICAgIGxpbmVhZ2VfaWQ9ZiJndWFyZC17aW5kZXh9IiwKICAgICAgICBkaXJlY3Rpb249ImxvbmciLAogICAgICAgIHF1YW50aXR5PURlY2ltYWwoIjEiKSwKICAgICAgICBlbnRyeT1EZWNpbWFsKCIxMDAiKSwKICAgICAgICBzdG9wPURlY2ltYWwoIjk5IiksCiAgICAgICAgdGFyZ2V0PURlY2ltYWwoIjEwMyIpLAogICAgICAgIHJpc2tfYW1vdW50PURlY2ltYWwoIjEiKSwKICAgICAgICBvcGVuZWRfYXQ9b3BlbmVkLAogICAgICAgIHN0YXR1cz0iY2xvc2VkIiwKICAgICAgICBjbG9zZWRfYXQ9b3BlbmVkLmFkZF9tcyhIMV9NUyksCiAgICAgICAgZXhpdF9wcmljZT1EZWNpbWFsKCI5OSIpLAogICAgICAgIHJlYWxpemVkX3BubD1EZWNpbWFsKCItMSIpLAogICAgICAgIHJlYWxpemVkX3I9LTEuMCwKICAgICAgICBjbG9zZV9yZWFzb249InN0b3AiLAogICAgKQo=
+"""Promotion pipeline: shadow evaluation, lifecycle, guard, queue pause."""
+
+import asyncio
+import json
+from decimal import Decimal
+from pathlib import Path
+
+from apex.contracts.engines import DecisionSnapshot
+from apex.core.config import AppConfig
+from apex.core.context import MarketContext
+from apex.core.enums import Timeframe
+from apex.core.time.clock import ManualClock
+from apex.core.time.timestamp import Timestamp
+from apex.decision.kernel import DecisionParams
+from apex.kernel.kernel import Kernel
+from apex.optimization.objective import ObjectiveWeights
+from apex.portfolio.config import portfolio_settings
+from apex.portfolio.store import PositionRecord, SqlitePortfolioRepository
+from apex.research.promotion import evaluate_shadow
+from apex.research.service import ResearchService
+from apex.research.store import (
+    PROMOTION_PASSED,
+    PROMOTION_PROMOTED,
+    PROMOTION_REJECTED,
+    PROMOTION_ROLLED_BACK,
+    PROMOTION_SHADOW,
+    SqliteResearchRepository,
+)
+
+from tests.conftest import T0
+from tests.unit.decision.test_decision import bullish_vector, make_bar, strong_channels
+
+H1_MS = Timeframe.H1.duration_ms
+
+
+def snapshots(count: int) -> list[DecisionSnapshot]:
+    """Rising confirmed bars wrapped as decision snapshots."""
+    result = []
+    for index in range(count):
+        base = 100.0 + index
+        bar = make_bar(index, base, base + 2.2, base - 0.4, base + 2.0)
+        result.append(
+            DecisionSnapshot(
+                bar=bar,
+                vector=bullish_vector(),
+                probability_long=0.85,
+                probability_short=0.05,
+                channels=strong_channels(),
+                macro_high=float(bar.close.value) + 50.0,
+                macro_low=float(bar.close.value) - 50.0,
+            )
+        )
+    return result
+
+
+def shadow_params() -> DecisionParams:
+    return DecisionParams(
+        atr_length=3,
+        ema_length=3,
+        rvol_gate_enabled=False,
+        similarity_cooldown_enabled=False,
+        cooldown_bars=1,
+        flatness_gate_enabled=False,
+    )
+
+
+class TestEvaluateShadow:
+    def test_insufficient_forward_bars_fails_with_reason(self) -> None:
+        report = evaluate_shadow(
+            snapshots=snapshots(3),
+            base_params=shadow_params(),
+            candidate_overrides={},
+            baseline_overrides=None,
+            context=MarketContext(symbol="BTCUSDT", timeframe=Timeframe.H1, as_of=T0),
+            clock=ManualClock(T0),
+            weights=ObjectiveWeights(),
+            horizon_bars=6,
+            min_bars=10,
+            tolerance=0.0,
+        )
+        assert not report.passed
+        assert "insufficient forward bars" in report.reason
+
+    def test_identical_candidate_passes_within_tolerance(self) -> None:
+        report = evaluate_shadow(
+            snapshots=snapshots(30),
+            base_params=shadow_params(),
+            candidate_overrides={},
+            baseline_overrides=None,
+            context=MarketContext(symbol="BTCUSDT", timeframe=Timeframe.H1, as_of=T0),
+            clock=ManualClock(T0),
+            weights=ObjectiveWeights(),
+            horizon_bars=6,
+            min_bars=10,
+            tolerance=0.0,
+        )
+        assert report.passed
+        assert report.candidate_score == report.baseline_score
+        assert report.bars == 30
+        payload = json.loads(report.to_json())
+        assert payload["passed"] is True
+        assert payload["candidate"]["signals"] == report.candidate_signals
+
+
+class TestPromotionStore:
+    def test_lifecycle_states_and_latest(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            store = SqliteResearchRepository(
+                database_path=tmp_path / "research.sqlite"
+            )
+            await store.open()
+            promotion_id = await store.register_promotion(
+                symbol="BTCUSDT",
+                timeframe=Timeframe.H1,
+                kind="signal",
+                artifact_path="/tmp/a.json",
+                baseline_artifact=None,
+                registered_at=T0,
+            )
+            shadows = await store.promotions(status=PROMOTION_SHADOW)
+            assert len(shadows) == 1
+            await store.mark_promotion_evaluated(
+                promotion_id,
+                status=PROMOTION_PASSED,
+                report='{"passed": true}',
+                at=T0.add_ms(1_000),
+            )
+            record = await store.promotion(promotion_id)
+            assert record is not None
+            assert record.status == PROMOTION_PASSED
+            assert record.report == '{"passed": true}'
+            await store.mark_promotion_decided(
+                promotion_id,
+                status=PROMOTION_PROMOTED,
+                actor="operator",
+                at=T0.add_ms(2_000),
+            )
+            latest = await store.latest_promotion(
+                "BTCUSDT", Timeframe.H1, "signal", status=PROMOTION_PROMOTED
+            )
+            assert latest is not None
+            assert latest.decided_by == "operator"
+            assert latest.decided_at is not None
+            await store.close()
+
+        asyncio.run(scenario())
+
+    def test_flags_roundtrip(self, tmp_path: Path) -> None:
+        async def scenario() -> None:
+            store = SqliteResearchRepository(
+                database_path=tmp_path / "research.sqlite"
+            )
+            await store.open()
+            assert await store.get_flag("queue_paused") is None
+            await store.set_flag("queue_paused", "1")
+            assert await store.get_flag("queue_paused") == "1"
+            await store.set_flag("queue_paused", "0")
+            assert await store.get_flag("queue_paused") == "0"
+            await store.close()
+
+        asyncio.run(scenario())
+
+
+class TestPromotionService:
+    """Lifecycle behavior through the booted platform services."""
+
+    def test_promote_reject_and_queue_pause(self, config_dir: Path) -> None:
+        async def scenario() -> None:
+            kernel = Kernel(config_dir=config_dir, clock=ManualClock(T0))
+            await kernel.boot()
+            try:
+                research = kernel.container.resolve(ResearchService)
+                store = kernel.container.resolve(SqliteResearchRepository)
+                missing = await research.promote(999, actor="op")
+                assert not missing.ok
+                assert missing.error is not None
+                assert missing.error.code == "RES-007"
+                promotion_id = await store.register_promotion(
+                    symbol="BTCUSDT",
+                    timeframe=Timeframe.H1,
+                    kind="signal",
+                    artifact_path=str(config_dir / "artifact.json"),
+                    baseline_artifact=None,
+                    registered_at=T0,
+                )
+                premature = await research.promote(promotion_id, actor="op")
+                assert not premature.ok
+                assert premature.error is not None
+                assert premature.error.code == "RES-008"
+                rejected = await research.reject_promotion(promotion_id, actor="op")
+                assert rejected.ok
+                record = await store.promotion(promotion_id)
+                assert record is not None
+                assert record.status == PROMOTION_REJECTED
+                re_reject = await research.reject_promotion(promotion_id, actor="op")
+                assert not re_reject.ok
+                assert re_reject.error is not None
+                assert re_reject.error.code == "RES-009"
+                assert not await research.queue_paused()
+                await research.pause_queue()
+                assert await research.queue_paused()
+                drained = await research.orchestrate(
+                    limit=1, default_window_bars=100
+                )
+                assert drained.unwrap().drained == 0  # paused queue never drains
+                await research.resume_queue()
+                assert not await research.queue_paused()
+            finally:
+                await kernel.shutdown()
+
+        asyncio.run(scenario())
+
+    def test_passed_promotion_activates_on_approval(self, config_dir: Path) -> None:
+        async def scenario() -> None:
+            kernel = Kernel(config_dir=config_dir, clock=ManualClock(T0))
+            await kernel.boot()
+            try:
+                research = kernel.container.resolve(ResearchService)
+                store = kernel.container.resolve(SqliteResearchRepository)
+                artifact = config_dir / "candidate.json"
+                artifact.write_text(
+                    json.dumps({"optimized_parameters": {"cooldown_bars": 2.0}}),
+                    encoding="utf-8",
+                )
+                promotion_id = await store.register_promotion(
+                    symbol="BTCUSDT",
+                    timeframe=Timeframe.H1,
+                    kind="signal",
+                    artifact_path=str(artifact),
+                    baseline_artifact=None,
+                    registered_at=T0,
+                )
+                await store.mark_promotion_evaluated(
+                    promotion_id,
+                    status=PROMOTION_PASSED,
+                    report="{}",
+                    at=T0.add_ms(1_000),
+                )
+                approved = await research.promote(promotion_id, actor="operator")
+                assert approved.ok
+                overrides = await research.active_overrides("BTCUSDT", Timeframe.H1)
+                assert overrides == {"cooldown_bars": 2.0}
+            finally:
+                await kernel.shutdown()
+
+        asyncio.run(scenario())
+
+    def test_promotion_guard_rolls_back_degrading_artifact(
+        self, config_dir: Path
+    ) -> None:
+        async def scenario() -> None:
+            clock = ManualClock(T0)
+            kernel = Kernel(config_dir=config_dir, clock=clock)
+            await kernel.boot()
+            try:
+                research = kernel.container.resolve(ResearchService)
+                store = kernel.container.resolve(SqliteResearchRepository)
+                portfolio = kernel.container.resolve(SqlitePortfolioRepository)
+                config = kernel.container.resolve(AppConfig)
+                portfolio_id = portfolio_settings(
+                    config.section("portfolio")
+                ).portfolio_id
+                baseline = config_dir / "baseline.json"
+                candidate = config_dir / "candidate.json"
+                for path in (baseline, candidate):
+                    path.write_text(
+                        json.dumps({"optimized_parameters": {}}), encoding="utf-8"
+                    )
+                await store.activate_version(
+                    symbol="BTCUSDT",
+                    timeframe=Timeframe.H1,
+                    kind="signal",
+                    artifact_path=str(baseline),
+                    activated_at=T0,
+                )
+                await store.activate_version(
+                    symbol="BTCUSDT",
+                    timeframe=Timeframe.H1,
+                    kind="signal",
+                    artifact_path=str(candidate),
+                    activated_at=T0.add_ms(1_000),
+                )
+                promotion_id = await store.register_promotion(
+                    symbol="BTCUSDT",
+                    timeframe=Timeframe.H1,
+                    kind="signal",
+                    artifact_path=str(candidate),
+                    baseline_artifact=str(baseline),
+                    registered_at=T0,
+                )
+                await store.mark_promotion_decided(
+                    promotion_id,
+                    status=PROMOTION_PROMOTED,
+                    actor="operator",
+                    at=T0.add_ms(2_000),
+                )
+                await portfolio.upsert_positions(
+                    [
+                        _losing_position(portfolio_id, index)
+                        for index in range(3)
+                    ]
+                )
+                untouched = await research.apply_promotion_guard(
+                    "BTCUSDT", Timeframe.H1, min_trades=5, floor_r=-2.0
+                )
+                assert untouched is None  # not enough trades yet
+                restored = await research.apply_promotion_guard(
+                    "BTCUSDT", Timeframe.H1, min_trades=3, floor_r=-2.0
+                )
+                assert restored == str(baseline)
+                record = await store.promotion(promotion_id)
+                assert record is not None
+                assert record.status == PROMOTION_ROLLED_BACK
+                assert record.decided_by == "promotion_guard"
+                # The guard never fires twice for the same promotion.
+                again = await research.apply_promotion_guard(
+                    "BTCUSDT", Timeframe.H1, min_trades=3, floor_r=-2.0
+                )
+                assert again is None
+            finally:
+                await kernel.shutdown()
+
+        asyncio.run(scenario())
+
+
+def _losing_position(portfolio_id: str, index: int) -> PositionRecord:
+    """One closed losing trade after the promotion decision."""
+    opened = Timestamp(epoch_ms=T0.epoch_ms + 3_000 + index * H1_MS)
+    return PositionRecord(
+        portfolio_id=portfolio_id,
+        exchange="toobit",
+        symbol="BTCUSDT",
+        timeframe=Timeframe.H1,
+        entry_bar_time=opened,
+        position_id=f"guard-{index}",
+        lineage_id=f"guard-{index}",
+        direction="long",
+        quantity=Decimal("1"),
+        entry=Decimal("100"),
+        stop=Decimal("99"),
+        target=Decimal("103"),
+        risk_amount=Decimal("1"),
+        opened_at=opened,
+        status="closed",
+        closed_at=opened.add_ms(H1_MS),
+        exit_price=Decimal("99"),
+        realized_pnl=Decimal("-1"),
+        realized_r=-1.0,
+        close_reason="stop",
+    )
